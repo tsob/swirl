@@ -1,0 +1,381 @@
+TFaustAUSynth
+v6
+r1
+cCheck dependencies
+cProcessInfoPlistFile /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Products/Development-iphoneos/FaustAUSynth.component/Info.plist /Users/reza/Documents/bk/420/FaustAUSynth\ copy/Info.plist
+cProcessPCH++ /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/PrecompiledHeaders/FaustAUSynth_Prefix-asikbovtgvvjcnbfnadqyvghogfr/FaustAUSynth_Prefix.pch.pch FaustAUSynth_Prefix.pch normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cProcessPCH++ /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/PrecompiledHeaders/FaustAUSynth_Prefix-bfivjofdbizeipfegzuvlpjiastf/FaustAUSynth_Prefix.pch.pch FaustAUSynth_Prefix.pch normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/SDKSettings.plist
+c000000005272437C000000000000036B
+t1383220092
+s875
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/CoreServices/SystemVersion.plist
+c000000005272437D00000000000001A0
+t1383220093
+s416
+
+N/Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/PrecompiledHeaders/FaustAUSynth_Prefix-asikbovtgvvjcnbfnadqyvghogfr/FaustAUSynth_Prefix.pch.pch
+t2
+s0
+
+N/Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/PrecompiledHeaders/FaustAUSynth_Prefix-bfivjofdbizeipfegzuvlpjiastf/FaustAUSynth_Prefix.pch.pch
+t2
+s0
+
+N/Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Products/Development-iphoneos/FaustAUSynth.component/Info.plist
+t2
+s0
+
+N/Users/reza/Documents/bk/420/FaustAUSynth copy/FaustAUSynth_Prefix.pch
+c0000000051B145E400000000000000F9
+t1370572260
+s249
+
+N/Users/reza/Documents/bk/420/FaustAUSynth copy/Info.plist
+c0000000051B15AAA0000000000000527
+t1370577578
+s1319
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/AUBase.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/AUDispatch.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/AUInputElement.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/AUOutputElement.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/AUPlugInDispatch.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/AUScopeElement.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/ComponentBase.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUInstrumentBase/AUInstrumentBase.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUInstrumentBase/SynthElement.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUInstrumentBase/SynthNote.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUInstrumentBase/SynthNoteList.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/OtherBases/AUMIDIBase.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/OtherBases/MusicDeviceBase.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/Utility/AUBaseHelper.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/Utility/AUBuffer.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/FaustAUSynth.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAAUMIDIMap.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAAUMIDIMapManager.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAAudioChannelLayout.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CABufferList.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CADebugMacros.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CADebugPrintf.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CADebugger.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAGuard.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAHostTimeBase.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAMutex.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAStreamBasicDescription.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAVectorUnit.cpp
+r0
+
+CBuild AST from /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAXException.cpp
+r0
+
+CCheck dependencies
+r0
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies18"Check dependenciesa9c22fa61939b841^4a26eba61939b841^---0#1#1#--18"Check dependencies36"2990FB94-9DF0-4752-8BAA-A279D30D44B3-
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/AUBase.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/AUBase.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/AUBaseHelper.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/Utility/AUBaseHelper.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/AUBuffer.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/Utility/AUBuffer.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/AUDispatch.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/AUDispatch.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/AUInputElement.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/AUInputElement.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/AUInstrumentBase.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUInstrumentBase/AUInstrumentBase.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/AUMIDIBase.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/OtherBases/AUMIDIBase.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/AUOutputElement.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/AUOutputElement.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/AUPlugInDispatch.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/AUPlugInDispatch.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/AUScopeElement.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/AUScopeElement.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/CAAUMIDIMap.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAAUMIDIMap.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/CAAUMIDIMapManager.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAAUMIDIMapManager.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/CAAudioChannelLayout.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAAudioChannelLayout.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/CABufferList.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CABufferList.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/CADebugMacros.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CADebugMacros.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/CADebugPrintf.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CADebugPrintf.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/CADebugger.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CADebugger.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/CAGuard.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAGuard.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/CAHostTimeBase.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAHostTimeBase.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/CAMutex.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAMutex.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/CAStreamBasicDescription.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAStreamBasicDescription.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/CAVectorUnit.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAVectorUnit.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/CAXException.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAXException.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/ComponentBase.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/ComponentBase.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/FaustAUSynth-4B9BF416750E252C.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/FaustAUSynth.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/MusicDeviceBase.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/OtherBases/MusicDeviceBase.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/SynthElement.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUInstrumentBase/SynthElement.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/SynthNote.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUInstrumentBase/SynthNote.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/SynthNoteList.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUInstrumentBase/SynthNoteList.cpp normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/AUBase.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/AUBase.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/AUBaseHelper.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/Utility/AUBaseHelper.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/AUBuffer.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/Utility/AUBuffer.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/AUDispatch.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/AUDispatch.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/AUInputElement.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/AUInputElement.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/AUInstrumentBase.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUInstrumentBase/AUInstrumentBase.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/AUMIDIBase.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/OtherBases/AUMIDIBase.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/AUOutputElement.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/AUOutputElement.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/AUPlugInDispatch.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/AUPlugInDispatch.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/AUScopeElement.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/AUScopeElement.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/CAAUMIDIMap.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAAUMIDIMap.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/CAAUMIDIMapManager.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAAUMIDIMapManager.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/CAAudioChannelLayout.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAAudioChannelLayout.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/CABufferList.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CABufferList.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/CADebugMacros.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CADebugMacros.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/CADebugPrintf.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CADebugPrintf.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/CADebugger.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CADebugger.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/CAGuard.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAGuard.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/CAHostTimeBase.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAHostTimeBase.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/CAMutex.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAMutex.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/CAStreamBasicDescription.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAStreamBasicDescription.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/CAVectorUnit.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAVectorUnit.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/CAXException.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/PublicUtility/CAXException.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/ComponentBase.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUBase/ComponentBase.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/FaustAUSynth-4B9BF416750E252C.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/FaustAUSynth.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/MusicDeviceBase.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/OtherBases/MusicDeviceBase.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/SynthElement.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUInstrumentBase/SynthElement.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/SynthNote.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUInstrumentBase/SynthNote.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/SynthNoteList.o /Users/reza/Documents/bk/420/FaustAUSynth\ copy/AUPublic/AUInstrumentBase/SynthNoteList.cpp normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCreateUniversalBinary /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Products/Development-iphoneos/FaustAUSynth.component/FaustAUSynth normal armv7\ armv7s
+r0
+
+CGenerateDSYMFile /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Products/Development-iphoneos/FaustAUSynth.component.dSYM /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Products/Development-iphoneos/FaustAUSynth.component/FaustAUSynth
+r0
+
+CLd /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7/FaustAUSynth normal armv7
+r0
+
+CLd /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/Objects-normal/armv7s/FaustAUSynth normal armv7s
+r0
+
+CProcessInfoPlistFile /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Products/Development-iphoneos/FaustAUSynth.component/Info.plist /Users/reza/Documents/bk/420/FaustAUSynth\ copy/Info.plist
+s406395302.919240
+e406395302.920508
+r1
+xProcessInfoPlistFile
+x/Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Products/Development-iphoneos/FaustAUSynth.component/Info.plist
+x/Users/reza/Documents/bk/420/FaustAUSynth copy/Info.plist
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection65"Process /Users/reza/Documents/bk/420/FaustAUSynth copy/Info.plist172"ProcessInfoPlistFile /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Products/Development-iphoneos/FaustAUSynth.component/Info.plist Info.plist9e60eba61939b841^28f3eba61939b841^---0#0#1#-19%DVTDocumentLocation2@66"file:///Users/reza/Documents/bk/420/FaustAUSynth%20copy/Info.plist0000000000000000^704"ProcessInfoPlistFile /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Products/Development-iphoneos/FaustAUSynth.component/Info.plist Info.plist    cd "/Users/reza/Documents/bk/420/FaustAUSynth copy"    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility /Users/reza/Documents/bk/420/FaustAUSynth\ copy/Info.plist -expandbuildsettings -format binary -platform iphoneos -o /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Products/Development-iphoneos/FaustAUSynth.component/Info.plist36"4825A90A-B895-4FEA-A8F8-B404DECC254D-
+b7FAE6EC6-A8B1-46DB-97F6-5B4ED4CA925D
+
+CProcessPCH++ /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/PrecompiledHeaders/FaustAUSynth_Prefix-asikbovtgvvjcnbfnadqyvghogfr/FaustAUSynth_Prefix.pch.pch FaustAUSynth_Prefix.pch normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s406395302.921211
+e406395304.515164
+r0
+xProcessPCH++
+x/Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/PrecompiledHeaders/FaustAUSynth_Prefix-asikbovtgvvjcnbfnadqyvghogfr/FaustAUSynth_Prefix.pch.pch
+xFaustAUSynth_Prefix.pch
+xnormal
+xarmv7
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+o/Users/reza/Documents/bk/420/FaustAUSynth copy/FaustAUSynth_Prefix.pch:5:10: fatal error: 'CoreServices/CoreServices.h' file not found
+o#include <CoreServices/CoreServices.h>
+o         ^
+o1 error generated.
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection34"Precompile FaustAUSynth_Prefix.pch284"ProcessPCH++ /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/PrecompiledHeaders/FaustAUSynth_Prefix-asikbovtgvvjcnbfnadqyvghogfr/FaustAUSynth_Prefix.pch.pch FaustAUSynth_Prefix.pch normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler42edeba61939b841^a8e183a81939b841^-204"/Users/reza/Documents/bk/420/FaustAUSynth copy/FaustAUSynth_Prefix.pch:5:10: fatal error: 'CoreServices/CoreServices.h' file not found#include <CoreServices/CoreServices.h>         ^1 error generated.1(36%IDEClangDiagnosticActivityLogMessage2@44"'CoreServices/CoreServices.h' file not found-406395304#18446744073709551615#0#-2#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@79"file:///Users/reza/Documents/bk/420/FaustAUSynth%20copy/FaustAUSynth_Prefix.pch0000000000000000^4#9#4#9#114#0#29"Lexical or Preprocessor Issue--0#0#1#-19%DVTDocumentLocation4@79"file:///Users/reza/Documents/bk/420/FaustAUSynth%20copy/FaustAUSynth_Prefix.pch0000000000000000^3197"ProcessPCH++ /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/PrecompiledHeaders/FaustAUSynth_Prefix-asikbovtgvvjcnbfnadqyvghogfr/FaustAUSynth_Prefix.pch.pch FaustAUSynth_Prefix.pch normal armv7 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd "/Users/reza/Documents/bk/420/FaustAUSynth copy"    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++-header -arch armv7 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -fvisibility-inlines-hidden -Wno-sign-conversion -miphoneos-version-min=7.0 -I/Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/FaustAUSynth.hmap -I/Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Products/Development-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/DerivedSources/armv7 -I/Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Products/Development-iphoneos -DCA_AUTO_MIDI_MAP=1 -DDEBUG --serialize-diagnostics /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/PrecompiledHeaders/FaustAUSynth_Prefix-asikbovtgvvjcnbfnadqyvghogfr/FaustAUSynth_Prefix.pch.dia -MMD -MT dependencies -MF /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/PrecompiledHeaders/FaustAUSynth_Prefix-asikbovtgvvjcnbfnadqyvghogfr/FaustAUSynth_Prefix.pch.d -c /Users/reza/Documents/bk/420/FaustAUSynth\ copy/FaustAUSynth_Prefix.pch -o /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/PrecompiledHeaders/FaustAUSynth_Prefix-asikbovtgvvjcnbfnadqyvghogfr/FaustAUSynth_Prefix.pch.pch36"E2547C96-588B-4126-8C07-BDC565D74AF5-
+b7FAE6EC6-A8B1-46DB-97F6-5B4ED4CA925D
+
+CProcessPCH++ /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/PrecompiledHeaders/FaustAUSynth_Prefix-bfivjofdbizeipfegzuvlpjiastf/FaustAUSynth_Prefix.pch.pch FaustAUSynth_Prefix.pch normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler
+s406395302.921654
+e406395304.515167
+r0
+xProcessPCH++
+x/Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/PrecompiledHeaders/FaustAUSynth_Prefix-bfivjofdbizeipfegzuvlpjiastf/FaustAUSynth_Prefix.pch.pch
+xFaustAUSynth_Prefix.pch
+xnormal
+xarmv7s
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+o/Users/reza/Documents/bk/420/FaustAUSynth copy/FaustAUSynth_Prefix.pch:5:10: fatal error: 'CoreServices/CoreServices.h' file not found
+o#include <CoreServices/CoreServices.h>
+o         ^
+o1 error generated.
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection34"Precompile FaustAUSynth_Prefix.pch285"ProcessPCH++ /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/PrecompiledHeaders/FaustAUSynth_Prefix-bfivjofdbizeipfegzuvlpjiastf/FaustAUSynth_Prefix.pch.pch FaustAUSynth_Prefix.pch normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compilerda04eca61939b841^c5e683a81939b841^-204"/Users/reza/Documents/bk/420/FaustAUSynth copy/FaustAUSynth_Prefix.pch:5:10: fatal error: 'CoreServices/CoreServices.h' file not found#include <CoreServices/CoreServices.h>         ^1 error generated.1(36%IDEClangDiagnosticActivityLogMessage2@44"'CoreServices/CoreServices.h' file not found-406395304#18446744073709551615#0#-2#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@79"file:///Users/reza/Documents/bk/420/FaustAUSynth%20copy/FaustAUSynth_Prefix.pch0000000000000000^4#9#4#9#114#0#29"Lexical or Preprocessor Issue--0#0#1#-19%DVTDocumentLocation4@79"file:///Users/reza/Documents/bk/420/FaustAUSynth%20copy/FaustAUSynth_Prefix.pch0000000000000000^3200"ProcessPCH++ /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/PrecompiledHeaders/FaustAUSynth_Prefix-bfivjofdbizeipfegzuvlpjiastf/FaustAUSynth_Prefix.pch.pch FaustAUSynth_Prefix.pch normal armv7s c++ com.apple.compilers.llvm.clang.1_0.compiler    cd "/Users/reza/Documents/bk/420/FaustAUSynth copy"    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++-header -arch armv7s -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -g -fvisibility-inlines-hidden -Wno-sign-conversion -miphoneos-version-min=7.0 -I/Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/FaustAUSynth.hmap -I/Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Products/Development-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/DerivedSources/armv7s -I/Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/DerivedSources -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -F/Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Products/Development-iphoneos -DCA_AUTO_MIDI_MAP=1 -DDEBUG --serialize-diagnostics /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/PrecompiledHeaders/FaustAUSynth_Prefix-bfivjofdbizeipfegzuvlpjiastf/FaustAUSynth_Prefix.pch.dia -MMD -MT dependencies -MF /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/PrecompiledHeaders/FaustAUSynth_Prefix-bfivjofdbizeipfegzuvlpjiastf/FaustAUSynth_Prefix.pch.d -c /Users/reza/Documents/bk/420/FaustAUSynth\ copy/FaustAUSynth_Prefix.pch -o /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/PrecompiledHeaders/FaustAUSynth_Prefix-bfivjofdbizeipfegzuvlpjiastf/FaustAUSynth_Prefix.pch.pch36"07C67D48-0918-4AFF-BE38-F2136D63624F-
+b7FAE6EC6-A8B1-46DB-97F6-5B4ED4CA925D
+
+CProcessPCH++ /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Index/PrecompiledHeaders/FaustAUSynth_Prefix-eqzpxstwtydyircxzsupgivimoqq_ast/FaustAUSynth_Prefix.pch.pch FaustAUSynth_Prefix.pch normal armv7 c++ com.apple.compilers.llvm.clang.1_0.astbuilder
+r0
+
+CProcessPCH++ /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Index/PrecompiledHeaders/FaustAUSynth_Prefix-evvopjbtpdsxijblsgsxbeohndka_ast/FaustAUSynth_Prefix.pch.pch FaustAUSynth_Prefix.pch normal armv7s c++ com.apple.compilers.llvm.clang.1_0.astbuilder
+r0
+
+CResMergerCollector /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/ResourceManagerResources/FaustAUSynth.rsrc
+r0
+
+CResMergerProduct /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Products/Development-iphoneos/FaustAUSynth.component/FaustAUSynth.rsrc
+r0
+
+CRez /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Intermediates/FaustAUSynth.build/Development-iphoneos/FaustAUSynth.build/ResourceManagerResources/Objects/FaustAUSynth-3C9EB26AD7FE452E.rsrc FaustAUSynth.r
+r0
+
+CTouch /Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Products/Development-iphoneos/FaustAUSynth.component
+r0
+
