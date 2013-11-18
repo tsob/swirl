@@ -1,0 +1,493 @@
+Trakakaka
+v6
+r1
+cCheck dependencies
+cCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/OscTypes.o /Users/reza/Desktop/rakakaka/api/osc/OscTypes.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-particle.o /Users/reza/Desktop/rakakaka/api/y-api/y-particle.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-score-reader.o /Users/reza/Desktop/rakakaka/api/y-api/y-score-reader.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-vector3d.o /Users/reza/Desktop/rakakaka/api/x-api/x-vector3d.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-waveform.o /Users/reza/Desktop/rakakaka/api/y-api/y-waveform.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-gfx.o /Users/reza/Desktop/rakakaka/api/x-api/x-gfx.mm normal x86_64 objective-c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/NetworkingUtils.o /Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/Stk.o /Users/reza/Desktop/rakakaka/api/stk/Stk.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/raka-gfx.o /Users/reza/Desktop/rakakaka/core/raka-gfx.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/SDKSettings.plist
+c00000000527243C0000000000000044C
+t1383220160
+s1100
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/CoreServices/SystemVersion.plist
+c00000000527243C000000000000001DB
+t1383220160
+s475
+
+N/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp
+c000000005287EF8F0000000000000D0F
+t1384640399
+s3343
+
+N/Users/reza/Desktop/rakakaka/api/osc/OscTypes.cpp
+c0000000051355C600000000000000827
+t1362451552
+s2087
+
+N/Users/reza/Desktop/rakakaka/api/stk/Stk.cpp
+c00000000527DE21F0000000000002507
+t1383981599
+s9479
+
+N/Users/reza/Desktop/rakakaka/api/x-api/x-gfx.mm
+c000000005281500C00000000000027E6
+t1384206348
+s10214
+
+N/Users/reza/Desktop/rakakaka/api/x-api/x-vector3d.cpp
+c00000000527DE21F0000000000000631
+t1383981599
+s1585
+
+N/Users/reza/Desktop/rakakaka/api/y-api/y-particle.cpp
+c00000000527DE21F000000000000295B
+t1383981599
+s10587
+
+N/Users/reza/Desktop/rakakaka/api/y-api/y-score-reader.cpp
+c00000000527DE21F00000000000078B6
+t1383981599
+s30902
+
+N/Users/reza/Desktop/rakakaka/api/y-api/y-waveform.cpp
+c00000000527DE21F00000000000016D6
+t1383981599
+s5846
+
+N/Users/reza/Desktop/rakakaka/core/raka-gfx.cpp
+c0000000052817EB80000000000007839
+t1384218296
+s30777
+
+N/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/NetworkingUtils.o
+t2
+s0
+
+N/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/OscTypes.o
+t2
+s0
+
+N/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/Stk.o
+t2
+s0
+
+N/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/raka-gfx.o
+t2
+s0
+
+N/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-gfx.o
+t2
+s0
+
+N/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-vector3d.o
+t2
+s0
+
+N/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-particle.o
+t2
+s0
+
+N/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-score-reader.o
+t2
+s0
+
+N/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-waveform.o
+t2
+s0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/ip/IpEndpointName.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/ip/posix/UdpSocket.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/ip/win32/UdpSocket.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/osc/OscOutboundPacketStream.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/osc/OscPrintReceivedElements.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/osc/OscReceivedElements.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/osc/OscTypes.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/rtaudio/RtAudio.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/stk/Delay.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/stk/DelayL.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/stk/MidiFileIn.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/stk/Stk.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/x-api/x-audio.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/x-api/x-buffer.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/x-api/x-fun.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/x-api/x-gfx.mm
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/x-api/x-loadlum.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/x-api/x-loadrgb.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/x-api/x-network.mm
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/x-api/x-thread.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/x-api/x-vector3d.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/y-api/y-charting.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/y-api/y-echo.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/y-api/y-entity.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/y-api/y-fft.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/y-api/y-particle.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/y-api/y-score-reader.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/api/y-api/y-waveform.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/core/raka-audio.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/core/raka-entity.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/core/raka-gfx.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/core/raka-globals.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/core/raka-sim.cpp
+r0
+
+CBuild AST from /Users/reza/Desktop/rakakaka/main/main.cpp
+r0
+
+CCheck dependencies
+r0
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies18"Check dependenciesb1fd348d2738b841^842c478d2738b841^---0#1#1#--18"Check dependencies36"A6E2E9F0-16C4-48EB-8009-39EB67A626DC-
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/Delay.o /Users/reza/Desktop/rakakaka/api/stk/Delay.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/DelayL.o /Users/reza/Desktop/rakakaka/api/stk/DelayL.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/IpEndpointName.o /Users/reza/Desktop/rakakaka/api/ip/IpEndpointName.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/MidiFileIn.o /Users/reza/Desktop/rakakaka/api/stk/MidiFileIn.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/NetworkingUtils.o /Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s406333325.280941
+e406333325.521035
+r0
+xCompileC
+xdata/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/NetworkingUtils.o
+x/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp
+d/Users/reza/Desktop/rakakaka/api/ip/NetworkingUtils.h
+o/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp:45:8: error: unknown type name 'LONG'
+ostatic LONG initCount_ = 0;
+o       ^
+o/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp:59:6: error: unknown type name 'WSAData'
+o            WSAData wsaData;
+o            ^
+o/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp:60:29: error: use of undeclared identifier 'MAKEWORD'
+o            int nCode = WSAStartup(MAKEWORD(1, 1), &wsaData);
+o                                   ^
+o/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp:74:13: error: use of undeclared identifier 'WSACleanup'
+o            WSACleanup();
+o            ^
+o/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp:87:25: error: use of undeclared identifier 'gethostbyname'; did you mean 'GetHostByName'?
+o    struct hostent *h = gethostbyname( name );
+o                        ^~~~~~~~~~~~~
+o                        GetHostByName
+o/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp:81:15: note: 'GetHostByName' declared here
+ounsigned long GetHostByName( const char *name )
+o              ^
+o/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp:87:21: error: cannot initialize a variable of type 'struct hostent *' with an rvalue of type 'unsigned long'
+o    struct hostent *h = gethostbyname( name );
+o                    ^   ~~~~~~~~~~~~~~~~~~~~~
+o/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp:89:24: error: variable has incomplete type 'struct in_addr'
+o        struct in_addr a;
+o                       ^
+o/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp:89:16: note: forward declaration of 'in_addr'
+o        struct in_addr a;
+o               ^
+o7 errors generated.
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection69"Compile /Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp250"CompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/NetworkingUtils.o api/ip/win32/NetworkingUtils.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler2d05488d2738b841^8061858d2738b841^-1708"/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp:45:8: error: unknown type name 'LONG'static LONG initCount_ = 0;       ^/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp:59:6: error: unknown type name 'WSAData'            WSAData wsaData;            ^/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp:60:29: error: use of undeclared identifier 'MAKEWORD'            int nCode = WSAStartup(MAKEWORD(1, 1), &wsaData);                                   ^/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp:74:13: error: use of undeclared identifier 'WSACleanup'            WSACleanup();            ^/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp:87:25: error: use of undeclared identifier 'gethostbyname'; did you mean 'GetHostByName'?    struct hostent *h = gethostbyname( name );                        ^~~~~~~~~~~~~                        GetHostByName/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp:81:15: note: 'GetHostByName' declared hereunsigned long GetHostByName( const char *name )              ^/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp:87:21: error: cannot initialize a variable of type 'struct hostent *' with an rvalue of type 'unsigned long'    struct hostent *h = gethostbyname( name );                    ^   ~~~~~~~~~~~~~~~~~~~~~/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp:89:24: error: variable has incomplete type 'struct in_addr'        struct in_addr a;                       ^/Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp:89:16: note: forward declaration of 'in_addr'        struct in_addr a;               ^7 errors generated.7(36%IDEClangDiagnosticActivityLogMessage2@24"Unknown type name 'LONG'-406333325#18446744073709551615#0#-2#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@68"file:///Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp0000000000000000^44#7#44#7#1873#0#11"Parse Issue--2@27"Unknown type name 'WSAData'-406333325#18446744073709551615#0#-2#27"com.apple.dt.IDE.diagnostic3@68"file:///Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp0000000000000000^58#5#58#5#2505#0#11"Parse Issue--2@39"Use of undeclared identifier 'MAKEWORD'-406333325#18446744073709551615#0#-2#27"com.apple.dt.IDE.diagnostic3@68"file:///Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp0000000000000000^59#28#59#28#2551#0#14"Semantic Issue--2@41"Use of undeclared identifier 'WSACleanup'-406333325#18446744073709551615#0#-2#27"com.apple.dt.IDE.diagnostic3@68"file:///Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp0000000000000000^73#12#73#12#2914#0#14"Semantic Issue--2@75"Use of undeclared identifier 'gethostbyname'; did you mean 'GetHostByName'?-406333325#18446744073709551615#0#1(2@29"'GetHostByName' declared here-406333325#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@68"file:///Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp0000000000000000^80#14#80#14#3010#0#14"Semantic Issue--2#27"com.apple.dt.IDE.diagnostic3@68"file:///Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp0000000000000000^86#24#86#24#3151#0#14"Semantic Issue1(3@68"file:///Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp0000000000000000^86#24#86#37#3151#13#-2@94"Cannot initialize a variable of type 'struct hostent *' with an rvalue of type 'unsigned long'-406333325#18446744073709551615#0#-2#27"com.apple.dt.IDE.diagnostic3@68"file:///Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp0000000000000000^86#20#86#20#3147#0#14"Semantic Issue1(3@68"file:///Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp0000000000000000^86#24#86#45#3151#20#-2@45"Variable has incomplete type 'struct in_addr'-406333325#18446744073709551615#0#1(2@32"Forward declaration of 'in_addr'-406333325#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@68"file:///Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp0000000000000000^88#15#88#15#3204#0#21"Apple LLVM 5.0 Notice--2#27"com.apple.dt.IDE.diagnostic3@68"file:///Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp0000000000000000^88#23#88#23#3212#0#14"Semantic Issue--0#0#1#-19%DVTDocumentLocation4@68"file:///Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp0000000000000000^3390"CompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/NetworkingUtils.o api/ip/win32/NetworkingUtils.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/reza/Desktop/rakakaka    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu++11 -stdlib=libc++ -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -fvisibility-inlines-hidden -Wno-sign-conversion -iquote /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-generated-files.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-own-target-headers.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-all-target-headers.hmap -iquote /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-project-headers.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/DerivedSources/x86_64 -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/DerivedSources -F/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug -MMD -MT dependencies -MF /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/NetworkingUtils.d --serialize-diagnostics /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/NetworkingUtils.dia -c /Users/reza/Desktop/rakakaka/api/ip/win32/NetworkingUtils.cpp -o /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/NetworkingUtils.o36"4D15C099-5C20-48AE-9700-29F92E7D4D89-
+bD75FFFD4-F73F-4E0C-B8DF-2352B22973E7
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/OscOutboundPacketStream.o /Users/reza/Desktop/rakakaka/api/osc/OscOutboundPacketStream.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/OscPrintReceivedElements.o /Users/reza/Desktop/rakakaka/api/osc/OscPrintReceivedElements.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/OscReceivedElements.o /Users/reza/Desktop/rakakaka/api/osc/OscReceivedElements.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/OscTypes.o /Users/reza/Desktop/rakakaka/api/osc/OscTypes.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s406333325.278636
+e406333325.557772
+r1
+xCompileC
+xdata/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/OscTypes.o
+x/Users/reza/Desktop/rakakaka/api/osc/OscTypes.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Users/reza/Desktop/rakakaka/api/osc/OscTypes.cpp
+d/Users/reza/Desktop/rakakaka/api/osc/OscTypes.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection57"Compile /Users/reza/Desktop/rakakaka/api/osc/OscTypes.cpp231"CompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/OscTypes.o api/osc/OscTypes.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler1b67478d2738b841^acca8e8d2738b841^---0#0#1#-19%DVTDocumentLocation2@56"file:///Users/reza/Desktop/rakakaka/api/osc/OscTypes.cpp0000000000000000^3338"CompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/OscTypes.o api/osc/OscTypes.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/reza/Desktop/rakakaka    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu++11 -stdlib=libc++ -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -fvisibility-inlines-hidden -Wno-sign-conversion -iquote /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-generated-files.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-own-target-headers.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-all-target-headers.hmap -iquote /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-project-headers.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/DerivedSources/x86_64 -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/DerivedSources -F/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug -MMD -MT dependencies -MF /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/OscTypes.d --serialize-diagnostics /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/OscTypes.dia -c /Users/reza/Desktop/rakakaka/api/osc/OscTypes.cpp -o /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/OscTypes.o36"49084ED0-982D-4243-8D23-7782807BE15F-
+bD75FFFD4-F73F-4E0C-B8DF-2352B22973E7
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/RtAudio.o /Users/reza/Desktop/rakakaka/api/rtaudio/RtAudio.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/Stk.o /Users/reza/Desktop/rakakaka/api/stk/Stk.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s406333325.281620
+e406333326.555266
+r1
+xCompileC
+xdata/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/Stk.o
+x/Users/reza/Desktop/rakakaka/api/stk/Stk.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Users/reza/Desktop/rakakaka/api/stk/Stk.cpp
+d/Users/reza/Desktop/rakakaka/api/stk/Stk.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Compile /Users/reza/Desktop/rakakaka/api/stk/Stk.cpp221"CompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/Stk.o api/stk/Stk.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler0a4b488d2738b841^74298e8e2738b841^---0#0#1#-19%DVTDocumentLocation2@51"file:///Users/reza/Desktop/rakakaka/api/stk/Stk.cpp0000000000000000^3308"CompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/Stk.o api/stk/Stk.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/reza/Desktop/rakakaka    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu++11 -stdlib=libc++ -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -fvisibility-inlines-hidden -Wno-sign-conversion -iquote /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-generated-files.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-own-target-headers.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-all-target-headers.hmap -iquote /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-project-headers.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/DerivedSources/x86_64 -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/DerivedSources -F/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug -MMD -MT dependencies -MF /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/Stk.d --serialize-diagnostics /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/Stk.dia -c /Users/reza/Desktop/rakakaka/api/stk/Stk.cpp -o /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/Stk.o36"3181A047-9076-483E-B98A-193E1C28714F-
+bD75FFFD4-F73F-4E0C-B8DF-2352B22973E7
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/UdpSocket-69699AD10ECFC757.o /Users/reza/Desktop/rakakaka/api/ip/win32/UdpSocket.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/UdpSocket-E8A1C26CDFB8D668.o /Users/reza/Desktop/rakakaka/api/ip/posix/UdpSocket.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/main.o /Users/reza/Desktop/rakakaka/main/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/raka-audio.o /Users/reza/Desktop/rakakaka/core/raka-audio.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/raka-entity.o /Users/reza/Desktop/rakakaka/core/raka-entity.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/raka-gfx.o /Users/reza/Desktop/rakakaka/core/raka-gfx.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s406333325.521258
+e406333326.626937
+r1
+xCompileC
+xdata/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/raka-gfx.o
+x/Users/reza/Desktop/rakakaka/core/raka-gfx.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Users/reza/Desktop/rakakaka/core/raka-gfx.cpp
+d/Users/reza/Desktop/rakakaka/core/raka-gfx.h
+d/Users/reza/Desktop/rakakaka/api/x-api/x-def.h
+d/Users/reza/Desktop/rakakaka/api/x-api/x-gfx.h
+d/Users/reza/Desktop/rakakaka/api/x-api/x-vector3d.h
+d/Users/reza/Desktop/rakakaka/core/raka-globals.h
+d/Users/reza/Desktop/rakakaka/api/x-api/x-audio.h
+d/Users/reza/Desktop/rakakaka/core/raka-sim.h
+d/Users/reza/Desktop/rakakaka/core/raka-entity.h
+d/Users/reza/Desktop/rakakaka/api/y-api/y-entity.h
+d/Users/reza/Desktop/rakakaka/api/x-api/x-buffer.h
+d/Users/reza/Desktop/rakakaka/api/x-api/x-fun.h
+d/Users/reza/Desktop/rakakaka/api/x-api/x-loadlum.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection54"Compile /Users/reza/Desktop/rakakaka/core/raka-gfx.cpp228"CompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/raka-gfx.o core/raka-gfx.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler9d85858d2738b841^b680a08e2738b841^---0#0#1#-19%DVTDocumentLocation2@53"file:///Users/reza/Desktop/rakakaka/core/raka-gfx.cpp0000000000000000^3332"CompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/raka-gfx.o core/raka-gfx.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/reza/Desktop/rakakaka    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu++11 -stdlib=libc++ -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -fvisibility-inlines-hidden -Wno-sign-conversion -iquote /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-generated-files.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-own-target-headers.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-all-target-headers.hmap -iquote /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-project-headers.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/DerivedSources/x86_64 -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/DerivedSources -F/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug -MMD -MT dependencies -MF /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/raka-gfx.d --serialize-diagnostics /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/raka-gfx.dia -c /Users/reza/Desktop/rakakaka/core/raka-gfx.cpp -o /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/raka-gfx.o36"75624B30-8489-430A-B8C4-BDD9F7222A0B-
+bD75FFFD4-F73F-4E0C-B8DF-2352B22973E7
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/raka-globals.o /Users/reza/Desktop/rakakaka/core/raka-globals.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/raka-sim.o /Users/reza/Desktop/rakakaka/core/raka-sim.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-audio.o /Users/reza/Desktop/rakakaka/api/x-api/x-audio.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-buffer.o /Users/reza/Desktop/rakakaka/api/x-api/x-buffer.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-fun.o /Users/reza/Desktop/rakakaka/api/x-api/x-fun.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-gfx.o /Users/reza/Desktop/rakakaka/api/x-api/x-gfx.mm normal x86_64 objective-c++ com.apple.compilers.llvm.clang.1_0.compiler
+s406333325.280424
+e406333330.592975
+r1
+xCompileC
+xdata/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-gfx.o
+x/Users/reza/Desktop/rakakaka/api/x-api/x-gfx.mm
+xnormal
+xx86_64
+xobjective-c++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Users/reza/Desktop/rakakaka/api/x-api/x-gfx.mm
+d/Users/reza/Desktop/rakakaka/api/x-api/x-gfx.h
+d/Users/reza/Desktop/rakakaka/api/x-api/x-def.h
+d/Users/reza/Desktop/rakakaka/api/x-api/x-vector3d.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection55"Compile /Users/reza/Desktop/rakakaka/api/x-api/x-gfx.mm236"CompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-gfx.o api/x-api/x-gfx.mm normal x86_64 objective-c++ com.apple.compilers.llvm.clang.1_0.compiler47e8478d2738b841^a2cf97922738b841^---0#0#1#-19%DVTDocumentLocation2@54"file:///Users/reza/Desktop/rakakaka/api/x-api/x-gfx.mm0000000000000000^3568"CompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-gfx.o api/x-api/x-gfx.mm normal x86_64 objective-c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/reza/Desktop/rakakaka    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c++ -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu++11 -stdlib=libc++ -fobjc-arc -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Wno-implicit-atomic-properties -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector -Wno-deprecated-implementations -Wno-c++11-extensions -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -fvisibility-inlines-hidden -Wno-sign-conversion -iquote /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-generated-files.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-own-target-headers.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-all-target-headers.hmap -iquote /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-project-headers.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/DerivedSources/x86_64 -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/DerivedSources -F/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug -MMD -MT dependencies -MF /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-gfx.d --serialize-diagnostics /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-gfx.dia -c /Users/reza/Desktop/rakakaka/api/x-api/x-gfx.mm -o /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-gfx.o36"BB84F6E4-5F95-4221-BCB3-E78D86361035-
+bD75FFFD4-F73F-4E0C-B8DF-2352B22973E7
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-loadlum.o /Users/reza/Desktop/rakakaka/api/x-api/x-loadlum.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-loadrgb.o /Users/reza/Desktop/rakakaka/api/x-api/x-loadrgb.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-network.o /Users/reza/Desktop/rakakaka/api/x-api/x-network.mm normal x86_64 objective-c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-thread.o /Users/reza/Desktop/rakakaka/api/x-api/x-thread.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-vector3d.o /Users/reza/Desktop/rakakaka/api/x-api/x-vector3d.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s406333325.279340
+e406333325.726257
+r1
+xCompileC
+xdata/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-vector3d.o
+x/Users/reza/Desktop/rakakaka/api/x-api/x-vector3d.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Users/reza/Desktop/rakakaka/api/x-api/x-vector3d.cpp
+d/Users/reza/Desktop/rakakaka/api/x-api/x-vector3d.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection61"Compile /Users/reza/Desktop/rakakaka/api/x-api/x-vector3d.cpp237"CompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-vector3d.o api/x-api/x-vector3d.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler7ba2478d2738b841^4eecb98d2738b841^---0#0#1#-19%DVTDocumentLocation2@60"file:///Users/reza/Desktop/rakakaka/api/x-api/x-vector3d.cpp0000000000000000^3354"CompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-vector3d.o api/x-api/x-vector3d.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/reza/Desktop/rakakaka    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu++11 -stdlib=libc++ -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -fvisibility-inlines-hidden -Wno-sign-conversion -iquote /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-generated-files.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-own-target-headers.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-all-target-headers.hmap -iquote /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-project-headers.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/DerivedSources/x86_64 -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/DerivedSources -F/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug -MMD -MT dependencies -MF /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-vector3d.d --serialize-diagnostics /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-vector3d.dia -c /Users/reza/Desktop/rakakaka/api/x-api/x-vector3d.cpp -o /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/x-vector3d.o36"89977212-FEC1-4AD8-9E64-32714025A75E-
+bD75FFFD4-F73F-4E0C-B8DF-2352B22973E7
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-charting.o /Users/reza/Desktop/rakakaka/api/y-api/y-charting.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-echo.o /Users/reza/Desktop/rakakaka/api/y-api/y-echo.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-entity.o /Users/reza/Desktop/rakakaka/api/y-api/y-entity.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-fft.o /Users/reza/Desktop/rakakaka/api/y-api/y-fft.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-particle.o /Users/reza/Desktop/rakakaka/api/y-api/y-particle.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s406333325.278838
+e406333326.521672
+r1
+xCompileC
+xdata/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-particle.o
+x/Users/reza/Desktop/rakakaka/api/y-api/y-particle.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Users/reza/Desktop/rakakaka/api/y-api/y-particle.cpp
+d/Users/reza/Desktop/rakakaka/api/y-api/y-particle.h
+d/Users/reza/Desktop/rakakaka/api/y-api/y-entity.h
+d/Users/reza/Desktop/rakakaka/api/x-api/x-gfx.h
+d/Users/reza/Desktop/rakakaka/api/x-api/x-def.h
+d/Users/reza/Desktop/rakakaka/api/x-api/x-vector3d.h
+d/Users/reza/Desktop/rakakaka/api/x-api/x-fun.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection61"Compile /Users/reza/Desktop/rakakaka/api/y-api/y-particle.cpp237"CompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-particle.o api/y-api/y-particle.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler1973478d2738b841^8f8c858e2738b841^---0#0#1#-19%DVTDocumentLocation2@60"file:///Users/reza/Desktop/rakakaka/api/y-api/y-particle.cpp0000000000000000^3354"CompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-particle.o api/y-api/y-particle.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/reza/Desktop/rakakaka    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu++11 -stdlib=libc++ -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -fvisibility-inlines-hidden -Wno-sign-conversion -iquote /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-generated-files.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-own-target-headers.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-all-target-headers.hmap -iquote /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-project-headers.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/DerivedSources/x86_64 -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/DerivedSources -F/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug -MMD -MT dependencies -MF /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-particle.d --serialize-diagnostics /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-particle.dia -c /Users/reza/Desktop/rakakaka/api/y-api/y-particle.cpp -o /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-particle.o36"DD7B7C27-8E13-4E24-BD07-50B4076FEFA6-
+bD75FFFD4-F73F-4E0C-B8DF-2352B22973E7
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-score-reader.o /Users/reza/Desktop/rakakaka/api/y-api/y-score-reader.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s406333325.279085
+e406333327.319957
+r1
+xCompileC
+xdata/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-score-reader.o
+x/Users/reza/Desktop/rakakaka/api/y-api/y-score-reader.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Users/reza/Desktop/rakakaka/api/y-api/y-score-reader.cpp
+d/Users/reza/Desktop/rakakaka/api/y-api/y-score-reader.h
+d/Users/reza/Desktop/rakakaka/api/stk/MidiFileIn.h
+d/Users/reza/Desktop/rakakaka/api/stk/Stk.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection65"Compile /Users/reza/Desktop/rakakaka/api/y-api/y-score-reader.cpp245"CompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-score-reader.o api/y-api/y-score-reader.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler4181478d2738b841^20eb518f2738b841^---0#0#1#-19%DVTDocumentLocation2@64"file:///Users/reza/Desktop/rakakaka/api/y-api/y-score-reader.cpp0000000000000000^3378"CompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-score-reader.o api/y-api/y-score-reader.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/reza/Desktop/rakakaka    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu++11 -stdlib=libc++ -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -fvisibility-inlines-hidden -Wno-sign-conversion -iquote /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-generated-files.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-own-target-headers.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-all-target-headers.hmap -iquote /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-project-headers.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/DerivedSources/x86_64 -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/DerivedSources -F/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug -MMD -MT dependencies -MF /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-score-reader.d --serialize-diagnostics /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-score-reader.dia -c /Users/reza/Desktop/rakakaka/api/y-api/y-score-reader.cpp -o /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-score-reader.o36"7D7F994F-D381-4603-B1F4-14CEBF3BD815-
+bD75FFFD4-F73F-4E0C-B8DF-2352B22973E7
+
+CCompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-waveform.o /Users/reza/Desktop/rakakaka/api/y-api/y-waveform.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s406333325.279916
+e406333326.520817
+r1
+xCompileC
+xdata/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-waveform.o
+x/Users/reza/Desktop/rakakaka/api/y-api/y-waveform.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Users/reza/Desktop/rakakaka/api/y-api/y-waveform.cpp
+d/Users/reza/Desktop/rakakaka/api/y-api/y-waveform.h
+d/Users/reza/Desktop/rakakaka/api/x-api/x-audio.h
+d/Users/reza/Desktop/rakakaka/api/x-api/x-def.h
+d/Users/reza/Desktop/rakakaka/api/x-api/x-gfx.h
+d/Users/reza/Desktop/rakakaka/api/x-api/x-vector3d.h
+d/Users/reza/Desktop/rakakaka/api/y-api/y-entity.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection61"Compile /Users/reza/Desktop/rakakaka/api/y-api/y-waveform.cpp237"CompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-waveform.o api/y-api/y-waveform.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler2bdb478d2738b841^9754858e2738b841^---0#0#1#-19%DVTDocumentLocation2@60"file:///Users/reza/Desktop/rakakaka/api/y-api/y-waveform.cpp0000000000000000^3354"CompileC data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-waveform.o api/y-api/y-waveform.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/reza/Desktop/rakakaka    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu++11 -stdlib=libc++ -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -mmacosx-version-min=10.8 -g -fvisibility-inlines-hidden -Wno-sign-conversion -iquote /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-generated-files.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-own-target-headers.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-all-target-headers.hmap -iquote /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/rakakaka-project-headers.hmap -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/DerivedSources/x86_64 -I/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/DerivedSources -F/Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug -MMD -MT dependencies -MF /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-waveform.d --serialize-diagnostics /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-waveform.dia -c /Users/reza/Desktop/rakakaka/api/y-api/y-waveform.cpp -o /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Intermediates/rakakaka.build/Debug/rakakaka.build/Objects-normal/x86_64/y-waveform.o36"1ABC22AB-9729-47E9-8A0C-72A62C822255-
+bD75FFFD4-F73F-4E0C-B8DF-2352B22973E7
+
+CLd /Users/reza/Desktop/rakakaka/data/texture/rakakaka-fwgfcxkmaufllhfgqiibkxcjkjbh/Build/Products/Debug/rakakaka normal x86_64
+r0
+

@@ -1,0 +1,26 @@
+Contents of /Users/reza/Documents/bk/420/FaustAUSynth copy/FaustAUSynth_Prefix.pch
+-x
+c++
+-arch
+x86_64
+-fretain-comments-from-system-headers
+-fpascal-strings
+-O0
+-isysroot
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk
+-fasm-blocks
+-g
+-fvisibility-inlines-hidden
+-I/Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Products/Development/include
+-I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include
+-F/Users/reza/Desktop/rakakaka/FaustAUSynth-atuwqtiyjqlaethkasltyiasdeno/Build/Products/Development
+-ferror-limit=10
+-working-directory=/Users/reza/Documents/bk/420/FaustAUSynth copy
+-Xclang
+-detailed-preprocessing-record
+-DCA_AUTO_MIDI_MAP=1
+-DDEBUG
+x86_64-apple-darwin13.0.0
+"4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.79)"
+SDK_PRODUCT_BUILD_VERSION=13A595
+13A595
