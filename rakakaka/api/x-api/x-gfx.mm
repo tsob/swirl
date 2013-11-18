@@ -35,11 +35,11 @@
 //-----------------------------------------------------------------------------
 #include "x-gfx.h"
 #include <math.h>
-#include <Cocoa/Cocoa.h>
+extern "C"{
+  #include <Cocoa/Cocoa.h>
+}
 #include <iostream>
 using namespace std;
-
-
 
 
 //-----------------------------------------------------------------------------
