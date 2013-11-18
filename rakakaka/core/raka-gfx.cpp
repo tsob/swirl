@@ -89,6 +89,17 @@ bool raka_gfx_init( int argc, const char ** argv )
     //TODO
     int sendPort = atoi(argv[1]);
     int receivePort = atoi(argv[2]);
+    
+    if (sendPort == 6000)
+    {
+        Globals::app = 1;
+        cout << "ONE\n";
+    }
+    else
+    {
+        Globals::app = 2;
+        cout << "TWO\n";
+    }
 
     UdpTransmitSocket* transmitSocket = getTransmitSocket( ADDRESS, sendPort);
    
@@ -300,6 +311,25 @@ void initialize_simulation()
         // add to simulation
         Globals::sim->root().addChild( getAvatar() );
     
+    
+    
+    Globals::cameraEye.x = 0;
+    Globals::cameraEye.y = 0;
+    
+    if (Globals::app == 1)
+    {
+        Globals::cameraEye.z = -2;
+        Globals::cameraReference.z = 9;
+    }
+    else
+    {
+        Globals::cameraEye.z = -1;
+        Globals::cameraReference.z = 10;
+    }
+
+
+    //Vector3D Globals::cameraReference( 0, 0, 0 );
+    
 //    // create test teapot
 //    RAKATeapot * teapot = new RAKATeapot();
 //    // set attributes
@@ -346,6 +376,10 @@ void initialize_simulation()
 //    bokeh->set( 1, 1, 1, 1, RAKA_TEX_FLARE_TNG_5 );
 //    bokeh->setBokehParams(0, 1, 10, Vector3D(0,0,0), Vector3D(1, 1, .5 ) );
 //    Globals::sim->root().addChild( bokeh );
+    
+    YCube* cube = new YCube();
+    Globals::sim->root().addChild( cube );
+
     
     for( int i = 0; i < 2000; i++ )
     {
@@ -565,11 +599,16 @@ void look( )
               0.0f, 0.0f, 0.0f,
               0.0f, ( cos( Globals::viewEyeY.x ) < 0 ? -1.0f : 1.0f ), 0.0f );*/
     
+    gluLookAt( Globals::cameraEye.x, Globals::cameraEye.y,
+              Globals::cameraEye.z,
+              Globals::cameraReference.x, Globals::cameraReference.y, Globals::cameraReference.z,
+              0.0f, 1.0f, 0.0f );
+   /*
     gluLookAt( Globals::viewRadius.y ,0.0f,
               Globals::viewEyeY.y,
               0.0f, 0.0f, 0.0f,
               0.0f, ( cos( Globals::viewEyeY.x ) < 0 ? -1.0f : 1.0f ), 0.0f );
-    
+    */
     // set the position of the lights
     glLightfv( GL_LIGHT0, GL_POSITION, Globals::light0_pos );
     glLightfv( GL_LIGHT1, GL_POSITION, Globals::light1_pos );
@@ -738,72 +777,109 @@ void keyboardFunc( unsigned char key, int x, int y )
     // check if something else is handling viewing
     bool handled = false;
     
+    
     // post visualizer handling (if not handled)
     if( !handled )
     {
         switch( key )
         {
             case ']':
-                Globals::viewEyeY.y -= .1f;
+                Globals::cameraReference.x = Globals::cameraReference.x * cos(-0.1)
+                - Globals::cameraReference.z * sin(-0.1);
+                
+                Globals::cameraReference.z = Globals::cameraReference.x * sin(-0.1)
+                + Globals::cameraReference.z * cos(-0.1);
+                
                 //fprintf( stderr, "[vismule]: yview:%f\n", g_eye_y.y );
                 
-                
                 oscOuttream << osc::BeginBundleImmediate
-                << osc::BeginMessage( "/viewEyeY" )
-                << Globals::viewEyeY.y << osc::EndMessage
+                
+                << osc::BeginMessage( "/cameraReferenceX" )
+                << /*Globals::Globals::cameraReference.x*/ -0.1f << osc::EndMessage
+               /*
+                << osc::BeginMessage( "/cameraReferenceZ" )
+                << Globals::Globals::cameraReference.z << osc::EndMessage
+               */
                 << osc::EndBundle;
                 transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
-                
                 
                 break;
             case '[':
-                Globals::viewEyeY.y += .1f;
-                //fprintf( stderr, "[vismule]: yview:%f\n", g_eye_y.y );
                 
-                oscOuttream << osc::BeginBundleImmediate
-                << osc::BeginMessage( "/viewEyeY" )
-                << Globals::viewEyeY.y << osc::EndMessage
-                << osc::EndBundle;
-                transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
-                
-                break;
-            case '=':
-                cout << "hi";
+                Globals::cameraReference.x = Globals::cameraReference.x * cos(0.1)
+                    - Globals::cameraReference.z * sin(0.1);
 
-                Globals::viewRadius.y = .975 * Globals::viewRadius.y;
-                if( Globals::viewRadius.y < .001 ) Globals::viewRadius.y = .001;
+                Globals::cameraReference.z = Globals::cameraReference.x * sin(0.1)
+                + Globals::cameraReference.z * cos(0.1);
+
+                //fprintf( stderr, "[vismule]: yview:%f\n", g_eye_y.y );
+             
+                oscOuttream << osc::BeginBundleImmediate
+
+                << osc::BeginMessage( "/cameraReferenceX" )
+                << /*Globals::Globals::cameraReference.x*/ 0.1f << osc::EndMessage
+              /*
+                << osc::BeginMessage( "/cameraReferenceZ" )
+                << Globals::Globals::cameraReference.z << osc::EndMessage
+              */
+                << osc::EndBundle;
+                transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
+                
+                break;
+            case 'w':
+                //Globals::viewRadius.y = 1.025 * Globals::viewRadius.y;
+                
+                Globals::cameraEye.z += 0.1;
+                Globals::cameraReference.z += 0.1;
+
                 // fprintf( stderr, "[vismule]: view radius:%f->%f\n", Globals::viewRadius.x, Globals::viewRadius.y );
-                
                 oscOuttream << osc::BeginBundleImmediate
-                << osc::BeginMessage( "/viewRadiusY" )
-                << Globals::viewRadius.y << osc::EndMessage
+                << osc::BeginMessage( "/cameraEyeZ" )
+                << Globals::cameraEye.z << osc::EndMessage
                 << osc::EndBundle;
                 transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
                 
                 break;
-            case '-':
-                Globals::viewRadius.y = 1.025 * Globals::viewRadius.y;
+            case 'x':
+                //Globals::viewRadius.y = Globals::viewRadius.x + .7*(Globals::viewRadius.y-Globals::viewRadius.x);
+                Globals::cameraEye.z -= 0.1;
+                Globals::cameraReference.z -= 0.1;
+
+                oscOuttream << osc::BeginBundleImmediate
+                << osc::BeginMessage( "/cameraEyeZ" )
+                << Globals::cameraEye.z << osc::EndMessage
+                << osc::EndBundle;
+                transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
+                
+                break;
+
+            case 'd':
+                //Globals::viewRadius.y = 1.025 * Globals::viewRadius.y;
+                
+                Globals::cameraEye.x += 0.1;
+                Globals::cameraReference.x += 0.1;
+                
                 // fprintf( stderr, "[vismule]: view radius:%f->%f\n", Globals::viewRadius.x, Globals::viewRadius.y );
                 oscOuttream << osc::BeginBundleImmediate
-                << osc::BeginMessage( "/viewRadiusY" )
-                << Globals::viewRadius.y << osc::EndMessage
+                << osc::BeginMessage( "/cameraEyeX" )
+                << Globals::cameraEye.x << osc::EndMessage
                 << osc::EndBundle;
                 transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
                 
                 break;
-            case '_':
-            case '+':{
-                Globals::viewRadius.y = Globals::viewRadius.x + .7*(Globals::viewRadius.y-Globals::viewRadius.x);
+            case 'a':
+                //Globals::viewRadius.y = Globals::viewRadius.x + .7*(Globals::viewRadius.y-Globals::viewRadius.x);
+                Globals::cameraEye.x -= 0.1;
+                Globals::cameraReference.x -= 0.1;
                 
                 oscOuttream << osc::BeginBundleImmediate
-                << osc::BeginMessage( "/viewRadiusY" )
-                << Globals::viewRadius.y << osc::EndMessage
+                << osc::BeginMessage( "/cameraEyeX" )
+                << Globals::cameraEye.x << osc::EndMessage
                 << osc::EndBundle;
                 transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
- //
-            }
                 
                 break;
+
             case '\'':
                 Globals::bgColor.update( Vector3D( 1,1,1 ) );
                 break;

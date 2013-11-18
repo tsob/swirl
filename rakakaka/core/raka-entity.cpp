@@ -73,9 +73,6 @@ void RAKASpark::update( YTimeInterval dt )
     this->alpha = ALPHA.value;
 }
 
-
-
-
 //-------------------------------------------------------------------------------
 // name: render()
 // desc: ...
@@ -143,7 +140,13 @@ void RAKATeapot::render()
     // enable lighting
     glEnable( GL_LIGHTING );
     // set color
-    glColor4f( col.x, col.y, col.z, alpha );
+    
+    //TODO
+    if (Globals::app == 1)
+        glColor4f( col.x, 0, col.z, alpha );
+    else
+        glColor4f( 0, col.y, col.z, alpha );
+
     // render stuff
     glutSolidTeapot( 1.0 );
     // disable lighting
