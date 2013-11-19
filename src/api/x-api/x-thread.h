@@ -40,29 +40,14 @@
 
 #include "x-def.h"
 
-
-
-
-#if ( defined(__PLATFORM_MACOSX__) || defined(__PLATFORM_LINUX__) || defined(__WINDOWS_PTHREAD__) )
-  #include <pthread.h>
-  #define THREAD_TYPE
-  typedef pthread_t THREAD_HANDLE;
-  typedef void * THREAD_RETURN;
-  typedef void * (*THREAD_FUNCTION)(void *);
-  typedef pthread_mutex_t MUTEX;
-  #define CHUCK_THREAD pthread_t
-#elif defined(__PLATFORM_WIN32__)
-  #include <windows.h>
-  #include <process.h>
-  #define THREAD_TYPE __stdcall
-  typedef unsigned long THREAD_HANDLE;
-  typedef unsigned THREAD_RETURN;
-  typedef unsigned (__stdcall *THREAD_FUNCTION)(void *);
-  typedef CRITICAL_SECTION MUTEX;
-  #define CHUCK_THREAD HANDLE
-#endif
-
-
+#include <pthread.h>
+#define THREAD_TYPE
+typedef pthread_t THREAD_HANDLE;
+typedef void* THREAD_RETURN;
+typedef void* (*THREAD_FUNCTION)(void *);
+typedef pthread_mutex_t MUTEX;
+#define CHUCK_THREAD pthread_t
+// Removed windows support because of compile error
 
 
 //-----------------------------------------------------------------------------
