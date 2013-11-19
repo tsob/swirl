@@ -28,14 +28,8 @@
 
 #define OUTPUT_BUFFER_SIZE 1024
 
-//
-
-
 using namespace std;
 
-
-// bokehs
-vector<YBokeh *> g_bokehs;
 
 
 //-----------------------------------------------------------------------------
@@ -51,11 +45,13 @@ void specialFunc( int key, int x, int y );
 void initialize_graphics();
 void initialize_simulation();
 bool initialize_data();
-void loadTextures();
-bool checkTexDim( int dim );
-void setupTexture( const char * filename, GLuint texobj,
-                  GLenum minFilter, GLenum maxFilter,
-                  int useMipMaps = 0 );
+//void loadTextures();
+//bool checkTexDim( int dim );
+/*
+ *void setupTexture( const char * filename, GLuint texobj,
+ *                  GLenum minFilter, GLenum maxFilter,
+ *                  int useMipMaps = 0 );
+ */
 
 void renderBackground();
 void blendPane();
@@ -86,7 +82,7 @@ void * oscListener(void * args)
 bool raka_gfx_init( int argc, const char ** argv )
 {
 
-    //TODO
+    //TODO - networking development
     int sendPort = atoi(argv[1]);
     int receivePort = atoi(argv[2]);
     
@@ -251,7 +247,7 @@ void initialize_graphics()
     glEnable( GL_LIGHT1 );
     
     // load textures
-    loadTextures();
+    //loadTextures();
     
     // fog
     Globals::fog_mode[0] = 0;
@@ -306,12 +302,9 @@ void initialize_simulation()
 {
     // instantiate simulation
     Globals::sim = new RAKASim();
-    
 
-        // add to simulation
-        Globals::sim->root().addChild( getAvatar() );
-    
-    
+    // add to simulation
+    Globals::sim->root().addChild( getAvatar() );
     
     Globals::cameraEye.x = 0;
     Globals::cameraEye.y = 0;
@@ -328,83 +321,9 @@ void initialize_simulation()
     }
 
 
-    //Vector3D Globals::cameraReference( 0, 0, 0 );
-    
-//    // create test teapot
-//    RAKATeapot * teapot = new RAKATeapot();
-//    // set attributes
-//    teapot->col = Globals::ourSoftYellow;
-//    teapot->loc.z = -10;
-//    // add to simulation
-//    Globals::sim->root().addChild( teapot );
-//    
-//    // create test teapot
-//    teapot = new RAKATeapot();
-//    // set attributes
-//    teapot->col = Globals::ourBlue;
-//    teapot->loc.set( -2, 2, -5 );
-//    // add to simulation
-//    Globals::sim->root().addChild( teapot );
-//    
-//    // create test teapot
-//    teapot = new RAKATeapot();
-//    // set attributes
-//    teapot->col = Globals::ourGreen;
-//    teapot->loc.set( 0, 0, 0 );
-//    teapot->sca.set( .2, .2, .2 );
-//    // add to simulation
-//    Globals::sim->root().addChild( teapot );
-
-
-//    // create a spark
-//    RAKASpark * spark = new RAKASpark();
-//    // set attributes
-//    spark->set( RAKA_TEX_FLARE_TNG_1, .5f, 1.0f );
-//    // add to simulation
-//    Globals::sim->root().addChild( spark );
-//    
-//    // create a spark
-//    spark = new RAKASpark();
-//    // set attributes
-//    spark->set( RAKA_TEX_FLARE_TNG_1, .5f, 1.0f );
-//    spark->loc.set( .1, 0, 0 );
-//    // add to simulation
-//    Globals::sim->root().addChild( spark );
-    
-//    // bokeh
-//    YBokeh * bokeh = new YBokeh();
-//    bokeh->set( 1, 1, 1, 1, RAKA_TEX_FLARE_TNG_5 );
-//    bokeh->setBokehParams(0, 1, 10, Vector3D(0,0,0), Vector3D(1, 1, .5 ) );
-//    Globals::sim->root().addChild( bokeh );
-    
+    // Put a cube in the environment
     YCube* cube = new YCube();
     Globals::sim->root().addChild( cube );
-
-    
-    for( int i = 0; i < 2000; i++ )
-    {
-        // create a spark
-        YBokeh * bokeh = new YBokeh();
-        // set attributes
-        bokeh->set( 1.0f, 1.0f, 1.0f, 1.0f, RAKA_TEX_FLARE_TNG_5 );
-        bokeh->sca.set( 1, 1, 1 );
-        // set bokeh
-        bokeh->setBokehParams( // initial time
-                              XFun::rand2f(0,10),
-                              // freq
-                              XFun::rand2f(1,3),
-                              // time step
-                              50,
-                              // location
-                              Vector3D(XFun::rand2f(-2,2),XFun::rand2f(-1,1), XFun::rand2f(-1,1)),
-                              // color
-                              Vector3D(XFun::rand2f(0,.1),XFun::rand2f(0,.2), XFun::rand2f(0,.1)) );
-        // alpha
-        bokeh->setAlpha( 1 );
-        // add to simulation
-        Globals::sim->root().addChild( bokeh );
-        g_bokehs.push_back( bokeh );
-    }
 }
 
 
@@ -456,11 +375,13 @@ bool initialize_data()
 void raka_about()
 {
     raka_line();
-    fprintf( stderr, "[bokeh]: Bokeh Madness\n" );
+    fprintf( stderr, "[swirl]: The Sonic World\n" );
     raka_line();
-    fprintf( stderr, "   | by Ge Wang\n" );
+    fprintf( stderr, "   | by Tim O'Brien\n" );
+    fprintf( stderr, "   |    Reza Payami\n" );
+    fprintf( stderr, "   |  & Haley Sayres\n" );
     fprintf( stderr, "   | Stanford University | CCRMA\n" );
-    fprintf( stderr, "   | http://ccrma.stanford.edu/~ge/\n" );
+    fprintf( stderr, "   | http://ccrma.stanford.edu/\n" );
     fprintf( stderr, "   | version: %s\n", Globals::version.c_str() );
 }
 
@@ -474,7 +395,7 @@ void raka_about()
 void raka_keys()
 {
     raka_line();
-    fprintf( stderr, "[bokeh]: run-time control\n" );
+    fprintf( stderr, "[swirl]: run-time control\n" );
     raka_line();
     fprintf( stderr, "  'h' - print this help message\n" );
     fprintf( stderr, "  's' - toggle fullscreen\n" );
@@ -515,9 +436,9 @@ void raka_help()
 void raka_usage()
 {
     raka_line();
-    fprintf( stderr, "[bokeh]: command line arguments\n" );
+    fprintf( stderr, "[swirl]: command line arguments\n" );
     raka_line();
-    fprintf( stderr, "usage: bokeh --[options] [name]\n" );
+    fprintf( stderr, "usage: swirl --[options] [name]\n" );
     fprintf( stderr, "   [options] = help | fullscreen" );
 }
 
@@ -640,12 +561,6 @@ void keyboardFunc( unsigned char key, int x, int y )
         }
         case 'r':
         {
-            for( int i = 0; i < g_bokehs.size(); i++ )
-            {
-                YBokeh * bokeh = g_bokehs[i];
-                bokeh->iLoc.update( Vector3D(XFun::rand2f(-2,2),XFun::rand2f(-1,1), XFun::rand2f(-1,1) ) );
-                bokeh->iRGB.update( Vector3D(XFun::rand2f(0,.3),XFun::rand2f(0,.3), XFun::rand2f(0,.3)) );
-            }
             break;
         }
         case 'a':
@@ -1080,30 +995,32 @@ void renderBackground()
 // name: loadTexture()
 // desc: load textures
 //-------------------------------------------------------------------------------
-void loadTextures()
-{
-    char filename[256];
-    GLenum minFilter, maxFilter;
-    int i;
-    
-    // log
-    fprintf( stderr, "[bokeh]: loading textures...\n" );
-    
-    // set store alignment
-    glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
-    
-    // set filter types
-    minFilter = GL_LINEAR;
-    maxFilter = GL_LINEAR;
-    
-    // load tng flares
-    for( i = RAKA_TEX_FLARE_TNG_1; i <= RAKA_TEX_FLARE_TNG_5; i++ )
-    {
-        glGenTextures( 1, &(Globals::textures[i]) );
-        sprintf( filename, "%sflare-tng-%d.bw", Globals::datapath.c_str(), i - RAKA_TEX_FLARE_TNG_1 + 1 );
-        setupTexture( filename, Globals::textures[i], minFilter, maxFilter );
-    }
-}
+/*
+ *void loadTextures()
+ *{
+ *    char filename[256];
+ *    GLenum minFilter, maxFilter;
+ *    int i;
+ *    
+ *    // log
+ *    fprintf( stderr, "[swirl]: loading textures...\n" );
+ *    
+ *    // set store alignment
+ *    glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
+ *    
+ *    // set filter types
+ *    minFilter = GL_LINEAR;
+ *    maxFilter = GL_LINEAR;
+ *    
+ *    // load tng flares
+ *    for( i = RAKA_TEX_FLARE_TNG_1; i <= RAKA_TEX_FLARE_TNG_5; i++ )
+ *    {
+ *        glGenTextures( 1, &(Globals::textures[i]) );
+ *        sprintf( filename, "%sflare-tng-%d.bw", Globals::datapath.c_str(), i - RAKA_TEX_FLARE_TNG_1 + 1 );
+ *        setupTexture( filename, Globals::textures[i], minFilter, maxFilter );
+ *    }
+ *}
+ */
 
 
 
@@ -1112,20 +1029,22 @@ void loadTextures()
 // name: raka_loadTexture()
 // desc: load texture
 //-------------------------------------------------------------------------------
-XTexture * raka_loadTexture( const string & filename )
-{
-    // instantiate image data
-    XTexture * tex = new XTexture;
-    
-    // load the texture
-    if( !raka_initTexture( filename, tex ) )
-    {
-        delete tex;
-        return NULL;
-    }
-    
-    return tex;
-}
+/*
+ *XTexture * raka_loadTexture( const string & filename )
+ *{
+ *    // instantiate image data
+ *    XTexture * tex = new XTexture;
+ *    
+ *    // load the texture
+ *    if( !raka_initTexture( filename, tex ) )
+ *    {
+ *        delete tex;
+ *        return NULL;
+ *    }
+ *    
+ *    return tex;
+ *}
+ */
 
 
 
@@ -1134,31 +1053,33 @@ XTexture * raka_loadTexture( const string & filename )
 // name: raka_loadTexture()
 // desc: load texture
 //-------------------------------------------------------------------------------
-bool raka_initTexture( const string & filename, XTexture * tex )
-{
-    // set desired resize
-    tex->resizeWidth = 512;
-    tex->resizeHeight = 512;
-    
-    // generate the texture
-    glGenTextures( 1, &tex->name );
-    // bind the texture
-    glBindTexture( GL_TEXTURE_2D, tex->name );
-    // select modulate to mix texture with color for shading
-    glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
-    // setting parameters
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-    
-    // load the texture
-    if( !XGfx::loadTexture( filename, tex ) )
-    {
-        cerr << "[bokeh]: error - cannot load texture '" << filename.c_str() << "'..." << endl;
-        return false;
-    }
-    
-    return true;
-}
+/*
+ *bool raka_initTexture( const string & filename, XTexture * tex )
+ *{
+ *    // set desired resize
+ *    tex->resizeWidth = 512;
+ *    tex->resizeHeight = 512;
+ *    
+ *    // generate the texture
+ *    glGenTextures( 1, &tex->name );
+ *    // bind the texture
+ *    glBindTexture( GL_TEXTURE_2D, tex->name );
+ *    // select modulate to mix texture with color for shading
+ *    glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
+ *    // setting parameters
+ *    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+ *    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+ *    
+ *    // load the texture
+ *    if( !XGfx::loadTexture( filename, tex ) )
+ *    {
+ *        cerr << "[bokeh]: error - cannot load texture '" << filename.c_str() << "'..." << endl;
+ *        return false;
+ *    }
+ *    
+ *    return true;
+ *}
+ */
 
 
 
@@ -1167,40 +1088,42 @@ bool raka_initTexture( const string & filename, XTexture * tex )
 // name: setupTexture()
 // desc: ...
 //--------------------------------------------------------------------------------
-void setupTexture( const char * filename, GLuint texobj,
-                  GLenum minFilter, GLenum maxFilter, int useMipMaps )
-{
-    unsigned char * buf = NULL;
-    int width = 0, height = 0, components = 0;
-    
-    glBindTexture( GL_TEXTURE_2D, texobj );
-    glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter );
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, maxFilter );
-    
-    // log
-    // fprintf( stderr, "[bokeh]: loading %s...\n", filename );
-    
-    // load luminance
-    buf = loadLuminance( filename, &width, &height, &components );
-    
-    // log
-    // fprintf( stderr, "[bokeh]: '%s' : %dx%dx%d\n", filename, width, height, components);
-    
-    // build mip maps
-    if( useMipMaps )
-    {
-        gluBuild2DMipmaps( GL_TEXTURE_2D, 1, width, height,
-                          GL_LUMINANCE, GL_UNSIGNED_BYTE, buf );
-    }
-    else
-    {
-        glTexImage2D( GL_TEXTURE_2D, 0, 1, width, height, 0,
-                     GL_LUMINANCE, GL_UNSIGNED_BYTE, buf );
-    }
-    
-    free(buf);
-}
+/*
+ *void setupTexture( const char * filename, GLuint texobj,
+ *                  GLenum minFilter, GLenum maxFilter, int useMipMaps )
+ *{
+ *    unsigned char * buf = NULL;
+ *    int width = 0, height = 0, components = 0;
+ *    
+ *    glBindTexture( GL_TEXTURE_2D, texobj );
+ *    glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
+ *    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter );
+ *    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, maxFilter );
+ *    
+ *    // log
+ *    // fprintf( stderr, "[bokeh]: loading %s...\n", filename );
+ *    
+ *    // load luminance
+ *    buf = loadLuminance( filename, &width, &height, &components );
+ *    
+ *    // log
+ *    // fprintf( stderr, "[bokeh]: '%s' : %dx%dx%d\n", filename, width, height, components);
+ *    
+ *    // build mip maps
+ *    if( useMipMaps )
+ *    {
+ *        gluBuild2DMipmaps( GL_TEXTURE_2D, 1, width, height,
+ *                          GL_LUMINANCE, GL_UNSIGNED_BYTE, buf );
+ *    }
+ *    else
+ *    {
+ *        glTexImage2D( GL_TEXTURE_2D, 0, 1, width, height, 0,
+ *                     GL_LUMINANCE, GL_UNSIGNED_BYTE, buf );
+ *    }
+ *    
+ *    free(buf);
+ *}
+ */
 
 
 
@@ -1209,18 +1132,20 @@ void setupTexture( const char * filename, GLuint texobj,
 // name: checkTexDim( )
 // desc: checks to see if a dim is a valid opengl texture dimension
 //-----------------------------------------------------------------------------
-bool checkTexDim( int dim )
-{
-    if( dim < 0 )
-        return false;
-    
-    int i, count = 0;
-    
-    // count bits
-    for( i = 0; i < 31; i++ )
-        if( dim & ( 0x1 << i ) )
-            count++;
-    
-    // this is true only if dim is power of 2
-    return count == 1;
-}
+/*
+ *bool checkTexDim( int dim )
+ *{
+ *    if( dim < 0 )
+ *        return false;
+ *    
+ *    int i, count = 0;
+ *    
+ *    // count bits
+ *    for( i = 0; i < 31; i++ )
+ *        if( dim & ( 0x1 << i ) )
+ *            count++;
+ *    
+ *    // this is true only if dim is power of 2
+ *    return count == 1;
+ *}
+ */

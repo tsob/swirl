@@ -22,8 +22,8 @@ void raka_help();
 void raka_usage();
 void raka_endline();
 void raka_line();
-bool raka_initTexture( const std::string & filename, XTexture * tex );
-XTexture * raka_loadTexture( const std::string & filename );
+//bool raka_initTexture( const std::string & filename, XTexture * tex );
+//XTexture * raka_loadTexture( const std::string & filename );
 
 
 
