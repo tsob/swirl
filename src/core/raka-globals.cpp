@@ -18,11 +18,13 @@
 #define DEFAULT_FOG           FALSE
 #define DEFAULT_VERSION       "0.0.1"
 
-RAKASim * Globals::sim = NULL;
+RAKASim * Globals::sim     = NULL;
 
 //TODO
 /*static*/ UdpTransmitSocket* transmitSocket = NULL;
 YEntity* avatar = NULL;
+
+YWaveform * Globals::waveform = NULL;
 
 YEntity* getAvatar()
 {
@@ -35,7 +37,7 @@ YEntity* getAvatar()
         avatar->col = Globals::ourSoftYellow;
         avatar->loc.x = 0;
         avatar->loc.y = 0;
-        
+
         if (Globals::app == 1)
             avatar->loc.z = -1;
         else
@@ -93,8 +95,6 @@ Vector3D Globals::cameraReference( 0, 0, 0 );
 //Vector3D Globals::cameraReference( 0, 0, 0 );
 
 Vector3D Globals::fov( 80, 100, .2f );
-
-GLuint   Globals::textures[RAKA_MAX_TEXTURES];
 
 GLfloat   Globals::light0_pos[4]      = {  2.0f, 1.2f,  4.0f, 1.0f };
 GLfloat   Globals::light1_ambient[4]  = {   .2f,  .2f,   .2f, 1.0f };

@@ -1,9 +1,22 @@
 //-----------------------------------------------------------------------------
-// Name: raka-audio.h
-// Desc: audio processing
+// name: raka-audio.h
+// desc: audio stuff
 //
-// Author: Tim O'Brien    (tsob@ccrma.stanford.edu)
-//         Reza Payami  (rpayami@ccrma.stanford.edu)
-//         Haley Sayres    (hsayres@stanford.edu)
-// Date:   Fall 2013
+// author: Ge Wang (ge@ccrma.stanford.edu)
+//   date: 2013
 //-----------------------------------------------------------------------------
+#ifndef __RAKA_AUDIO_H__
+#define __RAKA_AUDIO_H__
+
+#include "x-audio.h"
+
+// init audio
+bool raka_audio_init( unsigned int srate, unsigned int frameSize, unsigned channels );
+// start audio
+bool raka_audio_start();
+
+// play some notes
+void raka_playNotes( float pitch, float velocity );
+
+
+#endif

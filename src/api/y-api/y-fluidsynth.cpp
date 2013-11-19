@@ -64,7 +64,7 @@ GeXFluidSynth::~GeXFluidSynth()
     if( m_settings ) delete_fluid_settings( m_settings );
     m_synth = NULL;
     m_settings = NULL;
-    
+
     // unlock
     m_mutex.release();
 }
@@ -83,12 +83,12 @@ bool GeXFluidSynth::init( int srate, int polyphony )
         std::cerr << "synth already initialized..." << std::endl;
         return false;
     }
-    
+
     // lock
     m_mutex.acquire();
-    
+
     // log
-    NSLog( @"initializing synth..." );
+    //NSLog( @"initializing synth..." );
     // instantiate settings
     m_settings = new_fluid_settings();
     // set sample rate
@@ -99,13 +99,13 @@ bool GeXFluidSynth::init( int srate, int polyphony )
     fluid_settings_setint( m_settings, (char *)"synth.polyphony", polyphony );
     // instantiate the synth
     m_synth = new_fluid_synth( m_settings );
-    
+
     // unlock
     m_mutex.release();
-    
+
     return m_synth != NULL;
 }
-    
+
 
 
 
@@ -122,10 +122,10 @@ bool GeXFluidSynth::load( const char * filename, const char * extension )
 
     // the pathc
     std::string path = filename;
-    
+
     // log
     // NSLog( @"loading font file: %s.%s...", filename, extension );
-    
+
     // load
     if( fluid_synth_sfload( m_synth, path.c_str(), true ) == -1 )
     {
@@ -136,10 +136,10 @@ bool GeXFluidSynth::load( const char * filename, const char * extension )
 
         return false;
     }
-    
+
     // unlock
     m_mutex.release();
-    
+
     return true;
 }
 
@@ -158,7 +158,7 @@ void GeXFluidSynth::programChange( int channel, int program )
     fluid_synth_program_change( m_synth, channel, program );
     m_mutex.release();
 }
-    
+
 
 
 
@@ -265,7 +265,7 @@ bool GeXFluidSynth::synthesize2( float * buffer, unsigned int numFrames )
     // get it from fluidsynth
     int retval = fluid_synth_write_float( m_synth, numFrames, buffer, 0, 2, buffer, 1, 2 );
     m_mutex.release();
-    
+
     // return
     return retval == 0;
 }

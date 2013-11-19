@@ -7,5 +7,7 @@
 -Iapi/oscpack_1_1_0/ip/posix/
 -Iapi/oscpack_1_1_0/ip/
 -Iapi/oscpack_1_1_0/osc/
+-Iapi/fluidsynth/
+-Iapi/fluidsynth/include/
 -Icore/
 -Imain/

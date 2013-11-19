@@ -77,7 +77,7 @@ public:
 protected:
     fluid_settings_t * m_settings;
     fluid_synth_t * m_synth;
-    MoMutex m_mutex;
+    XMutex m_mutex;
 };
 
 

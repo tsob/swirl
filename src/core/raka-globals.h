@@ -16,6 +16,7 @@
 
 // y-api
 #include "y-entity.h"
+#include "y-waveform.h"
 
 // C++
 #include <string>
@@ -37,7 +38,6 @@
 #define RAKA_SRATE        44100
 #define RAKA_FRAMESIZE    1024
 #define RAKA_NUMCHANNELS  2
-#define RAKA_MAX_TEXTURES 32
 
 
 // forward reference
@@ -52,44 +52,44 @@ UdpTransmitSocket* getTransmitSocket(const char* address, int port);
 
 class ExamplePacketListener : public osc::OscPacketListener {
 protected:
-    
+
     virtual void ProcessMessage( const osc::ReceivedMessage& m,
                                 const IpEndpointName& remoteEndpoint )
     {
         (void) remoteEndpoint; // suppress unused parameter warning
-        
+
         try{
             // example of parsing single messages. osc::OsckPacketListener
             // handles the bundle traversal.
-            
+
             /*if( std::strcmp( m.AddressPattern(), "/cameraReferenceZ" ) == 0 ){
                 // example #1 -- argument stream interface
                 osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
                 float f;
                 args >> f >> osc::EndMessage;
-                
+
                 std::cout << "received '/cameraReferenceZ' message with arguments: "
                 << f << "\n";
-                
+
                 //TODO
                 getAvatar()->loc.x = f;
-                
+
             } else */ if( std::strcmp( m.AddressPattern(), "/cameraEyeZ" ) == 0 ){
                 // example #1 -- argument stream interface
                 osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
                 float f;
-                
+
                 std::cout << "RECEVING \n";
-                
+
                 args >> f >> osc::EndMessage;
-                
+
                 std::cout << f << std::endl;
-                
+
                 getAvatar()->loc.z = f;
-                
+
                // getAvatar()->loc.y = f;
 
-                
+
                 std::cout << "received '/cameraEyeZ' message with arguments: "
                 << f << "\n";
             }
@@ -97,18 +97,18 @@ protected:
                 // example #1 -- argument stream interface
                 osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
                 float f;
-                
+
                 std::cout << "RECEVING \n";
-                
+
                 args >> f >> osc::EndMessage;
-                
+
                 std::cout << f << std::endl;
-                
+
                 getAvatar()->loc.x = f;
-                
+
                 // getAvatar()->loc.y = f;
-                
-                
+
+
                 std::cout << "received '/cameraEyeZ' message with arguments: "
                 << f << "\n";
             }
@@ -116,19 +116,19 @@ protected:
                 // example #1 -- argument stream interface
                 osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
                 float f;
-                
+
                 std::cout << "RECEVING \n";
-                
+
                 args >> f >> osc::EndMessage;
-                
+
                 std::cout << f << std::endl;
-                
+
                 getAvatar()->ori.y += (180.0f / ONE_PI * f);
 
-                
+
                 // getAvatar()->loc.y = f;
-                
-                
+
+
                 std::cout << "received '/cameraEyeZ' message with arguments: "
                 << f << "\n";
             }
@@ -136,18 +136,18 @@ protected:
                 // example #1 -- argument stream interface
                 osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
                 float f;
-                
+
                 std::cout << "RECEVING \n";
-                
+
                 args >> f >> osc::EndMessage;
-                
+
                 std::cout << f << std::endl;
-                
+
                 getAvatar()->ori.y += (180 / (3.14f) * f);
-                
+
                 // getAvatar()->loc.y = f;
-                
-                
+
+
                 std::cout << "received '/cameraEyeZ' message with arguments: "
                 << f << "\n";
             }
@@ -169,12 +169,11 @@ protected:
 class Globals
 {
 public:
-    // top level root simulation
+    // Top level root simulation
     static RAKASim * sim;
-    
+
     static int app ;
 
-    
     // path
     static std::string path;
     // path to datapath
@@ -183,20 +182,23 @@ public:
     static std::string datapath;
     // version
     static std::string version;
-    
+
     // last audio buffer
     static SAMPLE * lastAudioBuffer;
     static SAMPLE * lastAudioBufferMono;
     static SAMPLE * audioBufferWindow;
     static unsigned int lastAudioBufferFrames;
     static unsigned int lastAudioBufferChannels;
-    
+
+    // Waveform
+    static YWaveform * waveform;
+
     // width and height of the window
     static GLsizei windowWidth;
     static GLsizei windowHeight;
     static GLsizei lastWindowWidth;
     static GLsizei lastWindowHeight;
-    
+
     // graphics fullscreen
     static GLboolean fullscreen;
     // blend pane instead of clearing screen
@@ -211,16 +213,13 @@ public:
     // view stuff
     static Vector3D viewRadius;
     static Vector3D viewEyeY;
-    
+
     //TODO
     static Vector3D cameraEye;
     static Vector3D cameraReference;
-    
+
     static Vector3D fov;
-    
-    // textures
-    static GLuint textures[];
-    
+
     // light 0 position
     static GLfloat light0_pos[4];
     // light 1 parameters
@@ -235,7 +234,7 @@ public:
     static GLuint fog_mode[4];   // storage for three/four types of fog
     static GLuint fog_filter;    // which fog to use
     static GLfloat fog_density;  // fog density
-    
+
     // colors
     static Vector3D ourWhite;
     static Vector3D ourRed;
@@ -246,8 +245,8 @@ public:
     static Vector3D ourYellow;
     static Vector3D ourSoftYellow;
     static Vector3D ourPurple;
-    
-    
+
+
 };
 
 

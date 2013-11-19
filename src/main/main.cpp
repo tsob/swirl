@@ -34,15 +34,20 @@ int main( int argc, const char ** argv )
     (void) argc; // suppress unused parameter warnings
     (void) argv; // suppress unused parameter warnings
 
-    // invoke graphics setup and loop
+
+
+
+
+
+
+    // Initiate graphics setup and loop
     if( !raka_gfx_init( argc, argv ) )
     {
-        // error message
         cerr << "[swirl]: cannot initialize graphics/data system..." << endl;
         return -1;
     }
 
-    // graphics loop
+    // Graphics loop
     raka_gfx_loop();
 
     return 0;
