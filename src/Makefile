@@ -7,17 +7,19 @@
 # Fall 2013
 
 # Project subdirectories
+PROJECTROOT=$(CURDIR)
+COREDIR=core/
+MAINDIR=main/
 APIDIR=api/
 RTAUDIODIR=$(APIDIR)rtaudio/
 STKDIR=$(APIDIR)stk/
+FLUIDSYNTHDIR=$(APIDIR)fluidsynth/
 XAPIDIR=$(APIDIR)x-api/
 YAPIDIR=$(APIDIR)y-api/
 OSCPACKDIR=$(APIDIR)oscpack_1_1_0/
 OSCPACKIPDIR=$(OSCPACKDIR)ip/
 OSCPACKIPPDIR=$(OSCPACKDIR)ip/posix/
 OSCPACKOSCDIR=$(OSCPACKDIR)osc/
-COREDIR=core/
-MAINDIR=main/
 
 
 CXX=g++
@@ -88,7 +90,7 @@ DelayL.o: $(STKDIR)DelayL.h $(STKDIR)DelayL.cpp
 Stk.o: $(STKDIR)Stk.h $(STKDIR)Stk.cpp
 	$(CXX) $(FLAGS) $(STKDIR)Stk.cpp
 
-# mcd-api
+# mcd-api - x
 x-buffer.o: $(XAPIDIR)x-buffer.h $(XAPIDIR)x-buffer.cpp
 	$(CXX) $(FLAGS) $(XAPIDIR)x-buffer.cpp
 x-fun.o: $(XAPIDIR)x-fun.h $(XAPIDIR)x-fun.cpp
@@ -104,6 +106,14 @@ x-vector3d.o: $(XAPIDIR)x-vector3d.h $(XAPIDIR)x-vector3d.cpp
 x-gfx.o: $(XAPIDIR)x-gfx.h $(XAPIDIR)x-gfx.cpp
 	$(CXX) $(FLAGS) $(XAPIDIR)x-gfx.cpp
 
+# Fluidsynth
+fluidsynth:
+	cd $(FLUIDSYNTHDIR)
+	./configure
+	make
+	cd $(PROJECTROOT)
+
+# mcd-api - y
 y-charting.o: $(YAPIDIR)y-charting.h $(YAPIDIR)y-charting.cpp
 	$(CXX) $(FLAGS) -I$(XAPIDIR) $(YAPIDIR)y-charting.cpp
 y-echo.o: $(YAPIDIR)y-echo.h $(YAPIDIR)y-echo.cpp
@@ -112,8 +122,8 @@ y-entity.o: $(YAPIDIR)y-entity.h $(YAPIDIR)y-entity.cpp
 	$(CXX) $(FLAGS) -I$(XAPIDIR) $(YAPIDIR)y-entity.cpp
 y-fft.o: $(YAPIDIR)y-fft.h $(YAPIDIR)y-fft.cpp
 	$(CXX) $(FLAGS) -I$(XAPIDIR) $(YAPIDIR)y-fft.cpp
-#y-fluidsynth.o: y-fluidsynth.h y-fluidsynth.cpp
-#  $(CXX) $(FLAGS) $(INCLUDES) y-fluidsynth.cpp
+y-fluidsynth.o: fluidsynth y-fluidsynth.h y-fluidsynth.cpp
+	$(CXX) $(FLAGS) -I$(FLUIDSYNTHDIR)includes/ -L$(FLUIDSYNTHDIR) y-fluidsynth.cpp
 y-particle.o: $(YAPIDIR)y-particle.h $(YAPIDIR)y-particle.cpp
 	$(CXX) $(FLAGS) -I$(XAPIDIR) $(YAPIDIR)y-particle.cpp
 #y-score-reader.o: $(YAPIDIR)y-score-reader.h $(YAPIDIR)y-score-reader.cpp
@@ -136,6 +146,7 @@ OscReceivedElements.o:
 	make -C $(OSCPACKDIR)
 OscTypes.o:
 	make -C $(OSCPACKDIR)
+
 
 
 clean:
