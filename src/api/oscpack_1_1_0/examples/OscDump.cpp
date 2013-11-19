@@ -34,62 +34,67 @@
 	requested that these non-binding requests be included whenever the
 	above license is reproduced.
 */
-#include "NetworkingUtils.h"
 
-//#include <winsock2.h>   // this must come first to prevent errors with MSVC7
-//#include <windows.h>
+/*
+    OscDump prints incoming OSC packets. Unlike the Berkeley dumposc program
+    OscDump uses a different printing format which indicates the type of each
+    message argument.
+*/
 
+
+#include <iostream>
 #include <cstring>
+#include <cstdlib>
+
+#if defined(__BORLANDC__) // workaround for BCB4 release build intrinsics bug
+namespace std {
+using ::__strcmp__;  // avoid error: E2316 '__strcmp__' is not a member of 'std'.
+}
+#endif
+
+#include "osc/OscReceivedElements.h"
+#include "osc/OscPrintReceivedElements.h"
+
+#include "ip/UdpSocket.h"
+#include "ip/PacketListener.h"
 
 
-static LONG initCount_ = 0;
-static bool winsockInitialized_ = false;
+class OscDumpPacketListener : public PacketListener{
+public:
+	virtual void ProcessPacket( const char *data, int size, 
+			const IpEndpointName& remoteEndpoint )
+	{
+        (void) remoteEndpoint; // suppress unused parameter warning
 
-NetworkInitializer::NetworkInitializer()
+		std::cout << osc::ReceivedPacket( data, size );
+	}
+};
+
+int main(int argc, char* argv[])
 {
-    if( InterlockedIncrement( &initCount_ ) == 1 ){
-        // there is a race condition here if one thread tries to access
-        // the library while another is still initializing it. 
-        // i can't think of an easy way to fix it so i'm telling you here
-        // incase you need to init the library from two threads at once.
-        // this is why the header file advises to instantiate one of these 
-        // in main() so that the initialization happens globally
-
-        // initialize winsock
-	    WSAData wsaData;
-	    int nCode = WSAStartup(MAKEWORD(1, 1), &wsaData);
-	    if( nCode != 0 ){
-	        //std::cout << "WSAStartup() failed with error code " << nCode << "\n";
-        }else{
-            winsockInitialized_ = true;
-        }
+	if( argc >= 2 && std::strcmp( argv[1], "-h" ) == 0 ){
+        std::cout << "usage: OscDump [port]\n";
+        return 0;
     }
+
+	int port = 7000;
+
+	if( argc >= 2 )
+		port = std::atoi( argv[1] );
+
+	OscDumpPacketListener listener;
+    UdpListeningReceiveSocket s(
+            IpEndpointName( IpEndpointName::ANY_ADDRESS, port ),
+            &listener );
+
+	std::cout << "listening for input on port " << port << "...\n";
+	std::cout << "press ctrl-c to end\n";
+
+	s.RunUntilSigInt();
+
+	std::cout << "finishing.\n";	
+
+    return 0;
 }
 
 
-NetworkInitializer::~NetworkInitializer()
-{
-    if( InterlockedDecrement( &initCount_ ) == 0 ){
-        if( winsockInitialized_ ){
-            WSACleanup();
-            winsockInitialized_ = false;
-        }
-    }
-}
-
-
-unsigned long GetHostByName( const char *name )
-{
-    NetworkInitializer networkInitializer;
-
-    unsigned long result = 0;
-
-    struct hostent *h = gethostbyname( name );
-    if( h ){
-        struct in_addr a;
-        std::memcpy( &a, h->h_addr_list[0], h->h_length );
-        result = ntohl(a.s_addr);
-    }
-
-    return result;
-}
