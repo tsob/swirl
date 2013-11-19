@@ -4,7 +4,8 @@
 -Iapi/stk/
 -Iapi/x-api/
 -Iapi/y-api/
--Iapi/ip/
--Iapi/osc/
+-Iapi/oscpack_1_1_0/ip/posix/
+-Iapi/oscpack_1_1_0/ip/
+-Iapi/oscpack_1_1_0/osc/
 -Icore/
 -Imain/

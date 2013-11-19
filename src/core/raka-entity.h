@@ -20,7 +20,7 @@ class RAKATeapot : public YEntity
 {
 public:
     // update
-    void update( YTimeInterval dt );
+    //void update( YTimeInterval dt );
     // render
     void render();
 };
