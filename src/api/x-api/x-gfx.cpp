@@ -26,7 +26,7 @@
 -----------------------------------------------------------------------------*/
 
 //-----------------------------------------------------------------------------
-// name: x-gfx.mm
+// name: x-gfx.cpp
 // desc: general graphics routines
 //
 // authors: Ge Wang (ge@ccrma.stanford.edu)
@@ -35,9 +35,6 @@
 //-----------------------------------------------------------------------------
 #include "x-gfx.h"
 #include <math.h>
-extern "C"{
-  #include <Cocoa/Cocoa.h>
-}
 #include <iostream>
 using namespace std;
 
