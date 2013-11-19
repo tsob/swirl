@@ -1,23 +1,25 @@
 //----------------------------------------------------------------------------
-// name: main.cpp
-// desc: bokeh entry point
+// Name: main.cpp
+// Desc: Swirl entry point
 //
-// author: Ge Wang (ge@ccrma.stanford.edu)
-// date: fall 2013
+// Author: Tim O'Brien    (tsob@ccrma.stanford.edu)
+//         Reza Payami  (rpayami@ccrma.stanford.edu)
+//         Haley Sayres    (hsayres@stanford.edu)
+// Date:   Fall 2013
 //----------------------------------------------------------------------------
 #include <iostream>
-// #include "raka-audio.h"
+#include "raka-audio.h"
 #include "raka-gfx.h"
 #include "raka-globals.h"
 
-#include "OscOutboundPacketStream.h"
-#include "UdpSocket.h"
+//#include "OscOutboundPacketStream.h"
+//#include "UdpSocket.h"
 
 
-#define ADDRESS "127.0.0.1"
+#define ADDRESS "127.0.0.1" //TODO
 #define PORT 7000
 
-#define OUTPUT_BUFFER_SIZE 1024
+#define OUTPUT_BUFFER_SIZE 1024 //TODO
 
 using namespace std;
 
@@ -31,17 +33,17 @@ int main( int argc, const char ** argv )
 
     (void) argc; // suppress unused parameter warnings
     (void) argv; // suppress unused parameter warnings
-    
+
     // invoke graphics setup and loop
     if( !raka_gfx_init( argc, argv ) )
     {
         // error message
-        cerr << "[bokeh]: cannot initialize graphics/data system..." << endl;
+        cerr << "[swirl]: cannot initialize graphics/data system..." << endl;
         return -1;
     }
-    
+
     // graphics loop
     raka_gfx_loop();
-    
+
     return 0;
 }
