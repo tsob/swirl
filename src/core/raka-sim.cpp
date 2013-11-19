@@ -1,24 +1,20 @@
 //-----------------------------------------------------------------------------
-// name: raka-sim.cpp
-// desc: bokeh visualization simulation
+// Name: raka-sim.cpp
+// Desc: visualization simulation
 //
-// author: Ge Wang (ge@ccrma.stanford.edu)
-//   date: 2013
+// Author: Tim O'Brien    (tsob@ccrma.stanford.edu)
+//         Reza Payami  (rpayami@ccrma.stanford.edu)
+//         Haley Sayres    (hsayres@stanford.edu)
+// Date:   Fall 2013
 //-----------------------------------------------------------------------------
 #include "raka-sim.h"
 #include <iostream>
 using namespace std;
 
-
-
-
 // up to max fps steps per second, e.g., 1./60
 #define STEPTIME (1.0 / getDesiredFrameRate())
 // max sim step size in seconds
 #define SIM_SKIP_TIME (.25)
-
-
-
 
 //-------------------------------------------------------------------------------
 // name: RAKASim()
@@ -28,96 +24,89 @@ RAKASim::RAKASim()
 {
     m_desiredFrameRate = 60;
     m_useFixedTimeStep = false;
-    m_timeLeftOver = 0;
-    m_simTime = 0;
-    m_lastDelta = 0;
-    m_first = true;
-    m_isPaused = false;
+    m_timeLeftOver     = 0;
+    m_simTime          = 0;
+    m_lastDelta        = 0;
+    m_first            = true;
+    m_isPaused         = false;
 }
-
-
-
 
 //-------------------------------------------------------------------------------
 // name: ~RAKASim()
-// desc: ...
+// desc: destructor
 //-------------------------------------------------------------------------------
 RAKASim::~RAKASim()
 {
-    // nothing to do
+    // Nothing to do
 }
 
-
-
-
 //-------------------------------------------------------------------------------
-// name: triggerUpdates()
+// name: systemCascade()
 // desc: trigger system wide update with time steps
 //-------------------------------------------------------------------------------
 void RAKASim::systemCascade()
 {
-    // get current time (once per frame)
+    // Get current time (once per frame)
     XGfx::getCurrentTime( true );
     
     // Timing loop
     YTimeInterval timeElapsed = XGfx::getCurrentTime() - m_simTime;
-    m_simTime += timeElapsed;
+    m_simTime  += timeElapsed;
     
-    // special case: first update
+    // Special case: first update
     if( m_first )
     {
-        // set time just enough for one update
-        timeElapsed = STEPTIME;
-        // set flag
-        m_first = false;
+        timeElapsed = STEPTIME; // Set time just enough for one update
+        m_first = false;        // Set flag
     }
     
-    // clamp it
+    // Clamp time elapsed
     if( timeElapsed > SIM_SKIP_TIME )
         timeElapsed = SIM_SKIP_TIME;
     
-    // update it
-    // check paused
+    // Update it as long as we aren't paused
     if( !m_isPaused )
     {
-        // update the world with a fixed timestep
+        // Update the world with a fixed timestep
         m_gfxRoot.updateAll( timeElapsed );
     }
     
-    // redraw
+    // Redraw
     m_gfxRoot.drawAll();
     
-    // set
+    // Set
     m_lastDelta = timeElapsed;
 }
 
-
-
-
-
 //-------------------------------------------------------------------------------
-// pause the simulation
+// Pause the simulation
 //-------------------------------------------------------------------------------
 void RAKASim::pause() { m_isPaused = true; }
+
 //-------------------------------------------------------------------------------
-// resume the simulation
+// Resume the simulation
 //-------------------------------------------------------------------------------
 void RAKASim::resume() { m_isPaused = false; }
+
 //-------------------------------------------------------------------------------
-// get is paused
+// Get is paused
 //-------------------------------------------------------------------------------
 bool RAKASim::isPaused() const { return m_isPaused; }
+
 //-------------------------------------------------------------------------------
-// set desired frame rate
+// Set desired frame rate
 //-------------------------------------------------------------------------------
-void RAKASim::setDesiredFrameRate( double frate ) { m_desiredFrameRate = frate; }
+void RAKASim::setDesiredFrameRate( double frate )
+{
+  m_desiredFrameRate = frate;
+}
+
 //-------------------------------------------------------------------------------
-// get it
+// Get desired frame rate
 //-------------------------------------------------------------------------------
 double RAKASim::getDesiredFrameRate() const { return m_desiredFrameRate; }
-//-------------------------------------------------------------------------------
-// get the timestep in effect (fixed or dynamic)
-//-------------------------------------------------------------------------------
-YTimeInterval RAKASim::delta() const
-{ return m_lastDelta; }
 
+//-------------------------------------------------------------------------------
+// Get the timestep in effect (fixed or dynamic)
+//-------------------------------------------------------------------------------
+YTimeInterval RAKASim::delta() const { return m_lastDelta; }

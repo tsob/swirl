@@ -1,17 +1,16 @@
 //-----------------------------------------------------------------------------
-// name: raka-sim.h
-// desc: visualization simulation
+// Name: raka-sim.h
+// Desc: visualization simulation
 //
-// author: Ge Wang (ge@ccrma.stanford.edu)
-//   date: 2013
+// Author: Tim O'Brien    (tsob@ccrma.stanford.edu)
+//         Reza Payami  (rpayami@ccrma.stanford.edu)
+//         Haley Sayres    (hsayres@stanford.edu)
+// Date:   Fall 2013
 //-----------------------------------------------------------------------------
 #ifndef __RAKA_SIM_H__
 #define __RAKA_SIM_H__
 
 #include "raka-entity.h"
-
-
-
 
 //-----------------------------------------------------------------------------
 // name: class RAKASim
@@ -52,17 +51,14 @@ protected:
     
 public:
     double m_desiredFrameRate;
-    bool m_useFixedTimeStep;
+    bool   m_useFixedTimeStep;
     
 public:
     YTimeInterval m_timeLeftOver;
     YTimeInterval m_simTime;
     YTimeInterval m_lastDelta;
-    bool m_first;
-    bool m_isPaused;
+    bool          m_first;
+    bool          m_isPaused;
 };
-
-
-
 
 #endif
