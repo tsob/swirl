@@ -14,3 +14,6 @@
 
 # Swap files
 *.swp
+
+# project executable
+src/swirl
