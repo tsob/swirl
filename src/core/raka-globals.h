@@ -17,7 +17,7 @@
 // y-api
 #include "y-entity.h"
 
-// c++
+// C++
 #include <string>
 #include <map>
 #include <vector>
@@ -33,41 +33,20 @@
 #include "UdpSocket.h"
 
 
-
-// defines
+// Defines
 #define RAKA_SRATE        44100
 #define RAKA_FRAMESIZE    1024
 #define RAKA_NUMCHANNELS  2
 #define RAKA_MAX_TEXTURES 32
 
 
-
-
-//-----------------------------------------------------------------------------
-// name: enum BokehTextureNames
-// desc: texture names
-//-----------------------------------------------------------------------------
-enum BokehTextureNames
-{
-    RAKA_TEX_NONE = 0,
-    RAKA_TEX_FLARE_TNG_1,
-    RAKA_TEX_FLARE_TNG_2,
-    RAKA_TEX_FLARE_TNG_3,
-    RAKA_TEX_FLARE_TNG_4,
-    RAKA_TEX_FLARE_TNG_5
-};
-
-
-
-
 // forward reference
 class RAKASim;
 
 //TODO
-
-
 YEntity* getAvatar();
 
+//TODO
 UdpTransmitSocket* getTransmitSocket();
 UdpTransmitSocket* getTransmitSocket(const char* address, int port);
 
