@@ -12,8 +12,8 @@
 
 // defaults
 #define DEFAULT_FULLSCREEN    TRUE
-#define DEFAULT_WINDOW_WIDTH  1280
-#define DEFAULT_WINDOW_HEIGHT 720
+#define DEFAULT_WINDOW_WIDTH  600
+#define DEFAULT_WINDOW_HEIGHT 400
 #define DEFAULT_BLENDSCREEN   FALSE
 #define DEFAULT_FOG           FALSE
 #define DEFAULT_VERSION       "1.0.0"
@@ -33,7 +33,13 @@ YEntity* getAvatar()
         // create test teapot
         // set attributes
         avatar->col = Globals::ourSoftYellow;
-        avatar->loc.z = -10;
+        avatar->loc.x = 0;
+        avatar->loc.y = 0;
+        
+        if (Globals::app == 1)
+            avatar->loc.z = -1;
+        else
+            avatar->loc.z = -2;
     }
     return avatar;
 }
@@ -75,6 +81,18 @@ GLenum Globals::fillmode = GL_FILL;
 iSlew3D Globals::bgColor( .5 );
 Vector3D Globals::viewRadius( 5, 2, 1 );
 Vector3D Globals::viewEyeY( 2, 0, 1.5f );
+
+int Globals::app = 0;
+
+//TODO
+
+Vector3D Globals::cameraEye( 0, 0, -1 );
+Vector3D Globals::cameraReference( 0, 0, 0 );
+
+
+//Vector3D Globals::cameraEye( 0, 0, -1 );
+//Vector3D Globals::cameraReference( 0, 0, 0 );
+
 Vector3D Globals::fov( 80, 100, .2f );
 
 GLuint Globals::textures[RAKA_MAX_TEXTURES];

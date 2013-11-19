@@ -80,30 +80,96 @@ protected:
             // example of parsing single messages. osc::OsckPacketListener
             // handles the bundle traversal.
             
-            if( std::strcmp( m.AddressPattern(), "/viewRadiusY" ) == 0 ){
+            /*if( std::strcmp( m.AddressPattern(), "/cameraReferenceZ" ) == 0 ){
                 // example #1 -- argument stream interface
                 osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
                 float f;
                 args >> f >> osc::EndMessage;
                 
-                std::cout << "received '/viewRadiusY' message with arguments: "
+                std::cout << "received '/cameraReferenceZ' message with arguments: "
                 << f << "\n";
                 
                 //TODO
-                getAvatar()->loc.z = f;
+                getAvatar()->loc.x = f;
                 
-            } else if( std::strcmp( m.AddressPattern(), "/viewEyeY" ) == 0 ){
+            } else */ if( std::strcmp( m.AddressPattern(), "/cameraEyeZ" ) == 0 ){
                 // example #1 -- argument stream interface
                 osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
                 float f;
+                
+                std::cout << "RECEVING \n";
+                
                 args >> f >> osc::EndMessage;
                 
-                getAvatar()->loc.x = f;
+                std::cout << f << std::endl;
+                
+                getAvatar()->loc.z = f;
+                
+               // getAvatar()->loc.y = f;
 
                 
-                std::cout << "received '/viewEyeY' message with arguments: "
+                std::cout << "received '/cameraEyeZ' message with arguments: "
                 << f << "\n";
             }
+            else if( std::strcmp( m.AddressPattern(), "/cameraEyeX" ) == 0 ){
+                // example #1 -- argument stream interface
+                osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
+                float f;
+                
+                std::cout << "RECEVING \n";
+                
+                args >> f >> osc::EndMessage;
+                
+                std::cout << f << std::endl;
+                
+                getAvatar()->loc.x = f;
+                
+                // getAvatar()->loc.y = f;
+                
+                
+                std::cout << "received '/cameraEyeZ' message with arguments: "
+                << f << "\n";
+            }
+            else if( std::strcmp( m.AddressPattern(), "/cameraReferenceX" ) == 0 ){
+                // example #1 -- argument stream interface
+                osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
+                float f;
+                
+                std::cout << "RECEVING \n";
+                
+                args >> f >> osc::EndMessage;
+                
+                std::cout << f << std::endl;
+                
+                getAvatar()->ori.y += (180.0f / ONE_PI * f);
+
+                
+                // getAvatar()->loc.y = f;
+                
+                
+                std::cout << "received '/cameraEyeZ' message with arguments: "
+                << f << "\n";
+            }
+            else if( std::strcmp( m.AddressPattern(), "/cameraReferenceZ" ) == 0 ){
+                // example #1 -- argument stream interface
+                osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
+                float f;
+                
+                std::cout << "RECEVING \n";
+                
+                args >> f >> osc::EndMessage;
+                
+                std::cout << f << std::endl;
+                
+                getAvatar()->ori.y += (180 / (3.14f) * f);
+                
+                // getAvatar()->loc.y = f;
+                
+                
+                std::cout << "received '/cameraEyeZ' message with arguments: "
+                << f << "\n";
+            }
+
         }catch( osc::Exception& e ){
             // any parsing errors such as unexpected argument types, or
             // missing arguments get thrown as exceptions.
@@ -123,6 +189,8 @@ class Globals
 public:
     // top level root simulation
     static RAKASim * sim;
+    
+    static int app ;
 
     
     // path
@@ -161,6 +229,11 @@ public:
     // view stuff
     static Vector3D viewRadius;
     static Vector3D viewEyeY;
+    
+    //TODO
+    static Vector3D cameraEye;
+    static Vector3D cameraReference;
+    
     static Vector3D fov;
     
     // textures
