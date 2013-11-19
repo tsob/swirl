@@ -138,10 +138,12 @@ bool XAudioIO::init( unsigned int inputDevice,
     o_num_channels = numChannels;
 
     // first available device
+    if( inputDevice == 0 ) inputDevice = o_audio->getDefaultInputDevice();
     iParams.deviceId = inputDevice;
     iParams.nChannels = o_num_channels;
     
     // first available device
+    if( outputDevice == 0 ) outputDevice = o_audio->getDefaultOutputDevice();
     oParams.deviceId = outputDevice;
     oParams.nChannels = o_num_channels;
 
