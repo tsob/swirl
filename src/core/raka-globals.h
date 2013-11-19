@@ -8,11 +8,14 @@
 #ifndef __RAKA_GLOBALS_H__
 #define __RAKA_GLOBALS_H__
 
-
+// x-api
 #include "x-def.h"
 #include "x-audio.h"
 #include "x-gfx.h"
 #include "x-vector3d.h"
+
+// y-api
+#include "y-entity.h"
 
 // c++
 #include <string>
@@ -22,13 +25,13 @@
 
 #include <iostream>
 
+// Networking and OSC
 #include "UdpSocket.h" //TODO
 
 #include "OscReceivedElements.h"
 #include "OscPacketListener.h"
 #include "UdpSocket.h"
 
-#include "y-entity.h"
 
 
 // defines
