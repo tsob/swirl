@@ -38,6 +38,7 @@
 #include "y-entity.h"
 #include <vector>
 #include <string>
+#include <cstdio>
 
 
 
