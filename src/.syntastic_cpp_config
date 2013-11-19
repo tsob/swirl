@@ -1,0 +1,10 @@
+-Imain/
+-Icore/
+-Iapi/rtaudio/
+-Iapi/stk/
+-Iapi/x-api/
+-Iapi/y-api/
+-Iapi/ip/
+-Iapi/osc/
+-Icore/
+-Imain/
