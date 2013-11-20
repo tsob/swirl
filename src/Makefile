@@ -13,7 +13,6 @@ MAINDIR=main/
 APIDIR=api/
 RTAUDIODIR=$(APIDIR)rtaudio/
 STKDIR=$(APIDIR)stk/
-FLUIDSYNTHDIR=$(APIDIR)fluidsynth/
 XAPIDIR=$(APIDIR)x-api/
 YAPIDIR=$(APIDIR)y-api/
 OSCPACKDIR=$(APIDIR)oscpack_1_1_0/
@@ -43,9 +42,21 @@ endif
 
 OBJS=RtAudio.o \
 		 Delay.o DelayL.o Stk.o \
-		 x-buffer.o x-fun.o x-gfx.o x-loadlum.o x-loadrgb.o \
-		 x-thread.o x-vector3d.o y-charting.o y-echo.o y-entity.o \
-		 y-fft.o y-particle.o  y-waveform.o y-fluidsynth.o \
+		 x-buffer.o \
+		 x-fun.o \
+		 x-gfx.o \
+		 x-loadlum.o \
+		 x-loadrgb.o \
+		 x-thread.o \
+		 x-vector3d.o \
+		 x-audio.o \
+		 y-charting.o \
+		 y-echo.o \
+		 y-entity.o \
+		 y-fft.o \
+		 y-particle.o \
+		 y-waveform.o \
+		 y-fluidsynth.o \
 		 $(OSCPACKIPPDIR)NetworkingUtils.o $(OSCPACKIPPDIR)UdpSocket.o \
 		 $(OSCPACKIPDIR)IpEndpointName.o \
 		 $(OSCPACKOSCDIR)OscOutboundPacketStream.o \
@@ -65,8 +76,7 @@ main.o: $(MAINDIR)main.cpp
 # core
 raka-audio.o: y-fluidsynth.o x-audio.o core/raka-audio.h core/raka-audio.cpp \
 	RtAudio.o
-	$(CXX) $(FLAGS) $(INCLUDES) -I$(FLUIDSYNTHDIR)include/ -L$(FLUIDSYNTHDIR) \
-		core/raka-audio.cpp
+	$(CXX) $(FLAGS) $(INCLUDES) core/raka-audio.cpp
 raka-entity.o: core/raka-entity.h core/raka-entity.cpp
 	$(CXX) $(FLAGS) $(INCLUDES) core/raka-entity.cpp
 raka-gfx.o: core/raka-gfx.h core/raka-gfx.cpp
@@ -120,8 +130,8 @@ y-entity.o: $(YAPIDIR)y-entity.h $(YAPIDIR)y-entity.cpp
 y-fft.o: $(YAPIDIR)y-fft.h $(YAPIDIR)y-fft.cpp
 	$(CXX) $(FLAGS) -I$(XAPIDIR) $(YAPIDIR)y-fft.cpp
 
-y-fluidsynth.o: fluidsynth $(YAPIDIR)y-fluidsynth.h $(YAPIDIR)y-fluidsynth.cpp
-	$(CXX) $(FLAGS) -I$(XAPIDIR) -I$(YAPIDIR) -I$(FLUIDSYNTHDIR)include/ \
+y-fluidsynth.o: $(YAPIDIR)y-fluidsynth.h $(YAPIDIR)y-fluidsynth.cpp
+	$(CXX) $(FLAGS) -I$(XAPIDIR) -I$(YAPIDIR) \
 		$(YAPIDIR)y-fluidsynth.cpp
 
 y-particle.o: $(YAPIDIR)y-particle.h $(YAPIDIR)y-particle.cpp
@@ -146,10 +156,6 @@ OscReceivedElements.o:
 	make -C $(OSCPACKDIR)
 OscTypes.o:
 	make -C $(OSCPACKDIR)
-
-# Fluidsynth
-fluidsynth:
-	make -C $(FLUIDSYNTHDIR)
 
 
 clean:

@@ -8,6 +8,7 @@
 #include "raka-audio.h"
 #include "raka-globals.h"
 #include "raka-sim.h"
+#include "x-audio.h"
 #include "x-thread.h"
 #include "y-fft.h"
 #include "y-waveform.h"
@@ -170,7 +171,15 @@ static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * user
 bool raka_audio_init( unsigned int srate, unsigned int frameSize, unsigned channels )
 {
     // initialize
-    if( !XAudioIO::init( 0, 0, srate, frameSize, channels, audio_callback, NULL ) )
+    if( !XAudioIO::init(
+          (unsigned int)0,
+          (unsigned int)0,
+          (unsigned int)srate,
+          (unsigned int &)frameSize,
+          (unsigned int)channels,
+          (XAudioCallback)audio_callback,
+          (void*)0 )
+      )
     {
         // done
         return false;
@@ -181,7 +190,7 @@ bool raka_audio_init( unsigned int srate, unsigned int frameSize, unsigned chann
     // init
     g_synth->init( srate, 32 );
     // load the soundfont
-    g_synth->load( "data/sfonts/rocking8m11e.sf2", "" );
+    g_synth->load( "data/soundfonts/default.sf2", "" );
     // map program changes
     g_synth->programChange( 0, 0 );
     g_synth->programChange( 1, 79 );
@@ -194,8 +203,8 @@ bool raka_audio_init( unsigned int srate, unsigned int frameSize, unsigned chann
     g_echo->setDelay( 0, .25 );
     g_echo->setDelay( 1, .5 );
 
-//    // make a note
-//    g_note = makeNote( 0, 60, .9, .5, 0 );
+    // make a note
+    //g_note = makeNote( 0, 60, .9, .5, 0 );
 
     // allocate
     Globals::lastAudioBuffer = new SAMPLE[frameSize*channels];
@@ -225,7 +234,7 @@ bool raka_audio_init( unsigned int srate, unsigned int frameSize, unsigned chann
     Globals::waveform->active = true;
 
     // add to sim
-    Globals::sim->root().addChild( Globals::waveform );
+    //Globals::sim->root().addChild( Globals::waveform );
 
     return true;
 }
@@ -234,7 +243,7 @@ bool raka_audio_init( unsigned int srate, unsigned int frameSize, unsigned chann
 
 
 //-----------------------------------------------------------------------------
-// name: vq_audio_start()
+// name: raka_audio_start()
 // desc: start audio system
 //-----------------------------------------------------------------------------
 bool raka_audio_start()
@@ -247,4 +256,15 @@ bool raka_audio_start()
     }
 
     return true;
+}
+
+
+//-----------------------------------------------------------------------------
+// name: vq_audio_start()
+// desc: stop audio system
+//-----------------------------------------------------------------------------
+void raka_audio_stop()
+{
+    // stop the audio
+    XAudioIO::stop();
 }

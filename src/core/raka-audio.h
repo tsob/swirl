@@ -14,8 +14,7 @@
 bool raka_audio_init( unsigned int srate, unsigned int frameSize, unsigned channels );
 // start audio
 bool raka_audio_start();
-
-// play some notes
+void raka_audio_stop();
 void raka_playNotes( float pitch, float velocity );
 
 

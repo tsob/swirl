@@ -34,11 +34,11 @@ int main( int argc, const char ** argv )
     (void) argc; // suppress unused parameter warnings
     (void) argv; // suppress unused parameter warnings
 
-
-
-
-
-
+    if( !raka_audio_init(RAKA_SRATE, RAKA_FRAMESIZE, 2) )
+    {
+      cerr << "[swirl]: cannot initialize audio system..." << endl;
+      return -1;
+    }
 
     // Initiate graphics setup and loop
     if( !raka_gfx_init( argc, argv ) )
@@ -47,8 +47,14 @@ int main( int argc, const char ** argv )
         return -1;
     }
 
+    // Start audio
+    raka_audio_start();
+
     // Graphics loop
     raka_gfx_loop();
+
+    // Stop Audio
+    raka_audio_stop();
 
     return 0;
 }

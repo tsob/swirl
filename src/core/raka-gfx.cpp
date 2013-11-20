@@ -8,6 +8,7 @@
 #include "raka-gfx.h"
 #include "raka-globals.h"
 #include "raka-sim.h"
+#include "raka-audio.h"
 
 #include "x-fun.h"
 #include "x-gfx.h"
@@ -806,6 +807,9 @@ void keyboardFunc( unsigned char key, int x, int y )
                 break;
             case ',':
                 Globals::bgColor.update( Vector3D( .5f, .75f, 1.0f ) );
+                break;
+            case 'n':
+                raka_playNotes(60, 120);
                 break;
         }
     }

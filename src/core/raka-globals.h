@@ -190,14 +190,14 @@ public:
     static unsigned int lastAudioBufferFrames;
     static unsigned int lastAudioBufferChannels;
 
-    // Waveform
-    static YWaveform * waveform;
-
     // width and height of the window
     static GLsizei windowWidth;
     static GLsizei windowHeight;
     static GLsizei lastWindowWidth;
     static GLsizei lastWindowHeight;
+
+    // waveform
+    static YWaveform * waveform;
 
     // graphics fullscreen
     static GLboolean fullscreen;

@@ -24,8 +24,6 @@ RAKASim * Globals::sim     = NULL;
 /*static*/ UdpTransmitSocket* transmitSocket = NULL;
 YEntity* avatar = NULL;
 
-YWaveform * Globals::waveform = NULL;
-
 YEntity* getAvatar()
 {
     //TODO
@@ -73,6 +71,7 @@ SAMPLE *     Globals::lastAudioBufferMono     = NULL;
 SAMPLE *     Globals::audioBufferWindow       = NULL;
 unsigned int Globals::lastAudioBufferFrames   = 0;
 unsigned int Globals::lastAudioBufferChannels = 0;
+YWaveform * Globals::waveform = NULL;
 
 GLboolean Globals::fullscreen  = DEFAULT_FULLSCREEN;
 GLboolean Globals::blendScreen = DEFAULT_BLENDSCREEN;
