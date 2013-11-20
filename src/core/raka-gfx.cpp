@@ -1,10 +1,12 @@
-//-----------------------------------------------------------------------------
-// name: raka-gfx.cpp
-// desc: graphics stuff for swirl visualization
+//----------------------------------------------------------------------------
+// Name: raka-gfx.cpp
+// Desc: Graphics stuff for swirl visualization
 //
-// author: Ge Wang (ge@ccrma.stanford.edu)
-//   date: 2013
-//-----------------------------------------------------------------------------
+// Author: Tim O'Brien    (tsob@ccrma.stanford.edu)
+//         Reza Payami  (rpayami@ccrma.stanford.edu)
+//         Haley Sayres    (hsayres@stanford.edu)
+// Date:   Fall 2013
+//----------------------------------------------------------------------------
 #include "raka-gfx.h"
 #include "raka-globals.h"
 #include "raka-sim.h"
