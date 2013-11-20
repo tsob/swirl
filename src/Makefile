@@ -63,7 +63,7 @@ OBJS=RtAudio.o \
 		 $(OSCPACKOSCDIR)OscPrintReceivedElements.o \
 		 $(OSCPACKOSCDIR)OscReceivedElements.o $(OSCPACKOSCDIR)OscTypes.o \
 		 raka-audio.o raka-entity.o raka-gfx.o raka-globals.o raka-sim.o \
-		 main.o
+		 raka-networking.o main.o
 # Note: leaving out y-score-reader.o
 
 swirl: $(OBJS)
@@ -85,6 +85,8 @@ raka-globals.o: core/raka-globals.h core/raka-globals.cpp
 	$(CXX) $(FLAGS) $(INCLUDES) core/raka-globals.cpp
 raka-sim.o: core/raka-sim.h core/raka-sim.cpp
 	$(CXX) $(FLAGS) $(INCLUDES) core/raka-sim.cpp
+raka-networking.o: core/raka-networking.h core/raka-networking.cpp
+	$(CXX) $(FLAGS) $(INCLUDES) core/raka-networking.cpp
 
 # rtaudio
 RtAudio.o: $(RTAUDIODIR)RtAudio.h $(RTAUDIODIR)RtAudio.cpp

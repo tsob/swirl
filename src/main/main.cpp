@@ -16,10 +16,8 @@
 //#include "UdpSocket.h"
 
 
-#define ADDRESS "127.0.0.1" //TODO
-#define PORT 7000
+#define ADDRESS "127.0.0.1" // Hack for localhost //TODO change for client-server
 
-#define OUTPUT_BUFFER_SIZE 1024 //TODO
 
 using namespace std;
 
@@ -30,11 +28,16 @@ using namespace std;
 //----------------------------------------------------------------------------
 int main( int argc, const char ** argv )
 {
-
+    // Networking //TODO change for client-server
+    if( argc < 3 ){
+      cerr << "[swirl]: please add send and receive ports as arguments" << endl;
+      return -1;
+    }
     (void) argc; // suppress unused parameter warnings
     (void) argv; // suppress unused parameter warnings
 
-    if( !raka_audio_init(RAKA_SRATE, RAKA_FRAMESIZE, 2) )
+    // Initialize audio
+    if( !raka_audio_init(RAKA_SRATE, RAKA_FRAMESIZE, RAKA_NUMCHANNELS) )
     {
       cerr << "[swirl]: cannot initialize audio system..." << endl;
       return -1;

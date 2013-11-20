@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
 // name: raka-gfx.cpp
-// desc: graphics stuff for bokeh visualization
+// desc: graphics stuff for swirl visualization
 //
 // author: Ge Wang (ge@ccrma.stanford.edu)
 //   date: 2013
@@ -9,6 +9,7 @@
 #include "raka-globals.h"
 #include "raka-sim.h"
 #include "raka-audio.h"
+#include "raka-networking.h"
 
 #include "x-fun.h"
 #include "x-gfx.h"
@@ -19,15 +20,11 @@
 #include <vector>
 
 
-//TODO
+//TODO networking -- see also raka-networking
 #include "OscOutboundPacketStream.h"
 #include "UdpSocket.h"
 
-
 #define ADDRESS "127.0.0.1"
-#define PORT 7000
-
-#define OUTPUT_BUFFER_SIZE 1024
 
 using namespace std;
 
@@ -58,22 +55,6 @@ void renderBackground();
 void blendPane();
 void updateNodeEntities();
 void renderNodeEntities();
-
-
-//TODO
-void * oscListener(void * args)
-{
-    
-    int receivePort = ((int*)args)[0];
-    
-    ExamplePacketListener listener;
-    UdpListeningReceiveSocket s(
-                                IpEndpointName( IpEndpointName::ANY_ADDRESS, receivePort ),
-                                &listener );
-    
-    s.RunUntilSigInt();
-    pthread_exit(NULL);
-}
 
 
 //-----------------------------------------------------------------------------
@@ -393,6 +374,7 @@ void raka_about()
 // name: raka_keys()
 // desc: ...
 //-----------------------------------------------------------------------------
+// TODO update
 void raka_keys()
 {
     raka_line();
@@ -549,8 +531,8 @@ void keyboardFunc( unsigned char key, int x, int y )
     //TODO
     UdpTransmitSocket* transmitSocket = getTransmitSocket();
 
-    char buffer[OUTPUT_BUFFER_SIZE];
-    osc::OutboundPacketStream oscOuttream( buffer, OUTPUT_BUFFER_SIZE );
+    char buffer[RAKA_FRAMESIZE];
+    osc::OutboundPacketStream oscOuttream( buffer, RAKA_FRAMESIZE);
     
     // system keys (handled first)
     switch( key )
@@ -585,13 +567,13 @@ void keyboardFunc( unsigned char key, int x, int y )
                 blendAlpha = Globals::blendAlpha.goal;
                 Globals::blendAlpha.goal = 1;
             }
-            fprintf( stderr, "[bokeh]: blendscreen:%s\n", Globals::blendScreen ? "ON" : "OFF" );
+            fprintf( stderr, "[swirl]: blendscreen:%s\n", Globals::blendScreen ? "ON" : "OFF" );
             break;
         }
         case 'f':
         {
             Globals::fog = !Globals::fog;
-            fprintf( stderr, "[bokeh]: fog:%s\n", Globals::fog ? "ON" : "OFF" );
+            fprintf( stderr, "[swirl]: fog:%s\n", Globals::fog ? "ON" : "OFF" );
             if( Globals::fog )
             {
                 // fog mode
@@ -644,17 +626,17 @@ void keyboardFunc( unsigned char key, int x, int y )
                 glutReshapeWindow( Globals::lastWindowWidth, Globals::lastWindowHeight );
             
             Globals::fullscreen = !Globals::fullscreen;
-            fprintf( stderr, "[bokeh]: fullscreen:%s\n", Globals::fullscreen ? "ON" : "OFF" );
+            fprintf( stderr, "[swirl]: fullscreen:%s\n", Globals::fullscreen ? "ON" : "OFF" );
             break;
         }
         case '<':
             Globals::fog_density *= .95f;
-            fprintf( stderr, "[bokeh]: fog density:%f\n", Globals::fog_density );
+            fprintf( stderr, "[swirl]: fog density:%f\n", Globals::fog_density );
             glFogf(GL_FOG_DENSITY, Globals::fog_density);
             break;
         case '>':
             Globals::fog_density *= 1.05f;
-            fprintf( stderr, "[bokeh]: fog density:%f\n", Globals::fog_density );
+            fprintf( stderr, "[swirl]: fog density:%f\n", Globals::fog_density );
             glFogf(GL_FOG_DENSITY, Globals::fog_density);
             break;
             
@@ -1077,7 +1059,7 @@ void renderBackground()
  *    // load the texture
  *    if( !XGfx::loadTexture( filename, tex ) )
  *    {
- *        cerr << "[bokeh]: error - cannot load texture '" << filename.c_str() << "'..." << endl;
+ *        cerr << "[swirl]: error - cannot load texture '" << filename.c_str() << "'..." << endl;
  *        return false;
  *    }
  *    
@@ -1105,13 +1087,13 @@ void renderBackground()
  *    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, maxFilter );
  *    
  *    // log
- *    // fprintf( stderr, "[bokeh]: loading %s...\n", filename );
+ *    // fprintf( stderr, "[swirl]: loading %s...\n", filename );
  *    
  *    // load luminance
  *    buf = loadLuminance( filename, &width, &height, &components );
  *    
  *    // log
- *    // fprintf( stderr, "[bokeh]: '%s' : %dx%dx%d\n", filename, width, height, components);
+ *    // fprintf( stderr, "[swirl]: '%s' : %dx%dx%d\n", filename, width, height, components);
  *    
  *    // build mip maps
  *    if( useMipMaps )

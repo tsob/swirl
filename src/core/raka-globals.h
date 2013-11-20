@@ -28,11 +28,9 @@
 
 // Networking and OSC
 #include "UdpSocket.h" //TODO
-
 #include "OscReceivedElements.h"
 #include "OscPacketListener.h"
 #include "UdpSocket.h"
-
 
 // Defines
 #define RAKA_SRATE        44100
