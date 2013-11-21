@@ -42,6 +42,10 @@ int main( int argc, const char ** argv )
       return -1;
     }
 
+    // Print about
+    swirl_about();
+    swirl_endline();
+
     // Start audio
     swirl_audio_start();
 
