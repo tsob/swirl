@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------------
-// Name: swirl-globals.h
+// Name: swirl-globals.cpp
 // Desc: Global stuff for swirl
 //
 // Author: Tim O'Brien    (tsob@ccrma.stanford.edu)
