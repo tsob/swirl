@@ -27,7 +27,13 @@ void raka_line();
 //bool raka_initTexture( const std::string & filename, XTexture * tex );
 //XTexture * raka_loadTexture( const std::string & filename );
 
-
+// User movement functions
+void strafe_left();
+void strafe_right();
+void move_forward();
+void move_back();
+void turn_left();
+void turn_right();
 
 
 #endif

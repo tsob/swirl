@@ -550,9 +550,9 @@ void keyboardFunc( unsigned char key, int x, int y )
         }
         case 'a':
         {
-            raka_endline();
-            raka_about();
-            raka_endline();
+            //raka_endline();
+            //raka_about();
+            //raka_endline();
             break;
         }
         case 'b':
@@ -684,100 +684,23 @@ void keyboardFunc( unsigned char key, int x, int y )
         switch( key )
         {
             case ']':
-                Globals::cameraReference.x = Globals::cameraReference.x * cos(-0.1)
-                - Globals::cameraReference.z * sin(-0.1);
-
-                Globals::cameraReference.z = Globals::cameraReference.x * sin(-0.1)
-                + Globals::cameraReference.z * cos(-0.1);
-
-                //fprintf( stderr, "[vismule]: yview:%f\n", g_eye_y.y );
-
-                oscOuttream << osc::BeginBundleImmediate
-
-                << osc::BeginMessage( "/cameraReferenceX" )
-                << /*Globals::Globals::cameraReference.x*/ -0.1f << osc::EndMessage
-               /*
-                << osc::BeginMessage( "/cameraReferenceZ" )
-                << Globals::Globals::cameraReference.z << osc::EndMessage
-               */
-                << osc::EndBundle;
-                transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
-
+                turn_right();
                 break;
             case '[':
-
-                Globals::cameraReference.x = Globals::cameraReference.x * cos(0.1)
-                    - Globals::cameraReference.z * sin(0.1);
-
-                Globals::cameraReference.z = Globals::cameraReference.x * sin(0.1)
-                + Globals::cameraReference.z * cos(0.1);
-
-                //fprintf( stderr, "[vismule]: yview:%f\n", g_eye_y.y );
-
-                oscOuttream << osc::BeginBundleImmediate
-
-                << osc::BeginMessage( "/cameraReferenceX" )
-                << /*Globals::Globals::cameraReference.x*/ 0.1f << osc::EndMessage
-              /*
-                << osc::BeginMessage( "/cameraReferenceZ" )
-                << Globals::Globals::cameraReference.z << osc::EndMessage
-              */
-                << osc::EndBundle;
-                transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
-
+                turn_left();
                 break;
             case 'w':
-                //Globals::viewRadius.y = 1.025 * Globals::viewRadius.y;
-
-                Globals::cameraEye.z += 0.1;
-                Globals::cameraReference.z += 0.1;
-
-                // fprintf( stderr, "[vismule]: view radius:%f->%f\n", Globals::viewRadius.x, Globals::viewRadius.y );
-                oscOuttream << osc::BeginBundleImmediate
-                << osc::BeginMessage( "/cameraEyeZ" )
-                << Globals::cameraEye.z << osc::EndMessage
-                << osc::EndBundle;
-                transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
-
+                move_forward();
                 break;
             case 'x':
-                //Globals::viewRadius.y = Globals::viewRadius.x + .7*(Globals::viewRadius.y-Globals::viewRadius.x);
-                Globals::cameraEye.z -= 0.1;
-                Globals::cameraReference.z -= 0.1;
-
-                oscOuttream << osc::BeginBundleImmediate
-                << osc::BeginMessage( "/cameraEyeZ" )
-                << Globals::cameraEye.z << osc::EndMessage
-                << osc::EndBundle;
-                transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
-
+                move_back();
                 break;
 
             case 'd':
-                //Globals::viewRadius.y = 1.025 * Globals::viewRadius.y;
-
-                Globals::cameraEye.x += 0.1;
-                Globals::cameraReference.x += 0.1;
-
-                // fprintf( stderr, "[vismule]: view radius:%f->%f\n", Globals::viewRadius.x, Globals::viewRadius.y );
-                oscOuttream << osc::BeginBundleImmediate
-                << osc::BeginMessage( "/cameraEyeX" )
-                << Globals::cameraEye.x << osc::EndMessage
-                << osc::EndBundle;
-                transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
-
+                strafe_right();
                 break;
             case 'a':
-                //Globals::viewRadius.y = Globals::viewRadius.x + .7*(Globals::viewRadius.y-Globals::viewRadius.x);
-                Globals::cameraEye.x -= 0.1;
-                Globals::cameraReference.x -= 0.1;
-
-                oscOuttream << osc::BeginBundleImmediate
-                << osc::BeginMessage( "/cameraEyeX" )
-                << Globals::cameraEye.x << osc::EndMessage
-                << osc::EndBundle;
-                transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
-
+                strafe_left();
                 break;
 
             case '\'':
@@ -1137,3 +1060,138 @@ void renderBackground()
  *    return count == 1;
  *}
  */
+
+
+//-----------------------------------------------------------------------------
+// name: strafe_left( )
+// desc: move me left
+//-----------------------------------------------------------------------------
+void strafe_left()
+{
+   UdpTransmitSocket* transmitSocket = getTransmitSocket();
+
+   char buffer[RAKA_FRAMESIZE];
+   osc::OutboundPacketStream oscOuttream( buffer, RAKA_FRAMESIZE);
+
+   Globals::cameraEye.x -= 0.1;
+   Globals::cameraReference.x -= 0.1;
+
+   oscOuttream << osc::BeginBundleImmediate
+   << osc::BeginMessage( "/cameraEyeX" )
+   << Globals::cameraEye.x << osc::EndMessage
+   << osc::EndBundle;
+   transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
+}
+
+
+//-----------------------------------------------------------------------------
+// name: strafe_right( )
+// desc: move me right
+//-----------------------------------------------------------------------------
+void strafe_right()
+{
+   UdpTransmitSocket* transmitSocket = getTransmitSocket();
+
+   char buffer[RAKA_FRAMESIZE];
+   osc::OutboundPacketStream oscOuttream( buffer, RAKA_FRAMESIZE);
+
+   Globals::cameraEye.x += 0.1;
+   Globals::cameraReference.x += 0.1;
+
+   oscOuttream << osc::BeginBundleImmediate
+   << osc::BeginMessage( "/cameraEyeX" )
+   << Globals::cameraEye.x << osc::EndMessage
+   << osc::EndBundle;
+   transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
+}
+
+//-----------------------------------------------------------------------------
+// name: move_forward( )
+// desc: move me forward
+//-----------------------------------------------------------------------------
+void move_forward()
+{
+   UdpTransmitSocket* transmitSocket = getTransmitSocket();
+
+   char buffer[RAKA_FRAMESIZE];
+   osc::OutboundPacketStream oscOuttream( buffer, RAKA_FRAMESIZE);
+
+   Globals::cameraEye.z += 0.1;
+   Globals::cameraReference.z += 0.1;
+
+   oscOuttream << osc::BeginBundleImmediate
+   << osc::BeginMessage( "/cameraEyeZ" )
+   << Globals::cameraEye.z << osc::EndMessage
+   << osc::EndBundle;
+   transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
+}
+
+//-----------------------------------------------------------------------------
+// name: move_back( )
+// desc: move me backward
+//-----------------------------------------------------------------------------
+void move_back()
+{
+   UdpTransmitSocket* transmitSocket = getTransmitSocket();
+
+   char buffer[RAKA_FRAMESIZE];
+   osc::OutboundPacketStream oscOuttream( buffer, RAKA_FRAMESIZE);
+
+   Globals::cameraEye.z -= 0.1;
+   Globals::cameraReference.z -= 0.1;
+
+   oscOuttream << osc::BeginBundleImmediate
+   << osc::BeginMessage( "/cameraEyeZ" )
+   << Globals::cameraEye.z << osc::EndMessage
+   << osc::EndBundle;
+   transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
+}
+
+//-----------------------------------------------------------------------------
+// name: turn_left( )
+// desc: turn me left
+//-----------------------------------------------------------------------------
+void turn_left()
+{
+   UdpTransmitSocket* transmitSocket = getTransmitSocket();
+
+   char buffer[RAKA_FRAMESIZE];
+   osc::OutboundPacketStream oscOuttream( buffer, RAKA_FRAMESIZE);
+
+   Globals::cameraReference.x = Globals::cameraReference.x * cos(0.1)
+                                - Globals::cameraReference.z * sin(0.1);
+
+   Globals::cameraReference.z = Globals::cameraReference.x * sin(0.1)
+                                + Globals::cameraReference.z * cos(0.1);
+
+   oscOuttream << osc::BeginBundleImmediate
+   << osc::BeginMessage( "/cameraReferenceX" )
+   << 0.1f << osc::EndMessage
+   << osc::EndBundle;
+
+   transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
+}
+
+//-----------------------------------------------------------------------------
+// name: turn_left( )
+// desc: turn me left
+//-----------------------------------------------------------------------------
+void turn_right()
+{
+   UdpTransmitSocket* transmitSocket = getTransmitSocket();
+
+   char buffer[RAKA_FRAMESIZE];
+   osc::OutboundPacketStream oscOuttream( buffer, RAKA_FRAMESIZE);
+
+   Globals::cameraReference.x = Globals::cameraReference.x * cos(-0.1)
+                                - Globals::cameraReference.z * sin(-0.1);
+
+   Globals::cameraReference.z = Globals::cameraReference.x * sin(-0.1)
+                                + Globals::cameraReference.z * cos(-0.1);
+
+   oscOuttream << osc::BeginBundleImmediate
+   << osc::BeginMessage( "/cameraReferenceX" )
+   << -0.1f << osc::EndMessage
+   << osc::EndBundle;
+   transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
+}
