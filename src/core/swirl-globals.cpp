@@ -20,8 +20,6 @@
 
 SWIRLSim * Globals::sim     = NULL;
 
-//TODO
-/*static*/ UdpTransmitSocket* transmitSocket = NULL;
 YEntity* avatar = NULL;
 
 YEntity* getAvatar()
@@ -44,22 +42,6 @@ YEntity* getAvatar()
     return avatar;
 }
 
-
-//TODO
-UdpTransmitSocket* getTransmitSocket()
-{
-    return transmitSocket;
-}
-
-//TODO
-UdpTransmitSocket* getTransmitSocket(const char* address, int port)
-{
-    //TODO
-    if (!transmitSocket)
-        transmitSocket = new UdpTransmitSocket( IpEndpointName(address, port) );
-    return transmitSocket;
-
-}
 
 GLsizei Globals::windowWidth      = DEFAULT_WINDOW_WIDTH;
 GLsizei Globals::windowHeight     = DEFAULT_WINDOW_HEIGHT;

@@ -21,7 +21,6 @@
 #include <iostream>
 #include <vector>
 
-
 //TODO networking -- see also swirl-networking
 #include "OscOutboundPacketStream.h"
 #include "UdpSocket.h"
@@ -30,38 +29,9 @@
 
 using namespace std;
 
-
-
 //-----------------------------------------------------------------------------
-// function prototypes
-//-----------------------------------------------------------------------------
-void idleFunc();
-void displayFunc();
-void reshapeFunc( int width, int height );
-void keyboardFunc( unsigned char, int, int );
-void mouseFunc( int button, int state, int x, int y );
-void specialFunc( int key, int x, int y );
-
-void initialize_graphics();
-void initialize_simulation();
-bool initialize_data();
-//void loadTextures();
-//bool checkTexDim( int dim );
-/*
- *void setupTexture( const char * filename, GLuint texobj,
- *                  GLenum minFilter, GLenum maxFilter,
- *                  int useMipMaps = 0 );
- */
-
-void renderBackground();
-void blendPane();
-void updateNodeEntities();
-void renderNodeEntities();
-
-
-//-----------------------------------------------------------------------------
-// name: swirl_gfx_init( )
-// desc: graphics/interaction entry point
+// Name: swirl_gfx_init( )
+// Desc: graphics/interaction entry point
 //-----------------------------------------------------------------------------
 bool swirl_gfx_init( int argc, const char ** argv )
 {
@@ -83,7 +53,7 @@ bool swirl_gfx_init( int argc, const char ** argv )
 
     UdpTransmitSocket* transmitSocket = getTransmitSocket( ADDRESS, sendPort);
 
-    //TOOO
+    //TODO
     pthread_t listenerThread;
     pthread_create(&listenerThread, NULL, oscListener, &receivePort);
 
@@ -113,42 +83,49 @@ bool swirl_gfx_init( int argc, const char ** argv )
     free( cwd );
 #endif
 
-    // print about
+
+    // Print about
     swirl_about();
     swirl_endline();
 
-    // double buffer, use rgb color, enable depth buffer
+    // Double buffer, use rgb color, enable depth buffer
     glutInitDisplayMode( GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH );
-    // initialize the window size
+
+    // Initialize the window size
     glutInitWindowSize( Globals::windowWidth, Globals::windowHeight );
-    // set the window postion
+
+    // Set the window postion
     glutInitWindowPosition( 100, 100 );
-    // create the window
+
+    // Create the window
     glutCreateWindow( "SWIRL");
-    // full screen
 
+    // Full screen
     //TODO
-   // if( Globals::fullscreen )
-     //   glutFullScreen();
+    // if( Globals::fullscreen )
+    //   glutFullScreen();
 
-    // set the idle function - called when idle
+    // Set the idle function - called when idle
     glutIdleFunc( idleFunc );
-    // set the display function - called when redrawing
-    glutDisplayFunc( displayFunc );
-    // set the reshape function - called when client area changes
-    glutReshapeFunc( reshapeFunc );
-    // set the keyboard function - called on keyboard events
-    glutKeyboardFunc( keyboardFunc );
-    // set the mouse function - called on mouse stuff
-    glutMouseFunc( mouseFunc );
-    // for arrow keys, etc
-	glutSpecialFunc (specialFunc );
 
-    // do our own initialization
+    // Set the display function - called when redrawing
+    glutDisplayFunc( displayFunc );
+
+    // Set the reshape function - called when client area changes
+    glutReshapeFunc( reshapeFunc );
+
+    // Set the keyboard function - called on keyboard events
+    glutKeyboardFunc( keyboardFunc );
+    // Set the mouse function - called on mouse stuff
+    glutMouseFunc( mouseFunc );
+    // For arrow keys, etc
+    glutSpecialFunc (specialFunc );
+
+    // Do our own initialization
     initialize_graphics();
-    // simulation
+    // Simulation
     initialize_simulation();
-    // do data
+    // Do data
     if( !initialize_data() )
     {
         // done
@@ -168,12 +145,12 @@ bool swirl_gfx_init( int argc, const char ** argv )
 
 
 //-----------------------------------------------------------------------------
-// name: swirl_gfx_loop( )
-// desc: hand off to graphics loop
+// Name: swirl_gfx_loop( )
+// Desc: hand off to graphics loop
 //-----------------------------------------------------------------------------
 void swirl_gfx_loop()
 {
-    // let GLUT handle the current thread from here
+    // Let GLUT handle the current thread from here
     glutMainLoop();
 }
 
@@ -279,8 +256,8 @@ void initialize_graphics()
 
 
 //-----------------------------------------------------------------------------
-// name: initialize_simulation( )
-// desc: simulation setup
+// Name: initialize_simulation( )
+// Desc: simulation setup
 //-----------------------------------------------------------------------------
 void initialize_simulation()
 {
@@ -314,8 +291,8 @@ void initialize_simulation()
 
 
 //-----------------------------------------------------------------------------
-// name: initialize_data( )
-// desc: load initial data
+// Name: initialize_data( )
+// Desc: load initial data
 //-----------------------------------------------------------------------------
 bool initialize_data()
 {
@@ -353,8 +330,8 @@ bool initialize_data()
 
 
 //-----------------------------------------------------------------------------
-// name: swirl_about()
-// desc: ...
+// Name: swirl_about()
+// Desc: ...
 //-----------------------------------------------------------------------------
 void swirl_about()
 {
@@ -373,8 +350,8 @@ void swirl_about()
 
 
 //-----------------------------------------------------------------------------
-// name: swirl_keys()
-// desc: ...
+// Name: swirl_keys()
+// Desc: ...
 //-----------------------------------------------------------------------------
 // TODO update
 void swirl_keys()
@@ -401,8 +378,8 @@ void swirl_keys()
 
 
 //-----------------------------------------------------------------------------
-// name: swirl_help()
-// desc: ...
+// Name: swirl_help()
+// Desc: ...
 //-----------------------------------------------------------------------------
 void swirl_help()
 {
@@ -415,8 +392,8 @@ void swirl_help()
 
 
 //-----------------------------------------------------------------------------
-// name: swirl_usage()
-// desc: ...
+// Name: swirl_usage()
+// Desc: ...
 //-----------------------------------------------------------------------------
 void swirl_usage()
 {
@@ -431,8 +408,8 @@ void swirl_usage()
 
 
 //-----------------------------------------------------------------------------
-// name: swirl_endline()
-// desc: ...
+// Name: swirl_endline()
+// Desc: ...
 //-----------------------------------------------------------------------------
 void swirl_endline()
 {
@@ -443,8 +420,8 @@ void swirl_endline()
 
 
 //-----------------------------------------------------------------------------
-// name: swirl_line()
-// desc: ...
+// Name: swirl_line()
+// Desc: ...
 //-----------------------------------------------------------------------------
 void swirl_line()
 {
@@ -843,8 +820,8 @@ void displayFunc( )
 
 
 //-----------------------------------------------------------------------------
-// name: blendPane()
-// desc: blends a pane into the current scene
+// Name: blendPane()
+// Desc: blends a pane into the current scene
 //-----------------------------------------------------------------------------
 void blendPane()
 {
@@ -885,8 +862,8 @@ void blendPane()
 
 
 //-----------------------------------------------------------------------------
-// name: renderBackground()
-// desc: ...
+// Name: renderBackground()
+// Desc: ...
 //-----------------------------------------------------------------------------
 void renderBackground()
 {
@@ -901,8 +878,8 @@ void renderBackground()
 
 
 //-------------------------------------------------------------------------------
-// name: loadTexture()
-// desc: load textures
+// Name: loadTexture()
+// Desc: load textures
 //-------------------------------------------------------------------------------
 /*
  *void loadTextures()
@@ -935,8 +912,8 @@ void renderBackground()
 
 
 //-------------------------------------------------------------------------------
-// name: swirl_loadTexture()
-// desc: load texture
+// Name: swirl_loadTexture()
+// Desc: load texture
 //-------------------------------------------------------------------------------
 /*
  *XTexture * swirl_loadTexture( const string & filename )
@@ -959,8 +936,8 @@ void renderBackground()
 
 
 //-------------------------------------------------------------------------------
-// name: swirl_loadTexture()
-// desc: load texture
+// Name: swirl_loadTexture()
+// Desc: load texture
 //-------------------------------------------------------------------------------
 /*
  *bool swirl_initTexture( const string & filename, XTexture * tex )
@@ -994,8 +971,8 @@ void renderBackground()
 
 
 //--------------------------------------------------------------------------------
-// name: setupTexture()
-// desc: ...
+// Name: setupTexture()
+// Desc: ...
 //--------------------------------------------------------------------------------
 /*
  *void setupTexture( const char * filename, GLuint texobj,
@@ -1038,8 +1015,8 @@ void renderBackground()
 
 
 //-----------------------------------------------------------------------------
-// name: checkTexDim( )
-// desc: checks to see if a dim is a valid opengl texture dimension
+// Name: checkTexDim( )
+// Desc: checks to see if a dim is a valid opengl texture dimension
 //-----------------------------------------------------------------------------
 /*
  *bool checkTexDim( int dim )
@@ -1061,8 +1038,8 @@ void renderBackground()
 
 
 //-----------------------------------------------------------------------------
-// name: strafe_left( )
-// desc: move me left
+// Name: strafe_left( )
+// Desc: move me left
 //-----------------------------------------------------------------------------
 void strafe_left()
 {
@@ -1083,8 +1060,8 @@ void strafe_left()
 
 
 //-----------------------------------------------------------------------------
-// name: strafe_right( )
-// desc: move me right
+// Name: strafe_right( )
+// Desc: move me right
 //-----------------------------------------------------------------------------
 void strafe_right()
 {
@@ -1104,8 +1081,8 @@ void strafe_right()
 }
 
 //-----------------------------------------------------------------------------
-// name: move_forward( )
-// desc: move me forward
+// Name: move_forward( )
+// Desc: move me forward
 //-----------------------------------------------------------------------------
 void move_forward()
 {
@@ -1125,8 +1102,8 @@ void move_forward()
 }
 
 //-----------------------------------------------------------------------------
-// name: move_back( )
-// desc: move me backward
+// Name: move_back( )
+// Desc: move me backward
 //-----------------------------------------------------------------------------
 void move_back()
 {
@@ -1146,8 +1123,8 @@ void move_back()
 }
 
 //-----------------------------------------------------------------------------
-// name: turn_left( )
-// desc: turn me left
+// Name: turn_left( )
+// Desc: turn me left
 //-----------------------------------------------------------------------------
 void turn_left()
 {
@@ -1171,8 +1148,8 @@ void turn_left()
 }
 
 //-----------------------------------------------------------------------------
-// name: turn_left( )
-// desc: turn me left
+// Name: turn_left( )
+// Desc: turn me left
 //-----------------------------------------------------------------------------
 void turn_right()
 {

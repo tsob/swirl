@@ -29,3 +29,21 @@ void * oscListener(void * args)
     pthread_exit(NULL);
 }
 
+//TODO
+/*static*/ UdpTransmitSocket* transmitSocket = NULL;
+
+//TODO
+UdpTransmitSocket* getTransmitSocket()
+{
+    return transmitSocket;
+}
+
+//TODO
+UdpTransmitSocket* getTransmitSocket(const char* address, int port)
+{
+    //TODO
+    if (!transmitSocket)
+        transmitSocket = new UdpTransmitSocket( IpEndpointName(address, port) );
+    return transmitSocket;
+
+}

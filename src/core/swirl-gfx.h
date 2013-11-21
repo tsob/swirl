@@ -14,8 +14,11 @@
 #include "x-gfx.h"
 #include <string>
 
+//-----------------------------------------------------------------------------
+// function prototypes
+//-----------------------------------------------------------------------------
 
-// entry point for graphics
+// Entry point for graphics
 bool swirl_gfx_init( int argc, const char ** argv );
 void swirl_gfx_loop();
 void swirl_about();
@@ -35,5 +38,26 @@ void move_back();
 void turn_left();
 void turn_right();
 
+// GL stuff
+void idleFunc();
+void displayFunc();
+void reshapeFunc( int width, int height );
+void keyboardFunc( unsigned char, int, int );
+void mouseFunc( int button, int state, int x, int y );
+void specialFunc( int key, int x, int y );
+
+void initialize_graphics();
+void initialize_simulation();
+bool initialize_data();
+//void loadTextures();
+//bool checkTexDim( int dim );
+//void setupTexture( const char * filename, GLuint texobj,
+                  //GLenum minFilter, GLenum maxFilter,
+                  //int useMipMaps = 0 );
+
+void renderBackground();
+void blendPane();
+void updateNodeEntities();
+void renderNodeEntities();
 
 #endif
