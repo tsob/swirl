@@ -8,20 +8,19 @@
 // Date:   Fall 2013
 //----------------------------------------------------------------------------
 
+#include <pthread.h> //TODO necessary?
 #include "swirl-globals.h"
 #include "UdpSocket.h" //TODO
 #include "OscReceivedElements.h"
 #include "OscPacketListener.h"
 #include "OscOutboundPacketStream.h"
 
-#define ADDRESS "127.0.0.1"
-#define PORT 7000
-
 //-----------------------------------------------------------------------------
 // Function declarations
 //-----------------------------------------------------------------------------
 bool swirl_networking_init( int argc, const char ** argv );
 void * oscListener(void * args);
+void * swirl_send_message(const char* label, float value);
 
 UdpTransmitSocket* getTransmitSocket();
 UdpTransmitSocket* getTransmitSocket(const char* address, int port);
@@ -58,17 +57,11 @@ protected:
                 // example #1 -- argument stream interface
                 osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
                 float f;
-
                 std::cout << "RECEVING \n";
-
                 args >> f >> osc::EndMessage;
-
                 std::cout << f << std::endl;
-
                 getAvatar()->loc.z = f;
-
                // getAvatar()->loc.y = f;
-
 
                 std::cout << "received '/cameraEyeZ' message with arguments: "
                 << f << "\n";
@@ -77,17 +70,11 @@ protected:
                 // example #1 -- argument stream interface
                 osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
                 float f;
-
                 std::cout << "RECEVING \n";
-
                 args >> f >> osc::EndMessage;
-
                 std::cout << f << std::endl;
-
                 getAvatar()->loc.x = f;
-
                 // getAvatar()->loc.y = f;
-
 
                 std::cout << "received '/cameraEyeZ' message with arguments: "
                 << f << "\n";
