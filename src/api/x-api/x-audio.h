@@ -37,9 +37,6 @@
 
 #include "x-def.h"
 
-
-
-
 // audio sample define
 typedef float SAMPLE;
 // typedef for audio callback function

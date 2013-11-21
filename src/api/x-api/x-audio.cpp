@@ -38,8 +38,6 @@
 using namespace std;
 
 
-
-
 // static instantiation
 RtAudio * XAudioIO::o_audio;
 XAudioCallback XAudioIO::o_callback;
