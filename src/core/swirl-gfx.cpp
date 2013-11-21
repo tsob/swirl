@@ -26,6 +26,7 @@
 #include "UdpSocket.h"
 
 #define ADDRESS "127.0.0.1"
+#define PORT 7000
 
 using namespace std;
 
@@ -61,11 +62,6 @@ bool swirl_gfx_init( int argc, const char ** argv )
     free( cwd );
 #endif
 
-
-    // Print about
-    swirl_about();
-    swirl_endline();
-
     // Double buffer, use rgb color, enable depth buffer
     glutInitDisplayMode( GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH );
 
@@ -76,7 +72,7 @@ bool swirl_gfx_init( int argc, const char ** argv )
     glutInitWindowPosition( 100, 100 );
 
     // Create the window
-    glutCreateWindow( "SWIRL");
+    glutCreateWindow("SWIRL");
 
     // Full screen
     //TODO
@@ -1148,4 +1144,7 @@ void turn_right()
    << osc::EndBundle;
 
    transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
+
+   // Report new info to network
+   //swirl_send_message( "/cameraReferenceX", -0.1f );
 }
