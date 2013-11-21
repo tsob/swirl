@@ -7,18 +7,10 @@
 //         Haley Sayres    (hsayres@stanford.edu)
 // Date:   Fall 2013
 //----------------------------------------------------------------------------
-#include "swirl-audio.h"
-#include "swirl-globals.h"
-#include "swirl-sim.h"
-#include "x-audio.h"
-#include "x-thread.h"
-#include "y-fft.h"
-#include "y-waveform.h"
-#include "y-fluidsynth.h"
-#include "y-echo.h"
-#include <iostream>
-using namespace std;
 
+#include "swirl-audio.h"
+
+using namespace std;
 
 // globals
 GeXFluidSynth * g_synth;
@@ -26,9 +18,6 @@ YEcho * g_echo;
 double g_now;
 double g_nextTime;
 int g_prog = 0;
-
-
-
 
 // basic note struct
 struct Note
@@ -85,8 +74,8 @@ void swirl_playNotes( float pitch, float velocity )
 
 
 //-----------------------------------------------------------------------------
-// name: audio_callback
-// desc: audio callback
+// Name: audio_callback
+// Desc: audio callback
 //-----------------------------------------------------------------------------
 static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * userData )
 {
@@ -167,8 +156,8 @@ static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * user
 
 
 //-----------------------------------------------------------------------------
-// name: swirl_audio_init()
-// desc: initialize audio system
+// Name: swirl_audio_init()
+// Desc: initialize audio system
 //-----------------------------------------------------------------------------
 bool swirl_audio_init( unsigned int srate, unsigned int frameSize, unsigned channels )
 {
@@ -248,8 +237,8 @@ bool swirl_audio_init( unsigned int srate, unsigned int frameSize, unsigned chan
 
 
 //-----------------------------------------------------------------------------
-// name: swirl_audio_start()
-// desc: start audio system
+// Name: swirl_audio_start()
+// Desc: start audio system
 //-----------------------------------------------------------------------------
 bool swirl_audio_start()
 {
@@ -265,8 +254,8 @@ bool swirl_audio_start()
 
 
 //-----------------------------------------------------------------------------
-// name: swirl_audio_stop()
-// desc: stop audio system
+// Name: swirl_audio_stop()
+// Desc: stop audio system
 //-----------------------------------------------------------------------------
 void swirl_audio_stop()
 {
