@@ -1,10 +1,12 @@
-//-----------------------------------------------------------------------------
-// name: swirl-globals.h
-// desc:
+//----------------------------------------------------------------------------
+// Name: swirl-globals.h
+// Desc: Global stuff for swirl
 //
-// author:
-//   date: 2013
-//-----------------------------------------------------------------------------
+// Author: Tim O'Brien    (tsob@ccrma.stanford.edu)
+//         Reza Payami  (rpayami@ccrma.stanford.edu)
+//         Haley Sayres    (hsayres@stanford.edu)
+// Date:   Fall 2013
+//----------------------------------------------------------------------------
 #ifndef __SWIRL_GLOBALS_H__
 #define __SWIRL_GLOBALS_H__
 
@@ -26,17 +28,10 @@
 
 #include <iostream>
 
-// Networking and OSC
-#include "UdpSocket.h" //TODO
-#include "OscReceivedElements.h"
-#include "OscPacketListener.h"
-#include "UdpSocket.h"
-
 // Defines
 #define SWIRL_SRATE        44100
 #define SWIRL_FRAMESIZE    1024
 #define SWIRL_NUMCHANNELS  2
-
 
 // forward reference
 class SWIRLSim;
@@ -45,8 +40,8 @@ class SWIRLSim;
 YEntity* getAvatar();
 
 //-----------------------------------------------------------------------------
-// name: class Globals
-// desc: the global class
+// Name: class Globals
+// Desc: the global class
 //-----------------------------------------------------------------------------
 class Globals
 {

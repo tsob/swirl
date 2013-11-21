@@ -1,10 +1,12 @@
-//-----------------------------------------------------------------------------
-// name: swirl-audio.cpp
-// desc: audio stuff for bokeh
+//----------------------------------------------------------------------------
+// Name: swirl-audio.cpp
+// Desc: Audio stuff for swirl
 //
-// author: Ge Wang (ge@ccrma.stanford.edu)
-//   date: 2013
-//-----------------------------------------------------------------------------
+// Author: Tim O'Brien    (tsob@ccrma.stanford.edu)
+//         Reza Payami  (rpayami@ccrma.stanford.edu)
+//         Haley Sayres    (hsayres@stanford.edu)
+// Date:   Fall 2013
+//----------------------------------------------------------------------------
 #include "swirl-audio.h"
 #include "swirl-globals.h"
 #include "swirl-sim.h"
@@ -16,7 +18,6 @@
 #include "y-echo.h"
 #include <iostream>
 using namespace std;
-
 
 
 // globals
@@ -57,7 +58,8 @@ XMutex g_mutex;
 
 
 
-// play some notes
+
+// Play some notes
 void swirl_playNotes( float pitch, float velocity )
 {
     // lock

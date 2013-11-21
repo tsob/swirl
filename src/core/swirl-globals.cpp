@@ -1,13 +1,15 @@
-//-----------------------------------------------------------------------------
-// name: swirl-globals.h
-// desc: global stuff for visquin visualization
+//----------------------------------------------------------------------------
+// Name: swirl-globals.h
+// Desc: Global stuff for swirl
 //
-// author: Ge Wang (ge@ccrma.stanford.edu)
-//   date: 2013
-//-----------------------------------------------------------------------------
+// Author: Tim O'Brien    (tsob@ccrma.stanford.edu)
+//         Reza Payami  (rpayami@ccrma.stanford.edu)
+//         Haley Sayres    (hsayres@stanford.edu)
+// Date:   Fall 2013
+//----------------------------------------------------------------------------
 #include "swirl-globals.h"
-#include "y-entity.h"
 #include "swirl-entity.h"
+#include "y-entity.h"
 
 
 // defaults

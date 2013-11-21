@@ -36,28 +36,6 @@ using namespace std;
 bool swirl_gfx_init( int argc, const char ** argv )
 {
 
-    //TODO - networking development
-    int sendPort = atoi(argv[1]);
-    int receivePort = atoi(argv[2]);
-
-    if (sendPort == 6000)
-    {
-        Globals::app = 1;
-        cout << "ONE\n";
-    }
-    else
-    {
-        Globals::app = 2;
-        cout << "TWO\n";
-    }
-
-    UdpTransmitSocket* transmitSocket = getTransmitSocket( ADDRESS, sendPort);
-
-    //TODO
-    pthread_t listenerThread;
-    pthread_create(&listenerThread, NULL, oscListener, &receivePort);
-
-
 #ifdef __APPLE__
     // save working dir
     char * cwd = getcwd( NULL, 0 );

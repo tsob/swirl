@@ -9,7 +9,6 @@
 //----------------------------------------------------------------------------
 
 #include "swirl-globals.h"
-// Networking and OSC
 #include "UdpSocket.h" //TODO
 #include "OscReceivedElements.h"
 #include "OscPacketListener.h"
@@ -18,10 +17,12 @@
 #define ADDRESS "127.0.0.1"
 #define PORT 7000
 
-// Function declaration
+//-----------------------------------------------------------------------------
+// Function declarations
+//-----------------------------------------------------------------------------
+bool swirl_networking_init( int argc, const char ** argv );
 void * oscListener(void * args);
 
-//TODO
 UdpTransmitSocket* getTransmitSocket();
 UdpTransmitSocket* getTransmitSocket(const char* address, int port);
 
