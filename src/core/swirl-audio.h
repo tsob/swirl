@@ -10,7 +10,15 @@
 #ifndef __SWIRL_AUDIO_H__
 #define __SWIRL_AUDIO_H__
 
+#include "swirl-globals.h"
+#include "swirl-sim.h"
 #include "x-audio.h"
+#include "x-thread.h"
+#include "y-fft.h"
+#include "y-waveform.h"
+#include "y-fluidsynth.h"
+#include "y-echo.h"
+#include <iostream>
 
 // Initialize audio
 bool swirl_audio_init(
