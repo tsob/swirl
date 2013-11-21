@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------------
-// Name: raka-networking.h
+// Name: swirl-networking.h
 // Desc: Networking and OSC stuff
 //
 // Author: Tim O'Brien    (tsob@ccrma.stanford.edu)
@@ -8,7 +8,7 @@
 // Date:   Fall 2013
 //----------------------------------------------------------------------------
 
-#include "raka-globals.h"
+#include "swirl-globals.h"
 #include "OscOutboundPacketStream.h"
 #include "UdpSocket.h"
 

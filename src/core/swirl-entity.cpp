@@ -1,24 +1,24 @@
 //-----------------------------------------------------------------------------
-// name: raka-entity.cpp
-// desc: entities for bokeh visualization
+// name: swirl-entity.cpp
+// desc:
 //
-// author: Ge Wang (ge@ccrma.stanford.edu)
+// author:
 //   date: 2013
 //-----------------------------------------------------------------------------
-#include "raka-entity.h"
-#include "raka-globals.h"
+#include "swirl-entity.h"
+#include "swirl-globals.h"
 using namespace std;
 
 //-------------------------------------------------------------------------------
 // name: render()
 // desc: ...
 //-------------------------------------------------------------------------------
-void RAKATeapot::render()
+void SWIRLTeapot::render()
 {
     // enable lighting
     glEnable( GL_LIGHTING );
     // set color
-    
+
     //TODO
     if (Globals::app == 1)
         glColor4f( col.x, 0, col.z, alpha );

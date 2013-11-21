@@ -62,8 +62,8 @@ OBJS=RtAudio.o \
 		 $(OSCPACKOSCDIR)OscOutboundPacketStream.o \
 		 $(OSCPACKOSCDIR)OscPrintReceivedElements.o \
 		 $(OSCPACKOSCDIR)OscReceivedElements.o $(OSCPACKOSCDIR)OscTypes.o \
-		 raka-audio.o raka-entity.o raka-gfx.o raka-globals.o raka-sim.o \
-		 raka-networking.o main.o
+		 swirl-audio.o swirl-entity.o swirl-gfx.o swirl-globals.o swirl-sim.o \
+		 swirl-networking.o main.o
 # Note: leaving out y-score-reader.o
 
 swirl: $(OBJS)
@@ -74,19 +74,19 @@ main.o: $(MAINDIR)main.cpp
 	$(CXX) $(FLAGS) $(INCLUDES) $(MAINDIR)main.cpp
 
 # core
-raka-audio.o: y-fluidsynth.o x-audio.o core/raka-audio.h core/raka-audio.cpp \
+swirl-audio.o: y-fluidsynth.o x-audio.o core/swirl-audio.h core/swirl-audio.cpp \
 	RtAudio.o
-	$(CXX) $(FLAGS) $(INCLUDES) core/raka-audio.cpp
-raka-entity.o: core/raka-entity.h core/raka-entity.cpp
-	$(CXX) $(FLAGS) $(INCLUDES) core/raka-entity.cpp
-raka-gfx.o: core/raka-gfx.h core/raka-gfx.cpp
-	$(CXX) $(FLAGS) $(INCLUDES) core/raka-gfx.cpp
-raka-globals.o: core/raka-globals.h core/raka-globals.cpp
-	$(CXX) $(FLAGS) $(INCLUDES) core/raka-globals.cpp
-raka-sim.o: core/raka-sim.h core/raka-sim.cpp
-	$(CXX) $(FLAGS) $(INCLUDES) core/raka-sim.cpp
-raka-networking.o: core/raka-networking.h core/raka-networking.cpp
-	$(CXX) $(FLAGS) $(INCLUDES) core/raka-networking.cpp
+	$(CXX) $(FLAGS) $(INCLUDES) core/swirl-audio.cpp
+swirl-entity.o: core/swirl-entity.h core/swirl-entity.cpp
+	$(CXX) $(FLAGS) $(INCLUDES) core/swirl-entity.cpp
+swirl-gfx.o: core/swirl-gfx.h core/swirl-gfx.cpp
+	$(CXX) $(FLAGS) $(INCLUDES) core/swirl-gfx.cpp
+swirl-globals.o: core/swirl-globals.h core/swirl-globals.cpp
+	$(CXX) $(FLAGS) $(INCLUDES) core/swirl-globals.cpp
+swirl-sim.o: core/swirl-sim.h core/swirl-sim.cpp
+	$(CXX) $(FLAGS) $(INCLUDES) core/swirl-sim.cpp
+swirl-networking.o: core/swirl-networking.h core/swirl-networking.cpp
+	$(CXX) $(FLAGS) $(INCLUDES) core/swirl-networking.cpp
 
 # rtaudio
 RtAudio.o: $(RTAUDIODIR)RtAudio.h $(RTAUDIODIR)RtAudio.cpp

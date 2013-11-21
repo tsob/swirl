@@ -1,13 +1,13 @@
 //-----------------------------------------------------------------------------
-// name: raka-audio.cpp
+// name: swirl-audio.cpp
 // desc: audio stuff for bokeh
 //
 // author: Ge Wang (ge@ccrma.stanford.edu)
 //   date: 2013
 //-----------------------------------------------------------------------------
-#include "raka-audio.h"
-#include "raka-globals.h"
-#include "raka-sim.h"
+#include "swirl-audio.h"
+#include "swirl-globals.h"
+#include "swirl-sim.h"
 #include "x-audio.h"
 #include "x-thread.h"
 #include "y-fft.h"
@@ -58,7 +58,7 @@ XMutex g_mutex;
 
 
 // play some notes
-void raka_playNotes( float pitch, float velocity )
+void swirl_playNotes( float pitch, float velocity )
 {
     // lock
     g_mutex.acquire();
@@ -107,7 +107,7 @@ static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * user
             // HACK: with a major 3rd above!
             g_synth->noteOn( n->channel, n->pitch + 4, n->velocity * 80 );
             // check to see next time
-            g_nextTime += n->duration * RAKA_SRATE;
+            g_nextTime += n->duration * SWIRL_SRATE;
             // move to next note for next time
             g_noteIndex++;
         }
@@ -165,10 +165,10 @@ static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * user
 
 
 //-----------------------------------------------------------------------------
-// name: raka_audio_init()
+// name: swirl_audio_init()
 // desc: initialize audio system
 //-----------------------------------------------------------------------------
-bool raka_audio_init( unsigned int srate, unsigned int frameSize, unsigned channels )
+bool swirl_audio_init( unsigned int srate, unsigned int frameSize, unsigned channels )
 {
     // log
     cerr << "[swirl]: initializing audio system..." << endl;
@@ -246,10 +246,10 @@ bool raka_audio_init( unsigned int srate, unsigned int frameSize, unsigned chann
 
 
 //-----------------------------------------------------------------------------
-// name: raka_audio_start()
+// name: swirl_audio_start()
 // desc: start audio system
 //-----------------------------------------------------------------------------
-bool raka_audio_start()
+bool swirl_audio_start()
 {
     // start the audio
     if( !XAudioIO::start() )
@@ -263,10 +263,10 @@ bool raka_audio_start()
 
 
 //-----------------------------------------------------------------------------
-// name: vq_audio_start()
+// name: swirl_audio_stop()
 // desc: stop audio system
 //-----------------------------------------------------------------------------
-void raka_audio_stop()
+void swirl_audio_stop()
 {
     // stop the audio
     XAudioIO::stop();

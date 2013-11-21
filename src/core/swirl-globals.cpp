@@ -1,13 +1,13 @@
 //-----------------------------------------------------------------------------
-// name: raka-globals.h
+// name: swirl-globals.h
 // desc: global stuff for visquin visualization
 //
 // author: Ge Wang (ge@ccrma.stanford.edu)
 //   date: 2013
 //-----------------------------------------------------------------------------
-#include "raka-globals.h"
+#include "swirl-globals.h"
 #include "y-entity.h"
-#include "raka-entity.h"
+#include "swirl-entity.h"
 
 
 // defaults
@@ -18,7 +18,7 @@
 #define DEFAULT_FOG           FALSE
 #define DEFAULT_VERSION       "0.0.1"
 
-RAKASim * Globals::sim     = NULL;
+SWIRLSim * Globals::sim     = NULL;
 
 //TODO
 /*static*/ UdpTransmitSocket* transmitSocket = NULL;
@@ -29,7 +29,7 @@ YEntity* getAvatar()
     //TODO
     if (!avatar)
     {
-        avatar = new RAKATeapot();
+        avatar = new SWIRLTeapot();
         // create test teapot
         // set attributes
         avatar->col = Globals::ourSoftYellow;

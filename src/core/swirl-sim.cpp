@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Name: raka-sim.cpp
+// Name: swirl-sim.cpp
 // Desc: visualization simulation
 //
 // Author: Tim O'Brien    (tsob@ccrma.stanford.edu)
@@ -7,7 +7,7 @@
 //         Haley Sayres    (hsayres@stanford.edu)
 // Date:   Fall 2013
 //-----------------------------------------------------------------------------
-#include "raka-sim.h"
+#include "swirl-sim.h"
 #include <iostream>
 using namespace std;
 
@@ -17,10 +17,10 @@ using namespace std;
 #define SIM_SKIP_TIME (.25)
 
 //-------------------------------------------------------------------------------
-// name: RAKASim()
+// name: SWIRLSim()
 // desc: constructor
 //-------------------------------------------------------------------------------
-RAKASim::RAKASim()
+SWIRLSim::SWIRLSim()
 {
     m_desiredFrameRate = 60;
     m_useFixedTimeStep = false;
@@ -32,10 +32,10 @@ RAKASim::RAKASim()
 }
 
 //-------------------------------------------------------------------------------
-// name: ~RAKASim()
+// name: ~SWIRLSim()
 // desc: destructor
 //-------------------------------------------------------------------------------
-RAKASim::~RAKASim()
+SWIRLSim::~SWIRLSim()
 {
     // Nothing to do
 }
@@ -44,7 +44,7 @@ RAKASim::~RAKASim()
 // name: systemCascade()
 // desc: trigger system wide update with time steps
 //-------------------------------------------------------------------------------
-void RAKASim::systemCascade()
+void SWIRLSim::systemCascade()
 {
     // Get current time (once per frame)
     XGfx::getCurrentTime( true );
@@ -81,22 +81,22 @@ void RAKASim::systemCascade()
 //-------------------------------------------------------------------------------
 // Pause the simulation
 //-------------------------------------------------------------------------------
-void RAKASim::pause() { m_isPaused = true; }
+void SWIRLSim::pause() { m_isPaused = true; }
 
 //-------------------------------------------------------------------------------
 // Resume the simulation
 //-------------------------------------------------------------------------------
-void RAKASim::resume() { m_isPaused = false; }
+void SWIRLSim::resume() { m_isPaused = false; }
 
 //-------------------------------------------------------------------------------
 // Get is paused
 //-------------------------------------------------------------------------------
-bool RAKASim::isPaused() const { return m_isPaused; }
+bool SWIRLSim::isPaused() const { return m_isPaused; }
 
 //-------------------------------------------------------------------------------
 // Set desired frame rate
 //-------------------------------------------------------------------------------
-void RAKASim::setDesiredFrameRate( double frate )
+void SWIRLSim::setDesiredFrameRate( double frate )
 {
   m_desiredFrameRate = frate;
 }
@@ -104,9 +104,9 @@ void RAKASim::setDesiredFrameRate( double frate )
 //-------------------------------------------------------------------------------
 // Get desired frame rate
 //-------------------------------------------------------------------------------
-double RAKASim::getDesiredFrameRate() const { return m_desiredFrameRate; }
+double SWIRLSim::getDesiredFrameRate() const { return m_desiredFrameRate; }
 
 //-------------------------------------------------------------------------------
 // Get the timestep in effect (fixed or dynamic)
 //-------------------------------------------------------------------------------
-YTimeInterval RAKASim::delta() const { return m_lastDelta; }
+YTimeInterval SWIRLSim::delta() const { return m_lastDelta; }

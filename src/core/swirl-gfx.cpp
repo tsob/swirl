@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------------
-// Name: raka-gfx.cpp
+// Name: swirl-gfx.cpp
 // Desc: Graphics stuff for swirl visualization
 //
 // Author: Tim O'Brien    (tsob@ccrma.stanford.edu)
@@ -7,11 +7,11 @@
 //         Haley Sayres    (hsayres@stanford.edu)
 // Date:   Fall 2013
 //----------------------------------------------------------------------------
-#include "raka-gfx.h"
-#include "raka-globals.h"
-#include "raka-sim.h"
-#include "raka-audio.h"
-#include "raka-networking.h"
+#include "swirl-gfx.h"
+#include "swirl-globals.h"
+#include "swirl-sim.h"
+#include "swirl-audio.h"
+#include "swirl-networking.h"
 
 #include "x-fun.h"
 #include "x-gfx.h"
@@ -22,7 +22,7 @@
 #include <vector>
 
 
-//TODO networking -- see also raka-networking
+//TODO networking -- see also swirl-networking
 #include "OscOutboundPacketStream.h"
 #include "UdpSocket.h"
 
@@ -60,10 +60,10 @@ void renderNodeEntities();
 
 
 //-----------------------------------------------------------------------------
-// name: raka_gfx_init( )
+// name: swirl_gfx_init( )
 // desc: graphics/interaction entry point
 //-----------------------------------------------------------------------------
-bool raka_gfx_init( int argc, const char ** argv )
+bool swirl_gfx_init( int argc, const char ** argv )
 {
 
     //TODO - networking development
@@ -114,8 +114,8 @@ bool raka_gfx_init( int argc, const char ** argv )
 #endif
 
     // print about
-    raka_about();
-    raka_endline();
+    swirl_about();
+    swirl_endline();
 
     // double buffer, use rgb color, enable depth buffer
     glutInitDisplayMode( GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH );
@@ -124,7 +124,7 @@ bool raka_gfx_init( int argc, const char ** argv )
     // set the window postion
     glutInitWindowPosition( 100, 100 );
     // create the window
-    glutCreateWindow( "RAKAKAKAKAKAKA!!!!!");
+    glutCreateWindow( "SWIRL");
     // full screen
 
     //TODO
@@ -156,10 +156,10 @@ bool raka_gfx_init( int argc, const char ** argv )
     }
 
     // print keys
-    // raka_endline();
-    // raka_keys();
-    // raka_line();
-    // raka_endline();
+    // swirl_endline();
+    // swirl_keys();
+    // swirl_line();
+    // swirl_endline();
 
     return true;
 }
@@ -168,10 +168,10 @@ bool raka_gfx_init( int argc, const char ** argv )
 
 
 //-----------------------------------------------------------------------------
-// name: raka_gfx_loop( )
+// name: swirl_gfx_loop( )
 // desc: hand off to graphics loop
 //-----------------------------------------------------------------------------
-void raka_gfx_loop()
+void swirl_gfx_loop()
 {
     // let GLUT handle the current thread from here
     glutMainLoop();
@@ -285,7 +285,7 @@ void initialize_graphics()
 void initialize_simulation()
 {
     // instantiate simulation
-    Globals::sim = new RAKASim();
+    Globals::sim = new SWIRLSim();
 
     // add to simulation
     Globals::sim->root().addChild( getAvatar() );
@@ -353,14 +353,14 @@ bool initialize_data()
 
 
 //-----------------------------------------------------------------------------
-// name: raka_about()
+// name: swirl_about()
 // desc: ...
 //-----------------------------------------------------------------------------
-void raka_about()
+void swirl_about()
 {
-    raka_line();
+    swirl_line();
     fprintf( stderr, "[swirl]: The Sonic World\n" );
-    raka_line();
+    swirl_line();
     fprintf( stderr, "   | by Tim O'Brien\n" );
     fprintf( stderr, "   |    Reza Payami\n" );
     fprintf( stderr, "   |  & Haley Sayres\n" );
@@ -373,15 +373,15 @@ void raka_about()
 
 
 //-----------------------------------------------------------------------------
-// name: raka_keys()
+// name: swirl_keys()
 // desc: ...
 //-----------------------------------------------------------------------------
 // TODO update
-void raka_keys()
+void swirl_keys()
 {
-    raka_line();
+    swirl_line();
     fprintf( stderr, "[swirl]: run-time control\n" );
-    raka_line();
+    swirl_line();
     fprintf( stderr, "  'h' - print this help message\n" );
     fprintf( stderr, "  's' - toggle fullscreen\n" );
     fprintf( stderr, "  'b' - toggle animated trails\n" );
@@ -401,28 +401,28 @@ void raka_keys()
 
 
 //-----------------------------------------------------------------------------
-// name: raka_help()
+// name: swirl_help()
 // desc: ...
 //-----------------------------------------------------------------------------
-void raka_help()
+void swirl_help()
 {
-    raka_endline();
-    raka_keys();
-    raka_endline();
+    swirl_endline();
+    swirl_keys();
+    swirl_endline();
 }
 
 
 
 
 //-----------------------------------------------------------------------------
-// name: raka_usage()
+// name: swirl_usage()
 // desc: ...
 //-----------------------------------------------------------------------------
-void raka_usage()
+void swirl_usage()
 {
-    raka_line();
+    swirl_line();
     fprintf( stderr, "[swirl]: command line arguments\n" );
-    raka_line();
+    swirl_line();
     fprintf( stderr, "usage: swirl --[options] [name]\n" );
     fprintf( stderr, "   [options] = help | fullscreen" );
 }
@@ -431,10 +431,10 @@ void raka_usage()
 
 
 //-----------------------------------------------------------------------------
-// name: raka_endline()
+// name: swirl_endline()
 // desc: ...
 //-----------------------------------------------------------------------------
-void raka_endline()
+void swirl_endline()
 {
     fprintf( stderr, "\n" );
 }
@@ -443,10 +443,10 @@ void raka_endline()
 
 
 //-----------------------------------------------------------------------------
-// name: raka_line()
+// name: swirl_line()
 // desc: ...
 //-----------------------------------------------------------------------------
-void raka_line()
+void swirl_line()
 {
     fprintf( stderr, "---------------------------------------------------------\n" );
 }
@@ -533,8 +533,8 @@ void keyboardFunc( unsigned char key, int x, int y )
     //TODO
     UdpTransmitSocket* transmitSocket = getTransmitSocket();
 
-    char buffer[RAKA_FRAMESIZE];
-    osc::OutboundPacketStream oscOuttream( buffer, RAKA_FRAMESIZE);
+    char buffer[SWIRL_FRAMESIZE];
+    osc::OutboundPacketStream oscOuttream( buffer, SWIRL_FRAMESIZE);
 
     // system keys (handled first)
     switch( key )
@@ -589,10 +589,10 @@ void keyboardFunc( unsigned char key, int x, int y )
         }
         case 'h':
         {
-            //raka_endline();
-            //raka_about();
-            //raka_endline();
-            raka_help();
+            //swirl_endline();
+            //swirl_about();
+            //swirl_endline();
+            swirl_help();
             break;
         }
         case 'm':
@@ -716,7 +716,7 @@ void keyboardFunc( unsigned char key, int x, int y )
                 Globals::bgColor.update( Vector3D( .5f, .75f, 1.0f ) );
                 break;
             case 'n':
-                raka_playNotes(60, 120);
+                swirl_playNotes(60, 120);
                 break;
         }
     }
@@ -922,10 +922,10 @@ void renderBackground()
  *    maxFilter = GL_LINEAR;
  *
  *    // load tng flares
- *    for( i = RAKA_TEX_FLARE_TNG_1; i <= RAKA_TEX_FLARE_TNG_5; i++ )
+ *    for( i = SWIRL_TEX_FLARE_TNG_1; i <= SWIRL_TEX_FLARE_TNG_5; i++ )
  *    {
  *        glGenTextures( 1, &(Globals::textures[i]) );
- *        sprintf( filename, "%sflare-tng-%d.bw", Globals::datapath.c_str(), i - RAKA_TEX_FLARE_TNG_1 + 1 );
+ *        sprintf( filename, "%sflare-tng-%d.bw", Globals::datapath.c_str(), i - SWIRL_TEX_FLARE_TNG_1 + 1 );
  *        setupTexture( filename, Globals::textures[i], minFilter, maxFilter );
  *    }
  *}
@@ -935,17 +935,17 @@ void renderBackground()
 
 
 //-------------------------------------------------------------------------------
-// name: raka_loadTexture()
+// name: swirl_loadTexture()
 // desc: load texture
 //-------------------------------------------------------------------------------
 /*
- *XTexture * raka_loadTexture( const string & filename )
+ *XTexture * swirl_loadTexture( const string & filename )
  *{
  *    // instantiate image data
  *    XTexture * tex = new XTexture;
  *
  *    // load the texture
- *    if( !raka_initTexture( filename, tex ) )
+ *    if( !swirl_initTexture( filename, tex ) )
  *    {
  *        delete tex;
  *        return NULL;
@@ -959,11 +959,11 @@ void renderBackground()
 
 
 //-------------------------------------------------------------------------------
-// name: raka_loadTexture()
+// name: swirl_loadTexture()
 // desc: load texture
 //-------------------------------------------------------------------------------
 /*
- *bool raka_initTexture( const string & filename, XTexture * tex )
+ *bool swirl_initTexture( const string & filename, XTexture * tex )
  *{
  *    // set desired resize
  *    tex->resizeWidth = 512;
@@ -1068,8 +1068,8 @@ void strafe_left()
 {
    UdpTransmitSocket* transmitSocket = getTransmitSocket();
 
-   char buffer[RAKA_FRAMESIZE];
-   osc::OutboundPacketStream oscOuttream( buffer, RAKA_FRAMESIZE);
+   char buffer[SWIRL_FRAMESIZE];
+   osc::OutboundPacketStream oscOuttream( buffer, SWIRL_FRAMESIZE);
 
    Globals::cameraEye.x -= 0.1;
    Globals::cameraReference.x -= 0.1;
@@ -1090,8 +1090,8 @@ void strafe_right()
 {
    UdpTransmitSocket* transmitSocket = getTransmitSocket();
 
-   char buffer[RAKA_FRAMESIZE];
-   osc::OutboundPacketStream oscOuttream( buffer, RAKA_FRAMESIZE);
+   char buffer[SWIRL_FRAMESIZE];
+   osc::OutboundPacketStream oscOuttream( buffer, SWIRL_FRAMESIZE);
 
    Globals::cameraEye.x += 0.1;
    Globals::cameraReference.x += 0.1;
@@ -1111,8 +1111,8 @@ void move_forward()
 {
    UdpTransmitSocket* transmitSocket = getTransmitSocket();
 
-   char buffer[RAKA_FRAMESIZE];
-   osc::OutboundPacketStream oscOuttream( buffer, RAKA_FRAMESIZE);
+   char buffer[SWIRL_FRAMESIZE];
+   osc::OutboundPacketStream oscOuttream( buffer, SWIRL_FRAMESIZE);
 
    Globals::cameraEye.z += 0.1;
    Globals::cameraReference.z += 0.1;
@@ -1132,8 +1132,8 @@ void move_back()
 {
    UdpTransmitSocket* transmitSocket = getTransmitSocket();
 
-   char buffer[RAKA_FRAMESIZE];
-   osc::OutboundPacketStream oscOuttream( buffer, RAKA_FRAMESIZE);
+   char buffer[SWIRL_FRAMESIZE];
+   osc::OutboundPacketStream oscOuttream( buffer, SWIRL_FRAMESIZE);
 
    Globals::cameraEye.z -= 0.1;
    Globals::cameraReference.z -= 0.1;
@@ -1153,8 +1153,8 @@ void turn_left()
 {
    UdpTransmitSocket* transmitSocket = getTransmitSocket();
 
-   char buffer[RAKA_FRAMESIZE];
-   osc::OutboundPacketStream oscOuttream( buffer, RAKA_FRAMESIZE);
+   char buffer[SWIRL_FRAMESIZE];
+   osc::OutboundPacketStream oscOuttream( buffer, SWIRL_FRAMESIZE);
 
    Globals::cameraReference.x = Globals::cameraReference.x * cos(0.1)
                               - Globals::cameraReference.z * sin(0.1);
@@ -1178,8 +1178,8 @@ void turn_right()
 {
    UdpTransmitSocket* transmitSocket = getTransmitSocket();
 
-   char buffer[RAKA_FRAMESIZE];
-   osc::OutboundPacketStream oscOuttream( buffer, RAKA_FRAMESIZE);
+   char buffer[SWIRL_FRAMESIZE];
+   osc::OutboundPacketStream oscOuttream( buffer, SWIRL_FRAMESIZE);
 
    Globals::cameraReference.x = Globals::cameraReference.x * cos(-0.1)
                               - Globals::cameraReference.z * sin(-0.1);

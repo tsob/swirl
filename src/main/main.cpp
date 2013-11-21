@@ -8,9 +8,9 @@
 // Date:   Fall 2013
 //----------------------------------------------------------------------------
 #include <iostream>
-#include "raka-audio.h"
-#include "raka-gfx.h"
-#include "raka-globals.h"
+#include "swirl-audio.h"
+#include "swirl-gfx.h"
+#include "swirl-globals.h"
 
 //#include "OscOutboundPacketStream.h"
 //#include "UdpSocket.h"
@@ -37,27 +37,27 @@ int main( int argc, const char ** argv )
     (void) argv; // suppress unused parameter warnings
 
     // Initiate graphics setup and loop
-    if( !raka_gfx_init( argc, argv ) )
+    if( !swirl_gfx_init( argc, argv ) )
     {
         cerr << "[swirl]: cannot initialize graphics/data system..." << endl;
         return -1;
     }
 
     // Initialize audio
-    if( !raka_audio_init(RAKA_SRATE, RAKA_FRAMESIZE, RAKA_NUMCHANNELS) )
+    if( !swirl_audio_init(SWIRL_SRATE, SWIRL_FRAMESIZE, SWIRL_NUMCHANNELS) )
     {
       cerr << "[swirl]: cannot initialize audio system..." << endl;
       return -1;
     }
 
     // Start audio
-    raka_audio_start();
+    swirl_audio_start();
 
     // Graphics loop
-    raka_gfx_loop();
+    swirl_gfx_loop();
 
     // Stop Audio
-    raka_audio_stop();
+    swirl_audio_stop();
 
     return 0;
 }

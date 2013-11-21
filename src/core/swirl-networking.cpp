@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------------
-// Name: raka-networking.cpp
+// Name: swirl-networking.cpp
 // Desc: Networking and OSC stuff
 //
 // Author: Tim O'Brien    (tsob@ccrma.stanford.edu)
@@ -8,14 +8,14 @@
 // Date:   Fall 2013
 //----------------------------------------------------------------------------
 
-#include "raka-networking.h"
+#include "swirl-networking.h"
 
 using namespace std;
 
 void * oscListener(void * args)
 {
     int receivePort = ((int*)args)[0];
-    
+
     ExamplePacketListener listener;
     UdpListeningReceiveSocket s(
         IpEndpointName(
@@ -24,7 +24,7 @@ void * oscListener(void * args)
           ),
         &listener
         );
-    
+
     s.RunUntilSigInt();
     pthread_exit(NULL);
 }

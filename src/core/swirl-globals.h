@@ -1,12 +1,12 @@
 //-----------------------------------------------------------------------------
-// name: raka-globals.h
-// desc: global stuff for bokeh visualization
+// name: swirl-globals.h
+// desc:
 //
-// author: Ge Wang (ge@ccrma.stanford.edu)
+// author:
 //   date: 2013
 //-----------------------------------------------------------------------------
-#ifndef __RAKA_GLOBALS_H__
-#define __RAKA_GLOBALS_H__
+#ifndef __SWIRL_GLOBALS_H__
+#define __SWIRL_GLOBALS_H__
 
 // x-api
 #include "x-def.h"
@@ -33,13 +33,13 @@
 #include "UdpSocket.h"
 
 // Defines
-#define RAKA_SRATE        44100
-#define RAKA_FRAMESIZE    1024
-#define RAKA_NUMCHANNELS  2
+#define SWIRL_SRATE        44100
+#define SWIRL_FRAMESIZE    1024
+#define SWIRL_NUMCHANNELS  2
 
 
 // forward reference
-class RAKASim;
+class SWIRLSim;
 
 //TODO
 YEntity* getAvatar();
@@ -168,7 +168,7 @@ class Globals
 {
 public:
     // Top level root simulation
-    static RAKASim * sim;
+    static SWIRLSim * sim;
 
     static int app ;
 

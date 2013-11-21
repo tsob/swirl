@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Name: raka-sim.h
+// Name: swirl-sim.h
 // Desc: visualization simulation
 //
 // Author: Tim O'Brien    (tsob@ccrma.stanford.edu)
@@ -7,25 +7,25 @@
 //         Haley Sayres    (hsayres@stanford.edu)
 // Date:   Fall 2013
 //-----------------------------------------------------------------------------
-#ifndef __RAKA_SIM_H__
-#define __RAKA_SIM_H__
+#ifndef __SWIRL_SIM_H__
+#define __SWIRL_SIM_H__
 
-#include "raka-entity.h"
+#include "swirl-entity.h"
 
 //-----------------------------------------------------------------------------
-// name: class RAKASim
+// name: class SWIRLSim
 // desc: simulation class
 //-----------------------------------------------------------------------------
-class RAKASim
+class SWIRLSim
 {
 public:
-    RAKASim();
-    virtual ~RAKASim();
-    
+    SWIRLSim();
+    virtual ~SWIRLSim();
+
 public:
     // cascade timestep simulation through system (as connected to this)
     void systemCascade();
-    
+
 public:
     // pause the simulation
     void pause();
@@ -33,7 +33,7 @@ public:
     void resume();
     // get is paused
     bool isPaused() const;
-    
+
 public:
     // set desired frame rate
     void setDesiredFrameRate( double frate );
@@ -41,18 +41,18 @@ public:
     double getDesiredFrameRate() const;
     // get the timestep in effect (fixed or dynamic)
     YTimeInterval delta() const;
-    
+
 public:
     // get the root
     YEntity & root() { return m_gfxRoot; }
-    
+
 protected:
     YEntity m_gfxRoot;
-    
+
 public:
     double m_desiredFrameRate;
     bool   m_useFixedTimeStep;
-    
+
 public:
     YTimeInterval m_timeLeftOver;
     YTimeInterval m_simTime;
