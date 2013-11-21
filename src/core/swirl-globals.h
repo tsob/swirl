@@ -116,6 +116,8 @@ public:
     static GLfloat fog_density;  // fog density
 
     // colors
+    static Vector3D skyBlue;
+    static Vector3D darkMossGreen;
     static Vector3D ourWhite;
     static Vector3D ourRed;
     static Vector3D ourBlue;

@@ -17,7 +17,7 @@
 #define DEFAULT_WINDOW_WIDTH  600
 #define DEFAULT_WINDOW_HEIGHT 400
 #define DEFAULT_BLENDSCREEN   FALSE
-#define DEFAULT_FOG           FALSE
+#define DEFAULT_FOG           TRUE
 #define DEFAULT_VERSION       "0.0.1"
 
 SWIRLSim * Globals::sim     = NULL;
@@ -60,10 +60,24 @@ YWaveform * Globals::waveform = NULL;
 GLboolean Globals::fullscreen  = DEFAULT_FULLSCREEN;
 GLboolean Globals::blendScreen = DEFAULT_BLENDSCREEN;
 
+// Colors
+Vector3D Globals::skyBlue(  0.529, 0.8078, 0.9215);
+Vector3D Globals::darkMossGreen( 0.29, 0.365, 0.137);
+Vector3D Globals::ourWhite(      1.0, 1.0,  1.0  );
+Vector3D Globals::ourRed(        1.0, 0.5,  0.5  );
+Vector3D Globals::ourBlue(       0.4, 0.8,  1.0  );
+Vector3D Globals::ourOrange(     1.0, 0.75, 0.25 );
+Vector3D Globals::ourGreen(      0.7, 1.0,  0.45 );
+Vector3D Globals::ourGray(       0.4, 0.4,  0.4  );
+Vector3D Globals::ourYellow(     1.0, 1.0,  0.25 );
+Vector3D Globals::ourSoftYellow( 0.7, 0.7,  0.1  );
+Vector3D Globals::ourPurple(     0.6, 0.25, 0.6  );
+
+
 Vector3D Globals::blendAlpha( 1, 1, .5f );
 GLfloat  Globals::blendRed = 0.0f;
 GLenum   Globals::fillmode = GL_FILL;
-iSlew3D  Globals::bgColor( .5 );
+iSlew3D  Globals::bgColor( Globals::skyBlue );
 Vector3D Globals::viewRadius( 5, 2, 1 );
 Vector3D Globals::viewEyeY( 2, 0, 1.5f );
 
@@ -77,7 +91,7 @@ Vector3D Globals::cameraReference( 0, 0, 0 );
 //Vector3D Globals::cameraEye( 0, 0, -1 );
 //Vector3D Globals::cameraReference( 0, 0, 0 );
 
-Vector3D Globals::fov( 80, 100, .2f );
+Vector3D Globals::fov( 80, 60, .2f );
 
 GLfloat   Globals::light0_pos[4]      = {  2.0f, 1.2f,  4.0f, 1.0f };
 GLfloat   Globals::light1_ambient[4]  = {   .2f,  .2f,   .2f, 1.0f };
@@ -90,16 +104,6 @@ GLuint    Globals::fog_mode[4];
 GLuint    Globals::fog_filter;
 GLfloat   Globals::fog_density;
 
-// Colors
-Vector3D Globals::ourWhite(      1.0, 1.0,  1.0  );
-Vector3D Globals::ourRed(        1.0, 0.5,  0.5  );
-Vector3D Globals::ourBlue(       0.4, 0.8,  1.0  );
-Vector3D Globals::ourOrange(     1.0, 0.75, 0.25 );
-Vector3D Globals::ourGreen(      0.7, 1.0,  0.45 );
-Vector3D Globals::ourGray(       0.4, 0.4,  0.4  );
-Vector3D Globals::ourYellow(     1.0, 1.0,  0.25 );
-Vector3D Globals::ourSoftYellow( 0.7, 0.7,  0.1  );
-Vector3D Globals::ourPurple(     0.6, 0.25, 0.6  );
 
 // Paths
 std::string Globals::path = "";

@@ -10,9 +10,27 @@
 #ifndef __SWIRL_GFX_H__
 #define __SWIRL_GFX_H__
 
+#include "swirl-globals.h"
+#include "swirl-sim.h"
+#include "swirl-audio.h"
+#include "swirl-networking.h"
+
 #include "x-def.h"
+#include "x-fun.h"
 #include "x-gfx.h"
+#include "x-loadlum.h"
+#include "x-vector3d.h"
+
 #include <string>
+#include <iostream>
+#include <vector>
+
+//TODO networking -- see also swirl-networking
+#include "OscOutboundPacketStream.h"
+#include "UdpSocket.h"
+
+#define ADDRESS "127.0.0.1"
+#define PORT 7000
 
 //-----------------------------------------------------------------------------
 // function prototypes

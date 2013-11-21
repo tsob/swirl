@@ -7,26 +7,8 @@
 //         Haley Sayres    (hsayres@stanford.edu)
 // Date:   Fall 2013
 //----------------------------------------------------------------------------
+
 #include "swirl-gfx.h"
-#include "swirl-globals.h"
-#include "swirl-sim.h"
-#include "swirl-audio.h"
-#include "swirl-networking.h"
-
-#include "x-fun.h"
-#include "x-gfx.h"
-#include "x-loadlum.h"
-#include "x-vector3d.h"
-
-#include <iostream>
-#include <vector>
-
-//TODO networking -- see also swirl-networking
-#include "OscOutboundPacketStream.h"
-#include "UdpSocket.h"
-
-#define ADDRESS "127.0.0.1"
-#define PORT 7000
 
 using namespace std;
 
@@ -63,7 +45,7 @@ bool swirl_gfx_init( int argc, const char ** argv )
 #endif
 
     // Double buffer, use rgb color, enable depth buffer
-    glutInitDisplayMode( GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH );
+    glutInitDisplayMode( GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH );
 
     // Initialize the window size
     glutInitWindowSize( Globals::windowWidth, Globals::windowHeight );
@@ -107,10 +89,10 @@ bool swirl_gfx_init( int argc, const char ** argv )
     }
 
     // print keys
-    // swirl_endline();
-    // swirl_keys();
-    // swirl_line();
-    // swirl_endline();
+    //swirl_endline();
+    //swirl_keys();
+    //swirl_line();
+    //swirl_endline();
 
     return true;
 }
@@ -137,16 +119,16 @@ void swirl_gfx_loop()
 //-----------------------------------------------------------------------------
 void initialize_graphics()
 {
-    // log
+    // Log
     cerr << "[swirl]: initializing graphics system..." << endl;
 
-    // reset time
+    // Reset time
     XGfx::resetCurrentTime();
-    // set simulation speed
+    // Set simulation speed
     XGfx::setDeltaFactor( 1.0f );
-    // get the first
+    // Get the first
     XGfx::getCurrentTime( true );
-    // random
+    // Seed random number generator
     XFun::srand();
 
     // set the GL clear color - use when the color buffer is cleared
@@ -189,7 +171,7 @@ void initialize_graphics()
     Globals::fog_mode[1] = GL_LINEAR;
     // fog_mode[1] = GL_EXP; fog_mode[2] = GL_EXP2;
     Globals::fog_filter = 0;
-    Globals::fog_density = .04f;
+    Globals::fog_density = .000882f;
 
     // fog color
     GLfloat fogColor[4]= {1.0f, 1.0f, 1.0f, 1.0f};
@@ -765,6 +747,7 @@ void displayFunc( )
     // enable depth test
     glEnable( GL_DEPTH_TEST );
 
+
     // save state
     glPushMatrix();
 
@@ -772,6 +755,9 @@ void displayFunc( )
     Globals::viewEyeY.interp( XGfx::delta());
     Globals::viewRadius.interp( XGfx::delta() );
     look();
+
+    // draw the floor
+    renderBackground();
 
     // cascade simulation
     Globals::sim->systemCascade();
@@ -843,6 +829,32 @@ void renderBackground()
 {
     // save the current matrix
     glPushMatrix( );
+
+        glColor4f(
+            Globals::darkMossGreen.x,
+            Globals::darkMossGreen.y,
+            Globals::darkMossGreen.z,
+            1.0f
+            ); //ground color
+            
+        glBegin(GL_TRIANGLE_FAN);//start drawing triangles
+            glVertex3f(-100.0f,-1.0f,-100.0f);
+            glVertex3f( 100.0f,-1.0f,-100.0f);
+            glVertex3f( 100.0f,-1.0f, 100.0f);
+            //drawing a new triangle to complete the rectangle
+            glVertex3f( 100.0f,-1.0f, 100.0f);
+            glVertex3f(-100.0f,-1.0f, 100.0f);
+            glVertex3f(-100.0f,-1.0f,-100.0f);
+        glEnd();//end drawing of triangles
+
+        // Draw the moon
+        glPushMatrix( );
+            glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+            glRotatef(5.0f, 0.0f, 1.0f, 0.0f);
+            glRotatef(20.0f, -1.0f, 0.0f, 0.0f);
+            glTranslatef(0.0f, 0.0f, 200.0f);
+            glutSolidSphere( 40.0f, 24, 24 );
+        glPopMatrix( );
 
     // restore
     glPopMatrix( );
