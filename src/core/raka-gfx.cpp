@@ -550,9 +550,6 @@ void keyboardFunc( unsigned char key, int x, int y )
         }
         case 'a':
         {
-            //raka_endline();
-            //raka_about();
-            //raka_endline();
             break;
         }
         case 'b':
@@ -592,6 +589,9 @@ void keyboardFunc( unsigned char key, int x, int y )
         }
         case 'h':
         {
+            //raka_endline();
+            //raka_about();
+            //raka_endline();
             raka_help();
             break;
         }
@@ -723,6 +723,7 @@ void keyboardFunc( unsigned char key, int x, int y )
 
     // do a reshape since viewEyeY might have changed
     reshapeFunc( Globals::windowWidth, Globals::windowHeight );
+
     // post redisplay
     glutPostRedisplay( );
 }
@@ -738,9 +739,6 @@ void mouseFunc( int button, int state, int x, int y )
 {
     glutPostRedisplay( );
 }
-
-
-
 
 //-----------------------------------------------------------------------------
 // Name: specialFunc( )
@@ -1159,10 +1157,10 @@ void turn_left()
    osc::OutboundPacketStream oscOuttream( buffer, RAKA_FRAMESIZE);
 
    Globals::cameraReference.x = Globals::cameraReference.x * cos(0.1)
-                                - Globals::cameraReference.z * sin(0.1);
+                              - Globals::cameraReference.z * sin(0.1);
 
    Globals::cameraReference.z = Globals::cameraReference.x * sin(0.1)
-                                + Globals::cameraReference.z * cos(0.1);
+                              + Globals::cameraReference.z * cos(0.1);
 
    oscOuttream << osc::BeginBundleImmediate
    << osc::BeginMessage( "/cameraReferenceX" )
@@ -1184,14 +1182,15 @@ void turn_right()
    osc::OutboundPacketStream oscOuttream( buffer, RAKA_FRAMESIZE);
 
    Globals::cameraReference.x = Globals::cameraReference.x * cos(-0.1)
-                                - Globals::cameraReference.z * sin(-0.1);
+                              - Globals::cameraReference.z * sin(-0.1);
 
    Globals::cameraReference.z = Globals::cameraReference.x * sin(-0.1)
-                                + Globals::cameraReference.z * cos(-0.1);
+                              + Globals::cameraReference.z * cos(-0.1);
 
    oscOuttream << osc::BeginBundleImmediate
    << osc::BeginMessage( "/cameraReferenceX" )
    << -0.1f << osc::EndMessage
    << osc::EndBundle;
+
    transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
 }

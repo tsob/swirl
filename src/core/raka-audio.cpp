@@ -170,6 +170,9 @@ static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * user
 //-----------------------------------------------------------------------------
 bool raka_audio_init( unsigned int srate, unsigned int frameSize, unsigned channels )
 {
+    // log
+    cerr << "[swirl]: initializing audio system..." << endl;
+
     // initialize
     if( !XAudioIO::init(
           (unsigned int)0,
