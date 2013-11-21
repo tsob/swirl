@@ -69,7 +69,7 @@ bool raka_gfx_init( int argc, const char ** argv )
     //TODO - networking development
     int sendPort = atoi(argv[1]);
     int receivePort = atoi(argv[2]);
-    
+
     if (sendPort == 6000)
     {
         Globals::app = 1;
@@ -82,11 +82,11 @@ bool raka_gfx_init( int argc, const char ** argv )
     }
 
     UdpTransmitSocket* transmitSocket = getTransmitSocket( ADDRESS, sendPort);
-   
+
     //TOOO
     pthread_t listenerThread;
     pthread_create(&listenerThread, NULL, oscListener, &receivePort);
-    
+
 
 #ifdef __APPLE__
     // save working dir
@@ -103,20 +103,20 @@ bool raka_gfx_init( int argc, const char ** argv )
     // compute the datapath
     Globals::datapath = Globals::path + Globals::relpath;
 #endif
-    
+
     // initialize GLUT
     glutInit( &argc, (char **)argv );
-    
+
 #ifdef __APPLE__
     //restore working dir
     chdir( cwd );
     free( cwd );
 #endif
-    
+
     // print about
     raka_about();
     raka_endline();
-    
+
     // double buffer, use rgb color, enable depth buffer
     glutInitDisplayMode( GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH );
     // initialize the window size
@@ -126,11 +126,11 @@ bool raka_gfx_init( int argc, const char ** argv )
     // create the window
     glutCreateWindow( "RAKAKAKAKAKAKA!!!!!");
     // full screen
-    
+
     //TODO
    // if( Globals::fullscreen )
      //   glutFullScreen();
-    
+
     // set the idle function - called when idle
     glutIdleFunc( idleFunc );
     // set the display function - called when redrawing
@@ -143,7 +143,7 @@ bool raka_gfx_init( int argc, const char ** argv )
     glutMouseFunc( mouseFunc );
     // for arrow keys, etc
 	glutSpecialFunc (specialFunc );
-    
+
     // do our own initialization
     initialize_graphics();
     // simulation
@@ -154,13 +154,13 @@ bool raka_gfx_init( int argc, const char ** argv )
         // done
         return false;
     }
-    
+
     // print keys
     // raka_endline();
     // raka_keys();
     // raka_line();
     // raka_endline();
-    
+
     return true;
 }
 
@@ -187,8 +187,8 @@ void raka_gfx_loop()
 void initialize_graphics()
 {
     // log
-    cerr << "[bokeh]: initializing graphics system..." << endl;
-    
+    cerr << "[swirl]: initializing graphics system..." << endl;
+
     // reset time
     XGfx::resetCurrentTime();
     // set simulation speed
@@ -197,7 +197,7 @@ void initialize_graphics()
     XGfx::getCurrentTime( true );
     // random
     XFun::srand();
-    
+
     // set the GL clear color - use when the color buffer is cleared
     glClearColor( Globals::bgColor.actual().x, Globals::bgColor.actual().y, Globals::bgColor.actual().z, 1.0f );
     // set the shading model to 'smooth'
@@ -220,26 +220,26 @@ void initialize_graphics()
     glEnable( GL_NORMALIZE );
     // line width
     glLineWidth( Globals::linewidth );
-    
+
     // enable light 0
     glEnable( GL_LIGHT0 );
-    
+
     // setup and enable light 1
     glLightfv( GL_LIGHT1, GL_AMBIENT, Globals::light1_ambient );
     glLightfv( GL_LIGHT1, GL_DIFFUSE, Globals::light1_diffuse );
     glLightfv( GL_LIGHT1, GL_SPECULAR, Globals::light1_specular );
     glEnable( GL_LIGHT1 );
-    
+
     // load textures
     //loadTextures();
-    
+
     // fog
     Globals::fog_mode[0] = 0;
     Globals::fog_mode[1] = GL_LINEAR;
     // fog_mode[1] = GL_EXP; fog_mode[2] = GL_EXP2;
     Globals::fog_filter = 0;
     Globals::fog_density = .04f;
-    
+
     // fog color
     GLfloat fogColor[4]= {1.0f, 1.0f, 1.0f, 1.0f};
     // fog mode
@@ -256,7 +256,7 @@ void initialize_graphics()
     glFogf( GL_FOG_END, 10.5f );
     // enable
     if( Globals::fog_filter ) glEnable( GL_FOG );
-    
+
     // check global flag
     if( Globals::fog )
     {
@@ -270,7 +270,7 @@ void initialize_graphics()
         // disable
         glDisable(GL_FOG);
     }
-    
+
     // clear the color buffer once
     glClear( GL_COLOR_BUFFER_BIT );
 }
@@ -289,10 +289,10 @@ void initialize_simulation()
 
     // add to simulation
     Globals::sim->root().addChild( getAvatar() );
-    
+
     Globals::cameraEye.x = 0;
     Globals::cameraEye.y = 0;
-    
+
     if (Globals::app == 1)
     {
         Globals::cameraEye.z = -2;
@@ -344,7 +344,7 @@ bool initialize_data()
     //
     //    // go ahead and start it
     //    Globals::skore->start();
-    
+
     // done
     return true;
 }
@@ -491,20 +491,20 @@ void look( )
     glLoadIdentity( );
     // create the viewing frustum
     gluPerspective( Globals::fov.value, (GLfloat)Globals::windowWidth / (GLfloat)Globals::windowHeight, .005, 500.0 );
-    
+
     // set the matrix mode to modelview
     glMatrixMode( GL_MODELVIEW );
     // load the identity matrix
     glLoadIdentity();
     // position the view point
-    
-    
+
+
     /*gluLookAt( 0.0f,
               Globals::viewRadius.x * sin( Globals::viewEyeY.x ),
               Globals::viewRadius.x * cos( Globals::viewEyeY.x ),
               0.0f, 0.0f, 0.0f,
               0.0f, ( cos( Globals::viewEyeY.x ) < 0 ? -1.0f : 1.0f ), 0.0f );*/
-    
+
     gluLookAt( Globals::cameraEye.x, Globals::cameraEye.y,
               Globals::cameraEye.z,
               Globals::cameraReference.x, Globals::cameraReference.y, Globals::cameraReference.z,
@@ -529,13 +529,13 @@ void look( )
 //-----------------------------------------------------------------------------
 void keyboardFunc( unsigned char key, int x, int y )
 {
-    
+
     //TODO
     UdpTransmitSocket* transmitSocket = getTransmitSocket();
 
     char buffer[RAKA_FRAMESIZE];
     osc::OutboundPacketStream oscOuttream( buffer, RAKA_FRAMESIZE);
-    
+
     // system keys (handled first)
     switch( key )
     {
@@ -626,7 +626,7 @@ void keyboardFunc( unsigned char key, int x, int y )
             }
             else
                 glutReshapeWindow( Globals::lastWindowWidth, Globals::lastWindowHeight );
-            
+
             Globals::fullscreen = !Globals::fullscreen;
             fprintf( stderr, "[swirl]: fullscreen:%s\n", Globals::fullscreen ? "ON" : "OFF" );
             break;
@@ -641,7 +641,7 @@ void keyboardFunc( unsigned char key, int x, int y )
             fprintf( stderr, "[swirl]: fog density:%f\n", Globals::fog_density );
             glFogf(GL_FOG_DENSITY, Globals::fog_density);
             break;
-            
+
             //        case 'A':
             //        case 'B':
             //        case 'C':
@@ -661,23 +661,23 @@ void keyboardFunc( unsigned char key, int x, int y )
             //        case '9':
             //            Globals::selectedVoice = key - '6';
             //            break;
-            
+
             //        case 'k':
             //            for( int i = 0; i < Globals::hud->histoVoice().numBins(); i++ )
             //                Globals::hud->histoVoice().bin(i)->setValue( XFun::rand2f(.1,.9) );
             //            for( int i = 0; i < Globals::hud->histoPitch().numBins(); i++ )
             //                Globals::hud->histoPitch().bin(i)->setValue( XFun::rand2f(.1,.9) );
             //            break;
-            
+
             //        case 'V':
             //            Globals::skore->start();
             //            break;
     }
-    
+
     // check if something else is handling viewing
     bool handled = false;
-    
-    
+
+
     // post visualizer handling (if not handled)
     if( !handled )
     {
@@ -686,14 +686,14 @@ void keyboardFunc( unsigned char key, int x, int y )
             case ']':
                 Globals::cameraReference.x = Globals::cameraReference.x * cos(-0.1)
                 - Globals::cameraReference.z * sin(-0.1);
-                
+
                 Globals::cameraReference.z = Globals::cameraReference.x * sin(-0.1)
                 + Globals::cameraReference.z * cos(-0.1);
-                
+
                 //fprintf( stderr, "[vismule]: yview:%f\n", g_eye_y.y );
-                
+
                 oscOuttream << osc::BeginBundleImmediate
-                
+
                 << osc::BeginMessage( "/cameraReferenceX" )
                 << /*Globals::Globals::cameraReference.x*/ -0.1f << osc::EndMessage
                /*
@@ -702,10 +702,10 @@ void keyboardFunc( unsigned char key, int x, int y )
                */
                 << osc::EndBundle;
                 transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
-                
+
                 break;
             case '[':
-                
+
                 Globals::cameraReference.x = Globals::cameraReference.x * cos(0.1)
                     - Globals::cameraReference.z * sin(0.1);
 
@@ -713,7 +713,7 @@ void keyboardFunc( unsigned char key, int x, int y )
                 + Globals::cameraReference.z * cos(0.1);
 
                 //fprintf( stderr, "[vismule]: yview:%f\n", g_eye_y.y );
-             
+
                 oscOuttream << osc::BeginBundleImmediate
 
                 << osc::BeginMessage( "/cameraReferenceX" )
@@ -724,11 +724,11 @@ void keyboardFunc( unsigned char key, int x, int y )
               */
                 << osc::EndBundle;
                 transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
-                
+
                 break;
             case 'w':
                 //Globals::viewRadius.y = 1.025 * Globals::viewRadius.y;
-                
+
                 Globals::cameraEye.z += 0.1;
                 Globals::cameraReference.z += 0.1;
 
@@ -738,7 +738,7 @@ void keyboardFunc( unsigned char key, int x, int y )
                 << Globals::cameraEye.z << osc::EndMessage
                 << osc::EndBundle;
                 transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
-                
+
                 break;
             case 'x':
                 //Globals::viewRadius.y = Globals::viewRadius.x + .7*(Globals::viewRadius.y-Globals::viewRadius.x);
@@ -750,34 +750,34 @@ void keyboardFunc( unsigned char key, int x, int y )
                 << Globals::cameraEye.z << osc::EndMessage
                 << osc::EndBundle;
                 transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
-                
+
                 break;
 
             case 'd':
                 //Globals::viewRadius.y = 1.025 * Globals::viewRadius.y;
-                
+
                 Globals::cameraEye.x += 0.1;
                 Globals::cameraReference.x += 0.1;
-                
+
                 // fprintf( stderr, "[vismule]: view radius:%f->%f\n", Globals::viewRadius.x, Globals::viewRadius.y );
                 oscOuttream << osc::BeginBundleImmediate
                 << osc::BeginMessage( "/cameraEyeX" )
                 << Globals::cameraEye.x << osc::EndMessage
                 << osc::EndBundle;
                 transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
-                
+
                 break;
             case 'a':
                 //Globals::viewRadius.y = Globals::viewRadius.x + .7*(Globals::viewRadius.y-Globals::viewRadius.x);
                 Globals::cameraEye.x -= 0.1;
                 Globals::cameraReference.x -= 0.1;
-                
+
                 oscOuttream << osc::BeginBundleImmediate
                 << osc::BeginMessage( "/cameraEyeX" )
                 << Globals::cameraEye.x << osc::EndMessage
                 << osc::EndBundle;
                 transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
-                
+
                 break;
 
             case '\'':
@@ -797,7 +797,7 @@ void keyboardFunc( unsigned char key, int x, int y )
                 break;
         }
     }
-    
+
     // do a reshape since viewEyeY might have changed
     reshapeFunc( Globals::windowWidth, Globals::windowHeight );
     // post redisplay
@@ -827,7 +827,7 @@ void specialFunc( int key, int x, int y )
 {
     // check
     bool handled = false;
-    
+
     // if not handled
     if( !handled )
     {
@@ -869,11 +869,11 @@ void displayFunc( )
 {
     // update time
     XGfx::getCurrentTime( TRUE );
-    
+
     // update
     Globals::bgColor.interp( XGfx::delta() );
     Globals::blendAlpha.interp( XGfx::delta() );
-    
+
     // clear or blend
     if( Globals::blendScreen && Globals::blendAlpha.value > .0001 )
     {
@@ -889,29 +889,29 @@ void displayFunc( )
         // clear the color and depth buffers
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     }
-    
+
     // enable depth test
     glEnable( GL_DEPTH_TEST );
-    
+
     // save state
     glPushMatrix();
-    
+
     // slew
     Globals::viewEyeY.interp( XGfx::delta());
     Globals::viewRadius.interp( XGfx::delta() );
     look();
-    
+
     // cascade simulation
     Globals::sim->systemCascade();
-    
+
     // pop state
     glPopMatrix();
-    
+
     //    // draw any HUD here
     //    Globals::hud->project();
     //    Globals::hud->updateAll( Globals::sim->delta() );
     //    Globals::hud->drawAll();
-    
+
     // flush gl commands
     glFlush();
     // swap the buffers
@@ -940,10 +940,10 @@ void blendPane()
     // reduce the red component
     // Globals::blendRed -= .02f;
     // if( Globals::blendRed < 0.0f ) Globals::blendRed = 0.0f;
-    
+
     GLfloat h = 10;
     GLfloat d = -1;
-    
+
     // draw the polyg
     glBegin( GL_QUADS );
     glVertex3f( -h, -h, d );
@@ -951,7 +951,7 @@ void blendPane()
     glVertex3f( h, h, d );
     glVertex3f( -h, h, d );
     glEnd();
-    
+
     // enable lighting
     glEnable( GL_LIGHTING );
     // enable depth test
@@ -971,7 +971,7 @@ void renderBackground()
 {
     // save the current matrix
     glPushMatrix( );
-    
+
     // restore
     glPopMatrix( );
 }
@@ -989,17 +989,17 @@ void renderBackground()
  *    char filename[256];
  *    GLenum minFilter, maxFilter;
  *    int i;
- *    
+ *
  *    // log
  *    fprintf( stderr, "[swirl]: loading textures...\n" );
- *    
+ *
  *    // set store alignment
  *    glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
- *    
+ *
  *    // set filter types
  *    minFilter = GL_LINEAR;
  *    maxFilter = GL_LINEAR;
- *    
+ *
  *    // load tng flares
  *    for( i = RAKA_TEX_FLARE_TNG_1; i <= RAKA_TEX_FLARE_TNG_5; i++ )
  *    {
@@ -1022,14 +1022,14 @@ void renderBackground()
  *{
  *    // instantiate image data
  *    XTexture * tex = new XTexture;
- *    
+ *
  *    // load the texture
  *    if( !raka_initTexture( filename, tex ) )
  *    {
  *        delete tex;
  *        return NULL;
  *    }
- *    
+ *
  *    return tex;
  *}
  */
@@ -1047,7 +1047,7 @@ void renderBackground()
  *    // set desired resize
  *    tex->resizeWidth = 512;
  *    tex->resizeHeight = 512;
- *    
+ *
  *    // generate the texture
  *    glGenTextures( 1, &tex->name );
  *    // bind the texture
@@ -1057,14 +1057,14 @@ void renderBackground()
  *    // setting parameters
  *    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
  *    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
- *    
+ *
  *    // load the texture
  *    if( !XGfx::loadTexture( filename, tex ) )
  *    {
  *        cerr << "[swirl]: error - cannot load texture '" << filename.c_str() << "'..." << endl;
  *        return false;
  *    }
- *    
+ *
  *    return true;
  *}
  */
@@ -1082,21 +1082,21 @@ void renderBackground()
  *{
  *    unsigned char * buf = NULL;
  *    int width = 0, height = 0, components = 0;
- *    
+ *
  *    glBindTexture( GL_TEXTURE_2D, texobj );
  *    glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
  *    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter );
  *    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, maxFilter );
- *    
+ *
  *    // log
  *    // fprintf( stderr, "[swirl]: loading %s...\n", filename );
- *    
+ *
  *    // load luminance
  *    buf = loadLuminance( filename, &width, &height, &components );
- *    
+ *
  *    // log
  *    // fprintf( stderr, "[swirl]: '%s' : %dx%dx%d\n", filename, width, height, components);
- *    
+ *
  *    // build mip maps
  *    if( useMipMaps )
  *    {
@@ -1108,7 +1108,7 @@ void renderBackground()
  *        glTexImage2D( GL_TEXTURE_2D, 0, 1, width, height, 0,
  *                     GL_LUMINANCE, GL_UNSIGNED_BYTE, buf );
  *    }
- *    
+ *
  *    free(buf);
  *}
  */
@@ -1125,14 +1125,14 @@ void renderBackground()
  *{
  *    if( dim < 0 )
  *        return false;
- *    
+ *
  *    int i, count = 0;
- *    
+ *
  *    // count bits
  *    for( i = 0; i < 31; i++ )
  *        if( dim & ( 0x1 << i ) )
  *            count++;
- *    
+ *
  *    // this is true only if dim is power of 2
  *    return count == 1;
  *}
