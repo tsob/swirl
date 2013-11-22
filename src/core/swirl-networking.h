@@ -18,7 +18,6 @@
 //-----------------------------------------------------------------------------
 // Function declarations
 //-----------------------------------------------------------------------------
-bool swirl_networking_init( int argc, const char ** argv );
 void * oscListener(void * args);
 void * swirl_send_message(const char* label, float value);
 

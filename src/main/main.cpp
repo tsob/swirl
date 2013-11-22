@@ -22,11 +22,33 @@ using namespace std;
 int main( int argc, const char ** argv )
 {
     // Initialize networking
-    if( !swirl_networking_init( argc, argv ) )
-    {
-        cerr << "[swirl]: cannot initialize networking interface..." << endl;
-        return -1;
+
+    //TODO change for client-server
+    if( argc < 3 ){
+      cerr << "[swirl]: please add send and receive ports as arguments" << endl;
+      return -1;
     }
+
+    //TODO - networking development
+    int sendPort = atoi(argv[1]);
+    int receivePort = atoi(argv[2]);
+
+    // Hack for peer to peer
+    if (sendPort == 6000)
+    {
+        Globals::app = 1;
+        cout << "ONE\n";
+    }
+    else
+    {
+        Globals::app = 2;
+        cout << "TWO\n";
+    }
+
+    UdpTransmitSocket* transmitSocket = getTransmitSocket( ADDRESS, sendPort);
+    pthread_t listenerThread;
+    pthread_create(&listenerThread, NULL, oscListener, &receivePort);
+
 
     // Initiate graphics setup and loop
     if( !swirl_gfx_init( argc, argv ) )
