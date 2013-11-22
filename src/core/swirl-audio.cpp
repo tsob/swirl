@@ -184,7 +184,7 @@ bool swirl_audio_init( unsigned int srate, unsigned int frameSize, unsigned chan
     // init
     g_synth->init( srate, 32 );
     // load the soundfont
-    g_synth->load( "data/soundfonts/default.sf2", "" );
+    g_synth->load( "data/soundfonts/birds.sf2", "" );
     // map program changes
     g_synth->programChange( 0, 0 );
     g_synth->programChange( 1, 79 );
