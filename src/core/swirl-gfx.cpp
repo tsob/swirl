@@ -248,6 +248,7 @@ void initialize_simulation()
 
     // Put a cube in the environment
     YCube* cube = new YCube();
+    cube->loc = Vector3D( 1.0f, 1.0f, 1.0f  );
     Globals::sim->root().addChild( cube );
 }
 
@@ -512,11 +513,11 @@ void keyboardFunc( unsigned char key, int x, int y )
         }
         case 'u':
         {
-            // add some cubes
-            for( int i = 0; i < 10; i++ )
-            {
-                Globals::sim->root().addChild( new YCube );
-            }
+            //// add some cubes
+            //for( int i = 0; i < 10; i++ )
+            //{
+                //Globals::sim->root().addChild( new YCube );
+            //}
         }
         case 'f':
         {
