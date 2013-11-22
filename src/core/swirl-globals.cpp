@@ -62,6 +62,8 @@ GLboolean Globals::blendScreen = DEFAULT_BLENDSCREEN;
 
 // Colors
 Vector3D Globals::skyBlue(  0.529, 0.8078, 0.9215);
+Vector3D Globals::nightSky(      0,    0,     0);
+Vector3D Globals::sunset(        1.0,  0.4784, 0.133);
 Vector3D Globals::darkMossGreen( 0.29, 0.365, 0.137);
 Vector3D Globals::ourWhite(      1.0, 1.0,  1.0  );
 Vector3D Globals::ourRed(        1.0, 0.5,  0.5  );
@@ -77,7 +79,7 @@ Vector3D Globals::ourPurple(     0.6, 0.25, 0.6  );
 Vector3D Globals::blendAlpha( 1, 1, .5f );
 GLfloat  Globals::blendRed = 0.0f;
 GLenum   Globals::fillmode = GL_FILL;
-iSlew3D  Globals::bgColor( Globals::skyBlue );
+iSlew3D  Globals::bgColor( Globals::skyBlue, 10.0 );
 Vector3D Globals::viewRadius( 5, 2, 1 );
 Vector3D Globals::viewEyeY( 2, 0, 1.5f );
 

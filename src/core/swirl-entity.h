@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
-// name: swirl-entity.h
-// desc: entities for visualization
+// Name: swirl-entity.h
+// Desc: entities for visualization
 //
 // author: Ge Wang (ge@ccrma.stanford.edu)
 //   date: 2013
@@ -13,8 +13,8 @@
 #include <vector>
 
 //-----------------------------------------------------------------------------
-// name: class SWIRLTeapot
-// desc: for testing
+// Name: class SWIRLTeapot
+// Desc: for testing
 //-----------------------------------------------------------------------------
 class SWIRLTeapot : public YEntity
 {
@@ -23,20 +23,28 @@ public:
     //void update( YTimeInterval dt );
     // render
     void render();
+
+    // description
+    virtual std::string desc() const;
+};
+
+//-----------------------------------------------------------------------------
+// Name: class SWIRLMoon
+// Desc: whoa... it's the moon
+//-----------------------------------------------------------------------------
+class SWIRLMoon : public YEntity
+{
+public:
+    // update
+    //void update( YTimeInterval dt );
+
+    // render
+    void render();
+
+    // description
+    virtual std::string desc() const;
 };
 
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
 
 

@@ -117,6 +117,8 @@ public:
 
     // colors
     static Vector3D skyBlue;
+    static Vector3D nightSky;
+    static Vector3D sunset;
     static Vector3D darkMossGreen;
     static Vector3D ourWhite;
     static Vector3D ourRed;

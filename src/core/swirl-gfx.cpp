@@ -58,8 +58,8 @@ bool swirl_gfx_init( int argc, const char ** argv )
 
     // Full screen
     //TODO
-    // if( Globals::fullscreen )
-    //   glutFullScreen();
+    if( Globals::fullscreen )
+      glutFullScreen();
 
     // Set the idle function - called when idle
     glutIdleFunc( idleFunc );
@@ -93,6 +93,13 @@ bool swirl_gfx_init( int argc, const char ** argv )
     //swirl_keys();
     //swirl_line();
     //swirl_endline();
+
+    // Debug: print scene graph //TODO remove
+    swirl_line();
+    cerr << "Scene graph:" << endl;
+    Globals::sim->root().dumpSceneGraph(1);
+    swirl_line();
+
 
     return true;
 }
@@ -222,6 +229,7 @@ void initialize_simulation()
 
     // add to simulation
     Globals::sim->root().addChild( getAvatar() );
+    Globals::sim->root().addChild( new SWIRLMoon  );
 
     Globals::cameraEye.x = 0;
     Globals::cameraEye.y = 0;
@@ -502,6 +510,14 @@ void keyboardFunc( unsigned char key, int x, int y )
             fprintf( stderr, "[swirl]: blendscreen:%s\n", Globals::blendScreen ? "ON" : "OFF" );
             break;
         }
+        case 'u':
+        {
+            // add some cubes
+            for( int i = 0; i < 10; i++ )
+            {
+                Globals::sim->root().addChild( new YCube );
+            }
+        }
         case 'f':
         {
             Globals::fog = !Globals::fog;
@@ -637,10 +653,13 @@ void keyboardFunc( unsigned char key, int x, int y )
                 break;
 
             case '\'':
-                Globals::bgColor.update( Vector3D( 1,1,1 ) );
+                Globals::bgColor.update( Globals::nightSky );
                 break;
             case ';':
-                Globals::bgColor.update( Vector3D( 0,0,0 ) );
+                Globals::bgColor.update( Globals::skyBlue );
+                break;
+            case 'l':
+                Globals::bgColor.update( Globals::sunset );
                 break;
             case '.':
                 Globals::bgColor.update( Vector3D( .5f, .5f, .5f ) );
@@ -846,15 +865,6 @@ void renderBackground()
             glVertex3f(-100.0f,-1.0f, 100.0f);
             glVertex3f(-100.0f,-1.0f,-100.0f);
         glEnd();//end drawing of triangles
-
-        // Draw the moon
-        glPushMatrix( );
-            glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
-            glRotatef(5.0f, 0.0f, 1.0f, 0.0f);
-            glRotatef(20.0f, -1.0f, 0.0f, 0.0f);
-            glTranslatef(0.0f, 0.0f, 200.0f);
-            glutSolidSphere( 40.0f, 24, 24 );
-        glPopMatrix( );
 
     // restore
     glPopMatrix( );
