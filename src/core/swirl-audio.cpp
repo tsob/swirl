@@ -9,6 +9,7 @@
 //----------------------------------------------------------------------------
 
 #include "swirl-audio.h"
+#include <vector>
 
 using namespace std;
 
@@ -17,34 +18,84 @@ double g_now;
 double g_nextTime;
 int g_prog = 0;
 
-// basic note struct
-struct Note
-{
-    int channel;
-    float pitch;
-    float velocity;
-    float duration; // in seconds
-    // add more stuff?
-
-    // constructor
-    Note( int c, float p, float v, float d )
-    {
-        channel = c;
-        pitch = p;
-        velocity = v;
-        duration = d;
-    }
-};
 
 
 // HACK: vector of notes
-vector<Note> g_notes;
+vector<SwirlNote> g_notes;
 int g_noteIndex = 0;
 XMutex g_mutex;
 
+//-----------------------------------------------------------------------------
+// Name: class SwirlNote
+// Desc: Constructor
+//-----------------------------------------------------------------------------
+SwirlNote::SwirlNote( int c, float p, float v, float d )
+{
+    channel  = c;
+    pitch    = p;
+    velocity = v;
+    duration = d;
+};
 
+//-----------------------------------------------------------------------------
+// Name: class SwirlNoteSequence
+// Desc: Constructor
+//-----------------------------------------------------------------------------
+SwirlNoteSequence::SwirlNoteSequence( )
+{
+    // Clear vectors
+    notes.clear();
+    nextTime = 0.0; // Start immediately
+    noteIndex = 0;
+}
+SwirlNoteSequence::SwirlNoteSequence( YTimeInterval startTime  )
+{
+    // Clear vectors
+    notes.clear();
+    nextTime = startTime;
+    noteIndex = 0;
+}
 
+//-----------------------------------------------------------------------------
+// Name: addNote [class SwirlNoteSequence]
+// Desc: Add a note to the sequence
+//-----------------------------------------------------------------------------
+void SwirlNoteSequence::addNote( SwirlNote note )
+{
+    // Add note to sequence
+    notes.push_back( note );
+}
 
+// Update
+void SwirlNoteSequence::update( YTimeInterval dt )
+{
+    int noteIndex = 0;
+    YTimeInterval timeAccumulation = 0.0;
+
+    if( dt > nextTime )
+    {
+        // lock (to protect vector)
+        m_mutex.acquire();
+        // move down the vector
+        if( noteIndex < notes.size() )
+        {
+            // temporary note pointer
+            SwirlNote * n = &g_notes[g_noteIndex];
+            // note on!
+            Globals::synth->noteOn( n->channel, n->pitch, n->velocity * 120 );
+            // check to see next time
+            nextTime += n->duration;
+            // move to next note for next time
+            noteIndex++;
+        }
+        // release lock
+        m_mutex.release();
+    }
+    else
+    {
+      nextTime -= dt;
+    }
+}
 
 // Play some notes
 void swirl_playNotes( float pitch, float velocity )
@@ -53,10 +104,11 @@ void swirl_playNotes( float pitch, float velocity )
     g_mutex.acquire();
     // clear notes
     g_notes.clear();
+
     for( int i = 0; i < 24; i++ )
     {
         // next notes
-        g_notes.push_back( Note( 0, pitch + i*2, (1 - i/24.0), .05 + .15*(1 - i/24.0) ) );
+        g_notes.push_back( SwirlNote( 0, pitch + i*2, (1 - i/24.0), .05 + .15*(1 - i/24.0) ) );
     }
     // unlock
     g_mutex.release();
@@ -69,16 +121,15 @@ void swirl_playNotes( float pitch, float velocity )
 }
 
 
-
-
 //-----------------------------------------------------------------------------
-// Name: audio_callback
-// Desc: audio callback
+// Name: swirl_pullNotes()
+// Desc: Used by the audio callback to pull a note into the buffer when it's
+//       time.
 //-----------------------------------------------------------------------------
-static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * userData )
+void swirl_pullNotes()
 {
-    // keep track of current time in samples
-    g_now += numFrames;
+
+
 
     // HACK: rough time keeping for next notes - this logic really should be
     // somewhere else: e.g., in its own class and not directly in the audio callback!
@@ -90,11 +141,11 @@ static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * user
         if( g_noteIndex < g_notes.size() )
         {
             // temporary note pointer
-            Note * n = &g_notes[g_noteIndex];
+            SwirlNote * n = &g_notes[g_noteIndex];
             // note on!
             Globals::synth->noteOn( n->channel, n->pitch, n->velocity * 120 );
             // HACK: with a major 3rd above!
-            Globals::synth->noteOn( n->channel, n->pitch + 4, n->velocity * 80 );
+            //Globals::synth->noteOn( n->channel, n->pitch + 4, n->velocity * 80 );
             // check to see next time
             g_nextTime += n->duration * SWIRL_SRATE;
             // move to next note for next time
@@ -104,18 +155,34 @@ static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * user
         g_mutex.release();
     }
 
+}
+
+
+//-----------------------------------------------------------------------------
+// Name: audio_callback
+// Desc: audio callback
+//-----------------------------------------------------------------------------
+static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * userData )
+{
+    // keep track of current time in samples
+    g_now += numFrames;
+
+    // Play notes if it's time
+    swirl_pullNotes();
+
+
     // sum
     SAMPLE sum = 0;
     // num channels
     unsigned int channels = Globals::lastAudioBufferChannels;
 
-    // zero out
+    // Zero out buffers
     memset( Globals::lastAudioBuffer, 0,
            sizeof(SAMPLE)*Globals::lastAudioBufferFrames*channels );
     memset( Globals::lastAudioBufferMono, 0,
            sizeof(SAMPLE)*Globals::lastAudioBufferFrames );
 
-    // copy to global buffer
+    // Copy to global buffer
     memcpy( Globals::lastAudioBuffer, buffer,
            sizeof(SAMPLE)*numFrames*channels );
 
