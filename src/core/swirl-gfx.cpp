@@ -1053,19 +1053,23 @@ void renderBackground()
 //-----------------------------------------------------------------------------
 void strafe_left()
 {
-   UdpTransmitSocket* transmitSocket = getTransmitSocket();
+   Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+   Vector3D movementVector = lookVector;
+   // Rotate movementVector by 90 degrees
+   float tmpX = movementVector.x;
+   float tmpZ = movementVector.z;
 
-   char buffer[SWIRL_FRAMESIZE];
-   osc::OutboundPacketStream oscOuttream( buffer, SWIRL_FRAMESIZE);
+   movementVector.x = - tmpZ;
+   movementVector.z = tmpX;
 
-   Globals::cameraEye.x -= 0.1;
-   Globals::cameraReference.x -= 0.1;
+   movementVector.normalize();
+   movementVector *= -0.1;
 
-   oscOuttream << osc::BeginBundleImmediate
-   << osc::BeginMessage( "/cameraEyeX" )
-   << Globals::cameraEye.x << osc::EndMessage
-   << osc::EndBundle;
-   transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
+   Globals::cameraReference += movementVector;
+   Globals::cameraEye += movementVector;
+
+   // TODO
+   swirl_send_message( "/strafeLeft", 0.1f );
 }
 
 
@@ -1075,19 +1079,23 @@ void strafe_left()
 //-----------------------------------------------------------------------------
 void strafe_right()
 {
-   UdpTransmitSocket* transmitSocket = getTransmitSocket();
+   Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+   Vector3D movementVector = lookVector;
+   // Rotate movementVector by 90 degrees
+   float tmpX = movementVector.x;
+   float tmpZ = movementVector.z;
 
-   char buffer[SWIRL_FRAMESIZE];
-   osc::OutboundPacketStream oscOuttream( buffer, SWIRL_FRAMESIZE);
+   movementVector.x = - tmpZ;
+   movementVector.z = tmpX;
 
-   Globals::cameraEye.x += 0.1;
-   Globals::cameraReference.x += 0.1;
+   movementVector.normalize();
+   movementVector *= 0.1;
 
-   oscOuttream << osc::BeginBundleImmediate
-   << osc::BeginMessage( "/cameraEyeX" )
-   << Globals::cameraEye.x << osc::EndMessage
-   << osc::EndBundle;
-   transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
+   Globals::cameraReference += movementVector;
+   Globals::cameraEye += movementVector;
+
+   // TODO
+   swirl_send_message( "/strafeRight", 0.1f );
 }
 
 //-----------------------------------------------------------------------------
@@ -1096,19 +1104,16 @@ void strafe_right()
 //-----------------------------------------------------------------------------
 void move_forward()
 {
-   UdpTransmitSocket* transmitSocket = getTransmitSocket();
+   Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+   Vector3D movementVector = lookVector;
+   movementVector.normalize();
+   movementVector *= 0.1;
 
-   char buffer[SWIRL_FRAMESIZE];
-   osc::OutboundPacketStream oscOuttream( buffer, SWIRL_FRAMESIZE);
+   Globals::cameraReference += movementVector;
+   Globals::cameraEye += movementVector;
 
-   Globals::cameraEye.z += 0.1;
-   Globals::cameraReference.z += 0.1;
-
-   oscOuttream << osc::BeginBundleImmediate
-   << osc::BeginMessage( "/cameraEyeZ" )
-   << Globals::cameraEye.z << osc::EndMessage
-   << osc::EndBundle;
-   transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
+   // TODO
+   swirl_send_message( "/moveForward", 0.1f );
 }
 
 //-----------------------------------------------------------------------------
@@ -1117,19 +1122,16 @@ void move_forward()
 //-----------------------------------------------------------------------------
 void move_back()
 {
-   UdpTransmitSocket* transmitSocket = getTransmitSocket();
+   Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+   Vector3D movementVector = lookVector;
+   movementVector.normalize();
+   movementVector *= -0.1;
 
-   char buffer[SWIRL_FRAMESIZE];
-   osc::OutboundPacketStream oscOuttream( buffer, SWIRL_FRAMESIZE);
+   Globals::cameraReference += movementVector;
+   Globals::cameraEye += movementVector;
 
-   Globals::cameraEye.z -= 0.1;
-   Globals::cameraReference.z -= 0.1;
-
-   oscOuttream << osc::BeginBundleImmediate
-   << osc::BeginMessage( "/cameraEyeZ" )
-   << Globals::cameraEye.z << osc::EndMessage
-   << osc::EndBundle;
-   transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
+   // TODO
+   swirl_send_message( "/moveForward", 0.1f );
 }
 
 //-----------------------------------------------------------------------------
@@ -1138,23 +1140,19 @@ void move_back()
 //-----------------------------------------------------------------------------
 void turn_left()
 {
-   UdpTransmitSocket* transmitSocket = getTransmitSocket();
+   Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+   float tmpRefX = lookVector.x;
+   float tmpRefZ = lookVector.z;
 
-   char buffer[SWIRL_FRAMESIZE];
-   osc::OutboundPacketStream oscOuttream( buffer, SWIRL_FRAMESIZE);
+   lookVector.x = tmpRefX * cos(-0.1)
+                  - tmpRefZ * sin(-0.1);
 
-   Globals::cameraReference.x = Globals::cameraReference.x * cos(0.1)
-                              - Globals::cameraReference.z * sin(0.1);
+   lookVector.z = tmpRefX * sin(-0.1)
+                  + tmpRefZ * cos(-0.1);
 
-   Globals::cameraReference.z = Globals::cameraReference.x * sin(0.1)
-                              + Globals::cameraReference.z * cos(0.1);
+   Globals::cameraReference = Globals::cameraEye + lookVector;
 
-   oscOuttream << osc::BeginBundleImmediate
-   << osc::BeginMessage( "/cameraReferenceX" )
-   << 0.1f << osc::EndMessage
-   << osc::EndBundle;
-
-   transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
+   swirl_send_message( "/cameraReferenceX", 0.1f );
 }
 
 //-----------------------------------------------------------------------------
@@ -1163,24 +1161,17 @@ void turn_left()
 //-----------------------------------------------------------------------------
 void turn_right()
 {
-   UdpTransmitSocket* transmitSocket = getTransmitSocket();
+   Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+   float tmpRefX = lookVector.x;
+   float tmpRefZ = lookVector.z;
 
-   char buffer[SWIRL_FRAMESIZE];
-   osc::OutboundPacketStream oscOuttream( buffer, SWIRL_FRAMESIZE);
+   lookVector.x = tmpRefX * cos(0.1)
+                  - tmpRefZ * sin(0.1);
 
-   Globals::cameraReference.x = Globals::cameraReference.x * cos(-0.1)
-                              - Globals::cameraReference.z * sin(-0.1);
+   lookVector.z = tmpRefX * sin(0.1)
+                  + tmpRefZ * cos(0.1);
 
-   Globals::cameraReference.z = Globals::cameraReference.x * sin(-0.1)
-                              + Globals::cameraReference.z * cos(-0.1);
+   Globals::cameraReference = Globals::cameraEye + lookVector;
 
-   oscOuttream << osc::BeginBundleImmediate
-   << osc::BeginMessage( "/cameraReferenceX" )
-   << -0.1f << osc::EndMessage
-   << osc::EndBundle;
-
-   transmitSocket->Send( oscOuttream.Data(), oscOuttream.Size() );
-
-   // Report new info to network
-   //swirl_send_message( "/cameraReferenceX", -0.1f );
+   swirl_send_message( "/cameraReferenceX", -0.1f );
 }
