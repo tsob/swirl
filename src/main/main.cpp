@@ -12,8 +12,19 @@
 #include "swirl-gfx.h"
 #include "swirl-globals.h"
 #include "swirl-networking.h"
+#include <pthread.h> //TODO necessary?
+#include "UdpSocket.h" //TODO
+#include "OscReceivedElements.h"
+#include "OscPacketListener.h"
+#include "OscOutboundPacketStream.h"
 
 using namespace std;
+
+struct NetworkLocation
+{
+    char address[15];
+    int port;
+};
 
 //----------------------------------------------------------------------------
 // Name: main()
@@ -24,14 +35,16 @@ int main( int argc, const char ** argv )
     // Initialize networking
 
     //TODO change for client-server
-    if( argc < 3 ){
+    if( argc < 5 ){
       cerr << "[swirl]: please add send and receive ports as arguments" << endl;
       return -1;
     }
 
     //TODO - networking development
-    int sendPort = atoi(argv[1]);
-    int receivePort = atoi(argv[2]);
+    const char* sendAddress = argv[1];
+    int sendPort = atoi(argv[2]);
+    const char* receiveAddress = argv[3];
+    int receivePort = atoi(argv[4]);
 
     // Hack for peer to peer
     if (sendPort == 6000)
@@ -45,10 +58,12 @@ int main( int argc, const char ** argv )
         cout << "TWO\n";
     }
 
-    UdpTransmitSocket* transmitSocket = getTransmitSocket( ADDRESS, sendPort);
+    UdpTransmitSocket* transmitSocket = getTransmitSocket( sendAddress, sendPort);
     pthread_t listenerThread;
-    pthread_create(&listenerThread, NULL, oscListener, &receivePort);
-
+    NetworkLocation receiveLocation;
+    strcpy( receiveLocation.address, receiveAddress );
+    receiveLocation.port = receivePort;
+    pthread_create(&listenerThread, NULL, oscListener, &receiveLocation);
 
     // Initiate graphics setup and loop
     if( !swirl_gfx_init( argc, argv ) )

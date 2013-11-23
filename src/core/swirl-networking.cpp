@@ -9,8 +9,20 @@
 //----------------------------------------------------------------------------
 
 #include "swirl-networking.h"
+#include <pthread.h> //TODO necessary?
+#include "swirl-globals.h"
+#include "UdpSocket.h" //TODO
+#include "OscReceivedElements.h"
+#include "OscPacketListener.h"
+#include "OscOutboundPacketStream.h"
 
 using namespace std;
+
+struct NetworkLocation
+{
+    const char address[15];
+    int port;
+};
 
 //-----------------------------------------------------------------------------
 // Name: class ExamplePacketListener
@@ -125,12 +137,13 @@ void * oscListener(void * args)
     cerr << "Starting listening thread!" << endl;
     ExamplePacketListener listener;
 
-    int receivePort = ((int*)args)[0];
+    NetworkLocation *  receiveLocation = (NetworkLocation*)args;
 
     UdpListeningReceiveSocket s(
         IpEndpointName(
-          IpEndpointName::ANY_ADDRESS,
-          receivePort
+          //IpEndpointName::ANY_ADDRESS,
+          receiveLocation->address,
+          receiveLocation->port
           ),
         &listener
         );

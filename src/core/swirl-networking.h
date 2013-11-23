@@ -24,3 +24,8 @@ void * swirl_send_message(const char* label, float value);
 UdpTransmitSocket* getTransmitSocket();
 UdpTransmitSocket* getTransmitSocket(const char* address, int port);
 
+struct NetworkLocation;
+//{
+    //const char address[15];
+    //int port;
+//};
