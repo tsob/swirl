@@ -37,7 +37,7 @@
 #define SWIRL_FRAMESIZE    1024
 #define SWIRL_NUMCHANNELS  2
 
-#define ADDRESS "127.0.0.1"
+#define ADDRESS "224.0.0.1"
 #define PORT 7000
 
 // forward reference
