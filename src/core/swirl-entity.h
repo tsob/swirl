@@ -13,6 +13,22 @@
 #include <vector>
 
 //-----------------------------------------------------------------------------
+// Name: class SWIRLCamera
+// Desc: the camera
+//-----------------------------------------------------------------------------
+class SWIRLCamera : public YEntity
+{
+public:
+    // update
+    void update( YTimeInterval dt );
+    // render
+    void render();
+
+    // description
+    virtual std::string desc() const;
+};
+
+//-----------------------------------------------------------------------------
 // Name: class SWIRLTeapot
 // Desc: for testing
 //-----------------------------------------------------------------------------

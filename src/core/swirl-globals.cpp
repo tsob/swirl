@@ -50,12 +50,21 @@ GLsizei Globals::windowHeight     = DEFAULT_WINDOW_HEIGHT;
 GLsizei Globals::lastWindowWidth  = Globals::windowWidth;
 GLsizei Globals::lastWindowHeight = Globals::windowHeight;
 
+
+// AUDIO STUFF ----------------------------------------------------------------
+// fluidsynth
+GeXFluidSynth * Globals::synth = new GeXFluidSynth;
+
+// STK
+YEcho * Globals::echo; // initialized in swirl-audio.cpp
+
 SAMPLE *     Globals::lastAudioBuffer         = NULL;
 SAMPLE *     Globals::lastAudioBufferMono     = NULL;
 SAMPLE *     Globals::audioBufferWindow       = NULL;
 unsigned int Globals::lastAudioBufferFrames   = 0;
 unsigned int Globals::lastAudioBufferChannels = 0;
-YWaveform * Globals::waveform = NULL;
+YWaveform *  Globals::waveform                = NULL;
+//-----------------------------------------------------------------------------
 
 GLboolean Globals::fullscreen  = DEFAULT_FULLSCREEN;
 GLboolean Globals::blendScreen = DEFAULT_BLENDSCREEN;
@@ -86,6 +95,7 @@ Vector3D Globals::viewEyeY( 2, 0, 1.5f );
 int Globals::app = 0;
 
 //TODO
+SWIRLCamera * Globals::camera =  new SWIRLCamera;
 Vector3D Globals::cameraEye( 0, 0, -1 );
 Vector3D Globals::cameraReference( 0, 0, 0 );
 

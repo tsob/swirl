@@ -10,6 +10,8 @@
 #ifndef __SWIRL_GLOBALS_H__
 #define __SWIRL_GLOBALS_H__
 
+#include "swirl-entity.h"
+
 // x-api
 #include "x-def.h"
 #include "x-audio.h"
@@ -19,6 +21,8 @@
 // y-api
 #include "y-entity.h"
 #include "y-waveform.h"
+#include "y-fluidsynth.h"
+#include "y-echo.h"
 
 // C++
 #include <string>
@@ -70,6 +74,12 @@ public:
     static unsigned int lastAudioBufferFrames;
     static unsigned int lastAudioBufferChannels;
 
+    // fluidsynth
+    static GeXFluidSynth * synth;
+
+    // STK
+    static YEcho * echo;
+
     // width and height of the window
     static GLsizei windowWidth;
     static GLsizei windowHeight;
@@ -95,6 +105,7 @@ public:
     static Vector3D viewEyeY;
 
     //TODO
+    static SWIRLCamera* camera;
     static Vector3D cameraEye;
     static Vector3D cameraReference;
 

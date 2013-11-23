@@ -139,7 +139,12 @@ void initialize_graphics()
     XFun::srand();
 
     // set the GL clear color - use when the color buffer is cleared
-    glClearColor( Globals::bgColor.actual().x, Globals::bgColor.actual().y, Globals::bgColor.actual().z, 1.0f );
+    glClearColor(
+        Globals::bgColor.actual().x,
+        Globals::bgColor.actual().y,
+        Globals::bgColor.actual().z,
+        1.0f
+        );
     // set the shading model to 'smooth'
     glShadeModel( GL_SMOOTH );
     // enable depth
@@ -183,7 +188,8 @@ void initialize_graphics()
     // fog color
     GLfloat fogColor[4]= {1.0f, 1.0f, 1.0f, 1.0f};
     // fog mode
-    if( Globals::fog_filter ) glFogi(GL_FOG_MODE, Globals::fog_mode[Globals::fog_filter]);
+    if( Globals::fog_filter )
+      glFogi(GL_FOG_MODE, Globals::fog_mode[Globals::fog_filter]);
     // set fog color
     glFogfv( GL_FOG_COLOR, fogColor );
     // fog density
@@ -247,9 +253,9 @@ void initialize_simulation()
 
 
     // Put a cube in the environment
-    YCube* cube = new YCube();
-    cube->loc = Vector3D( 1.0f, 1.0f, 1.0f  );
-    Globals::sim->root().addChild( cube );
+    //YCube* cube = new YCube();
+    //cube->loc = Vector3D( 1.0f, 1.0f, 1.0f  );
+    //Globals::sim->root().addChild( cube );
 }
 
 
@@ -447,16 +453,23 @@ void look( )
               0.0f, 0.0f, 0.0f,
               0.0f, ( cos( Globals::viewEyeY.x ) < 0 ? -1.0f : 1.0f ), 0.0f );*/
 
-    gluLookAt( Globals::cameraEye.x, Globals::cameraEye.y,
-              Globals::cameraEye.z,
-              Globals::cameraReference.x, Globals::cameraReference.y, Globals::cameraReference.z,
-              0.0f, 1.0f, 0.0f );
+    gluLookAt(
+        Globals::cameraEye.x,
+        Globals::cameraEye.y,
+        Globals::cameraEye.z,
+        Globals::cameraReference.x,
+        Globals::cameraReference.y,
+        Globals::cameraReference.z,
+        0.0f, 1.0f, 0.0f
+        );
+
    /*
     gluLookAt( Globals::viewRadius.y ,0.0f,
               Globals::viewEyeY.y,
               0.0f, 0.0f, 0.0f,
               0.0f, ( cos( Globals::viewEyeY.x ) < 0 ? -1.0f : 1.0f ), 0.0f );
     */
+
     // set the position of the lights
     glLightfv( GL_LIGHT0, GL_POSITION, Globals::light0_pos );
     glLightfv( GL_LIGHT1, GL_POSITION, Globals::light1_pos );

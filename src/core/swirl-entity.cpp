@@ -13,6 +13,11 @@ using namespace std;
 // Name: render()
 // Desc: ...
 //-------------------------------------------------------------------------------
+void SWIRLCamera::render()
+{
+  // Do nothing?
+}
+
 void SWIRLTeapot::render()
 {
     glPushMatrix( );
@@ -46,15 +51,28 @@ void SWIRLMoon::render()
 }
 
 //-----------------------------------------------------------------------------
-// name: desc()
-// desc: Returns a description (usually type and name) of this object. Useful
+// Name: desc()
+// Desc: Returns a description (usually type and name) of this object. Useful
 // for debugging stuff.
 //-----------------------------------------------------------------------------
+std::string SWIRLCamera::desc() const
+{
+    return "YEntity [SWIRLCamera]";
+}
 std::string SWIRLMoon::desc() const
 {
-    return "SWIRLMoon [unnamed]";
+    return "YEntity [SWIRLMoon]";
 }
 std::string SWIRLTeapot::desc() const
 {
-    return "SWIRLTeapot [unnamed]";
+    return "YEntity [SWIRLTeapot]";
+}
+
+//-----------------------------------------------------------------------------
+// Name: update( YTimeInterval dt )
+// Desc: ...
+//-----------------------------------------------------------------------------
+void SWIRLCamera::update( YTimeInterval dt )
+{
+  // Do nothing?
 }

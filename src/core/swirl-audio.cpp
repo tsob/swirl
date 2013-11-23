@@ -13,8 +13,6 @@
 using namespace std;
 
 // globals
-GeXFluidSynth * g_synth;
-YEcho * g_echo;
 double g_now;
 double g_nextTime;
 int g_prog = 0;
@@ -94,9 +92,9 @@ static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * user
             // temporary note pointer
             Note * n = &g_notes[g_noteIndex];
             // note on!
-            g_synth->noteOn( n->channel, n->pitch, n->velocity * 120 );
+            Globals::synth->noteOn( n->channel, n->pitch, n->velocity * 120 );
             // HACK: with a major 3rd above!
-            g_synth->noteOn( n->channel, n->pitch + 4, n->velocity * 80 );
+            Globals::synth->noteOn( n->channel, n->pitch + 4, n->velocity * 80 );
             // check to see next time
             g_nextTime += n->duration * SWIRL_SRATE;
             // move to next note for next time
@@ -120,6 +118,11 @@ static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * user
     // copy to global buffer
     memcpy( Globals::lastAudioBuffer, buffer,
            sizeof(SAMPLE)*numFrames*channels );
+
+    // synthesize it
+    Globals::synth->synthesize2( buffer, numFrames );
+    // echo it
+    Globals::echo->synthesize2( buffer, numFrames );
 
     // copy to mono buffer
     for( int i = 0; i < numFrames; i++ )
@@ -146,10 +149,6 @@ static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * user
     // set in the wave
     Globals::waveform->set( Globals::lastAudioBufferMono, numFrames );
 
-    // synthesize it
-    g_synth->synthesize2( buffer, numFrames );
-    // echo it
-    g_echo->synthesize2( buffer, numFrames );
 }
 
 
@@ -179,56 +178,52 @@ bool swirl_audio_init( unsigned int srate, unsigned int frameSize, unsigned chan
         return false;
     }
 
-    // instantiate
-    g_synth = new GeXFluidSynth();
-    // init
-    g_synth->init( srate, 32 );
-    // load the soundfont
-    g_synth->load( "data/soundfonts/birds.sf2", "" );
-    // map program changes
-    g_synth->programChange( 0, 0 );
-    g_synth->programChange( 1, 79 );
-    g_synth->programChange( 2, 4 );
-    g_synth->programChange( 3, 10 );
-    g_synth->programChange( 4, 13 );
+    // Instantiate fluidsynth
+    Globals::synth = new GeXFluidSynth();
+    // Init fluidsynth
+    Globals::synth->init( srate, 32 );
+    // Load the soundfont
+    Globals::synth->load( "data/soundfonts/birds.sf2", "" );
+    // Map program changes
+    Globals::synth->programChange( 0, 0 );
+    //Globals::synth->programChange( 1, 79 );
+    //Globals::synth->programChange( 2, 4 );
+    //Globals::synth->programChange( 3, 10 );
+    //Globals::synth->programChange( 4, 13 );
 
-    // allocate echo
-    g_echo = new YEcho( srate );
-    g_echo->setDelay( 0, .25 );
-    g_echo->setDelay( 1, .5 );
+    // Allocate echo
+    Globals::echo = new YEcho( srate );
+    Globals::echo->setDelay( 0, .25 );
+    Globals::echo->setDelay( 1, .5 );
 
     // make a note
     //g_note = makeNote( 0, 60, .9, .5, 0 );
 
-    // allocate
-    Globals::lastAudioBuffer = new SAMPLE[frameSize*channels];
-    // allocate mono buffer
+    // Allocate audio buffers
+    Globals::lastAudioBuffer     = new SAMPLE[frameSize*channels];
     Globals::lastAudioBufferMono = new SAMPLE[frameSize];
-    // allocate window buffer
-    Globals::audioBufferWindow = new SAMPLE[frameSize];
-    // set frame size (could have changed in XAudioIO::init())
-    Globals::lastAudioBufferFrames = frameSize;
-    // set num channels
+    Globals::audioBufferWindow   = new SAMPLE[frameSize];
+
+    // Set frame size (could have changed in XAudioIO::init())
+    Globals::lastAudioBufferFrames   = frameSize;
+
+    // Set num channels
     Globals::lastAudioBufferChannels = channels;
 
-    // compute the window
+    // Compute the window
     hanning( Globals::audioBufferWindow, frameSize );
 
-    // create waveform
+    // Create waveform
     Globals::waveform = new YWaveform();
-    // place it
-    Globals::waveform->loc.y = 1.5f;
-    // set the width
-    Globals::waveform->setWidth( 2.5f );
-    // set the height
-    Globals::waveform->setHeight( .75f );
-    // initialize it
-    Globals::waveform->init( frameSize );
-    // active?
-    Globals::waveform->active = true;
+    Globals::waveform->loc.y = 1.5f;          // Place it
+    Globals::waveform->col = Globals::ourRed; // Color it
+    Globals::waveform->setWidth(  2.5f );     // Set the width
+    Globals::waveform->setHeight( 1.0f );     // Set the height
+    Globals::waveform->init( frameSize );     // Initialize it
+    Globals::waveform->active = true;         // Active?
+    // Add waveform to sim
+    Globals::sim->root().addChild( Globals::waveform );
 
-    // add to sim
-    //Globals::sim->root().addChild( Globals::waveform );
 
     return true;
 }
