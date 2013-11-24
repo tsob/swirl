@@ -116,8 +116,7 @@ public:
 
   //! Prints thrown error message to stderr.
   virtual void printMessage(void) { std::cerr << '\n' << message_ << "\n\n"; }
-
-  //! Returns the thrown error message type.
+//! Returns the thrown error message type.
   virtual const Type& getType(void) { return type_; }
 
   //! Returns the thrown error message string.
@@ -200,6 +199,8 @@ public:
 
   //! Toggle display of error messages before throwing exceptions.
   static void printErrors( bool status ) { printErrors_ = status; }
+
+  virtual StkFloat tick( StkFloat input ) = 0;
 
 private:
   static StkFloat srate_;

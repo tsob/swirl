@@ -11,6 +11,7 @@
 #define __SWIRL_SIM_H__
 
 #include "swirl-entity.h"
+#include "swirl-globals.h"
 
 //-----------------------------------------------------------------------------
 // name: class SWIRLSim
@@ -25,6 +26,8 @@ public:
 public:
     // cascade timestep simulation through system (as connected to this)
     void systemCascade();
+    // Generate audio buffers from all audio objects in sim
+    void audioCascade(SAMPLE * buffer, unsigned int numFrames);
 
 public:
     // pause the simulation
