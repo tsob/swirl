@@ -78,7 +78,7 @@ protected:
                 std::cout << "received '/cameraEyeZ' message with arguments: "
                 << f << "\n";
             }
-            else if( std::strcmp( m.AddressPattern(), "/cameraReferenceX" ) == 0 ){
+            else if( std::strcmp( m.AddressPattern(), "/rotated" ) == 0 ){
                 // example #1 -- argument stream interface
                 osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
                 float f;
@@ -116,6 +116,33 @@ protected:
 
                 std::cout << "received '/cameraEyeZ' message with arguments: "
                 << f << "\n";
+            }
+            else if( std::strcmp( m.AddressPattern(), "/moveForward" ) == 0 ){
+                // example #1 -- argument stream interface
+                osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
+                float f;
+
+                std::cout << "RECEVING \n";
+
+                args >> f >> osc::EndMessage;
+
+                std::cout << f << std::endl;
+                
+                 Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+                 Vector3D movementVector = lookVector;
+                 movementVector.normalize();
+                 movementVector *= -0.1;
+
+                 Globals::cameraReference += movementVector;
+                 Globals::cameraEye += movementVector;
+   
+                 getAvatar()->ori.y += (180 / (3.14f) * f);
+
+                // getAvatar()->loc.y = f;
+
+
+                  std::cout << "received '/cameraEyeZ' message with arguments: "
+                  << f << "\n";
             }
 
         }catch( osc::Exception& e ){

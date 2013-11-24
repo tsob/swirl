@@ -1069,7 +1069,8 @@ void strafe_left()
    Globals::cameraEye += movementVector;
 
    // TODO
-   swirl_send_message( "/strafeLeft", 0.1f );
+   //swirl_send_message( "/strafe", -0.1f );
+   swirl_send_message( "/strafe", -0.1f );
 }
 
 
@@ -1095,7 +1096,7 @@ void strafe_right()
    Globals::cameraEye += movementVector;
 
    // TODO
-   swirl_send_message( "/strafeRight", 0.1f );
+   swirl_send_message( "/strafe", 0.1f );
 }
 
 //-----------------------------------------------------------------------------
@@ -1131,7 +1132,7 @@ void move_back()
    Globals::cameraEye += movementVector;
 
    // TODO
-   swirl_send_message( "/moveForward", 0.1f );
+   swirl_send_message( "/moveForward", -0.1f );
 }
 
 //-----------------------------------------------------------------------------
@@ -1152,7 +1153,7 @@ void turn_left()
 
    Globals::cameraReference = Globals::cameraEye + lookVector;
 
-   swirl_send_message( "/cameraReferenceX", 0.1f );
+   swirl_send_message( "/rotated", 0.1f );
 }
 
 //-----------------------------------------------------------------------------
@@ -1173,5 +1174,5 @@ void turn_right()
 
    Globals::cameraReference = Globals::cameraEye + lookVector;
 
-   swirl_send_message( "/cameraReferenceX", -0.1f );
+   swirl_send_message( "/rotated", -0.1f );
 }
