@@ -48,32 +48,32 @@ void SWIRLSim::systemCascade()
 {
     // Get current time (once per frame)
     XGfx::getCurrentTime( true );
-    
+
     // Timing loop
     YTimeInterval timeElapsed = XGfx::getCurrentTime() - m_simTime;
     m_simTime  += timeElapsed;
-    
+
     // Special case: first update
     if( m_first )
     {
         timeElapsed = STEPTIME; // Set time just enough for one update
         m_first = false;        // Set flag
     }
-    
+
     // Clamp time elapsed
     if( timeElapsed > SIM_SKIP_TIME )
         timeElapsed = SIM_SKIP_TIME;
-    
+
     // Update it as long as we aren't paused
     if( !m_isPaused )
     {
         // Update the world with a fixed timestep
         m_gfxRoot.updateAll( timeElapsed );
     }
-    
+
     // Redraw
     m_gfxRoot.drawAll();
-    
+
     // Set
     m_lastDelta = timeElapsed;
 }

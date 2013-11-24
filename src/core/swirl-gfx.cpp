@@ -453,6 +453,7 @@ void look( )
               0.0f, 0.0f, 0.0f,
               0.0f, ( cos( Globals::viewEyeY.x ) < 0 ? -1.0f : 1.0f ), 0.0f );*/
 
+    // TODO change to camera YEntity
     gluLookAt(
         Globals::cameraEye.x,
         Globals::cameraEye.y,
@@ -1047,6 +1048,9 @@ void renderBackground()
  */
 
 
+
+// TODO CHANGE TO MEMBER FUNCTIONS OF YENTITIES
+
 //-----------------------------------------------------------------------------
 // Name: strafe_left( )
 // Desc: move me left
@@ -1157,7 +1161,7 @@ void turn_left()
 }
 
 //-----------------------------------------------------------------------------
-// Name: turn_left( )
+// Name: turn_right( )
 // Desc: turn me left
 //-----------------------------------------------------------------------------
 void turn_right()
