@@ -38,7 +38,7 @@
 #include <vector>
 #include <string>
 #include "x-gfx.h"
-
+#include "Stk.h"
 
 // forward references
 class YEntity;
@@ -80,7 +80,7 @@ public:
     virtual void drawAll();
     // all post-render updates
     virtual void updateAllPostRender( YTimeInterval dt );
-    
+
 public:
     // add child
     void addChild( YEntity * child );

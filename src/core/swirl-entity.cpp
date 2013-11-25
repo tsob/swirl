@@ -8,6 +8,17 @@
 #include "swirl-entity.h"
 #include "swirl-globals.h"
 using namespace std;
+using namespace stk;
+
+
+//-------------------------------------------------------------------------------
+// Name: tick()
+// Desc: ...
+//-------------------------------------------------------------------------------
+StkFloat SWIRLEntity::tick( StkFloat input )
+{
+  return unitGenerator->tick( input );
+}
 
 //-------------------------------------------------------------------------------
 // Name: render()

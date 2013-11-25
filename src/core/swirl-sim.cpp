@@ -79,6 +79,26 @@ void SWIRLSim::systemCascade()
 }
 
 //-------------------------------------------------------------------------------
+// name: audioCascade()
+// desc: ..
+//-------------------------------------------------------------------------------
+void SWIRLSim::audioCascade(SAMPLE * buffer, unsigned int numFrames)
+{
+    StkFloat oneSample[SWIRL_NUMCHANNELS];
+
+    for (int i = 0; i < numFrames; ++i)
+    {
+         m_gfxRoot.tickAll( oneSample, Globals::cameraEye );
+
+        for (int j = 0; j < SWIRL_NUMCHANNELS; ++j)
+        {
+            buffer[i* SWIRL_NUMCHANNELS+j] = oneSample[j];
+        }
+    }
+}
+
+
+//-------------------------------------------------------------------------------
 // Pause the simulation
 //-------------------------------------------------------------------------------
 void SWIRLSim::pause() { m_isPaused = true; }

@@ -23,8 +23,9 @@ OSCPACKOSCDIR=$(OSCPACKDIR)osc/
 
 CXX=g++
 INCLUDES=-Imain/ -Icore/ -I$(RTAUDIODIR) -I$(STKDIR)\
-				 -I$(XAPIDIR) -I$(YAPIDIR) -I$(OSCPACKDIR) -I$(OSCPACKIPDIR) \
-				 -I$(OSCPACKIPPDIR) -I$(OSCPACKOSCDIR) -I$(COREDIR)
+	 -I$(XAPIDIR) -I$(YAPIDIR) -I$(OSCPACKDIR) -I$(OSCPACKIPDIR) \
+	 -I$(OSCPACKIPPDIR) -I$(OSCPACKOSCDIR) -I$(COREDIR) \
+	 -I$(STKDIR)
 UNAME := $(shell uname)
 
 ifeq ($(UNAME), Linux)
@@ -77,7 +78,7 @@ main.o: $(MAINDIR)main.cpp
 swirl-audio.o: y-fluidsynth.o x-audio.o core/swirl-audio.h core/swirl-audio.cpp \
 	RtAudio.o
 	$(CXX) $(FLAGS) $(INCLUDES) core/swirl-audio.cpp
-swirl-entity.o: core/swirl-entity.h core/swirl-entity.cpp
+swirl-entity.o: core/swirl-entity.h core/swirl-entity.cpp Stk.o
 	$(CXX) $(FLAGS) $(INCLUDES) core/swirl-entity.cpp
 swirl-gfx.o: core/swirl-gfx.h core/swirl-gfx.cpp
 	$(CXX) $(FLAGS) $(INCLUDES) core/swirl-gfx.cpp
