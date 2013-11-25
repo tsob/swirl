@@ -105,7 +105,7 @@ public:
     static Vector3D viewEyeY;
 
     //TODO
-    static SWIRLCamera* camera;
+    static SWIRLCamera swirlCamera;
     static Vector3D cameraEye;
     static Vector3D cameraReference;
 

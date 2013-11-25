@@ -128,13 +128,18 @@ protected:
 
                 std::cout << f << std::endl;
                 
-                 Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+                //TODO  Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+                Vector3D lookVector = Globals::swirlCamera.reference - Globals::swirlCamera.eye;
+                
                  Vector3D movementVector = lookVector;
                  movementVector.normalize();
                  movementVector *= -0.1;
 
-                 Globals::cameraReference += movementVector;
-                 Globals::cameraEye += movementVector;
+                 //TODO Globals::cameraReference += movementVector;
+                Globals::swirlCamera.reference += movementVector;
+                
+                //TODO Globals::cameraEye += movementVector;
+                Globals::swirlCamera.eye += movementVector;
    
                  getAvatar()->ori.y += (180 / (3.14f) * f);
 

@@ -26,6 +26,9 @@ public:
 
     // description
     virtual std::string desc() const;
+    
+    Vector3D eye;
+    Vector3D reference;
 };
 
 //-----------------------------------------------------------------------------

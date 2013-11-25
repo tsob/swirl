@@ -8,6 +8,7 @@
 // Date:   Fall 2013
 //----------------------------------------------------------------------------
 
+#include "swirl-globals.h"
 #include "swirl-gfx.h"
 
 using namespace std;
@@ -237,18 +238,23 @@ void initialize_simulation()
     Globals::sim->root().addChild( getAvatar() );
     Globals::sim->root().addChild( new SWIRLMoon  );
 
-    Globals::cameraEye.x = 0;
-    Globals::cameraEye.y = 0;
+    //TODO Globals::cameraEye.x = 0;
+    //TODO Globals::cameraEye.y = 0;
+    Globals::Globals::swirlCamera.eye.x = Globals::swirlCamera.eye.y = 0;
 
     if (Globals::app == 1)
     {
-        Globals::cameraEye.z = -2;
-        Globals::cameraReference.z = 9;
+        //TODO Globals::cameraEye.z = -2;
+        //TODO Globals::cameraReference.z = 9;
+        Globals::swirlCamera.eye.z = -2;
+        Globals::swirlCamera.reference.z = 9;
+
+
     }
     else
     {
-        Globals::cameraEye.z = -1;
-        Globals::cameraReference.z = 10;
+        Globals::swirlCamera.eye.z = -1;
+        Globals::swirlCamera.reference.z = 10;
     }
 
 
@@ -455,12 +461,23 @@ void look( )
 
     // TODO change to camera YEntity
     gluLookAt(
+        
+        /*
         Globals::cameraEye.x,
         Globals::cameraEye.y,
         Globals::cameraEye.z,
         Globals::cameraReference.x,
         Globals::cameraReference.y,
         Globals::cameraReference.z,
+         */
+              
+        Globals::swirlCamera.eye.x,
+              Globals::swirlCamera.eye.y,
+              Globals::swirlCamera.eye.z,
+              Globals::swirlCamera.reference.x,
+              Globals::swirlCamera.reference.y,
+              Globals::swirlCamera.reference.z,
+
         0.0f, 1.0f, 0.0f
         );
 
@@ -1057,7 +1074,9 @@ void renderBackground()
 //-----------------------------------------------------------------------------
 void strafe_left()
 {
-   Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+   //TODO Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+    Vector3D lookVector = Globals::swirlCamera.reference - Globals::swirlCamera.eye;
+    
    Vector3D movementVector = lookVector;
    // Rotate movementVector by 90 degrees
    float tmpX = movementVector.x;
@@ -1069,8 +1088,10 @@ void strafe_left()
    movementVector.normalize();
    movementVector *= -0.1;
 
-   Globals::cameraReference += movementVector;
-   Globals::cameraEye += movementVector;
+   //TODO Globals::cameraReference += movementVector;
+    Globals::swirlCamera.reference += movementVector;
+   //TODO Globals::cameraEye += movementVector;
+    Globals::swirlCamera.eye += movementVector;
 
    // TODO
    //swirl_send_message( "/strafe", -0.1f );
@@ -1084,7 +1105,8 @@ void strafe_left()
 //-----------------------------------------------------------------------------
 void strafe_right()
 {
-   Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+   //TODO Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+    Vector3D lookVector = Globals::swirlCamera.reference - Globals::swirlCamera.eye;
    Vector3D movementVector = lookVector;
    // Rotate movementVector by 90 degrees
    float tmpX = movementVector.x;
@@ -1096,8 +1118,13 @@ void strafe_right()
    movementVector.normalize();
    movementVector *= 0.1;
 
-   Globals::cameraReference += movementVector;
-   Globals::cameraEye += movementVector;
+   //Globals::cameraReference += movementVector;
+    Globals::swirlCamera.reference += movementVector;
+   
+    
+    //TODO Globals::cameraEye += movementVector;
+    Globals::swirlCamera.eye += movementVector;
+
 
    // TODO
    swirl_send_message( "/strafe", 0.1f );
@@ -1109,14 +1136,19 @@ void strafe_right()
 //-----------------------------------------------------------------------------
 void move_forward()
 {
-   Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+   //TODO Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+    Vector3D lookVector = Globals::swirlCamera.reference - Globals::swirlCamera.eye;
+
    Vector3D movementVector = lookVector;
    movementVector.normalize();
    movementVector *= 0.1;
 
-   Globals::cameraReference += movementVector;
-   Globals::cameraEye += movementVector;
-
+    //Globals::cameraReference += movementVector;
+    Globals::swirlCamera.reference += movementVector;
+    
+    
+    //TODO Globals::cameraEye += movementVector;
+    Globals::swirlCamera.eye += movementVector;
    // TODO
    swirl_send_message( "/moveForward", 0.1f );
 }
@@ -1127,13 +1159,19 @@ void move_forward()
 //-----------------------------------------------------------------------------
 void move_back()
 {
-   Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+    //TODO Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+    Vector3D lookVector = Globals::swirlCamera.reference - Globals::swirlCamera.eye;
+    
    Vector3D movementVector = lookVector;
    movementVector.normalize();
    movementVector *= -0.1;
 
-   Globals::cameraReference += movementVector;
-   Globals::cameraEye += movementVector;
+    //Globals::cameraReference += movementVector;
+    Globals::swirlCamera.reference += movementVector;
+    
+    
+    //TODO Globals::cameraEye += movementVector;
+    Globals::swirlCamera.eye += movementVector;
 
    // TODO
    swirl_send_message( "/moveForward", -0.1f );
@@ -1145,8 +1183,11 @@ void move_back()
 //-----------------------------------------------------------------------------
 void turn_left()
 {
-   Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
-   float tmpRefX = lookVector.x;
+    //TODO Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+    Vector3D lookVector = Globals::swirlCamera.reference - Globals::swirlCamera.eye;
+
+    
+    float tmpRefX = lookVector.x;
    float tmpRefZ = lookVector.z;
 
    lookVector.x = tmpRefX * cos(-0.1)
@@ -1155,7 +1196,8 @@ void turn_left()
    lookVector.z = tmpRefX * sin(-0.1)
                   + tmpRefZ * cos(-0.1);
 
-   Globals::cameraReference = Globals::cameraEye + lookVector;
+   //TODO Globals::cameraReference = Globals::cameraEye + lookVector;
+    Globals::swirlCamera.reference = Globals::swirlCamera.eye + lookVector;
 
    swirl_send_message( "/rotated", 0.1f );
 }
@@ -1166,8 +1208,10 @@ void turn_left()
 //-----------------------------------------------------------------------------
 void turn_right()
 {
-   Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
-   float tmpRefX = lookVector.x;
+    //TODO Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+    Vector3D lookVector = Globals::swirlCamera.reference - Globals::swirlCamera.eye;
+
+    float tmpRefX = lookVector.x;
    float tmpRefZ = lookVector.z;
 
    lookVector.x = tmpRefX * cos(0.1)
@@ -1176,7 +1220,8 @@ void turn_right()
    lookVector.z = tmpRefX * sin(0.1)
                   + tmpRefZ * cos(0.1);
 
-   Globals::cameraReference = Globals::cameraEye + lookVector;
-
+    //TODO Globals::cameraReference = Globals::cameraEye + lookVector;
+    Globals::swirlCamera.reference = Globals::swirlCamera.eye + lookVector;
+    
    swirl_send_message( "/rotated", -0.1f );
 }

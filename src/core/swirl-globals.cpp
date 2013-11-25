@@ -94,10 +94,17 @@ Vector3D Globals::viewEyeY( 2, 0, 1.5f );
 
 int Globals::app = 0;
 
+
+SWIRLCamera Globals::swirlCamera;
+
 //TODO
-SWIRLCamera * Globals::camera =  new SWIRLCamera;
-Vector3D Globals::cameraEye( 0, 0, -1 );
-Vector3D Globals::cameraReference( 0, 0, 0 );
+//SWIRLCamera * Globals::swirlCamera =  new SWIRLCamera;
+//Vector3D Globals::cameraEye( 0, 0, -1 );
+//Vector3D Globals::cameraReference( 0, 0, 0 );
+
+//TODO
+//SWIRLCamera Globals::swirlCamera.eye(0, 0, -1);
+//SWIRLCamera Globals::swirlCamera.reference(0, 0, 0);
 
 
 //Vector3D Globals::cameraEye( 0, 0, -1 );
