@@ -84,9 +84,9 @@ void SWIRLSim::systemCascade()
 //-------------------------------------------------------------------------------
 void SWIRLSim::audioCascade(SAMPLE * buffer, unsigned int numFrames)
 {
-    StkFloat oneFrame[SWIRL_NUMCHANNELS];
+    SAMPLE oneFrame[SWIRL_NUMCHANNELS];
     // Zero out to start
-    memset(oneFrame, 0, sizeof(StkFloat)*SWIRL_NUMCHANNELS);
+    memset(oneFrame, 0, sizeof(SAMPLE)*SWIRL_NUMCHANNELS);
 
     for (int i = 0; i < numFrames; ++i)
     {

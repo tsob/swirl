@@ -56,14 +56,16 @@ OBJS=RtAudio.o \
 		 y-entity.o \
 		 y-fft.o \
 		 y-particle.o \
-		 y-waveform.o \
 		 y-fluidsynth.o \
-		 $(OSCPACKIPPDIR)NetworkingUtils.o $(OSCPACKIPPDIR)UdpSocket.o \
+		 $(OSCPACKIPPDIR)NetworkingUtils.o \
+		 $(OSCPACKIPPDIR)UdpSocket.o \
 		 $(OSCPACKIPDIR)IpEndpointName.o \
 		 $(OSCPACKOSCDIR)OscOutboundPacketStream.o \
 		 $(OSCPACKOSCDIR)OscPrintReceivedElements.o \
-		 $(OSCPACKOSCDIR)OscReceivedElements.o $(OSCPACKOSCDIR)OscTypes.o \
+		 $(OSCPACKOSCDIR)OscReceivedElements.o \
+		 $(OSCPACKOSCDIR)OscTypes.o \
 		 swirl-audio.o swirl-entity.o swirl-gfx.o swirl-globals.o swirl-sim.o \
+		 y-waveform.o \
 		 swirl-networking.o main.o
 # Note: leaving out y-score-reader.o
 
@@ -82,7 +84,7 @@ swirl-entity.o: core/swirl-entity.h core/swirl-entity.cpp Stk.o
 	$(CXX) $(FLAGS) $(INCLUDES) core/swirl-entity.cpp
 swirl-gfx.o: core/swirl-gfx.h core/swirl-gfx.cpp
 	$(CXX) $(FLAGS) $(INCLUDES) core/swirl-gfx.cpp
-swirl-globals.o: core/swirl-globals.h core/swirl-globals.cpp
+swirl-globals.o: core/swirl-globals.h core/swirl-globals.cpp swirl-entity.o
 	$(CXX) $(FLAGS) $(INCLUDES) core/swirl-globals.cpp
 swirl-sim.o: core/swirl-sim.h core/swirl-sim.cpp
 	$(CXX) $(FLAGS) $(INCLUDES) core/swirl-sim.cpp
@@ -141,7 +143,7 @@ y-particle.o: $(YAPIDIR)y-particle.h $(YAPIDIR)y-particle.cpp
 	$(CXX) $(FLAGS)  $(INCLUDES) -I$(XAPIDIR) $(YAPIDIR)y-particle.cpp
 #y-score-reader.o: $(YAPIDIR)y-score-reader.h $(YAPIDIR)y-score-reader.cpp
 	#$(CXX) $(FLAGS) $(INCLUDES) $(YAPIDIR)y-score-reader.cpp
-y-waveform.o: $(YAPIDIR)y-waveform.h $(YAPIDIR)y-waveform.cpp
+y-waveform.o: $(YAPIDIR)y-waveform.h $(YAPIDIR)y-waveform.cpp swirl-entity.o
 	$(CXX) $(FLAGS) $(INCLUDES) -I$(XAPIDIR) $(YAPIDIR)y-waveform.cpp
 
 # OSC and Networking - use makefile that comes with OSCPACK

@@ -186,6 +186,8 @@ static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * user
     memcpy( Globals::lastAudioBuffer, buffer,
            sizeof(SAMPLE)*numFrames*channels );
 
+    Globals::sim->audioCascade( buffer, numFrames );
+
     // synthesize it
     Globals::synth->synthesize2( buffer, numFrames );
     // echo it

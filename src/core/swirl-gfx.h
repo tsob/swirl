@@ -49,10 +49,13 @@ void swirl_line();
 //XTexture * swirl_loadTexture( const std::string & filename );
 
 // User movement functions
+void strafe(float amount);
 void strafe_left();
 void strafe_right();
+void move(float amount);
 void move_forward();
 void move_back();
+void turn(float radAmount);
 void turn_left();
 void turn_right();
 

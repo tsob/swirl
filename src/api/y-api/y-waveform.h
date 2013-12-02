@@ -37,7 +37,8 @@
 
 #include "x-audio.h"
 #include "x-gfx.h"
-#include "y-entity.h"
+//#include "y-entity.h"
+#include "swirl-entity.h"
 
 
 
@@ -46,7 +47,7 @@
 // name: class YWaveform
 // desc: mono waveform visualization
 //-----------------------------------------------------------------------------
-class YWaveform : public YEntity
+class YWaveform : public SWIRLEntity
 {
 public:
     // constructor

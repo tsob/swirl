@@ -9,7 +9,9 @@
 #define __SWIRL_ENTITY_H__
 
 #include "y-entity.h"
+#include "x-audio.h"
 #include "x-buffer.h"
+//#include "swirl-audio.h"
 #include "Stk.h"
 //#include "swirl-globals.h"
 #include <vector>
@@ -27,10 +29,10 @@ public:
     Stk * unitGenerator;
 
     //! Input one sample to the filter and return one output.
-    StkFloat tick( StkFloat input );
+    SAMPLE tick( SAMPLE input );
 
     // Get one sample from every child
-    virtual void tickAll( StkFloat * oneFrame, Vector3D listenerPosition );
+    virtual void tickAll( SAMPLE * oneFrame, Vector3D listenerPosition );
 };
 
 //-----------------------------------------------------------------------------
@@ -40,6 +42,12 @@ public:
 class SWIRLCamera : public YEntity
 {
 public:
+    // slew
+    iSlew3D iLoc;
+    iSlew3D iRefLoc;
+
+    Vector3D refLoc;
+
     // update
     void update( YTimeInterval dt );
     // render
@@ -82,6 +90,5 @@ public:
     // description
     virtual std::string desc() const;
 };
-
 
 #endif

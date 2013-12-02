@@ -15,16 +15,17 @@ using namespace stk;
 // Name: tick()
 // Desc: ...
 //-------------------------------------------------------------------------------
-StkFloat SWIRLEntity::tick( StkFloat input )
+SAMPLE SWIRLEntity::tick( SAMPLE input )
 {
-  return unitGenerator->tick( input );
+  //return unitGenerator->tick( input );
+  return 0.0;
 }
 
 //-------------------------------------------------------------------------------
 // Name: tickAll()
 // Desc: Get one audio frame from this and every child
 //-------------------------------------------------------------------------------
-void SWIRLEntity::tickAll( StkFloat * oneFrame, Vector3D listenerPosition )
+void SWIRLEntity::tickAll( SAMPLE * oneFrame, Vector3D listenerPosition )
 {
     // oneFrame is the buffer we'll fill with the combined audio frame
     // For now, just do mono without spatialization
@@ -37,7 +38,7 @@ void SWIRLEntity::tickAll( StkFloat * oneFrame, Vector3D listenerPosition )
     if( !hidden )
     {
         // TODO sanity check argument
-        oneFrame[0] += this->tick( (StkFloat)1 );
+        oneFrame[0] += this->tick( (SAMPLE)1 );
 
         // Mono expansion
         for (int i = 1; i < SWIRL_NUMCHANNELS; ++i)
@@ -46,11 +47,12 @@ void SWIRLEntity::tickAll( StkFloat * oneFrame, Vector3D listenerPosition )
         }
     }
 
-    // draw children
+    // tick children
     for( vector<YEntity *>::iterator itr = children.begin();
          itr != children.end(); itr++ )
     {
-        ((SWIRLEntity*)*itr)->tickAll(oneFrame, listenerPosition);
+        if (dynamic_cast<SWIRLEntity *>(*itr))
+          ((SWIRLEntity*)*itr)->tickAll(oneFrame, listenerPosition);
     }
 
 }
@@ -120,5 +122,16 @@ std::string SWIRLTeapot::desc() const
 //-----------------------------------------------------------------------------
 void SWIRLCamera::update( YTimeInterval dt )
 {
-  // Do nothing?
+
+    iLoc.update(Globals::cameraEye);
+    iRefLoc.update(Globals::cameraReference);
+
+    // interp
+    iLoc.interp( dt );
+    iRefLoc.interp( dt );
+
+    // update
+    loc = iLoc.actual();
+    refLoc = iRefLoc.actual();
+
 }

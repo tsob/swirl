@@ -99,7 +99,6 @@ SWIRLCamera * Globals::camera =  new SWIRLCamera;
 Vector3D Globals::cameraEye( 0, 0, -1 );
 Vector3D Globals::cameraReference( 0, 0, 0 );
 
-
 //Vector3D Globals::cameraEye( 0, 0, -1 );
 //Vector3D Globals::cameraReference( 0, 0, 0 );
 
