@@ -125,11 +125,11 @@ x-audio.o: $(XAPIDIR)x-audio.h $(XAPIDIR)x-audio.cpp RtAudio.o
 
 # mcd-api - y
 y-charting.o: $(YAPIDIR)y-charting.h $(YAPIDIR)y-charting.cpp
-	$(CXX) $(FLAGS) -I$(XAPIDIR) $(YAPIDIR)y-charting.cpp
+	$(CXX) $(FLAGS) $(INCLUDES) -I$(XAPIDIR) $(YAPIDIR)y-charting.cpp
 y-echo.o: $(YAPIDIR)y-echo.h $(YAPIDIR)y-echo.cpp
-	$(CXX) $(FLAGS) -I $(STKDIR) -I$(XAPIDIR) $(YAPIDIR)y-echo.cpp
+	$(CXX) $(FLAGS) -I$(STKDIR) -I$(XAPIDIR) $(YAPIDIR)y-echo.cpp
 y-entity.o: $(YAPIDIR)y-entity.h $(YAPIDIR)y-entity.cpp
-	$(CXX) $(FLAGS) -I$(XAPIDIR) $(YAPIDIR)y-entity.cpp
+	$(CXX) $(FLAGS) $(INCLUDES) -I$(XAPIDIR) $(YAPIDIR)y-entity.cpp
 y-fft.o: $(YAPIDIR)y-fft.h $(YAPIDIR)y-fft.cpp
 	$(CXX) $(FLAGS) -I$(XAPIDIR) $(YAPIDIR)y-fft.cpp
 
@@ -138,11 +138,11 @@ y-fluidsynth.o: $(YAPIDIR)y-fluidsynth.h $(YAPIDIR)y-fluidsynth.cpp
 		$(YAPIDIR)y-fluidsynth.cpp
 
 y-particle.o: $(YAPIDIR)y-particle.h $(YAPIDIR)y-particle.cpp
-	$(CXX) $(FLAGS) -I$(XAPIDIR) $(YAPIDIR)y-particle.cpp
+	$(CXX) $(FLAGS)  $(INCLUDES) -I$(XAPIDIR) $(YAPIDIR)y-particle.cpp
 #y-score-reader.o: $(YAPIDIR)y-score-reader.h $(YAPIDIR)y-score-reader.cpp
 	#$(CXX) $(FLAGS) $(INCLUDES) $(YAPIDIR)y-score-reader.cpp
 y-waveform.o: $(YAPIDIR)y-waveform.h $(YAPIDIR)y-waveform.cpp
-	$(CXX) $(FLAGS) -I$(XAPIDIR) $(YAPIDIR)y-waveform.cpp
+	$(CXX) $(FLAGS) $(INCLUDES) -I$(XAPIDIR) $(YAPIDIR)y-waveform.cpp
 
 # OSC and Networking - use makefile that comes with OSCPACK
 NetworkingUtils.o:
