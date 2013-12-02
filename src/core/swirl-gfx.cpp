@@ -54,7 +54,7 @@ bool swirl_gfx_init( int argc, const char ** argv )
     glutInitWindowPosition( 100, 100 );
 
     // Create the window
-    glutCreateWindow("SWIRL");
+    glutCreateWindow("Swirl, the Sonic World");
 
     // Full screen
     //TODO
