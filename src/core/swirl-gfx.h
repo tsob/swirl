@@ -66,6 +66,7 @@ void reshapeFunc( int width, int height );
 void keyboardFunc( unsigned char, int, int );
 void mouseFunc( int button, int state, int x, int y );
 void specialFunc( int key, int x, int y );
+void mouseMoveFunc( int x, int y );
 
 void initialize_graphics();
 void initialize_simulation();

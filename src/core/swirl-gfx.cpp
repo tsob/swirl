@@ -77,6 +77,9 @@ bool swirl_gfx_init( int argc, const char ** argv )
     // For arrow keys, etc
     glutSpecialFunc (specialFunc );
 
+    // Set the mouse movement function
+    glutPassiveMotionFunc( mouseMoveFunc );
+
     // Do our own initialization
     initialize_graphics();
     // Simulation
@@ -492,7 +495,41 @@ void look( )
 }
 
 
+//-----------------------------------------------------------------------------
+// Name: mouseMoveFunc( )
+// Desc: mouse movement handler
+//-----------------------------------------------------------------------------
+void mouseMoveFunc( int x, int y )
+{
+    static float lastx = 0.0;
+    static float lasty = 0.0;
 
+    lastx = (float)x - lastx;
+    lasty = (float)y - lasty;
+
+    if ( (abs((int)lastx)>10) || (abs((int)lasty)>20) )
+    {
+        lastx = (float)x;
+        lasty = (float)y;
+        return;
+    }
+
+    if( (float)x > lastx )
+        turn(lastx*0.01);
+    else
+        turn((-lastx)*0.01);
+    if( (float)y > 0 )
+        move(-lasty*0.01); 
+    else 
+        move(lasty*0.01);
+
+    lastx = (float)x;
+    lasty = (float)y;
+
+    // post redisplay
+    glutPostRedisplay( );
+
+}
 
 //-----------------------------------------------------------------------------
 // Name: keyboardFunc( )
