@@ -47,10 +47,10 @@ public:
 
 public:
     // get the root
-    YEntity & root() { return m_gfxRoot; }
+    SWIRLEntity & root() { return m_gfxRoot; }
 
 protected:
-    YEntity m_gfxRoot;
+    SWIRLEntity m_gfxRoot;
 
 public:
     double m_desiredFrameRate;
