@@ -7,12 +7,13 @@
 //-----------------------------------------------------------------------------
 #include "swirl-entity.h"
 #include "swirl-globals.h"
+
 using namespace std;
 using namespace stk;
 
 
 //-------------------------------------------------------------------------------
-// Name: tick()
+// Name: class: SWIRLEntity method: tick()
 // Desc: ...
 //-------------------------------------------------------------------------------
 SAMPLE SWIRLEntity::tick( SAMPLE input )
@@ -22,7 +23,7 @@ SAMPLE SWIRLEntity::tick( SAMPLE input )
 }
 
 //-------------------------------------------------------------------------------
-// Name: tickAll()
+// Name: class: SWIRLEntity method: tickAll()
 // Desc: Get one audio frame from this and every child
 //-------------------------------------------------------------------------------
 void SWIRLEntity::tickAll( SAMPLE * oneFrame, Vector3D listenerPosition )
@@ -57,15 +58,19 @@ void SWIRLEntity::tickAll( SAMPLE * oneFrame, Vector3D listenerPosition )
 
 }
 
-//-------------------------------------------------------------------------------
-// Name: render()
+//-----------------------------------------------------------------------------
+// Name: class: SWIRLCamera method: render()
 // Desc: ...
-//-------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void SWIRLCamera::render()
 {
   // Do nothing?
 }
 
+//-----------------------------------------------------------------------------
+// Name: class: SWIRLTeapot method: render()
+// Desc: ...
+//-----------------------------------------------------------------------------
 void SWIRLTeapot::render()
 {
     glPushMatrix( );
@@ -86,6 +91,10 @@ void SWIRLTeapot::render()
     glPopMatrix( );
 }
 
+//-----------------------------------------------------------------------------
+// Name: class: SWIRLMoon method: render()
+// Desc: renders the SWIRLMoon
+//-----------------------------------------------------------------------------
 void SWIRLMoon::render()
 {
     // Draw the moon
@@ -99,9 +108,9 @@ void SWIRLMoon::render()
 }
 
 //-----------------------------------------------------------------------------
-// Name: desc()
+// Name: class: SWIRL* method: desc()
 // Desc: Returns a description (usually type and name) of this object. Useful
-// for debugging stuff.
+//       for debugging stuff.
 //-----------------------------------------------------------------------------
 std::string SWIRLCamera::desc() const
 {
@@ -117,8 +126,8 @@ std::string SWIRLTeapot::desc() const
 }
 
 //-----------------------------------------------------------------------------
-// Name: update( YTimeInterval dt )
-// Desc: ...
+// Name: class: SWIRLCamera method: update( YTimeInterval dt )
+// Desc: updates (interpolates) camera position
 //-----------------------------------------------------------------------------
 void SWIRLCamera::update( YTimeInterval dt )
 {
@@ -136,6 +145,11 @@ void SWIRLCamera::update( YTimeInterval dt )
 
 }
 
+// TODO
+//-----------------------------------------------------------------------------
+// Name: class: SWIRLBirdy constructor
+// Desc: ...
+//-----------------------------------------------------------------------------
 SWIRLBirdy::SWIRLBirdy()
 {
     // Instantiate fluidsynth
@@ -148,9 +162,14 @@ SWIRLBirdy::SWIRLBirdy()
     synth->programChange( 0, 0 );
 }
 
+// TODO
+//-----------------------------------------------------------------------------
+// Name: class: SWIRLBirdy method: tick()
+// Desc: return a sample of audio from SWIRLBirdy
+//-----------------------------------------------------------------------------
 SAMPLE SWIRLBirdy::tick( SAMPLE input )
 {
   SAMPLE oneFrame[2];
   synth->synthesize2( oneFrame, 1);
-  return oneFrame[0]; 
+  return oneFrame[0];
 }
