@@ -135,3 +135,22 @@ void SWIRLCamera::update( YTimeInterval dt )
     refLoc = iRefLoc.actual();
 
 }
+
+SWIRLBirdy::SWIRLBirdy()
+{
+    // Instantiate fluidsynth
+    GeXFluidSynth * synth = new GeXFluidSynth();
+    // Init fluidsynth
+    synth->init( SWIRL_SRATE, 32 );
+    // Load the soundfont
+    synth->load( "data/soundfonts/birds.sf2", "" );
+    // Map program changes
+    synth->programChange( 0, 0 );
+}
+
+SAMPLE SWIRLBirdy::tick( SAMPLE input )
+{
+  SAMPLE oneFrame[2];
+  synth->synthesize2( oneFrame, 1);
+  return oneFrame[0]; 
+}
