@@ -21,6 +21,41 @@ StkFloat SWIRLEntity::tick( StkFloat input )
 }
 
 //-------------------------------------------------------------------------------
+// Name: tickAll()
+// Desc: Get one audio frame from this and every child
+//-------------------------------------------------------------------------------
+void SWIRLEntity::tickAll( StkFloat * oneFrame, Vector3D listenerPosition )
+{
+    // oneFrame is the buffer we'll fill with the combined audio frame
+    // For now, just do mono without spatialization
+
+    // Stop if this entity is not active.
+    if( !active )
+        return;
+
+    // render self if not hidden
+    if( !hidden )
+    {
+        // TODO sanity check argument
+        oneFrame[0] += this->tick( (StkFloat)1 );
+
+        // Mono expansion
+        for (int i = 1; i < SWIRL_NUMCHANNELS; ++i)
+        {
+          oneFrame[i] = oneFrame[0];
+        }
+    }
+
+    // draw children
+    for( vector<YEntity *>::iterator itr = children.begin();
+         itr != children.end(); itr++ )
+    {
+        ((SWIRLEntity*)*itr)->tickAll(oneFrame, listenerPosition);
+    }
+
+}
+
+//-------------------------------------------------------------------------------
 // Name: render()
 // Desc: ...
 //-------------------------------------------------------------------------------
