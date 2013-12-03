@@ -9,6 +9,8 @@
 //----------------------------------------------------------------------------
 
 #include "swirl-gfx.h"
+#include "swirl-networking.h"
+
 
 using namespace std;
 
@@ -687,26 +689,32 @@ void keyboardFunc( unsigned char key, int x, int y )
             case ']':
                 // turn right
                 Globals::myAvatar->turn(0.1f);
+                swirl_send_message( "/turn", 0.1f );
                 break;
             case '[':
                 // turn left
                 Globals::myAvatar->turn(-0.1f);
+                swirl_send_message( "/turn", -0.1f );
                 break;
             case 'w':
                 // move forward
                 Globals::myAvatar->move(0.2f);
+                swirl_send_message( "/move", 0.2f );
                 break;
             case 'x':
                 // move back
                 Globals::myAvatar->move(-0.2f);
+                swirl_send_message( "/move", -0.2f );
                 break;
             case 'd':
                 //strafe right
                 Globals::myAvatar->strafe(0.1f);
+                swirl_send_message( "/strafe", 0.1f );
                 break;
             case 'a':
                 //strafe left
                 Globals::myAvatar->strafe(-0.1f);
+                swirl_send_message( "/strafe", -0.1f );
                 break;
             case 'c':
                 // toggle camera position

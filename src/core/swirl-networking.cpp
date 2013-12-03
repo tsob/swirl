@@ -28,126 +28,31 @@ struct NetworkLocation
 // Name: class ExamplePacketListener
 // Desc: our packet listener
 //-----------------------------------------------------------------------------
-class ExamplePacketListener : public osc::OscPacketListener {
+class SWIRLPacketListener : public osc::OscPacketListener {
 protected:
 
     virtual void ProcessMessage( const osc::ReceivedMessage& m,
                                 const IpEndpointName& remoteEndpoint )
     {
         (void) remoteEndpoint; // suppress unused parameter warning
+        osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
+        SWIRLAvatar* otherAvatar = (SWIRLAvatar*)getAvatar();
+        float f;
+        
+        args >> f >> osc::EndMessage;
+        std::cout << "Receiving " << m.AddressPattern() << " " << f << std::endl;
 
         try{
-            // example of parsing single messages. osc::OsckPacketListener
-            // handles the bundle traversal.
-
-            /*if( std::strcmp( m.AddressPattern(), "/cameraReferenceZ" ) == 0 ){
-                // example #1 -- argument stream interface
-                osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
-                float f;
-                args >> f >> osc::EndMessage;
-
-                std::cout << "received '/cameraReferenceZ' message with arguments: "
-                << f << "\n";
-
-                //TODO
-                getAvatar()->loc.x = f;
-
-            } else */ if( std::strcmp( m.AddressPattern(), "/cameraEyeZ" ) == 0 ){
-                // example #1 -- argument stream interface
-                osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
-                float f;
-                std::cout << "RECEVING \n";
-                args >> f >> osc::EndMessage;
-                std::cout << f << std::endl;
-                getAvatar()->loc.z = f;
-               // getAvatar()->loc.y = f;
-
-                std::cout << "received '/cameraEyeZ' message with arguments: "
-                << f << "\n";
+            if( std::strcmp( m.AddressPattern(), "/move" ) == 0 ){
+                otherAvatar->move(f);
             }
-            else if( std::strcmp( m.AddressPattern(), "/cameraEyeX" ) == 0 ){
-                // example #1 -- argument stream interface
-                osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
-                float f;
-                std::cout << "RECEVING \n";
-                args >> f >> osc::EndMessage;
-                std::cout << f << std::endl;
-                getAvatar()->loc.x = f;
-                // getAvatar()->loc.y = f;
-
-                std::cout << "received '/cameraEyeZ' message with arguments: "
-                << f << "\n";
+            else if( std::strcmp( m.AddressPattern(), "/turn" ) == 0 ){
+                otherAvatar->turn(f);
             }
-            else if( std::strcmp( m.AddressPattern(), "/rotated" ) == 0 ){
-                // example #1 -- argument stream interface
-                osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
-                float f;
-
-                std::cout << "RECEVING \n";
-
-                args >> f >> osc::EndMessage;
-
-                std::cout << f << std::endl;
-
-                getAvatar()->ori.y += (180.0f / ONE_PI * f);
-
-
-                // getAvatar()->loc.y = f;
-
-
-                std::cout << "received '/cameraEyeZ' message with arguments: "
-                << f << "\n";
+            else if( std::strcmp( m.AddressPattern(), "/strafe" ) == 0 ){
+                otherAvatar->strafe(f);
             }
-            else if( std::strcmp( m.AddressPattern(), "/cameraReferenceZ" ) == 0 ){
-                // example #1 -- argument stream interface
-                osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
-                float f;
-
-                std::cout << "RECEVING \n";
-
-                args >> f >> osc::EndMessage;
-
-                std::cout << f << std::endl;
-
-                getAvatar()->ori.y += (180 / (3.14f) * f);
-
-                // getAvatar()->loc.y = f;
-
-
-                std::cout << "received '/cameraEyeZ' message with arguments: "
-                << f << "\n";
-            }
-            else if( std::strcmp( m.AddressPattern(), "/moveForward" ) == 0 ){
-                //// example #1 -- argument stream interface
-                //osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
-                //float f;
-
-                //std::cout << "RECEVING \n";
-
-                //args >> f >> osc::EndMessage;
-
-                //std::cout << f << std::endl;
-                
-                 //Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
-                 //Vector3D movementVector = lookVector;
-                 //movementVector.normalize();
-                 //movementVector *= -0.1;
-
-                 //Globals::cameraReference += movementVector;
-                 //Globals::cameraEye += movementVector;
-   
-                 //getAvatar()->ori.y += (180 / (3.14f) * f);
-
-                //// getAvatar()->loc.y = f;
-
-
-                  //std::cout << "received '/cameraEyeZ' message with arguments: "
-                  //<< f << "\n";
-            }
-
         }catch( osc::Exception& e ){
-            // any parsing errors such as unexpected argument types, or
-            // missing arguments get thrown as exceptions.
             std::cout << "error while parsing message: "
             << m.AddressPattern() << ": " << e.what() << "\n";
         }
@@ -162,7 +67,7 @@ protected:
 void * oscListener(void * args)
 {
     cerr << "Starting listening thread!" << endl;
-    ExamplePacketListener listener;
+    SWIRLPacketListener listener;
 
     NetworkLocation *  receiveLocation = (NetworkLocation*)args;
 
