@@ -7,21 +7,86 @@
 //-----------------------------------------------------------------------------
 #include "swirl-entity.h"
 #include "swirl-globals.h"
+#include <math.h>
 
 using namespace std;
 using namespace stk;
 
-
-//-------------------------------------------------------------------------------
-// Name: class: SWIRLEntity method: tick()
-// Desc: ...
-//-------------------------------------------------------------------------------
-SAMPLE SWIRLEntity::tick( SAMPLE input )
+//-----------------------------------------------------------------------------
+// name: g_squareVertices
+// desc: vertices for a cube
+//-----------------------------------------------------------------------------
+static const GLfloat g_squareVertices[] =
 {
-  //return unitGenerator->tick( input );
-  return 0.0;
-}
+    // FRONT
+    -0.5f, -0.5f,  0.5f,
+    0.5f, -0.5f,  0.5f,
+    -0.5f,  0.5f,  0.5f,
+    0.5f,  0.5f,  0.5f,
+    // BACK
+    -0.5f, -0.5f, -0.5f,
+    -0.5f,  0.5f, -0.5f,
+    0.5f, -0.5f, -0.5f,
+    0.5f,  0.5f, -0.5f,
+    // LEFT
+    -0.5f, -0.5f,  0.5f,
+    -0.5f,  0.5f,  0.5f,
+    -0.5f, -0.5f, -0.5f,
+    -0.5f,  0.5f, -0.5f,
+    // RIGHT
+    0.5f, -0.5f, -0.5f,
+    0.5f,  0.5f, -0.5f,
+    0.5f, -0.5f,  0.5f,
+    0.5f,  0.5f,  0.5f,
+    // TOP
+    -0.5f,  0.5f,  0.5f,
+    0.5f,  0.5f,  0.5f,
+    -0.5f,  0.5f, -0.5f,
+    0.5f,  0.5f, -0.5f,
+    // BOTTOM
+    -0.5f, -0.5f,  0.5f,
+    -0.5f, -0.5f, -0.5f,
+    0.5f, -0.5f,  0.5f,
+    0.5f, -0.5f, -0.5f,
+};
 
+//-----------------------------------------------------------------------------
+// name: g_squareNormals
+// desc: normals for a cube
+//-----------------------------------------------------------------------------
+static const GLfloat g_squareNormals[] =
+{
+    // FRONT
+    0, 0, 1,
+    0, 0, 1,
+    0, 0, 1,
+    0, 0, 1,
+    // BACK
+    0, 0, -1,
+    0, 0, -1,
+    0, 0, -1,
+    0, 0, -1,
+    // LEFT
+    -1, 0, 0,
+    -1, 0, 0,
+    -1, 0, 0,
+    -1, 0, 0,
+    // RIGHT
+    1, 0, 0,
+    1, 0, 0,
+    1, 0, 0,
+    1, 0, 0,
+    // TOP
+    0, 1, 0,
+    0, 1, 0,
+    0, 1, 0,
+    0, 1, 0,
+    // BOTTOM
+    0, -1, 0,
+    0, -1, 0,
+    0, -1, 0,
+    0, -1, 0
+};
 //-------------------------------------------------------------------------------
 // Name: class: SWIRLEntity method: tickAll()
 // Desc: Get one audio frame from this and every child
@@ -53,7 +118,9 @@ void SWIRLEntity::tickAll( SAMPLE * oneFrame, Vector3D listenerPosition )
          itr != children.end(); itr++ )
     {
         if (dynamic_cast<SWIRLEntity *>(*itr))
+        {
           ((SWIRLEntity*)*itr)->tickAll(oneFrame, listenerPosition);
+        }
     }
 
 }
@@ -116,6 +183,10 @@ std::string SWIRLEntity::desc() const
 {
     return "SWIRLEntity [unnamed]";
 }
+std::string SWIRLBirdCube::desc() const
+{
+    return "SWIRLEntity [SWIRLBirdCube]";
+}
 std::string SWIRLCamera::desc() const
 {
     return "SWIRLEntity [SWIRLCamera]";
@@ -153,7 +224,7 @@ void SWIRLCamera::update( YTimeInterval dt )
     //ori.z = (loc-refLoc).angleXY();
     ori.z = 0.0f;
 
-    Globals::waveform->loc = loc + (refLoc-loc)*0.1 + Vector3D(0.0f, 0.6f, 0.0f);;
+    Globals::waveform->loc = loc + (refLoc-loc)*0.1 + Vector3D(0.0f, 0.6f, 0.0f);
     Globals::waveform->ori = ori;
 }
 
@@ -176,16 +247,18 @@ void SWIRLCamera::drawHUD( )
 // Name: class: SWIRLBirdy constructor
 // Desc: ...
 //-----------------------------------------------------------------------------
-SWIRLBirdy::SWIRLBirdy()
+SWIRLFluid::SWIRLFluid()
 {
+    printf("About to instantiate SWIRLFluid\n");
     // Instantiate fluidsynth
-    GeXFluidSynth * synth = new GeXFluidSynth();
+    synth = new GeXFluidSynth();
     // Init fluidsynth
     synth->init( SWIRL_SRATE, 32 );
     // Load the soundfont
     synth->load( "data/soundfonts/birds.sf2", "" );
     // Map program changes
     synth->programChange( 0, 0 );
+    printf("Instantiated SWIRLFluid\n");
 }
 
 // TODO
@@ -193,9 +266,111 @@ SWIRLBirdy::SWIRLBirdy()
 // Name: class: SWIRLBirdy method: tick()
 // Desc: return a sample of audio from SWIRLBirdy
 //-----------------------------------------------------------------------------
-SAMPLE SWIRLBirdy::tick( SAMPLE input )
+SAMPLE SWIRLFluid::tick( SAMPLE input )
 {
+  static int counter = 0;
   SAMPLE oneFrame[2];
   synth->synthesize2( oneFrame, 1);
   return oneFrame[0];
 }
+
+//-----------------------------------------------------------------------------
+// name: render()
+// desc: ...
+//-----------------------------------------------------------------------------
+void SWIRLCube::render()
+{
+    // enable state
+    glEnableClientState( GL_VERTEX_ARRAY );
+    glEnableClientState( GL_NORMAL_ARRAY );
+
+    // set vertex pointer
+    glVertexPointer( 3, GL_FLOAT, 0, g_squareVertices );
+    glNormalPointer( GL_FLOAT, 0, g_squareNormals );
+
+    // push
+    glPushMatrix();
+    // scale
+    glScalef( size.value, size.value, size.value );
+
+    // draw it
+    glDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
+    glDrawArrays( GL_TRIANGLE_STRIP, 4, 4 );
+    glDrawArrays( GL_TRIANGLE_STRIP, 8, 4 );
+    glDrawArrays( GL_TRIANGLE_STRIP, 12, 4 );
+    glDrawArrays( GL_TRIANGLE_STRIP, 16, 4 );
+    glDrawArrays( GL_TRIANGLE_STRIP, 20, 4 );
+
+    // pop
+    glPopMatrix();
+
+    // disable
+    glDisableClientState( GL_VERTEX_ARRAY );
+    glDisableClientState( GL_NORMAL_ARRAY );
+}
+
+
+
+
+//-----------------------------------------------------------------------------
+// name: update()
+// desc: ...
+//-----------------------------------------------------------------------------
+void SWIRLCube::update( YTimeInterval dt )
+{
+    // interp
+    size.interp( dt );
+}
+
+//-----------------------------------------------------------------------------
+// name: update()
+// desc: ...
+//-----------------------------------------------------------------------------
+void SWIRLBirdCube::update( YTimeInterval dt )
+{
+    static int counter = 0;
+
+    // interp
+    size.interp( dt );
+
+    if( (loc - Globals::camera->loc).magnitude() < size.magnitude() )
+    {
+      synth->noteOn(0, 60.0f,126);
+      cout << "note!" << endl;
+    }
+}
+//-----------------------------------------------------------------------------
+// name: render()
+// desc: ...
+//-----------------------------------------------------------------------------
+void SWIRLBirdCube::render()
+{
+    // enable state
+    glEnableClientState( GL_VERTEX_ARRAY );
+    glEnableClientState( GL_NORMAL_ARRAY );
+
+    // set vertex pointer
+    glVertexPointer( 3, GL_FLOAT, 0, g_squareVertices );
+    glNormalPointer( GL_FLOAT, 0, g_squareNormals );
+
+    // push
+    glPushMatrix();
+    // scale
+    glScalef( size.value, size.value, size.value );
+
+    // draw it
+    glDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
+    glDrawArrays( GL_TRIANGLE_STRIP, 4, 4 );
+    glDrawArrays( GL_TRIANGLE_STRIP, 8, 4 );
+    glDrawArrays( GL_TRIANGLE_STRIP, 12, 4 );
+    glDrawArrays( GL_TRIANGLE_STRIP, 16, 4 );
+    glDrawArrays( GL_TRIANGLE_STRIP, 20, 4 );
+
+    // pop
+    glPopMatrix();
+
+    // disable
+    glDisableClientState( GL_VERTEX_ARRAY );
+    glDisableClientState( GL_NORMAL_ARRAY );
+}
+

@@ -201,7 +201,7 @@ protected:
 // name: class YCube
 // desc: abstraction for a cube entity
 //-----------------------------------------------------------------------------
-class YCube : public YEntity
+class YCube : public virtual YEntity
 {
 public:
     YCube() : size( 1, 1, 1.0f ) { }

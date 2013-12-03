@@ -261,6 +261,8 @@ void initialize_simulation()
 
     Globals::sim->root().addChild( Globals::camera );
 
+    Globals::sim->root().addChild( new SWIRLBirdCube() );
+
     // Put a cube in the environment
     //YCube* cube = new YCube();
     //cube->loc = Vector3D( 1.0f, 1.0f, 1.0f  );

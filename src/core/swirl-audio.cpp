@@ -185,13 +185,15 @@ static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * user
     // Copy to global buffer
     memcpy( Globals::lastAudioBuffer, buffer,
            sizeof(SAMPLE)*numFrames*channels );
-
-    Globals::sim->audioCascade( buffer, numFrames );
+    
 
     // synthesize it
     Globals::synth->synthesize2( buffer, numFrames );
     // echo it
     Globals::echo->synthesize2( buffer, numFrames );
+
+    // Cascade audio for simulation
+    Globals::sim->audioCascade( buffer, numFrames );
 
     // copy to mono buffer
     for( int i = 0; i < numFrames; i++ )

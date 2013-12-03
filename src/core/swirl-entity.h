@@ -29,7 +29,7 @@ class SWIRLEntity : public YEntity
 public:
 
     //! Input one sample to the filter and return one output.
-    SAMPLE tick( SAMPLE input );
+    virtual SAMPLE tick( SAMPLE input ) {};
 
     // Get one sample from every child
     virtual void tickAll( SAMPLE * oneFrame, Vector3D listenerPosition );
@@ -42,7 +42,7 @@ public:
 // Name: class SWIRLCamera
 // Desc: the camera
 //-----------------------------------------------------------------------------
-class SWIRLCamera : public virtual SWIRLEntity
+class SWIRLCamera : public SWIRLEntity
 {
 public:
     // slew
@@ -67,7 +67,7 @@ public:
 // Name: class SWIRLMoon
 // Desc: whoa... it's the moon
 //-----------------------------------------------------------------------------
-class SWIRLMoon : public virtual SWIRLEntity
+class SWIRLMoon : public SWIRLEntity
 {
 public:
     // update
@@ -84,7 +84,7 @@ public:
 // Name: class SWIRLTeapot
 // Desc: for testing
 //-----------------------------------------------------------------------------
-class SWIRLTeapot : public virtual SWIRLEntity
+class SWIRLTeapot : public SWIRLEntity
 {
 public:
     // update
@@ -97,18 +97,51 @@ public:
 };
 
 //-----------------------------------------------------------------------------
-// Name: class SWIRLBirdy
+// Name: class SWIRLFluid
 // Desc:
 //-----------------------------------------------------------------------------
-class SWIRLBirdy : public virtual SWIRLEntity
+class SWIRLFluid : public SWIRLEntity
 {
 public:
-    SWIRLBirdy(); //Constructor
+    SWIRLFluid(); //Constructor
 
-    SAMPLE tick( SAMPLE input );
+    virtual SAMPLE tick( SAMPLE input );
 
     // fluidsynth
     GeXFluidSynth * synth;
 };
+
+class SWIRLCube : public SWIRLEntity
+{
+public:
+    SWIRLCube() : size( 1, 1, 1.0f ) { }
+
+public:
+    virtual void update( YTimeInterval dt );
+    virtual void render();
+
+public:
+    Vector3D size;
+};
+
+//-----------------------------------------------------------------------------
+// Name: class SWIRLFluid
+// Desc:
+//-----------------------------------------------------------------------------
+class SWIRLBirdCube : public SWIRLFluid
+{
+public:
+    SWIRLBirdCube() : size( 1, 1, 1.0f ) {  }
+
+    virtual void render(); 
+    virtual void update( YTimeInterval dt );
+
+    // description
+    virtual std::string desc() const;
+
+public:
+    Vector3D size;
+};
+
 
 #endif

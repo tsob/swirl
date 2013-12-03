@@ -97,8 +97,13 @@ bool GeXFluidSynth::init( int srate, int polyphony )
     if( polyphony <= 0 ) polyphony = 1;
     else if( polyphony > 256 ) polyphony = 256;
     fluid_settings_setint( m_settings, (char *)"synth.polyphony", polyphony );
+
+    printf("Fluid synth about to be insantiated.\n");
+
     // instantiate the synth
     m_synth = new_fluid_synth( m_settings );
+
+    printf("Fluid synth insantiated.\n");
 
     // unlock
     m_mutex.release();
