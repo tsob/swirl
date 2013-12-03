@@ -423,7 +423,7 @@ SAMPLE SWIRLFluid::tick( SAMPLE input )
 {
   SAMPLE oneFrame[2];
   synth->synthesize2( oneFrame, 1);
-  return 0.5*oneFrame[0];
+  return 0.1*oneFrame[0];
 }
 
 //-----------------------------------------------------------------------------
