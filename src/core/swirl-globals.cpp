@@ -96,7 +96,7 @@ int Globals::app = 0;
 
 //TODO
 SWIRLCamera * Globals::camera   =  new SWIRLCamera;
-SWIRLAvatar * Globals::myAvatar =  new SWIRLAvatar( Vector3D(0.0f, 0.0f, 0.0f) );
+SWIRLAvatar * Globals::myAvatar =  new SWIRLAvatar( Vector3D(0.0f, 0.0f, 3.0f) );
 //Vector3D Globals::cameraEye( 0, 0, -1 );
 //Vector3D Globals::cameraReference( 0, 0, 0 );
 

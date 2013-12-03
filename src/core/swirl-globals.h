@@ -108,8 +108,6 @@ public:
     //TODO
     static SWIRLCamera* camera;
     static SWIRLAvatar* myAvatar;
-    static Vector3D cameraEye;
-    static Vector3D cameraReference;
 
     static Vector3D fov;
 

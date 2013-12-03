@@ -50,9 +50,6 @@ public:
     // render
     //void render();
 
-    // draw the heads-up display
-    void drawHUD();
-
     // description
     virtual std::string desc() const;
 };

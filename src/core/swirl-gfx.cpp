@@ -457,22 +457,6 @@ void look( )
     // position the view point
 
 
-    /*gluLookAt( 0.0f,
-              Globals::viewRadius.x * sin( Globals::viewEyeY.x ),
-              Globals::viewRadius.x * cos( Globals::viewEyeY.x ),
-              0.0f, 0.0f, 0.0f,
-              0.0f, ( cos( Globals::viewEyeY.x ) < 0 ? -1.0f : 1.0f ), 0.0f );*/
-
-    // TODO change to camera YEntity
-    //gluLookAt(
-        //Globals::cameraEye.x,
-        //Globals::cameraEye.y,
-        //Globals::cameraEye.z,
-        //Globals::cameraReference.x,
-        //Globals::cameraReference.y,
-        //Globals::cameraReference.z,
-        //0.0f, 1.0f, 0.0f
-        //);
     gluLookAt(
         Globals::camera->loc.x,
         Globals::camera->loc.y,
@@ -482,13 +466,6 @@ void look( )
         Globals::myAvatar->refLoc.z,
         0.0f, 1.0f, 0.0f
         );
-
-   /*
-    gluLookAt( Globals::viewRadius.y ,0.0f,
-              Globals::viewEyeY.y,
-              0.0f, 0.0f, 0.0f,
-              0.0f, ( cos( Globals::viewEyeY.x ) < 0 ? -1.0f : 1.0f ), 0.0f );
-    */
 
     // set the position of the lights
     glLightfv( GL_LIGHT0, GL_POSITION, Globals::light0_pos );

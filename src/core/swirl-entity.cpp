@@ -88,6 +88,7 @@ static const GLfloat g_squareNormals[] =
     0, -1, 0,
     0, -1, 0
 };
+
 //-------------------------------------------------------------------------------
 // Name: class: SWIRLEntity method: tickAll()
 // Desc: Get one audio frame from this and every child
@@ -158,11 +159,17 @@ void SWIRLMoon::render()
 {
     // Draw the moon
     glPushMatrix( );
+        // enable lighting
+        glEnable( GL_LIGHTING );
+
         glColor4f(1.0f, 1.0f, 1.0f, 0.4f);
         glRotatef(5.0f, 0.0f, 1.0f, 0.0f);
         glRotatef(20.0f, -1.0f, 0.0f, 0.0f);
         glTranslatef(0.0f, 0.0f, 200.0f);
         glutSolidSphere( 20.0f, 24, 24 );
+
+        // disable lighting
+        glDisable( GL_LIGHTING );
     glPopMatrix( );
 }
 
@@ -221,7 +228,7 @@ void SWIRLAvatar::update( YTimeInterval dt )
     iRefLoc.interp( dt );
 
     // update
-    loc = iLoc.actual();
+    loc    = iLoc.actual();
     refLoc = iRefLoc.actual();
 
     ori.x = 0.0f;
@@ -238,6 +245,9 @@ void SWIRLAvatar::update( YTimeInterval dt )
 //-----------------------------------------------------------------------------
 void SWIRLAvatar::render()
 {
+    // enable lighting
+    glEnable( GL_LIGHTING );
+
     // enable state
     glEnableClientState( GL_VERTEX_ARRAY );
     glEnableClientState( GL_NORMAL_ARRAY );
@@ -266,6 +276,9 @@ void SWIRLAvatar::render()
     // disable
     glDisableClientState( GL_VERTEX_ARRAY );
     glDisableClientState( GL_NORMAL_ARRAY );
+
+    // disable lighting
+    glDisable( GL_LIGHTING );
 }
 
 //-----------------------------------------------------------------------------
@@ -276,8 +289,8 @@ SWIRLAvatar::SWIRLAvatar( Vector3D startingLocation )
 {
     size = Vector3D(1, 1, 1.0f); 
     loc  = startingLocation;
-    refLoc = loc + Vector3D(0.0f, 0.0f, 1.0f);
-    col = Globals::ourGray;
+    refLoc = loc + Vector3D(0.0f, 0.0f, 10.0f);
+    col = Globals::ourOrange;
 }
 
 //-----------------------------------------------------------------------------
@@ -294,7 +307,7 @@ void SWIRLAvatar::move( float amount )
    refGoal += movementVector;
 
    // TODO
-   swirl_send_message( "/move", amount );
+   //swirl_send_message( "/move", amount );
 }
 
 //-----------------------------------------------------------------------------
@@ -342,20 +355,6 @@ void SWIRLAvatar::strafe( float amount )
 
 }
 
-//-----------------------------------------------------------------------------
-// Name: class: SWIRLCamera method: drawHUD( )
-// Desc: draws the heads-up display
-//-----------------------------------------------------------------------------
-void SWIRLCamera::drawHUD( )
-{
-    //TODO
-    glPushMatrix();
-        glTranslatef(0.0f, 0.5f, 0.5f);
-        //Globals::waveform->render();
-    glPopMatrix();
-}
-
-
 // TODO
 //-----------------------------------------------------------------------------
 // Name: class: SWIRLBirdy constructor
@@ -382,7 +381,6 @@ SWIRLFluid::SWIRLFluid()
 //-----------------------------------------------------------------------------
 SAMPLE SWIRLFluid::tick( SAMPLE input )
 {
-  static int counter = 0;
   SAMPLE oneFrame[2];
   synth->synthesize2( oneFrame, 1);
   return oneFrame[0];
@@ -443,14 +441,22 @@ void SWIRLCube::update( YTimeInterval dt )
 void SWIRLBirdCube::update( YTimeInterval dt )
 {
     static int counter = 0;
+    int timeout = 50;
 
     // interp
     size.interp( dt );
 
-    if( (loc - Globals::camera->loc).magnitude() < size.magnitude() )
+    if(counter<=0)
     {
-      synth->noteOn(0, 60.0f,126);
-      cout << "note!" << endl;
+        if( (loc - Globals::myAvatar->loc).magnitude() < size.magnitude() )
+        {
+            synth->noteOn(0, 60.0f,126);
+            counter += timeout;
+        }
+    }
+    else
+    {
+        counter -= 1;
     }
 }
 //-----------------------------------------------------------------------------
@@ -469,16 +475,16 @@ void SWIRLBirdCube::render()
 
     // push
     glPushMatrix();
-    // scale
-    glScalef( size.value, size.value, size.value );
+        // scale
+        glScalef( size.value, size.value, size.value );
 
-    // draw it
-    glDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
-    glDrawArrays( GL_TRIANGLE_STRIP, 4, 4 );
-    glDrawArrays( GL_TRIANGLE_STRIP, 8, 4 );
-    glDrawArrays( GL_TRIANGLE_STRIP, 12, 4 );
-    glDrawArrays( GL_TRIANGLE_STRIP, 16, 4 );
-    glDrawArrays( GL_TRIANGLE_STRIP, 20, 4 );
+        // draw it
+        glDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
+        glDrawArrays( GL_TRIANGLE_STRIP, 4, 4 );
+        glDrawArrays( GL_TRIANGLE_STRIP, 8, 4 );
+        glDrawArrays( GL_TRIANGLE_STRIP, 12, 4 );
+        glDrawArrays( GL_TRIANGLE_STRIP, 16, 4 );
+        glDrawArrays( GL_TRIANGLE_STRIP, 20, 4 );
 
     // pop
     glPopMatrix();
@@ -487,4 +493,3 @@ void SWIRLBirdCube::render()
     glDisableClientState( GL_VERTEX_ARRAY );
     glDisableClientState( GL_NORMAL_ARRAY );
 }
-

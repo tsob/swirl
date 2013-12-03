@@ -189,11 +189,12 @@ static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * user
 
     // synthesize it
     Globals::synth->synthesize2( buffer, numFrames );
-    // echo it
-    Globals::echo->synthesize2( buffer, numFrames );
 
     // Cascade audio for simulation
     Globals::sim->audioCascade( buffer, numFrames );
+
+    // echo it
+    Globals::echo->synthesize2( buffer, numFrames );
 
     // copy to mono buffer
     for( int i = 0; i < numFrames; i++ )
