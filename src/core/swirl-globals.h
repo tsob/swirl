@@ -40,6 +40,7 @@
 #define ADDRESS "127.0.0.1"
 #define PORT 7000
 
+#define SWIRL_PI  3.14159265359
 
 // forward reference
 class SWIRLSim;
@@ -108,6 +109,10 @@ public:
     //TODO
     static SWIRLCamera* camera;
     static SWIRLAvatar* myAvatar;
+
+    // Relative camera positions
+    static Vector3D firstPerson;
+    static Vector3D thirdPerson;
 
     static Vector3D fov;
 

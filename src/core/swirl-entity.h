@@ -50,6 +50,9 @@ public:
     // render
     //void render();
 
+    iSlew3D relativePosition;
+    void togglePosition();
+
     // description
     virtual std::string desc() const;
 };

@@ -9,6 +9,7 @@
 #include "swirl-globals.h"
 #include "swirl-networking.h"
 #include <math.h>
+#include "x-fun.h"
 
 using namespace std;
 using namespace stk;
@@ -210,7 +211,44 @@ std::string SWIRLTeapot::desc() const
 //-----------------------------------------------------------------------------
 void SWIRLCamera::update( YTimeInterval dt )
 {
-    loc = Globals::myAvatar->loc + Vector3D(0.0f, 2.0f, 0.0f );
+    // interpolate relative camera position
+    relativePosition.interp(dt);
+
+    // Vector pointing in the look direction
+    Vector3D lookVector = Globals::myAvatar->loc- Globals::myAvatar->refLoc;
+    lookVector.normalize();
+    
+    // rotate relative position for absolute displacement
+    float theta = lookVector.angleXZ() + 0.5*SWIRL_PI;
+    Vector3D displacementVector = Vector3D(
+        relativePosition.actual().x * cos(theta) - relativePosition.actual().z * sin(theta),
+        relativePosition.actual().y,
+        relativePosition.actual().x * sin(theta) + relativePosition.actual().z * cos(theta)
+        );
+
+    loc = Globals::myAvatar->loc + displacementVector;
+}
+
+//-----------------------------------------------------------------------------
+// Name: 
+// Desc: 
+//-----------------------------------------------------------------------------
+void SWIRLCamera::togglePosition()
+{
+    static int position=1;
+
+    if(position==3)
+    {
+      // third to first person
+      relativePosition.update( Globals::firstPerson );
+      position = 1;
+    }
+    else
+    {
+      // first to third person
+      relativePosition.update( Globals::thirdPerson );
+      position = 3;
+    }
 }
 
 //-----------------------------------------------------------------------------
@@ -441,7 +479,7 @@ void SWIRLCube::update( YTimeInterval dt )
 void SWIRLBirdCube::update( YTimeInterval dt )
 {
     static int counter = 0;
-    int timeout = 50;
+    int timeout = 100;
 
     // interp
     size.interp( dt );
@@ -450,8 +488,8 @@ void SWIRLBirdCube::update( YTimeInterval dt )
     {
         if( (loc - Globals::myAvatar->loc).magnitude() < size.magnitude() )
         {
-            synth->noteOn(0, 60.0f,126);
-            counter += timeout;
+            synth->noteOn(0, (float)XFun::rand2i(48,62),100);
+            counter = timeout;
         }
     }
     else
@@ -465,6 +503,9 @@ void SWIRLBirdCube::update( YTimeInterval dt )
 //-----------------------------------------------------------------------------
 void SWIRLBirdCube::render()
 {
+    // enable lighting
+    glEnable( GL_LIGHTING );
+
     // enable state
     glEnableClientState( GL_VERTEX_ARRAY );
     glEnableClientState( GL_NORMAL_ARRAY );
@@ -492,4 +533,7 @@ void SWIRLBirdCube::render()
     // disable
     glDisableClientState( GL_VERTEX_ARRAY );
     glDisableClientState( GL_NORMAL_ARRAY );
+
+    // disable lighting
+    glDisable( GL_LIGHTING );
 }

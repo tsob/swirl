@@ -257,7 +257,7 @@ void initialize_simulation()
     Globals::myAvatar->goal = Globals::myAvatar->loc;
     Globals::myAvatar->refGoal = Globals::myAvatar->refLoc;
 
-    Globals::camera->loc = Globals::myAvatar->loc + Vector3D(0.0f, 2.0f, 0.0f );
+    Globals::camera->relativePosition = iSlew3D( Globals::firstPerson, 5.0f);
 
     //Globals::myAvatar->iRefLoc.setSlew(5);
 
@@ -706,6 +706,10 @@ void keyboardFunc( unsigned char key, int x, int y )
             case 'a':
                 //strafe left
                 Globals::myAvatar->strafe(-0.1f);
+                break;
+            case 'c':
+                // toggle camera position
+                Globals::camera->togglePosition();
                 break;
             case '\'':
                 Globals::bgColor.update( Globals::nightSky );
