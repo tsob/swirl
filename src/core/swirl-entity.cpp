@@ -360,7 +360,9 @@ void SWIRLAvatar::render()
     //glDrawArrays( GL_TRIANGLE_STRIP, 12, 4 );
     //glDrawArrays( GL_TRIANGLE_STRIP, 16, 4 );
     //glDrawArrays( GL_TRIANGLE_STRIP, 20, 4 );
-    glutSolidTeapot( size.magnitude() );
+      glTranslatef( 0.0f, -1.5f, 0.0f);
+      glRotatef( -90.0f, 1.0f, 0.0f, 0.0f);
+      glutSolidCone( 0.5f, 3.0f, 12, 12 );
 
     // pop
     glPopMatrix();
