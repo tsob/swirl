@@ -217,7 +217,6 @@ static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * user
 
     // set in the wave
     Globals::waveform->set( Globals::lastAudioBufferMono, numFrames );
-
 }
 
 

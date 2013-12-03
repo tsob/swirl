@@ -64,7 +64,7 @@ void SWIRLEntity::tickAll( SAMPLE * oneFrame, Vector3D listenerPosition )
 //-----------------------------------------------------------------------------
 void SWIRLCamera::render()
 {
-  // Do nothing?
+  //Do nothing?
 }
 
 //-----------------------------------------------------------------------------
@@ -112,17 +112,21 @@ void SWIRLMoon::render()
 // Desc: Returns a description (usually type and name) of this object. Useful
 //       for debugging stuff.
 //-----------------------------------------------------------------------------
+std::string SWIRLEntity::desc() const
+{
+    return "SWIRLEntity [unnamed]";
+}
 std::string SWIRLCamera::desc() const
 {
-    return "YEntity [SWIRLCamera]";
+    return "SWIRLEntity [SWIRLCamera]";
 }
 std::string SWIRLMoon::desc() const
 {
-    return "YEntity [SWIRLMoon]";
+    return "SWIRLEntity [SWIRLMoon]";
 }
 std::string SWIRLTeapot::desc() const
 {
-    return "YEntity [SWIRLTeapot]";
+    return "SWIRLEntity [SWIRLTeapot]";
 }
 
 //-----------------------------------------------------------------------------
@@ -143,7 +147,29 @@ void SWIRLCamera::update( YTimeInterval dt )
     loc = iLoc.actual();
     refLoc = iRefLoc.actual();
 
+    //ori.x = (refLoc-loc).angleXZ();
+    ori.x = 0.0f;
+    ori.y = (-180.0f / 3.1415927) * (refLoc-loc).angleXZ() + 90.0f;
+    //ori.z = (loc-refLoc).angleXY();
+    ori.z = 0.0f;
+
+    Globals::waveform->loc = loc + (refLoc-loc)*0.1 + Vector3D(0.0f, 0.6f, 0.0f);;
+    Globals::waveform->ori = ori;
 }
+
+//-----------------------------------------------------------------------------
+// Name: class: SWIRLCamera method: drawHUD( )
+// Desc: draws the heads-up display
+//-----------------------------------------------------------------------------
+void SWIRLCamera::drawHUD( )
+{
+    //TODO
+    glPushMatrix();
+        glTranslatef(0.0f, 0.5f, 0.5f);
+        //Globals::waveform->render();
+    glPopMatrix();
+}
+
 
 // TODO
 //-----------------------------------------------------------------------------

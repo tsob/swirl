@@ -9,6 +9,7 @@
 #define __SWIRL_ENTITY_H__
 
 #include "y-entity.h"
+//#include "y-waveform.h"
 #include "y-fluidsynth.h"
 #include "x-audio.h"
 #include "x-buffer.h"
@@ -32,6 +33,9 @@ public:
 
     // Get one sample from every child
     virtual void tickAll( SAMPLE * oneFrame, Vector3D listenerPosition );
+
+    // description
+    virtual std::string desc() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -51,6 +55,8 @@ public:
     void update( YTimeInterval dt );
     // render
     void render();
+    // draw the heads-up display
+    void drawHUD();
 
     // description
     virtual std::string desc() const;
