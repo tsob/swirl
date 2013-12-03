@@ -78,7 +78,8 @@ bool swirl_gfx_init( int argc, const char ** argv )
     glutSpecialFunc (specialFunc );
 
     // Set the mouse movement function
-    glutPassiveMotionFunc( mouseMoveFunc );
+    // TODO troubleshoot
+    //glutPassiveMotionFunc( mouseMoveFunc );
 
     // Do our own initialization
     initialize_graphics();
@@ -462,9 +463,9 @@ void look( )
 
 
     gluLookAt(
-        Globals::camera->loc.x,
-        Globals::camera->loc.y,
-        Globals::camera->loc.z,
+        Globals::camera->absLoc.x,
+        Globals::camera->absLoc.y,
+        Globals::camera->absLoc.z,
         Globals::myAvatar->refLoc.x,
         Globals::myAvatar->refLoc.y,
         Globals::myAvatar->refLoc.z,
@@ -748,6 +749,11 @@ void keyboardFunc( unsigned char key, int x, int y )
 //-----------------------------------------------------------------------------
 void mouseFunc( int button, int state, int x, int y )
 {
+    SWIRLBirdCube * nextBirdCube = new SWIRLBirdCube;
+    nextBirdCube->loc = Globals::myAvatar->loc;
+    nextBirdCube->col = Vector3D( XFun::rand2f(0,1), XFun::rand2f(0,1), XFun::rand2f(0,1));
+    Globals::sim->root().addChild( nextBirdCube );
+
     glutPostRedisplay( );
 }
 

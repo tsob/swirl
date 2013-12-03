@@ -52,6 +52,7 @@ public:
 
     iSlew3D relativePosition;
     void togglePosition();
+    Vector3D absLoc;
 
     // description
     virtual std::string desc() const;

@@ -226,7 +226,8 @@ void SWIRLCamera::update( YTimeInterval dt )
         relativePosition.actual().x * sin(theta) + relativePosition.actual().z * cos(theta)
         );
 
-    loc = Globals::myAvatar->loc + displacementVector;
+    absLoc = Globals::myAvatar->loc + displacementVector;
+    loc = relativePosition.actual();
 }
 
 //-----------------------------------------------------------------------------
@@ -479,7 +480,7 @@ void SWIRLCube::update( YTimeInterval dt )
 void SWIRLBirdCube::update( YTimeInterval dt )
 {
     static int counter = 0;
-    int timeout = 100;
+    int timeout = 24;
 
     // interp
     size.interp( dt );
@@ -488,7 +489,7 @@ void SWIRLBirdCube::update( YTimeInterval dt )
     {
         if( (loc - Globals::myAvatar->loc).magnitude() < size.magnitude() )
         {
-            synth->noteOn(0, (float)XFun::rand2i(48,62),100);
+            synth->noteOn(0, (float)XFun::rand2i(48,62), XFun::rand2i(50,100) );
             counter = timeout;
         }
     }

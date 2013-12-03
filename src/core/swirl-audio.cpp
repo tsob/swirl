@@ -286,14 +286,15 @@ bool swirl_audio_init( unsigned int srate, unsigned int frameSize, unsigned chan
 
     // Create waveform
     Globals::waveform = new YWaveform();
-    Globals::waveform->loc.y = 1.5f;          // Place it
+    Globals::waveform->loc.y = 0.5f;          // Place it
+    Globals::waveform->loc.z = 2.5f;          // Place it
     Globals::waveform->col = Globals::ourRed; // Color it
     Globals::waveform->setWidth(  2.5f );     // Set the width
     Globals::waveform->setHeight( 1.0f );     // Set the height
     Globals::waveform->init( frameSize );     // Initialize it
     Globals::waveform->active = true;         // Active?
     // Add waveform to sim
-    Globals::myAvatar->addChild( Globals::waveform );
+    Globals::camera->addChild( Globals::waveform );
 
 
     return true;
