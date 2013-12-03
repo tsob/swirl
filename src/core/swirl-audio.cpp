@@ -254,7 +254,8 @@ bool swirl_audio_init( unsigned int srate, unsigned int frameSize, unsigned chan
     // Init fluidsynth
     Globals::synth->init( srate, 32 );
     // Load the soundfont
-    Globals::synth->load( "data/soundfonts/birds.sf2", "" );
+    //Globals::synth->load( "data/soundfonts/birds.sf2", "" );
+    Globals::synth->load( "data/soundfonts/CasioVL-1.sf2", "" );
     // Map program changes
     Globals::synth->programChange( 0, 0 );
     //Globals::synth->programChange( 1, 79 );

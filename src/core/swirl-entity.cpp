@@ -407,7 +407,8 @@ SWIRLFluid::SWIRLFluid()
     // Init fluidsynth
     synth->init( SWIRL_SRATE, 32 );
     // Load the soundfont
-    synth->load( "data/soundfonts/birds.sf2", "" );
+    //synth->load( "data/soundfonts/birds.sf2", "" );
+    synth->load( "data/soundfonts/CasioVL-1.sf2", "" );
     // Map program changes
     synth->programChange( 0, 0 );
     printf("Instantiated SWIRLFluid\n");
@@ -422,7 +423,7 @@ SAMPLE SWIRLFluid::tick( SAMPLE input )
 {
   SAMPLE oneFrame[2];
   synth->synthesize2( oneFrame, 1);
-  return oneFrame[0];
+  return 0.5*oneFrame[0];
 }
 
 //-----------------------------------------------------------------------------
