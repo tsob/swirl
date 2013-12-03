@@ -157,7 +157,7 @@ void SWIRLEntity::synthesizeAll( SAMPLE * buffer,
 
         for (int j = 0; j < numFrames; ++j)
         {
-            buffer[j*SWIRL_NUMCHANNELS] += tmpBuffer[j];
+            buffer[j*SWIRL_NUMCHANNELS] += tmpBuffer[j*SWIRL_NUMCHANNELS];
 
             // Mono expansion // TODO change
             for (int i = 1; i < SWIRL_NUMCHANNELS; ++i)
