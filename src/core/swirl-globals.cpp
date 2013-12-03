@@ -95,9 +95,10 @@ Vector3D Globals::viewEyeY( 2, 0, 1.5f );
 int Globals::app = 0;
 
 //TODO
-SWIRLCamera * Globals::camera =  new SWIRLCamera;
-Vector3D Globals::cameraEye( 0, 0, -1 );
-Vector3D Globals::cameraReference( 0, 0, 0 );
+SWIRLCamera * Globals::camera   =  new SWIRLCamera;
+SWIRLAvatar * Globals::myAvatar =  new SWIRLAvatar( Vector3D(0.0f, 0.0f, 0.0f) );
+//Vector3D Globals::cameraEye( 0, 0, -1 );
+//Vector3D Globals::cameraReference( 0, 0, 0 );
 
 //Vector3D Globals::cameraEye( 0, 0, -1 );
 //Vector3D Globals::cameraReference( 0, 0, 0 );

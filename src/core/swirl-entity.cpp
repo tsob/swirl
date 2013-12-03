@@ -7,6 +7,7 @@
 //-----------------------------------------------------------------------------
 #include "swirl-entity.h"
 #include "swirl-globals.h"
+#include "swirl-networking.h"
 #include <math.h>
 
 using namespace std;
@@ -126,15 +127,6 @@ void SWIRLEntity::tickAll( SAMPLE * oneFrame, Vector3D listenerPosition )
 }
 
 //-----------------------------------------------------------------------------
-// Name: class: SWIRLCamera method: render()
-// Desc: ...
-//-----------------------------------------------------------------------------
-void SWIRLCamera::render()
-{
-  //Do nothing?
-}
-
-//-----------------------------------------------------------------------------
 // Name: class: SWIRLTeapot method: render()
 // Desc: ...
 //-----------------------------------------------------------------------------
@@ -187,6 +179,10 @@ std::string SWIRLBirdCube::desc() const
 {
     return "SWIRLEntity [SWIRLBirdCube]";
 }
+std::string SWIRLAvatar::desc() const
+{
+    return "SWIRLEntity [SWIRLAvatar]";
+}
 std::string SWIRLCamera::desc() const
 {
     return "SWIRLEntity [SWIRLCamera]";
@@ -200,15 +196,25 @@ std::string SWIRLTeapot::desc() const
     return "SWIRLEntity [SWIRLTeapot]";
 }
 
+
 //-----------------------------------------------------------------------------
-// Name: class: SWIRLCamera method: update( YTimeInterval dt )
-// Desc: updates (interpolates) camera position
+// Name: 
+// Desc: 
 //-----------------------------------------------------------------------------
 void SWIRLCamera::update( YTimeInterval dt )
 {
+    loc = Globals::myAvatar->loc + Vector3D(0.0f, 2.0f, 0.0f );
+}
 
-    iLoc.update(Globals::cameraEye);
-    iRefLoc.update(Globals::cameraReference);
+//-----------------------------------------------------------------------------
+// Name: class: SWIRLAvatar method: update( YTimeInterval dt )
+// Desc: updates (interpolates) avatar position
+//-----------------------------------------------------------------------------
+void SWIRLAvatar::update( YTimeInterval dt )
+{
+
+    iLoc.update( goal );
+    iRefLoc.update( refGoal );
 
     // interp
     iLoc.interp( dt );
@@ -218,14 +224,122 @@ void SWIRLCamera::update( YTimeInterval dt )
     loc = iLoc.actual();
     refLoc = iRefLoc.actual();
 
-    //ori.x = (refLoc-loc).angleXZ();
     ori.x = 0.0f;
     ori.y = (-180.0f / 3.1415927) * (refLoc-loc).angleXZ() + 90.0f;
-    //ori.z = (loc-refLoc).angleXY();
     ori.z = 0.0f;
 
-    Globals::waveform->loc = loc + (refLoc-loc)*0.1 + Vector3D(0.0f, 0.6f, 0.0f);
-    Globals::waveform->ori = ori;
+    //Globals::waveform->loc = loc + (refLoc-loc)*0.1 + Vector3D(0.0f, 0.6f, 0.0f);
+    //Globals::waveform->ori = ori;
+}
+
+//-----------------------------------------------------------------------------
+// name: render()
+// desc: ...
+//-----------------------------------------------------------------------------
+void SWIRLAvatar::render()
+{
+    // enable state
+    glEnableClientState( GL_VERTEX_ARRAY );
+    glEnableClientState( GL_NORMAL_ARRAY );
+
+    // set vertex pointer
+    glVertexPointer( 3, GL_FLOAT, 0, g_squareVertices );
+    glNormalPointer( GL_FLOAT, 0, g_squareNormals );
+
+    // push
+    glPushMatrix();
+    // scale
+    glScalef( size.value, size.value, size.value );
+
+    // draw it
+    //glDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
+    //glDrawArrays( GL_TRIANGLE_STRIP, 4, 4 );
+    //glDrawArrays( GL_TRIANGLE_STRIP, 8, 4 );
+    //glDrawArrays( GL_TRIANGLE_STRIP, 12, 4 );
+    //glDrawArrays( GL_TRIANGLE_STRIP, 16, 4 );
+    //glDrawArrays( GL_TRIANGLE_STRIP, 20, 4 );
+    glutSolidTeapot( size.magnitude() );
+
+    // pop
+    glPopMatrix();
+
+    // disable
+    glDisableClientState( GL_VERTEX_ARRAY );
+    glDisableClientState( GL_NORMAL_ARRAY );
+}
+
+//-----------------------------------------------------------------------------
+// Name: class: SWIRLAvatar constructor
+// Desc: 
+//-----------------------------------------------------------------------------
+SWIRLAvatar::SWIRLAvatar( Vector3D startingLocation )
+{
+    size = Vector3D(1, 1, 1.0f); 
+    loc  = startingLocation;
+    refLoc = loc + Vector3D(0.0f, 0.0f, 1.0f);
+    col = Globals::ourGray;
+}
+
+//-----------------------------------------------------------------------------
+// Name: class: SWIRLAvatar method: move( amount )
+// Desc: 
+//-----------------------------------------------------------------------------
+void SWIRLAvatar::move( float amount )
+{
+   Vector3D movementVector = refLoc - loc;
+   movementVector.normalize();
+   movementVector *= amount;
+
+   goal    += movementVector;
+   refGoal += movementVector;
+
+   // TODO
+   swirl_send_message( "/move", amount );
+}
+
+//-----------------------------------------------------------------------------
+// Name: class: SWIRLAvatar method: turn( radAmount )
+// Desc: 
+//-----------------------------------------------------------------------------
+void SWIRLAvatar::turn( float radAmount )
+{
+   Vector3D lookVector = refLoc - loc;
+   float tmpRefX = lookVector.x;
+   float tmpRefZ = lookVector.z;
+
+   lookVector.x = tmpRefX * cos(radAmount)
+                  - tmpRefZ * sin(radAmount);
+
+   lookVector.z = tmpRefX * sin(radAmount)
+                  + tmpRefZ * cos(radAmount);
+
+   refGoal = loc + lookVector;
+}
+
+//-----------------------------------------------------------------------------
+// Name: class: SWIRLAvatar method: strafe( amount )
+// Desc: 
+//-----------------------------------------------------------------------------
+void SWIRLAvatar::strafe( float amount )
+{
+   Vector3D movementVector = refLoc - loc;
+   // Rotate movementVector by 90 degrees
+   float tmpX = movementVector.x;
+   float tmpZ = movementVector.z;
+
+   movementVector.x = - tmpZ;
+   movementVector.z = tmpX;
+
+   movementVector.normalize();
+   movementVector *= amount;
+
+   refGoal += movementVector;
+   goal    += movementVector;
+
+   // TODO
+   //swirl_send_message( "/strafe", -0.1f );
+   //swirl_send_message( "/strafe", amount );
+
 }
 
 //-----------------------------------------------------------------------------

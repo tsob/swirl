@@ -90,7 +90,7 @@ void SWIRLSim::audioCascade(SAMPLE * buffer, unsigned int numFrames)
 
     for (int i = 0; i < numFrames; ++i)
     {
-         m_gfxRoot.tickAll( oneFrame, Globals::cameraEye );
+         m_gfxRoot.tickAll( oneFrame, Globals::camera->loc );
 
         for (int j = 0; j < SWIRL_NUMCHANNELS; ++j)
         {

@@ -45,16 +45,11 @@ public:
 class SWIRLCamera : public SWIRLEntity
 {
 public:
-    // slew
-    iSlew3D iLoc;
-    iSlew3D iRefLoc;
-
-    Vector3D refLoc;
-
     // update
     void update( YTimeInterval dt );
     // render
-    void render();
+    //void render();
+
     // draw the heads-up display
     void drawHUD();
 
@@ -62,6 +57,37 @@ public:
     virtual std::string desc() const;
 };
 
+//-----------------------------------------------------------------------------
+// Name: class SWIRLAvatar
+// Desc: the avatars
+//-----------------------------------------------------------------------------
+class SWIRLAvatar : public SWIRLEntity
+{
+public:
+    SWIRLAvatar( Vector3D startingLocation ); // Constructor
+
+    Vector3D goal;
+    Vector3D refGoal;
+    Vector3D refLoc;
+
+    iSlew3D iLoc;
+    iSlew3D iRefLoc;
+
+    // update
+    void update( YTimeInterval dt );
+    // render
+    void render();
+
+    // description
+    virtual std::string desc() const;
+
+    // movement methods
+    void move(   float amount );
+    void turn(   float degAmount );
+    void strafe( float amount );
+
+    Vector3D size;
+};
 
 //-----------------------------------------------------------------------------
 // Name: class SWIRLMoon

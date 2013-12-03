@@ -185,7 +185,7 @@ static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * user
     // Copy to global buffer
     memcpy( Globals::lastAudioBuffer, buffer,
            sizeof(SAMPLE)*numFrames*channels );
-    
+
 
     // synthesize it
     Globals::synth->synthesize2( buffer, numFrames );
@@ -292,7 +292,7 @@ bool swirl_audio_init( unsigned int srate, unsigned int frameSize, unsigned chan
     Globals::waveform->init( frameSize );     // Initialize it
     Globals::waveform->active = true;         // Active?
     // Add waveform to sim
-    Globals::sim->root().addChild( Globals::waveform );
+    Globals::myAvatar->addChild( Globals::waveform );
 
 
     return true;

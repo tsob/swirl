@@ -240,26 +240,25 @@ void initialize_simulation()
     Globals::sim->root().addChild( getAvatar() );
     Globals::sim->root().addChild( new SWIRLMoon  );
 
-    Globals::cameraEye.x = 0;
-    Globals::cameraEye.y = 0;
-
     if (Globals::app == 1)
     {
-        Globals::cameraEye.z = -2;
-        Globals::cameraReference.z = 9;
+        Globals::myAvatar->loc.z = -2;
+        Globals::myAvatar->refLoc.z = 9;
     }
     else
     {
-        Globals::cameraEye.z = -1;
-        Globals::cameraReference.z = 10;
+        Globals::myAvatar->loc.z = -1;
+        Globals::myAvatar->refLoc.z = 10;
     }
 
-    Globals::camera->loc = Globals::cameraEye;
-    Globals::camera->refLoc = Globals::cameraReference;
-    Globals::camera->iLoc.setSlew(5);
-    Globals::camera->iRefLoc.setSlew(5);
+    Globals::camera->loc = Globals::myAvatar->loc + Vector3D(0.0f, 2.0f, 0.0f );
 
-    Globals::sim->root().addChild( Globals::camera );
+    Globals::myAvatar->iLoc = iSlew3D( Globals::myAvatar->loc, 5.0f );
+    Globals::myAvatar->iRefLoc = iSlew3D( Globals::myAvatar->refLoc, 5.0f );
+    //Globals::myAvatar->iRefLoc.setSlew(5);
+
+    Globals::myAvatar->addChild( Globals::camera );
+    Globals::sim->root().addChild( Globals::myAvatar );
 
     Globals::sim->root().addChild( new SWIRLBirdCube() );
 
@@ -478,9 +477,9 @@ void look( )
         Globals::camera->loc.x,
         Globals::camera->loc.y,
         Globals::camera->loc.z,
-        Globals::camera->refLoc.x,
-        Globals::camera->refLoc.y,
-        Globals::camera->refLoc.z,
+        Globals::myAvatar->refLoc.x,
+        Globals::myAvatar->refLoc.y,
+        Globals::myAvatar->refLoc.z,
         0.0f, 1.0f, 0.0f
         );
 
@@ -517,13 +516,13 @@ void mouseMoveFunc( int x, int y )
     }
 
     if( (float)x > lastx )
-        turn(lastx*0.01);
+        Globals::myAvatar->turn(lastx*0.01);
     else
-        turn((-lastx)*0.01);
+        Globals::myAvatar->turn((-lastx)*0.01);
     if( (float)y > 0 )
-        move(-lasty*0.01); 
+        Globals::myAvatar->move(-lasty*0.01); 
     else 
-        move(lasty*0.01);
+        Globals::myAvatar->move(lasty*0.01);
 
     lastx = (float)x;
     lasty = (float)y;
@@ -703,27 +702,27 @@ void keyboardFunc( unsigned char key, int x, int y )
         {
             case ']':
                 // turn right
-                turn(0.1f);
+                Globals::myAvatar->turn(0.1f);
                 break;
             case '[':
                 // turn left
-                turn(-0.1f);
+                Globals::myAvatar->turn(-0.1f);
                 break;
             case 'w':
                 // move forward
-                move(0.1f);
+                Globals::myAvatar->move(0.1f);
                 break;
             case 'x':
                 // move back
-                move(-0.1f);
+                Globals::myAvatar->move(-0.1f);
                 break;
             case 'd':
                 //strafe right
-                strafe(0.1f);
+                Globals::myAvatar->strafe(0.1f);
                 break;
             case 'a':
                 //strafe left
-                strafe(-0.1f);
+                Globals::myAvatar->strafe(-0.1f);
                 break;
             case '\'':
                 Globals::bgColor.update( Globals::nightSky );
@@ -1109,67 +1108,67 @@ void renderBackground()
 
 // TODO CHANGE TO MEMBER FUNCTIONS OF YENTITIES
 
-//-----------------------------------------------------------------------------
-// Name: strafe( float amount )
-// Desc: move me left or right
-//-----------------------------------------------------------------------------
-void strafe( float amount )
-{
-   Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
-   Vector3D movementVector = lookVector;
-   // Rotate movementVector by 90 degrees
-   float tmpX = movementVector.x;
-   float tmpZ = movementVector.z;
+////-----------------------------------------------------------------------------
+//// Name: strafe( float amount )
+//// Desc: move me left or right
+////-----------------------------------------------------------------------------
+//void strafe( float amount )
+//{
+   //Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+   //Vector3D movementVector = lookVector;
+   //// Rotate movementVector by 90 degrees
+   //float tmpX = movementVector.x;
+   //float tmpZ = movementVector.z;
 
-   movementVector.x = - tmpZ;
-   movementVector.z = tmpX;
+   //movementVector.x = - tmpZ;
+   //movementVector.z = tmpX;
 
-   movementVector.normalize();
-   movementVector *= amount;
+   //movementVector.normalize();
+   //movementVector *= amount;
 
-   Globals::cameraReference += movementVector;
-   Globals::cameraEye += movementVector;
+   //Globals::cameraReference += movementVector;
+   //Globals::cameraEye += movementVector;
 
-   // TODO
-   //swirl_send_message( "/strafe", -0.1f );
-   swirl_send_message( "/strafe", amount );
-}
+   //// TODO
+   ////swirl_send_message( "/strafe", -0.1f );
+   //swirl_send_message( "/strafe", amount );
+//}
 
-//-----------------------------------------------------------------------------
-// Name: move( float amount )
-// Desc: move me forward or backward
-//-----------------------------------------------------------------------------
-void move( float amount )
-{
-   Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
-   Vector3D movementVector = lookVector;
-   movementVector.normalize();
-   movementVector *= amount;
+////-----------------------------------------------------------------------------
+//// Name: move( float amount )
+//// Desc: move me forward or backward
+////-----------------------------------------------------------------------------
+//void move( float amount )
+//{
+   //Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+   //Vector3D movementVector = lookVector;
+   //movementVector.normalize();
+   //movementVector *= amount;
 
-   Globals::cameraReference += movementVector;
-   Globals::cameraEye += movementVector;
+   //Globals::cameraReference += movementVector;
+   //Globals::cameraEye += movementVector;
 
-   // TODO
-   swirl_send_message( "/move", amount );
-}
+   //// TODO
+   //swirl_send_message( "/move", amount );
+//}
 
-//-----------------------------------------------------------------------------
-// Name: turn( radAmount )
-// Desc: turn
-//-----------------------------------------------------------------------------
-void turn( float radAmount )
-{
-   Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
-   float tmpRefX = lookVector.x;
-   float tmpRefZ = lookVector.z;
+////-----------------------------------------------------------------------------
+//// Name: turn( radAmount )
+//// Desc: turn
+////-----------------------------------------------------------------------------
+//void turn( float radAmount )
+//{
+   //Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+   //float tmpRefX = lookVector.x;
+   //float tmpRefZ = lookVector.z;
 
-   lookVector.x = tmpRefX * cos(radAmount)
-                  - tmpRefZ * sin(radAmount);
+   //lookVector.x = tmpRefX * cos(radAmount)
+                  //- tmpRefZ * sin(radAmount);
 
-   lookVector.z = tmpRefX * sin(radAmount)
-                  + tmpRefZ * cos(radAmount);
+   //lookVector.z = tmpRefX * sin(radAmount)
+                  //+ tmpRefZ * cos(radAmount);
 
-   Globals::cameraReference = Globals::cameraEye + lookVector;
+   //Globals::cameraReference = Globals::cameraEye + lookVector;
 
-   swirl_send_message( "/rotated", radAmount );
-}
+   //swirl_send_message( "/rotated", radAmount );
+//}
