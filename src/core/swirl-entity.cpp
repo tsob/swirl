@@ -9,6 +9,7 @@
 #include "swirl-globals.h"
 #include "swirl-networking.h"
 #include <math.h>
+#include <utility>
 #include "x-fun.h"
 
 using namespace std;
@@ -151,13 +152,13 @@ void SWIRLEntity::synthesizeAll( SAMPLE * buffer,
         // For now, just do mono without spatialization
         SAMPLE tmpBuffer[numFrames*2];
         memset(tmpBuffer,0,sizeof(SAMPLE)*numFrames*2);
-        //cout << "about to synthesize into a temporary buffer" << endl;
         this->synthesize( tmpBuffer, numFrames );
-        //cout << "successfully synthesized into a temporary buffer" << endl;
 
         for (int j = 0; j < numFrames; ++j)
         {
-            buffer[j*SWIRL_NUMCHANNELS] += tmpBuffer[j*SWIRL_NUMCHANNELS];
+            // perform distance scaling and add to mono buffer
+            buffer[j*SWIRL_NUMCHANNELS] += tmpBuffer[j*SWIRL_NUMCHANNELS]
+                 / max((this->loc-Globals::camera->absLoc).magnitude(), 1.0f);
 
             // Mono expansion // TODO change
             for (int i = 1; i < SWIRL_NUMCHANNELS; ++i)
@@ -463,6 +464,9 @@ SWIRLFluid::SWIRLFluid()
     synth->load( "data/soundfonts/CasioVL-1.sf2", "" );
     // Map program changes
     synth->programChange( 0, 0 );
+    synth->programChange( 1, 1 );
+    synth->programChange( 2, 2 );
+    synth->programChange( 3, 3 );
     printf("Instantiated SWIRLFluid\n");
 }
 
@@ -523,8 +527,6 @@ void SWIRLCube::render()
 }
 
 
-
-
 //-----------------------------------------------------------------------------
 // name: update()
 // desc: ...
@@ -542,7 +544,8 @@ void SWIRLCube::update( YTimeInterval dt )
 void SWIRLBirdCube::update( YTimeInterval dt )
 {
     static int counter = 0;
-    int timeout = 24;
+    static vector< pair<int,int> > noteChanPitch;
+    static int timeout = 12;
 
     // interp
     size.interp( dt );
@@ -551,13 +554,23 @@ void SWIRLBirdCube::update( YTimeInterval dt )
     {
         if( (loc - Globals::myAvatar->loc).magnitude() < size.magnitude() )
         {
-            synth->noteOn(0, (float)XFun::rand2i(48,62), XFun::rand2i(50,100) );
+            int pitch = XFun::rand2i(48,62);
+            int channel = 0;
+            synth->noteOn(channel, (float)pitch, XFun::rand2i(50,100) );
             counter = timeout;
+            noteChanPitch.push_back( make_pair(channel, (int)pitch) );
         }
     }
     else
     {
         counter -= 1;
+        cout << counter << endl;
+        if(counter<=0)
+        {
+            pair<int, int> myNoteOff = noteChanPitch.back();
+            noteChanPitch.pop_back();
+            synth->noteOff( myNoteOff.first, myNoteOff.second );
+        }
     }
 }
 //-----------------------------------------------------------------------------

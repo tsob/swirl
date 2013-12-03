@@ -194,7 +194,7 @@ static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * user
     Globals::sim->audioCascade( buffer, numFrames );
 
     // echo it
-    //Globals::echo->synthesize2( buffer, numFrames );
+    Globals::echo->synthesize2( buffer, numFrames );
 
     // copy to mono buffer
     for( int i = 0; i < numFrames; i++ )
@@ -265,8 +265,8 @@ bool swirl_audio_init( unsigned int srate, unsigned int frameSize, unsigned chan
 
     // Allocate echo
     Globals::echo = new YEcho( srate );
-    Globals::echo->setDelay( 0, .25 );
-    Globals::echo->setDelay( 1, .5 );
+    Globals::echo->setDelay( 0, .1 );
+    Globals::echo->setDelay( 1, .14 );
 
     // make a note
     //g_note = makeNote( 0, 60, .9, .5, 0 );

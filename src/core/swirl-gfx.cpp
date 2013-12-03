@@ -236,6 +236,10 @@ void initialize_graphics()
 //-----------------------------------------------------------------------------
 void initialize_simulation()
 {
+
+    // seed rand
+    XFun::srand();
+
     // instantiate simulation
     Globals::sim = new SWIRLSim();
 
