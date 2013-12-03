@@ -84,19 +84,30 @@ void SWIRLSim::systemCascade()
 //-------------------------------------------------------------------------------
 void SWIRLSim::audioCascade(SAMPLE * buffer, unsigned int numFrames)
 {
-    SAMPLE oneFrame[SWIRL_NUMCHANNELS];
+
+    // Below is to tick all sample by sample...
+/*
+ *    SAMPLE oneFrame[SWIRL_NUMCHANNELS];
+ *    // Zero out to start
+ *    memset(oneFrame, 0, sizeof(SAMPLE)*SWIRL_NUMCHANNELS);
+ *
+ *    for (int i = 0; i < numFrames; ++i)
+ *    {
+ *         m_gfxRoot.tickAll( oneFrame, Globals::camera->loc );
+ *
+ *        for (int j = 0; j < SWIRL_NUMCHANNELS; ++j)
+ *        {
+ *            buffer[i* SWIRL_NUMCHANNELS+j] = oneFrame[j];
+ *        }
+ *    }
+ */
+
+    // Instead we synthesize all per buffer.
+
     // Zero out to start
-    memset(oneFrame, 0, sizeof(SAMPLE)*SWIRL_NUMCHANNELS);
+    memset(buffer, 0, sizeof(SAMPLE)*SWIRL_NUMCHANNELS*numFrames);
 
-    for (int i = 0; i < numFrames; ++i)
-    {
-         m_gfxRoot.tickAll( oneFrame, Globals::camera->loc );
-
-        for (int j = 0; j < SWIRL_NUMCHANNELS; ++j)
-        {
-            buffer[i* SWIRL_NUMCHANNELS+j] = oneFrame[j];
-        }
-    }
+    m_gfxRoot.synthesizeAll( buffer, numFrames, Globals::camera->loc );
 }
 
 

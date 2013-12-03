@@ -128,6 +128,58 @@ void SWIRLEntity::tickAll( SAMPLE * oneFrame, Vector3D listenerPosition )
 
 }
 
+//-------------------------------------------------------------------------------
+// Name: class: SWIRLEntity method: tickAll()
+// Desc: Get one audio frame from this and every child
+//-------------------------------------------------------------------------------
+void SWIRLEntity::synthesizeAll( SAMPLE * buffer,
+                                 unsigned int numFrames,
+                                 Vector3D listenerPosition
+                               )
+{
+    //cout << this->desc() << endl;
+    //cout << "starting to synthesize!" << endl;
+
+    // Stop if this entity is not active.
+    if( !active )
+        return;
+
+    // render self if not hidden
+    if( !hidden )
+    {
+
+        // For now, just do mono without spatialization
+        SAMPLE tmpBuffer[numFrames*2];
+        memset(tmpBuffer,0,sizeof(SAMPLE)*numFrames*2);
+        //cout << "about to synthesize into a temporary buffer" << endl;
+        this->synthesize( tmpBuffer, numFrames );
+        //cout << "successfully synthesized into a temporary buffer" << endl;
+
+        for (int j = 0; j < numFrames; ++j)
+        {
+            buffer[j*SWIRL_NUMCHANNELS] += tmpBuffer[j];
+
+            // Mono expansion // TODO change
+            for (int i = 1; i < SWIRL_NUMCHANNELS; ++i)
+            {
+                buffer[j*SWIRL_NUMCHANNELS + i] =  buffer[j*SWIRL_NUMCHANNELS];
+            }
+        }
+    }
+
+    // synthesize children
+    for( vector<YEntity *>::iterator itr = children.begin();
+         itr != children.end(); itr++ )
+    {
+        if (dynamic_cast<SWIRLEntity *>(*itr))
+        {
+          //cout << "going to child...";
+          ((SWIRLEntity*)*itr)->synthesizeAll(buffer,numFrames,listenerPosition);
+        }
+    }
+
+}
+
 //-----------------------------------------------------------------------------
 // Name: class: SWIRLTeapot method: render()
 // Desc: ...
@@ -416,7 +468,7 @@ SWIRLFluid::SWIRLFluid()
 
 // TODO
 //-----------------------------------------------------------------------------
-// Name: class: SWIRLBirdy method: tick()
+// Name: class: SWIRLFluid method: tick()
 // Desc: return a sample of audio from SWIRLBirdy
 //-----------------------------------------------------------------------------
 SAMPLE SWIRLFluid::tick( SAMPLE input )
@@ -424,6 +476,15 @@ SAMPLE SWIRLFluid::tick( SAMPLE input )
   SAMPLE oneFrame[2];
   synth->synthesize2( oneFrame, 1);
   return 0.1*oneFrame[0];
+}
+
+//-----------------------------------------------------------------------------
+// Name: class: 
+// Desc: 
+//-----------------------------------------------------------------------------
+void SWIRLFluid::synthesize( SAMPLE * buffer, unsigned int numFrames )
+{
+  synth->synthesize2( (float*)buffer, numFrames);
 }
 
 //-----------------------------------------------------------------------------

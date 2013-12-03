@@ -31,8 +31,17 @@ public:
     //! Input one sample to the filter and return one output.
     virtual SAMPLE tick( SAMPLE input ) {};
 
+    // Synthesize a whole buffer
+    virtual void synthesize( SAMPLE * buffer, unsigned int numFrames ) {};
+
     // Get one sample from every child
     virtual void tickAll( SAMPLE * oneFrame, Vector3D listenerPosition );
+
+    // Synthesize one buffer from every child
+    virtual void synthesizeAll( SAMPLE * buffer,
+                                unsigned int numFrames,
+                                Vector3D listenerPosition
+                              );
 
     // description
     virtual std::string desc() const;
@@ -133,6 +142,7 @@ public:
     SWIRLFluid(); //Constructor
 
     virtual SAMPLE tick( SAMPLE input );
+    virtual void synthesize( SAMPLE * buffer, unsigned int numFrames );
 
     // fluidsynth
     GeXFluidSynth * synth;
