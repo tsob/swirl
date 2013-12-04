@@ -202,7 +202,7 @@ public:
 class SWIRLBirdCube : public SWIRLFluid
 {
 public:
-    SWIRLBirdCube() : size( 1, 1, 1.0f ) {  }
+    SWIRLBirdCube() : size( 1, 1, 1.0f ) { counter = 0; }
 
 public:
     virtual void render();
@@ -211,6 +211,8 @@ public:
 public:
     // description
     virtual std::string desc() const;
+
+    int counter;
 
 public:
     Vector3D size;
@@ -223,7 +225,11 @@ public:
 class SWIRLNoteSphere : public SWIRLFluid
 {
 public:
-    SWIRLNoteSphere() : size( 1, 1, 1.0f ) { pitch = XFun::rand2i(48,62); }
+    SWIRLNoteSphere() : size( 1, 1, 1.0f ){
+      pitch   = XFun::rand2i(22,62);
+      channel = rand() % 30;
+      counter = 0;
+    }
 
 public:
     virtual void render();
@@ -233,6 +239,7 @@ public:
     // description
     virtual std::string desc() const;
     float pitch;
+    int counter, channel;
 
 public:
     Vector3D size;

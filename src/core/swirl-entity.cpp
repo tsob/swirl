@@ -479,18 +479,26 @@ void SWIRLAvatar::strafe( float amount )
 SWIRLFluid::SWIRLFluid()
 {
     printf("About to instantiate SWIRLFluid\n");
+    XFun::srand();
     // Instantiate fluidsynth
     synth = new GeXFluidSynth();
     // Init fluidsynth
     synth->init( SWIRL_SRATE, 32 );
     // Load the soundfont
     //synth->load( "data/soundfonts/birds.sf2", "" );
-    synth->load( "data/soundfonts/CasioVL-1.sf2", "" );
+    //synth->load( "data/soundfonts/CasioVL-1.sf2", "" );
+    synth->load( "data/soundfonts/chorium.sf2", "" );
     // Map program changes
-    synth->programChange( 0, 0 );
-    synth->programChange( 1, 1 );
-    synth->programChange( 2, 2 );
-    synth->programChange( 3, 3 );
+    //synth->programChange( 0, XFun::rand2i(1,13)-1 );
+
+    for (int i = 0; i < 30; ++i)
+    {
+        synth->programChange( i, rand() % 64 );
+    }
+
+    //synth->programChange( 1, 1 );
+    //synth->programChange( 2, 2 );
+    //synth->programChange( 3, 3 );
     printf("Instantiated SWIRLFluid\n");
 }
 
@@ -566,7 +574,6 @@ void SWIRLCube::update( YTimeInterval dt )
 //-----------------------------------------------------------------------------
 void SWIRLBirdCube::update( YTimeInterval dt )
 {
-    static int counter = 0;
     static vector< pair<int,int> > noteChanPitch;
     static int timeout = 512;
 
@@ -578,7 +585,7 @@ void SWIRLBirdCube::update( YTimeInterval dt )
         if( (loc - Globals::myAvatar->loc).magnitude() < size.magnitude() )
         {
             int pitch = XFun::rand2i(48,62);
-            int channel = 0;
+            int channel = rand() % 64;
             synth->noteOn(channel, (float)pitch, XFun::rand2i(50,100) );
             counter = timeout;
             noteChanPitch.push_back( make_pair(channel, (int)pitch) );
@@ -604,7 +611,6 @@ void SWIRLBirdCube::update( YTimeInterval dt )
 //-----------------------------------------------------------------------------
 void SWIRLNoteSphere::update( YTimeInterval dt )
 {
-    static int counter = 0;
     static vector< pair<int,int> > noteChanPitch;
     static int timeout = 512;
 
@@ -615,7 +621,6 @@ void SWIRLNoteSphere::update( YTimeInterval dt )
     {
         if( (loc - Globals::myAvatar->loc).magnitude() < size.magnitude() )
         {
-            int channel = 0;
             synth->noteOn(channel, (float)pitch, XFun::rand2i(50,100) );
             counter = timeout;
             noteChanPitch.push_back( make_pair(channel, (int)pitch) );
@@ -625,7 +630,7 @@ void SWIRLNoteSphere::update( YTimeInterval dt )
     }
     else
     {
-        counter -= 1;
+        counter--;
         if(counter<=0)
         {
             pair<int, int> myNoteOff = noteChanPitch.back();
