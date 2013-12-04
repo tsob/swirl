@@ -48,6 +48,10 @@ SwirlNoteSequence::SwirlNoteSequence( )
     nextTime = 0.0; // Start immediately
     noteIndex = 0;
 }
+//-----------------------------------------------------------------------------
+// Name: class SwirlNoteSequence
+// Desc: Overloaded constructor
+//-----------------------------------------------------------------------------
 SwirlNoteSequence::SwirlNoteSequence( YTimeInterval startTime  )
 {
     // Clear vectors
@@ -57,7 +61,7 @@ SwirlNoteSequence::SwirlNoteSequence( YTimeInterval startTime  )
 }
 
 //-----------------------------------------------------------------------------
-// Name: addNote [class SwirlNoteSequence]
+// Name: class: SwirlNoteSequence method: addNote
 // Desc: Add a note to the sequence
 //-----------------------------------------------------------------------------
 void SwirlNoteSequence::addNote( SwirlNote note )
@@ -66,7 +70,10 @@ void SwirlNoteSequence::addNote( SwirlNote note )
     notes.push_back( note );
 }
 
-// Update
+//-----------------------------------------------------------------------------
+// Name: class: SwirlNoteSequence method: update
+// Desc: 
+//-----------------------------------------------------------------------------
 void SwirlNoteSequence::update( YTimeInterval dt )
 {
     int noteIndex = 0;
@@ -97,7 +104,10 @@ void SwirlNoteSequence::update( YTimeInterval dt )
     }
 }
 
-// Play some notes
+//-----------------------------------------------------------------------------
+// Name: swirl_playNotes( float pitch, float velocity )
+// Desc: Play some notes
+//-----------------------------------------------------------------------------
 void swirl_playNotes( float pitch, float velocity )
 {
     // lock
@@ -177,18 +187,27 @@ static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * user
     unsigned int channels = Globals::lastAudioBufferChannels;
 
     // Zero out buffers
-    memset( Globals::lastAudioBuffer, 0,
-           sizeof(SAMPLE)*Globals::lastAudioBufferFrames*channels );
-    memset( Globals::lastAudioBufferMono, 0,
-           sizeof(SAMPLE)*Globals::lastAudioBufferFrames );
+    memset(
+        Globals::lastAudioBuffer,
+        0,
+        sizeof(SAMPLE)*Globals::lastAudioBufferFrames*channels
+        );
+
+    memset(
+        Globals::lastAudioBufferMono,
+        0,
+        sizeof(SAMPLE)*Globals::lastAudioBufferFrames
+        );
 
     // Copy to global buffer
-    memcpy( Globals::lastAudioBuffer, buffer,
-           sizeof(SAMPLE)*numFrames*channels );
-
+    memcpy(
+        Globals::lastAudioBuffer,
+        buffer,
+        sizeof(SAMPLE)*numFrames*channels
+        );
 
     // synthesize it
-    Globals::synth->synthesize2( buffer, numFrames );
+    //Globals::synth->synthesize2( buffer, numFrames );
 
     // Cascade audio for simulation
     Globals::sim->audioCascade( buffer, numFrames );
@@ -218,7 +237,7 @@ static void audio_callback( SAMPLE * buffer, unsigned int numFrames, void * user
         Globals::lastAudioBufferMono[i] *= Globals::audioBufferWindow[i];
     }
 
-    // set in the wave
+    // set in the waveform
     Globals::waveform->set( Globals::lastAudioBufferMono, numFrames );
 }
 
@@ -249,19 +268,24 @@ bool swirl_audio_init( unsigned int srate, unsigned int frameSize, unsigned chan
         return false;
     }
 
+    //-----TODO delete this global synth---------------------------------------
     // Instantiate fluidsynth
     Globals::synth = new GeXFluidSynth();
+
     // Init fluidsynth
     Globals::synth->init( srate, 32 );
+
     // Load the soundfont
     //Globals::synth->load( "data/soundfonts/birds.sf2", "" );
     Globals::synth->load( "data/soundfonts/CasioVL-1.sf2", "" );
+
     // Map program changes
     Globals::synth->programChange( 0, 0 );
     //Globals::synth->programChange( 1, 79 );
     //Globals::synth->programChange( 2, 4 );
     //Globals::synth->programChange( 3, 10 );
     //Globals::synth->programChange( 4, 13 );
+    //-------------------------------------------------------------------------
 
     // Allocate echo
     Globals::echo = new YEcho( srate );
@@ -285,6 +309,7 @@ bool swirl_audio_init( unsigned int srate, unsigned int frameSize, unsigned chan
     // Compute the window
     hanning( Globals::audioBufferWindow, frameSize );
 
+
     // Create waveform
     Globals::waveform = new YWaveform();
     Globals::waveform->loc.y = 0.5f;          // Place it
@@ -294,7 +319,8 @@ bool swirl_audio_init( unsigned int srate, unsigned int frameSize, unsigned chan
     Globals::waveform->setHeight( 1.0f );     // Set the height
     Globals::waveform->init( frameSize );     // Initialize it
     Globals::waveform->active = true;         // Active?
-    // Add waveform to sim
+
+    // Add waveform to sim as child of camera
     Globals::camera->addChild( Globals::waveform );
 
 

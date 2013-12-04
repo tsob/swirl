@@ -23,14 +23,18 @@
 
 using namespace std;
 
-// Initialize audio
+//-----------------------------------------------------------------------------
+// Name: swirl_audio_init( )
+// Desc: Initialize audio
+//-----------------------------------------------------------------------------
 bool swirl_audio_init(
-    unsigned int srate,
-    unsigned int frameSize,
-    unsigned channels
+    unsigned int srate, unsigned int frameSize, unsigned channels
     );
 
-// Start and stop the audio pipeline
+//-----------------------------------------------------------------------------
+// Name: swirl_audio_start() and swirl_audio_stop()
+// Desc: Start and stop the audio pipeline
+//-----------------------------------------------------------------------------
 bool swirl_audio_start();
 void swirl_audio_stop();
 
@@ -77,11 +81,8 @@ protected:
     XMutex m_mutex;
 };
 
-
-
 // Music-related
 void swirl_playNotes( float pitch, float velocity );
-
 void swirl_pullNotes();
 
 #endif
