@@ -267,20 +267,21 @@ void SWIRLMoon::render()
 
 
 //-----------------------------------------------------------------------------
-// Name:
+// Name: class: SWIRLCamera method: update
 // Desc:
 //-----------------------------------------------------------------------------
 void SWIRLCamera::update( YTimeInterval dt )
 {
     // interpolate relative camera position
     relativePosition.interp(dt);
+    loc = relativePosition.actual();
 
     // Vector pointing in the look direction
-    Vector3D lookVector = Globals::myAvatar->loc- Globals::myAvatar->refLoc;
+    Vector3D lookVector = Globals::myAvatar->loc-Globals::myAvatar->refLoc;
     lookVector.normalize();
 
     // rotate relative position for absolute displacement
-    float theta = lookVector.angleXZ() + 0.5*SWIRL_PI;
+    float theta = lookVector.angleXZ() - 0.5*SWIRL_PI;
     Vector3D displacementVector = Vector3D(
         relativePosition.actual().x * cos(theta) - relativePosition.actual().z * sin(theta),
         relativePosition.actual().y,
@@ -288,12 +289,11 @@ void SWIRLCamera::update( YTimeInterval dt )
         );
 
     absLoc = Globals::myAvatar->loc + displacementVector;
-    loc = relativePosition.actual();
 }
 
 //-----------------------------------------------------------------------------
-// Name:
-// Desc:
+// Name: class: SWIRLCamera method: togglePosition()
+// Desc: Toggles between first- and third-person view.
 //-----------------------------------------------------------------------------
 void SWIRLCamera::togglePosition()
 {
@@ -319,7 +319,11 @@ void SWIRLCamera::togglePosition()
 //-----------------------------------------------------------------------------
 void SWIRLAvatar::update( YTimeInterval dt )
 {
+    // interp
+    iLoc.interp( dt );
+    iRefLoc.interp( dt );
 
+    // update goals
     iLoc.update( goal );
     iRefLoc.update( refGoal );
 
@@ -327,7 +331,7 @@ void SWIRLAvatar::update( YTimeInterval dt )
     iLoc.interp( dt );
     iRefLoc.interp( dt );
 
-    // update
+    // get current positions
     loc    = iLoc.actual();
     refLoc = iRefLoc.actual();
 
@@ -358,19 +362,19 @@ void SWIRLAvatar::render()
 
     // push
     glPushMatrix();
-    // scale
-    glScalef( size.value, size.value, size.value );
+        // scale
+        glScalef( size.value, size.value, size.value );
 
-    // draw it
-    //glDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
-    //glDrawArrays( GL_TRIANGLE_STRIP, 4, 4 );
-    //glDrawArrays( GL_TRIANGLE_STRIP, 8, 4 );
-    //glDrawArrays( GL_TRIANGLE_STRIP, 12, 4 );
-    //glDrawArrays( GL_TRIANGLE_STRIP, 16, 4 );
-    //glDrawArrays( GL_TRIANGLE_STRIP, 20, 4 );
-      glTranslatef( 0.0f, -1.5f, 0.0f);
-      glRotatef( -90.0f, 1.0f, 0.0f, 0.0f);
-      glutSolidCone( 0.5f, 3.0f, 12, 12 );
+        // draw it
+        //glDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
+        //glDrawArrays( GL_TRIANGLE_STRIP, 4, 4 );
+        //glDrawArrays( GL_TRIANGLE_STRIP, 8, 4 );
+        //glDrawArrays( GL_TRIANGLE_STRIP, 12, 4 );
+        //glDrawArrays( GL_TRIANGLE_STRIP, 16, 4 );
+        //glDrawArrays( GL_TRIANGLE_STRIP, 20, 4 );
+        glTranslatef( 0.0f, -1.5f, 0.0f);
+        glRotatef( -90.0f, 1.0f, 0.0f, 0.0f);
+        glutSolidCone( 1.0f, 3.0f, 24, 24 );
 
     // pop
     glPopMatrix();
@@ -389,24 +393,30 @@ void SWIRLAvatar::render()
 //-----------------------------------------------------------------------------
 SWIRLAvatar::SWIRLAvatar( Vector3D startingLocation )
 {
-    size = Vector3D(1, 1, 1.0f);
-    loc  = startingLocation;
+    size   = Vector3D(1, 1, 1.0f);
+    loc    = startingLocation;
     refLoc = loc + Vector3D(0.0f, 0.0f, 10.0f);
-    col = Globals::ourOrange;
+    col    = Globals::ourOrange;
 }
 
 //-----------------------------------------------------------------------------
-// Name: class: SWIRLAvatar method: move( amount )
+// Name: class: SWIRLAvatar method: move( amnunt )
 // Desc:
 //-----------------------------------------------------------------------------
 void SWIRLAvatar::move( float amount )
 {
-   Vector3D movementVector = refLoc - loc;
+   //Vector3D movementVector = iRefLoc.actual() - iLoc.actual();
+   Vector3D movementVector = refGoal - goal;
+   //movementVector.y = 0.0f;
    movementVector.normalize();
    movementVector *= amount;
 
    goal    += movementVector;
    refGoal += movementVector;
+
+
+   //Vector3D direction = goal-refGoal;
+   //refGoal = goal + direction*10.0;
 
    // TODO
    //swirl_send_message( "/move", amount );
@@ -418,7 +428,7 @@ void SWIRLAvatar::move( float amount )
 //-----------------------------------------------------------------------------
 void SWIRLAvatar::turn( float radAmount )
 {
-   Vector3D lookVector = refLoc - loc;
+   Vector3D lookVector = iRefLoc.actual() - iLoc.actual();
    float tmpRefX = lookVector.x;
    float tmpRefZ = lookVector.z;
 
@@ -498,7 +508,7 @@ SAMPLE SWIRLFluid::tick( SAMPLE input )
 //-----------------------------------------------------------------------------
 void SWIRLFluid::synthesize( SAMPLE * buffer, unsigned int numFrames )
 {
-  synth->synthesize2( (float*)buffer, numFrames);
+    synth->synthesize2( (float*)buffer, numFrames);
 }
 
 //-----------------------------------------------------------------------------
@@ -517,17 +527,16 @@ void SWIRLCube::render()
 
     // push
     glPushMatrix();
-    // scale
-    glScalef( size.value, size.value, size.value );
+        // scale
+        glScalef( size.value, size.value, size.value );
 
-    // draw it
-    glDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
-    glDrawArrays( GL_TRIANGLE_STRIP, 4, 4 );
-    glDrawArrays( GL_TRIANGLE_STRIP, 8, 4 );
-    glDrawArrays( GL_TRIANGLE_STRIP, 12, 4 );
-    glDrawArrays( GL_TRIANGLE_STRIP, 16, 4 );
-    glDrawArrays( GL_TRIANGLE_STRIP, 20, 4 );
-
+        // draw it
+        glDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
+        glDrawArrays( GL_TRIANGLE_STRIP, 4, 4 );
+        glDrawArrays( GL_TRIANGLE_STRIP, 8, 4 );
+        glDrawArrays( GL_TRIANGLE_STRIP, 12, 4 );
+        glDrawArrays( GL_TRIANGLE_STRIP, 16, 4 );
+        glDrawArrays( GL_TRIANGLE_STRIP, 20, 4 );
     // pop
     glPopMatrix();
 
@@ -555,7 +564,7 @@ void SWIRLBirdCube::update( YTimeInterval dt )
 {
     static int counter = 0;
     static vector< pair<int,int> > noteChanPitch;
-    static int timeout = 12;
+    static int timeout = 512;
 
     // interp
     size.interp( dt );
@@ -569,12 +578,13 @@ void SWIRLBirdCube::update( YTimeInterval dt )
             synth->noteOn(channel, (float)pitch, XFun::rand2i(50,100) );
             counter = timeout;
             noteChanPitch.push_back( make_pair(channel, (int)pitch) );
+            //col = Vector3D(XFun::rand2f(0,1),XFun::rand2f(0,1),XFun::rand2f(0,1));
+            col = pitch2color( (float)pitch );
         }
     }
     else
     {
         counter -= 1;
-        cout << counter << endl;
         if(counter<=0)
         {
             pair<int, int> myNoteOff = noteChanPitch.back();
@@ -582,6 +592,7 @@ void SWIRLBirdCube::update( YTimeInterval dt )
             synth->noteOff( myNoteOff.first, myNoteOff.second );
         }
     }
+    col *= 0.99;
 }
 //-----------------------------------------------------------------------------
 // name: render()
@@ -622,4 +633,21 @@ void SWIRLBirdCube::render()
 
     // disable lighting
     glDisable( GL_LIGHTING );
+}
+
+
+//-----------------------------------------------------------------------------
+// Name: pitch2color
+// Desc: maps pitch to a color
+//-----------------------------------------------------------------------------
+Vector3D pitch2color( float pitch ){
+    float r, g, b;
+    
+    int pitchClass = (int)pitch % 12;
+
+    r = pitchClass/11.0f;
+    g = sin( pitchClass * SWIRL_PI / 12.0 )*0.5 + 0.5;
+    b = 1.0f - pitchClass/11.0f;
+
+    return Vector3D(r, g, b);
 }

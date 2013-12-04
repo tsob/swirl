@@ -251,7 +251,7 @@ void initialize_simulation()
     Globals::sim->root().addChild( new SWIRLMoon  );
 
     Globals::myAvatar->iLoc = iSlew3D( Globals::myAvatar->loc, 5.0f );
-    Globals::myAvatar->iRefLoc = iSlew3D( Globals::myAvatar->refLoc, 5.0f );
+    Globals::myAvatar->iRefLoc = iSlew3D( Globals::myAvatar->refLoc, 9.0f );
 
     if (Globals::app == 1)
     {
@@ -267,19 +267,16 @@ void initialize_simulation()
     Globals::myAvatar->goal = Globals::myAvatar->loc;
     Globals::myAvatar->refGoal = Globals::myAvatar->refLoc;
 
-    Globals::camera->relativePosition = iSlew3D( Globals::firstPerson, 5.0f);
+    Globals::camera->relativePosition = iSlew3D( Globals::firstPerson, 9.0f);
 
     //Globals::myAvatar->iRefLoc.setSlew(5);
 
     Globals::myAvatar->addChild( Globals::camera );
     Globals::sim->root().addChild( Globals::myAvatar );
 
+    // Put a bird on it
     Globals::sim->root().addChild( new SWIRLBirdCube() );
 
-    // Put a cube in the environment
-    //YCube* cube = new YCube();
-    //cube->loc = Vector3D( 1.0f, 1.0f, 1.0f  );
-    //Globals::sim->root().addChild( cube );
 }
 
 
@@ -475,9 +472,9 @@ void look( )
         Globals::camera->absLoc.x,
         Globals::camera->absLoc.y,
         Globals::camera->absLoc.z,
-        Globals::myAvatar->refLoc.x,
-        Globals::myAvatar->refLoc.y,
-        Globals::myAvatar->refLoc.z,
+        Globals::myAvatar->iRefLoc.actual().x,
+        Globals::myAvatar->iRefLoc.actual().y,
+        Globals::myAvatar->iRefLoc.actual().z,
         0.0f, 1.0f, 0.0f
         );
 
@@ -541,8 +538,9 @@ void motion(int x, int y) {
         int dy = y - wh / 2;
 
         // Do something with dx and dy here
-        Globals::myAvatar->turn(dx*0.01);
         Globals::myAvatar->move(dy*-0.01);
+        Globals::myAvatar->turn(dx*0.01);
+        reshapeFunc( Globals::windowWidth, Globals::windowHeight );
         glutPostRedisplay( );
 
         // move mouse pointer back to the center of the window
@@ -803,6 +801,46 @@ void mouseFunc( int button, int state, int x, int y )
     nextBirdCube->col = Vector3D( XFun::rand2f(0,1), XFun::rand2f(0,1), XFun::rand2f(0,1));
     Globals::sim->root().addChild( nextBirdCube );
 
+
+    // debug TODO remove
+    cout << "camera absolute position: " <<
+      Globals::camera->absLoc.x << ", " <<
+      Globals::camera->absLoc.y << ", " <<
+      Globals::camera->absLoc.z << ", " <<
+      endl;
+
+    cout << "camera relative position: " <<
+      Globals::camera->loc.x << ", " <<
+      Globals::camera->loc.y << ", " <<
+      Globals::camera->loc.z << ", " <<
+      endl;
+
+    cout << "My avatar position: " <<
+      Globals::myAvatar->loc.x << ", " <<
+      Globals::myAvatar->loc.y << ", " <<
+      Globals::myAvatar->loc.z << ", " <<
+      endl;
+
+    cout << "My avatar reference position: " <<
+      Globals::myAvatar->refLoc.x << ", " <<
+      Globals::myAvatar->refLoc.y << ", " <<
+      Globals::myAvatar->refLoc.z << ", " <<
+      endl;
+
+    Vector3D lookDirection = Globals::myAvatar->loc - Globals::myAvatar->refLoc;
+    cout << "Look direction from avatar: " <<
+      lookDirection.x << ", " <<
+      lookDirection.y << ", " <<
+      lookDirection.z << ", " <<
+      endl;
+    lookDirection = Globals::camera->absLoc - Globals::myAvatar->refLoc;
+    cout << "Look direction from camera: " <<
+      lookDirection.x << ", " <<
+      lookDirection.y << ", " <<
+      lookDirection.z << ", " <<
+      endl;
+
+
     glutPostRedisplay( );
 }
 
@@ -880,6 +918,7 @@ void displayFunc( )
     // enable depth test
     glEnable( GL_DEPTH_TEST );
 
+    look();
 
     // save state
     glPushMatrix();
@@ -887,13 +926,13 @@ void displayFunc( )
     // slew
     Globals::viewEyeY.interp( XGfx::delta());
     Globals::viewRadius.interp( XGfx::delta() );
-    look();
 
     // draw the floor
     renderBackground();
 
     // cascade simulation
     Globals::sim->systemCascade();
+
 
     // pop state
     glPopMatrix();
