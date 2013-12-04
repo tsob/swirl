@@ -9,10 +9,51 @@
 #include "swirl-globals.h"
 #include "swirl-networking.h"
 #include <math.h>
+#include <utility>
 #include "x-fun.h"
 
 using namespace std;
 using namespace stk;
+
+
+//-----------------------------------------------------------------------------
+// Name: class: SWIRL* method: desc()
+// Desc: Returns a description (usually type and name) of this object. Useful
+//       for debugging stuff.
+//-----------------------------------------------------------------------------
+std::string SWIRLEntity::desc() const
+{
+    return "SWIRLEntity [unnamed]";
+}
+std::string SWIRLFluid::desc() const
+{
+    return "SWIRLEntity [SWIRLFluid]";
+}
+std::string SWIRLBirdCube::desc() const
+{
+    return "SWIRLEntity [SWIRLBirdCube]";
+}
+std::string SWIRLNoteSphere::desc() const
+{
+    return "SWIRLEntity [SWIRLNoteSphere]";
+}
+std::string SWIRLAvatar::desc() const
+{
+    return "SWIRLEntity [SWIRLAvatar]";
+}
+std::string SWIRLCamera::desc() const
+{
+    return "SWIRLEntity [SWIRLCamera]";
+}
+std::string SWIRLMoon::desc() const
+{
+    return "SWIRLEntity [SWIRLMoon]";
+}
+std::string SWIRLTeapot::desc() const
+{
+    return "SWIRLEntity [SWIRLTeapot]";
+}
+
 
 //-----------------------------------------------------------------------------
 // name: g_squareVertices
@@ -128,6 +169,59 @@ void SWIRLEntity::tickAll( SAMPLE * oneFrame, Vector3D listenerPosition )
 
 }
 
+//-------------------------------------------------------------------------------
+// Name: class: SWIRLEntity method: tickAll()
+// Desc: Get one audio frame from this and every child
+//-------------------------------------------------------------------------------
+void SWIRLEntity::synthesizeAll( SAMPLE * buffer,
+                                 unsigned int numFrames,
+                                 Vector3D listenerPosition
+                               )
+{
+    //cout << this->desc() << endl;
+    //cout << "starting to synthesize!" << endl;
+
+    // Stop if this entity is not active.
+    if( !active )
+        return;
+
+    // render self if not hidden
+    if( !hidden )
+    {
+
+        // For now, just do mono without spatialization
+        SAMPLE tmpBuffer[numFrames*2];
+        memset(tmpBuffer,0,sizeof(SAMPLE)*numFrames*2);
+        this->synthesize( tmpBuffer, numFrames );
+
+        for (int j = 0; j < numFrames; ++j)
+        {
+          for (int i = 0; i < SWIRL_NUMCHANNELS; ++i)
+          {
+            if(i<2)
+            {
+              // perform distance scaling and add to mono buffer
+              buffer[j*SWIRL_NUMCHANNELS+i] += tmpBuffer[j*SWIRL_NUMCHANNELS+i]
+                   / max((this->loc-Globals::camera->absLoc).magnitude(), 1.0f);
+              //buffer[j*SWIRL_NUMCHANNELS + i] =  buffer[j*SWIRL_NUMCHANNELS];
+            }
+          }
+        }
+    }
+
+    // synthesize children
+    for( vector<YEntity *>::iterator itr = children.begin();
+         itr != children.end(); itr++ )
+    {
+        if (dynamic_cast<SWIRLEntity *>(*itr))
+        {
+          //cout << "going to child...";
+          ((SWIRLEntity*)*itr)->synthesizeAll(buffer,numFrames,listenerPosition);
+        }
+    }
+
+}
+
 //-----------------------------------------------------------------------------
 // Name: class: SWIRLTeapot method: render()
 // Desc: ...
@@ -166,40 +260,11 @@ void SWIRLMoon::render()
     glPopMatrix( );
 }
 
-//-----------------------------------------------------------------------------
-// Name: class: SWIRL* method: desc()
-// Desc: Returns a description (usually type and name) of this object. Useful
-//       for debugging stuff.
-//-----------------------------------------------------------------------------
-std::string SWIRLEntity::desc() const
-{
-    return "SWIRLEntity [unnamed]";
-}
-std::string SWIRLBirdCube::desc() const
-{
-    return "SWIRLEntity [SWIRLBirdCube]";
-}
-std::string SWIRLAvatar::desc() const
-{
-    return "SWIRLEntity [SWIRLAvatar]";
-}
-std::string SWIRLCamera::desc() const
-{
-    return "SWIRLEntity [SWIRLCamera]";
-}
-std::string SWIRLMoon::desc() const
-{
-    return "SWIRLEntity [SWIRLMoon]";
-}
-std::string SWIRLTeapot::desc() const
-{
-    return "SWIRLEntity [SWIRLTeapot]";
-}
 
 
 //-----------------------------------------------------------------------------
-// Name: 
-// Desc: 
+// Name: class: SWIRLCamera method: update
+// Desc:
 //-----------------------------------------------------------------------------
 void SWIRLCamera::update( YTimeInterval dt )
 {
@@ -207,13 +272,14 @@ void SWIRLCamera::update( YTimeInterval dt )
     
     // interpolate relative camera position
     relativePosition.interp(dt);
+    loc = relativePosition.actual();
 
     // Vector pointing in the look direction
     Vector3D lookVector = myAvatar->loc - myAvatar->refLoc;
     lookVector.normalize();
-    
+
     // rotate relative position for absolute displacement
-    float theta = lookVector.angleXZ() + 0.5*SWIRL_PI;
+    float theta = lookVector.angleXZ() - 0.5*SWIRL_PI;
     Vector3D displacementVector = Vector3D(
         relativePosition.actual().x * cos(theta) - relativePosition.actual().z * sin(theta),
         relativePosition.actual().y,
@@ -225,8 +291,8 @@ void SWIRLCamera::update( YTimeInterval dt )
 }
 
 //-----------------------------------------------------------------------------
-// Name: 
-// Desc: 
+// Name: class: SWIRLCamera method: togglePosition()
+// Desc: Toggles between first- and third-person view.
 //-----------------------------------------------------------------------------
 void SWIRLCamera::togglePosition()
 {
@@ -252,7 +318,11 @@ void SWIRLCamera::togglePosition()
 //-----------------------------------------------------------------------------
 void SWIRLAvatar::update( YTimeInterval dt )
 {
+    // interp
+    iLoc.interp( dt );
+    iRefLoc.interp( dt );
 
+    // update goals
     iLoc.update( goal );
     iRefLoc.update( refGoal );
 
@@ -260,7 +330,7 @@ void SWIRLAvatar::update( YTimeInterval dt )
     iLoc.interp( dt );
     iRefLoc.interp( dt );
 
-    // update
+    // get current positions
     loc    = iLoc.actual();
     refLoc = iRefLoc.actual();
 
@@ -291,17 +361,19 @@ void SWIRLAvatar::render()
 
     // push
     glPushMatrix();
-    // scale
-    glScalef( size.value, size.value, size.value );
+        // scale
+        glScalef( size.value, size.value, size.value );
 
-    // draw it
-    //glDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
-    //glDrawArrays( GL_TRIANGLE_STRIP, 4, 4 );
-    //glDrawArrays( GL_TRIANGLE_STRIP, 8, 4 );
-    //glDrawArrays( GL_TRIANGLE_STRIP, 12, 4 );
-    //glDrawArrays( GL_TRIANGLE_STRIP, 16, 4 );
-    //glDrawArrays( GL_TRIANGLE_STRIP, 20, 4 );
-    glutSolidTeapot( size.magnitude() );
+        // draw it
+        //glDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
+        //glDrawArrays( GL_TRIANGLE_STRIP, 4, 4 );
+        //glDrawArrays( GL_TRIANGLE_STRIP, 8, 4 );
+        //glDrawArrays( GL_TRIANGLE_STRIP, 12, 4 );
+        //glDrawArrays( GL_TRIANGLE_STRIP, 16, 4 );
+        //glDrawArrays( GL_TRIANGLE_STRIP, 20, 4 );
+        glTranslatef( 0.0f, -1.5f, 0.0f);
+        glRotatef( -90.0f, 1.0f, 0.0f, 0.0f);
+        glutSolidCone( 1.0f, 3.0f, 24, 24 );
 
     // pop
     glPopMatrix();
@@ -316,7 +388,7 @@ void SWIRLAvatar::render()
 
 //-----------------------------------------------------------------------------
 // Name: class: SWIRLAvatar constructor
-// Desc: 
+// Desc:
 //-----------------------------------------------------------------------------
 SWIRLAvatar::SWIRLAvatar( int anId, Vector3D startingLocation )
 {
@@ -324,21 +396,27 @@ SWIRLAvatar::SWIRLAvatar( int anId, Vector3D startingLocation )
     size = Vector3D(1, 1, 1.0f);
     loc  = startingLocation;
     refLoc = loc + Vector3D(0.0f, 0.0f, 10.0f);
-    col = Globals::ourOrange;
+    col    = Globals::ourOrange;
 }
 
 //-----------------------------------------------------------------------------
-// Name: class: SWIRLAvatar method: move( amount )
-// Desc: 
+// Name: class: SWIRLAvatar method: move( amnunt )
+// Desc:
 //-----------------------------------------------------------------------------
 void SWIRLAvatar::move( float amount )
 {
-   Vector3D movementVector = refLoc - loc;
+   //Vector3D movementVector = iRefLoc.actual() - iLoc.actual();
+   Vector3D movementVector = refGoal - goal;
+   //movementVector.y = 0.0f;
    movementVector.normalize();
    movementVector *= amount;
 
    goal    += movementVector;
    refGoal += movementVector;
+
+
+   //Vector3D direction = goal-refGoal;
+   //refGoal = goal + direction*10.0;
 
    // TODO
    //swirl_send_message( "/move", amount );
@@ -346,11 +424,11 @@ void SWIRLAvatar::move( float amount )
 
 //-----------------------------------------------------------------------------
 // Name: class: SWIRLAvatar method: turn( radAmount )
-// Desc: 
+// Desc:
 //-----------------------------------------------------------------------------
 void SWIRLAvatar::turn( float radAmount )
 {
-   Vector3D lookVector = refLoc - loc;
+   Vector3D lookVector = iRefLoc.actual() - iLoc.actual();
    float tmpRefX = lookVector.x;
    float tmpRefZ = lookVector.z;
 
@@ -365,7 +443,7 @@ void SWIRLAvatar::turn( float radAmount )
 
 //-----------------------------------------------------------------------------
 // Name: class: SWIRLAvatar method: strafe( amount )
-// Desc: 
+// Desc:
 //-----------------------------------------------------------------------------
 void SWIRLAvatar::strafe( float amount )
 {
@@ -397,27 +475,48 @@ void SWIRLAvatar::strafe( float amount )
 SWIRLFluid::SWIRLFluid()
 {
     printf("About to instantiate SWIRLFluid\n");
+    XFun::srand();
     // Instantiate fluidsynth
     synth = new GeXFluidSynth();
     // Init fluidsynth
     synth->init( SWIRL_SRATE, 32 );
     // Load the soundfont
-    synth->load( "data/soundfonts/birds.sf2", "" );
+    //synth->load( "data/soundfonts/birds.sf2", "" );
+    //synth->load( "data/soundfonts/CasioVL-1.sf2", "" );
+    synth->load( "data/soundfonts/chorium.sf2", "" );
     // Map program changes
-    synth->programChange( 0, 0 );
+    //synth->programChange( 0, XFun::rand2i(1,13)-1 );
+
+    for (int i = 0; i < 30; ++i)
+    {
+        synth->programChange( i, rand() % 64 );
+    }
+
+    //synth->programChange( 1, 1 );
+    //synth->programChange( 2, 2 );
+    //synth->programChange( 3, 3 );
     printf("Instantiated SWIRLFluid\n");
 }
 
 // TODO
 //-----------------------------------------------------------------------------
-// Name: class: SWIRLBirdy method: tick()
-// Desc: return a sample of audio from SWIRLBirdy
+// Name: class: SWIRLFluid method: tick()
+// Desc: return a sample of audio from SWIRLFluid
 //-----------------------------------------------------------------------------
 SAMPLE SWIRLFluid::tick( SAMPLE input )
 {
   SAMPLE oneFrame[2];
   synth->synthesize2( oneFrame, 1);
-  return oneFrame[0];
+  return 0.1*oneFrame[0];
+}
+
+//-----------------------------------------------------------------------------
+// Name: class: SWIRLFluid method: synthesize
+// Desc: fills a stereo buffer with synthesized audio from the fluidsynth obj
+//-----------------------------------------------------------------------------
+void SWIRLFluid::synthesize( SAMPLE * buffer, unsigned int numFrames )
+{
+    synth->synthesize2( (float*)buffer, numFrames);
 }
 
 //-----------------------------------------------------------------------------
@@ -436,17 +535,16 @@ void SWIRLCube::render()
 
     // push
     glPushMatrix();
-    // scale
-    glScalef( size.value, size.value, size.value );
+        // scale
+        glScalef( size.value, size.value, size.value );
 
-    // draw it
-    glDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
-    glDrawArrays( GL_TRIANGLE_STRIP, 4, 4 );
-    glDrawArrays( GL_TRIANGLE_STRIP, 8, 4 );
-    glDrawArrays( GL_TRIANGLE_STRIP, 12, 4 );
-    glDrawArrays( GL_TRIANGLE_STRIP, 16, 4 );
-    glDrawArrays( GL_TRIANGLE_STRIP, 20, 4 );
-
+        // draw it
+        glDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
+        glDrawArrays( GL_TRIANGLE_STRIP, 4, 4 );
+        glDrawArrays( GL_TRIANGLE_STRIP, 8, 4 );
+        glDrawArrays( GL_TRIANGLE_STRIP, 12, 4 );
+        glDrawArrays( GL_TRIANGLE_STRIP, 16, 4 );
+        glDrawArrays( GL_TRIANGLE_STRIP, 20, 4 );
     // pop
     glPopMatrix();
 
@@ -454,8 +552,6 @@ void SWIRLCube::render()
     glDisableClientState( GL_VERTEX_ARRAY );
     glDisableClientState( GL_NORMAL_ARRAY );
 }
-
-
 
 
 //-----------------------------------------------------------------------------
@@ -475,6 +571,8 @@ void SWIRLCube::update( YTimeInterval dt )
 void SWIRLBirdCube::update( YTimeInterval dt )
 {
     SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+    static vector< pair<int,int> > noteChanPitch;
+    static int timeout = 512;
 
     static int counter = 0;
     int timeout = 24;
@@ -486,15 +584,63 @@ void SWIRLBirdCube::update( YTimeInterval dt )
     {
         if( (loc - myAvatar->loc).magnitude() < size.magnitude() )
         {
-            synth->noteOn(0, (float)XFun::rand2i(48,62), XFun::rand2i(50,100) );
+            int pitch = XFun::rand2i(48,62);
+            int channel = rand() % 64;
+            synth->noteOn(channel, (float)pitch, XFun::rand2i(50,100) );
             counter = timeout;
+            noteChanPitch.push_back( make_pair(channel, (int)pitch) );
+            //col = Vector3D(XFun::rand2f(0,1),XFun::rand2f(0,1),XFun::rand2f(0,1));
+            col = pitch2color( (float)pitch );
         }
     }
     else
     {
         counter -= 1;
+        if(counter<=0)
+        {
+            pair<int, int> myNoteOff = noteChanPitch.back();
+            noteChanPitch.pop_back();
+            synth->noteOff( myNoteOff.first, myNoteOff.second );
+        }
     }
+    col *= powf(0.2,XGfx::delta());
 }
+//-----------------------------------------------------------------------------
+// name: update()
+// desc: ...
+//-----------------------------------------------------------------------------
+void SWIRLNoteSphere::update( YTimeInterval dt )
+{
+    static vector< pair<int,int> > noteChanPitch;
+    static int timeout = 512;
+
+    // interp
+    size.interp( dt );
+
+    if(counter<=0)
+    {
+        if( (loc - Globals::myAvatar->loc).magnitude() < size.magnitude() )
+        {
+            synth->noteOn(channel, (float)pitch, XFun::rand2i(50,100) );
+            counter = timeout;
+            noteChanPitch.push_back( make_pair(channel, (int)pitch) );
+            //col = Vector3D(XFun::rand2f(0,1),XFun::rand2f(0,1),XFun::rand2f(0,1));
+            col = pitch2color( (float)pitch );
+        }
+    }
+    else
+    {
+        counter--;
+        if(counter<=0)
+        {
+            pair<int, int> myNoteOff = noteChanPitch.back();
+            noteChanPitch.pop_back();
+            synth->noteOff( myNoteOff.first, myNoteOff.second );
+        }
+    }
+    col *= powf(1.1,XGfx::delta());
+}
+
 //-----------------------------------------------------------------------------
 // name: render()
 // desc: ...
@@ -534,4 +680,55 @@ void SWIRLBirdCube::render()
 
     // disable lighting
     glDisable( GL_LIGHTING );
+}
+
+//-----------------------------------------------------------------------------
+// name: render()
+// desc: ...
+//-----------------------------------------------------------------------------
+void SWIRLNoteSphere::render()
+{
+    // enable lighting
+    glEnable( GL_LIGHTING );
+
+    // enable state
+    glEnableClientState( GL_VERTEX_ARRAY );
+    glEnableClientState( GL_NORMAL_ARRAY );
+
+    // set vertex pointer
+    glVertexPointer( 3, GL_FLOAT, 0, g_squareVertices );
+    glNormalPointer( GL_FLOAT, 0, g_squareNormals );
+
+    // push
+    glPushMatrix();
+        // scale
+        glScalef( size.value, size.value, size.value );
+
+        glutSolidSphere( 0.5, 24, 24  );
+
+    // pop
+    glPopMatrix();
+
+    // disable
+    glDisableClientState( GL_VERTEX_ARRAY );
+    glDisableClientState( GL_NORMAL_ARRAY );
+
+    // disable lighting
+    glDisable( GL_LIGHTING );
+}
+
+//-----------------------------------------------------------------------------
+// Name: pitch2color
+// Desc: maps pitch to a color
+//-----------------------------------------------------------------------------
+Vector3D pitch2color( float pitch ){
+    float r, g, b;
+
+    int pitchClass = (int)pitch % 12;
+
+    r = pitchClass/11.0f;
+    g = sin( pitchClass * SWIRL_PI / 12.0 )*0.5 + 0.5;
+    b = 1.0f - pitchClass/11.0f;
+
+    return Vector3D(r, g, b);
 }

@@ -76,8 +76,8 @@ Vector3D Globals::viewEyeY( 2, 0, 1.5f );
 SWIRLCamera * Globals::camera   =  new SWIRLCamera;
 
 // Relative camera positions
-Vector3D Globals::firstPerson = Vector3D(0.0f, 0.5f, 2.0f);
-Vector3D Globals::thirdPerson = Vector3D(0.0f, 4.0f, -4.0f);
+Vector3D Globals::firstPerson = Vector3D(0.0f, 1.5f, 0.0f);
+Vector3D Globals::thirdPerson = Vector3D(0.0f, 2.5f, 4.0f);
 
 Vector3D Globals::fov( 80, 60, .2f );
 

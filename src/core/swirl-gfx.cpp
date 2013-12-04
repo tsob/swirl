@@ -60,7 +60,10 @@ bool swirl_gfx_init( int argc, const char ** argv )
     // Full screen
     //TODO
     if( Globals::fullscreen )
+    {
+      glutSetCursor(GLUT_CURSOR_NONE);
       glutFullScreen();
+    }
 
     // Set the idle function - called when idle
     glutIdleFunc( idleFunc );
@@ -80,7 +83,7 @@ bool swirl_gfx_init( int argc, const char ** argv )
 
     // Set the mouse movement function
     // TODO troubleshoot
-    //glutPassiveMotionFunc( mouseMoveFunc );
+    glutPassiveMotionFunc( motion );
 
     // Do our own initialization
     initialize_graphics();
@@ -235,6 +238,9 @@ void initialize_graphics()
 //-----------------------------------------------------------------------------
 void initialize_simulation()
 {
+    // seed rand
+    XFun::srand();
+
     // instantiate simulation
     Globals::sim = new SWIRLSim();
 
@@ -244,16 +250,31 @@ void initialize_simulation()
     Globals::sim->root().addChild( myAvatar );
     Globals::sim->root().addChild( new SWIRLMoon  );
 
+<<<<<<< HEAD
     myAvatar->iLoc = iSlew3D( myAvatar->loc, 5.0f );
     myAvatar->iRefLoc = iSlew3D( myAvatar->refLoc, 5.0f );
+=======
+    Globals::myAvatar->iLoc = iSlew3D( Globals::myAvatar->loc, 1.0f );
+    Globals::myAvatar->iRefLoc = iSlew3D( Globals::myAvatar->refLoc, 1.0f );
+
+    if (Globals::app == 1)
+    {
+        Globals::myAvatar->loc.z = -2;
+        Globals::myAvatar->refLoc.z = 9;
+    }
+    else
+    {
+        Globals::myAvatar->loc.z = -1;
+        Globals::myAvatar->refLoc.z = 10;
+    }
+>>>>>>> 597465cb69cc9ed9d72943c175d7f4211cd9fe5f
 
     myAvatar->goal = myAvatar->loc;
     myAvatar->refGoal = myAvatar->refLoc;
 
-    Globals::camera->relativePosition = iSlew3D( Globals::firstPerson, 5.0f);
+    Globals::camera->relativePosition = iSlew3D( Globals::firstPerson, 0.5f);
 
-    //Globals::myAvatar->iRefLoc.setSlew(5);
-
+<<<<<<< HEAD
     myAvatar->addChild( Globals::camera );
     Globals::sim->root().addChild( myAvatar );
 
@@ -263,6 +284,10 @@ void initialize_simulation()
     //YCube* cube = new YCube();
     //cube->loc = Vector3D( 1.0f, 1.0f, 1.0f  );
     //Globals::sim->root().addChild( cube );
+=======
+    Globals::myAvatar->addChild( Globals::camera );
+    Globals::sim->root().addChild( Globals::myAvatar );
+>>>>>>> 597465cb69cc9ed9d72943c175d7f4211cd9fe5f
 }
 
 
@@ -460,9 +485,15 @@ void look( )
         Globals::camera->absLoc.x,
         Globals::camera->absLoc.y,
         Globals::camera->absLoc.z,
+<<<<<<< HEAD
         myAvatar->refLoc.x,
         myAvatar->refLoc.y,
         myAvatar->refLoc.z,
+=======
+        Globals::myAvatar->iRefLoc.actual().x,
+        Globals::myAvatar->iRefLoc.actual().y,
+        Globals::myAvatar->iRefLoc.actual().z,
+>>>>>>> 597465cb69cc9ed9d72943c175d7f4211cd9fe5f
         0.0f, 1.0f, 0.0f
         );
 
@@ -510,6 +541,37 @@ void mouseMoveFunc( int x, int y )
     // post redisplay
     glutPostRedisplay( );
 
+}
+
+//-----------------------------------------------------------------------------
+// Name: motion( int x, int y )
+// Desc: A mouse movement function adapted slightly from
+//       http://en.wikibooks.org/wiki/OpenGL_Programming/Glescraft_4
+//-----------------------------------------------------------------------------
+void motion(int x, int y) {
+    static bool wrap = false;
+
+    if(!wrap) {
+        int ww = glutGet(GLUT_WINDOW_WIDTH);
+        int wh = glutGet(GLUT_WINDOW_HEIGHT);
+
+        int dx = x - ww / 2;
+        int dy = y - wh / 2;
+
+        // Do something with dx and dy here
+        Globals::myAvatar->move(dy*-0.01);
+        Globals::myAvatar->turn(dx*0.01);
+        reshapeFunc( Globals::windowWidth, Globals::windowHeight );
+        glutPostRedisplay( );
+
+        // move mouse pointer back to the center of the window
+        wrap = true;
+        glutWarpPointer(ww / 2, wh / 2);
+    }
+    else
+    {
+        wrap = false;
+    }
 }
 
 //-----------------------------------------------------------------------------
@@ -615,10 +677,14 @@ void keyboardFunc( unsigned char key, int x, int y )
             {
                 Globals::lastWindowWidth = Globals::windowWidth;
                 Globals::lastWindowHeight = Globals::windowHeight;
+                glutSetCursor(GLUT_CURSOR_NONE);
                 glutFullScreen();
             }
             else
+            {
+                glutSetCursor(GLUT_CURSOR_INHERIT);
                 glutReshapeWindow( Globals::lastWindowWidth, Globals::lastWindowHeight );
+            }
 
             Globals::fullscreen = !Globals::fullscreen;
             fprintf( stderr, "[swirl]: fullscreen:%s\n", Globals::fullscreen ? "ON" : "OFF" );
@@ -635,6 +701,12 @@ void keyboardFunc( unsigned char key, int x, int y )
             glFogf(GL_FOG_DENSITY, Globals::fog_density);
             break;
 
+        case '1':
+            dropRandCube();
+            break;
+        case '2':
+            dropNoteSphere();
+            break;
             //        case 'A':
             //        case 'B':
             //        case 'C':
@@ -681,6 +753,7 @@ void keyboardFunc( unsigned char key, int x, int y )
         {
             case ']':
                 // turn right
+<<<<<<< HEAD
                 myAvatar->turn(0.1f);
                 serverProxy->perform( myAvatar->id, "/turn", 0.1f );
                 break;
@@ -708,6 +781,35 @@ void keyboardFunc( unsigned char key, int x, int y )
                 //strafe left
                 myAvatar->strafe(-0.1f);
                 serverProxy->perform( myAvatar->id, "/strafe", -0.1f );
+=======
+                Globals::myAvatar->turn(0.4f);
+                swirl_send_message( "/turn", 0.1f );
+                break;
+            case '[':
+                // turn left
+                Globals::myAvatar->turn(-0.4f);
+                swirl_send_message( "/turn", -0.1f );
+                break;
+            case 'w':
+                // move forward
+                Globals::myAvatar->move(0.4f);
+                swirl_send_message( "/move", 0.2f );
+                break;
+            case 'x':
+                // move back
+                Globals::myAvatar->move(-0.4f);
+                swirl_send_message( "/move", -0.2f );
+                break;
+            case 'd':
+                //strafe right
+                Globals::myAvatar->strafe(0.4f);
+                swirl_send_message( "/strafe", 0.1f );
+                break;
+            case 'a':
+                //strafe left
+                Globals::myAvatar->strafe(-0.4f);
+                swirl_send_message( "/strafe", -0.1f );
+>>>>>>> 597465cb69cc9ed9d72943c175d7f4211cd9fe5f
                 break;
             case 'c':
                 // toggle camera position
@@ -750,14 +852,55 @@ void keyboardFunc( unsigned char key, int x, int y )
 //-----------------------------------------------------------------------------
 void mouseFunc( int button, int state, int x, int y )
 {
+<<<<<<< HEAD
     SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
 
     SWIRLBirdCube * nextBirdCube = new SWIRLBirdCube;
     nextBirdCube->loc = myAvatar->loc;
     nextBirdCube->col = Vector3D( XFun::rand2f(0,1), XFun::rand2f(0,1), XFun::rand2f(0,1));
     Globals::sim->root().addChild( nextBirdCube );
+=======
+>>>>>>> 597465cb69cc9ed9d72943c175d7f4211cd9fe5f
 
-    glutPostRedisplay( );
+    // debug TODO remove
+    cout << "camera absolute position: " <<
+      Globals::camera->absLoc.x << ", " <<
+      Globals::camera->absLoc.y << ", " <<
+      Globals::camera->absLoc.z << ", " <<
+      endl;
+
+    cout << "camera relative position: " <<
+      Globals::camera->loc.x << ", " <<
+      Globals::camera->loc.y << ", " <<
+      Globals::camera->loc.z << ", " <<
+      endl;
+
+    cout << "My avatar position: " <<
+      Globals::myAvatar->loc.x << ", " <<
+      Globals::myAvatar->loc.y << ", " <<
+      Globals::myAvatar->loc.z << ", " <<
+      endl;
+
+    cout << "My avatar reference position: " <<
+      Globals::myAvatar->refLoc.x << ", " <<
+      Globals::myAvatar->refLoc.y << ", " <<
+      Globals::myAvatar->refLoc.z << ", " <<
+      endl;
+
+    Vector3D lookDirection = Globals::myAvatar->loc - Globals::myAvatar->refLoc;
+    cout << "Look direction from avatar: " <<
+      lookDirection.x << ", " <<
+      lookDirection.y << ", " <<
+      lookDirection.z << ", " <<
+      endl;
+    lookDirection = Globals::camera->absLoc - Globals::myAvatar->refLoc;
+    cout << "Look direction from camera: " <<
+      lookDirection.x << ", " <<
+      lookDirection.y << ", " <<
+      lookDirection.z << ", " <<
+      endl;
+
+
 }
 
 //-----------------------------------------------------------------------------
@@ -834,6 +977,7 @@ void displayFunc( )
     // enable depth test
     glEnable( GL_DEPTH_TEST );
 
+    look();
 
     // save state
     glPushMatrix();
@@ -841,13 +985,13 @@ void displayFunc( )
     // slew
     Globals::viewEyeY.interp( XGfx::delta());
     Globals::viewRadius.interp( XGfx::delta() );
-    look();
 
     // draw the floor
     renderBackground();
 
     // cascade simulation
     Globals::sim->systemCascade();
+
 
     // pop state
     glPopMatrix();
@@ -914,6 +1058,7 @@ void blendPane()
 //-----------------------------------------------------------------------------
 void renderBackground()
 {
+    float backgroundRadius = 200.0;
     // save the current matrix
     glPushMatrix( );
 
@@ -925,13 +1070,13 @@ void renderBackground()
             ); //ground color
 
         glBegin(GL_TRIANGLE_FAN);//start drawing triangles
-            glVertex3f(-100.0f,-1.0f,-100.0f);
-            glVertex3f( 100.0f,-1.0f,-100.0f);
-            glVertex3f( 100.0f,-1.0f, 100.0f);
+            glVertex3f(-backgroundRadius,-1.0f,-backgroundRadius);
+            glVertex3f( backgroundRadius,-1.0f,-backgroundRadius);
+            glVertex3f( backgroundRadius,-1.0f, backgroundRadius);
             //drawing a new triangle to complete the rectangle
-            glVertex3f( 100.0f,-1.0f, 100.0f);
-            glVertex3f(-100.0f,-1.0f, 100.0f);
-            glVertex3f(-100.0f,-1.0f,-100.0f);
+            glVertex3f( backgroundRadius,-1.0f, backgroundRadius);
+            glVertex3f(-backgroundRadius,-1.0f, backgroundRadius);
+            glVertex3f(-backgroundRadius,-1.0f,-backgroundRadius);
         glEnd();//end drawing of triangles
 
     // restore
@@ -1100,3 +1245,28 @@ void renderBackground()
  *}
  */
 
+//-----------------------------------------------------------------------------
+// Name: dropRandCube
+// Desc: Drops a rand-pitch cube at the user's location
+//-----------------------------------------------------------------------------
+void dropRandCube()
+{
+    SWIRLBirdCube * nextCube = new SWIRLBirdCube;
+    nextCube->loc = Globals::myAvatar->loc;
+    nextCube->col = Vector3D( XFun::rand2f(0,1), XFun::rand2f(0,1), XFun::rand2f(0,1));
+    Globals::sim->root().addChild( nextCube );
+
+    glutPostRedisplay( );
+}
+//-----------------------------------------------------------------------------
+// Name: dropNoteSphere
+// Desc: 
+//-----------------------------------------------------------------------------
+void dropNoteSphere()
+{
+    SWIRLNoteSphere * nextObj = new SWIRLNoteSphere;
+    nextObj->loc = Globals::myAvatar->loc;
+    Globals::sim->root().addChild( nextObj );
+
+    glutPostRedisplay( );
+}

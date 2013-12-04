@@ -59,6 +59,10 @@ void turn(float radAmount);
 void turn_left();
 void turn_right();
 
+// Interacting with the environment
+void dropRandCube();
+void dropNoteSphere();
+
 // GL stuff
 void idleFunc();
 void displayFunc();
@@ -67,6 +71,7 @@ void keyboardFunc( unsigned char, int, int );
 void mouseFunc( int button, int state, int x, int y );
 void specialFunc( int key, int x, int y );
 void mouseMoveFunc( int x, int y );
+void motion( int x, int y);
 
 void initialize_graphics();
 void initialize_simulation();
