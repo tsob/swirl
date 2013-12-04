@@ -61,7 +61,10 @@ bool swirl_gfx_init( int argc, const char ** argv )
     // Full screen
     //TODO
     if( Globals::fullscreen )
+    {
+      glutSetCursor(GLUT_CURSOR_NONE);
       glutFullScreen();
+    }
 
     // Set the idle function - called when idle
     glutIdleFunc( idleFunc );
@@ -629,10 +632,14 @@ void keyboardFunc( unsigned char key, int x, int y )
             {
                 Globals::lastWindowWidth = Globals::windowWidth;
                 Globals::lastWindowHeight = Globals::windowHeight;
+                glutSetCursor(GLUT_CURSOR_NONE);
                 glutFullScreen();
             }
             else
+            {
+                glutSetCursor(GLUT_CURSOR_INHERIT);
                 glutReshapeWindow( Globals::lastWindowWidth, Globals::lastWindowHeight );
+            }
 
             Globals::fullscreen = !Globals::fullscreen;
             fprintf( stderr, "[swirl]: fullscreen:%s\n", Globals::fullscreen ? "ON" : "OFF" );
