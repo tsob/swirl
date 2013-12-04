@@ -227,9 +227,10 @@ class SWIRLNoteSphere : public SWIRLFluid
 {
 public:
     SWIRLNoteSphere() : size( 1, 1, 1.0f ){
-      pitch   = XFun::rand2i(22,62);
-      channel = rand() % 30;
-      counter = 0;
+        srand(time(NULL));
+        pitch   = (rand() % 60) + 22;
+        channel = rand() % 9;
+        counter = 0;
     }
 
 public:

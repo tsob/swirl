@@ -191,6 +191,7 @@ void SWIRLEntity::synthesizeAll( SAMPLE * buffer,
 
         // For now, just do mono without spatialization
         SAMPLE tmpBuffer[numFrames*2];
+        SAMPLE gainScale = 2.0 / max((this->loc-Globals::camera->absLoc).magnitude(), 1.0f);
         memset(tmpBuffer,0,sizeof(SAMPLE)*numFrames*2);
         this->synthesize( tmpBuffer, numFrames );
 
@@ -201,8 +202,8 @@ void SWIRLEntity::synthesizeAll( SAMPLE * buffer,
             if(i<2)
             {
               // perform distance scaling and add to mono buffer
-              buffer[j*SWIRL_NUMCHANNELS+i] += tmpBuffer[j*SWIRL_NUMCHANNELS+i]
-                   / max((this->loc-Globals::camera->absLoc).magnitude(), 1.0f);
+              buffer[j*SWIRL_NUMCHANNELS+i] +=
+                tmpBuffer[j*SWIRL_NUMCHANNELS+i] * gainScale;
               //buffer[j*SWIRL_NUMCHANNELS + i] =  buffer[j*SWIRL_NUMCHANNELS];
             }
           }
@@ -487,9 +488,19 @@ SWIRLFluid::SWIRLFluid()
     // Map program changes
     //synth->programChange( 0, XFun::rand2i(1,13)-1 );
 
-    for (int i = 0; i < 30; ++i)
+    synth->programChange( 0, 11 ); //vibraphone
+    synth->programChange( 1, 46 ); //harp
+    synth->programChange( 2, 47 ); //timpani
+    synth->programChange( 3, 32 ); //bass
+    synth->programChange( 4, 34 ); //another bass
+    synth->programChange( 5, 77 ); //shakuhachi
+    synth->programChange( 6, 82 ); //synth calliope
+    synth->programChange( 7, 104); //sitar
+    synth->programChange( 8, 108); //Kalimba
+
+    for (int i = 9; i < 30; ++i)
     {
-        synth->programChange( i, rand() % 64 );
+        synth->programChange( i, rand() % 127 );
     }
 
     //synth->programChange( 1, 1 );
@@ -507,7 +518,7 @@ SAMPLE SWIRLFluid::tick( SAMPLE input )
 {
   SAMPLE oneFrame[2];
   synth->synthesize2( oneFrame, 1);
-  return 0.1*oneFrame[0];
+  return oneFrame[0];
 }
 
 //-----------------------------------------------------------------------------
@@ -573,7 +584,7 @@ void SWIRLBirdCube::update( YTimeInterval dt )
     SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
     static vector< pair<int,int> > noteChanPitch;
 
-    static int counter = 0;
+    //static int counter = 0;
     int timeout = 24;
 
     // interp
@@ -584,8 +595,8 @@ void SWIRLBirdCube::update( YTimeInterval dt )
         if( (loc - myAvatar->loc).magnitude() < size.magnitude() )
         {
             int pitch = XFun::rand2i(48,62);
-            int channel = rand() % 64;
-            synth->noteOn(channel, (float)pitch, XFun::rand2i(50,100) );
+            int channel = rand() % 9;
+            synth->noteOn(channel, (float)pitch, (rand() % 40) + 80 );
             counter = timeout;
             noteChanPitch.push_back( make_pair(channel, (int)pitch) );
             //col = Vector3D(XFun::rand2f(0,1),XFun::rand2f(0,1),XFun::rand2f(0,1));
@@ -622,7 +633,7 @@ void SWIRLNoteSphere::update( YTimeInterval dt )
     {
         if( (loc - myAvatar->loc).magnitude() < size.magnitude() )
         {
-            synth->noteOn(channel, (float)pitch, XFun::rand2i(50,100) );
+            synth->noteOn(channel, (float)pitch,  (rand() % 40) + 60 );
             counter = timeout;
             noteChanPitch.push_back( make_pair(channel, (int)pitch) );
             //col = Vector3D(XFun::rand2f(0,1),XFun::rand2f(0,1),XFun::rand2f(0,1));
@@ -639,7 +650,7 @@ void SWIRLNoteSphere::update( YTimeInterval dt )
             synth->noteOff( myNoteOff.first, myNoteOff.second );
         }
     }
-    col *= powf(1.1,XGfx::delta());
+    col *= powf(1.2,XGfx::delta());
 }
 
 //-----------------------------------------------------------------------------
