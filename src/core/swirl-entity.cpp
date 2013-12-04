@@ -33,6 +33,10 @@ std::string SWIRLBirdCube::desc() const
 {
     return "SWIRLEntity [SWIRLBirdCube]";
 }
+std::string SWIRLNoteSphere::desc() const
+{
+    return "SWIRLEntity [SWIRLNoteSphere]";
+}
 std::string SWIRLAvatar::desc() const
 {
     return "SWIRLEntity [SWIRLAvatar]";
@@ -595,6 +599,44 @@ void SWIRLBirdCube::update( YTimeInterval dt )
     col *= powf(0.2,XGfx::delta());
 }
 //-----------------------------------------------------------------------------
+// name: update()
+// desc: ...
+//-----------------------------------------------------------------------------
+void SWIRLNoteSphere::update( YTimeInterval dt )
+{
+    static int counter = 0;
+    static vector< pair<int,int> > noteChanPitch;
+    static int timeout = 512;
+
+    // interp
+    size.interp( dt );
+
+    if(counter<=0)
+    {
+        if( (loc - Globals::myAvatar->loc).magnitude() < size.magnitude() )
+        {
+            int channel = 0;
+            synth->noteOn(channel, (float)pitch, XFun::rand2i(50,100) );
+            counter = timeout;
+            noteChanPitch.push_back( make_pair(channel, (int)pitch) );
+            //col = Vector3D(XFun::rand2f(0,1),XFun::rand2f(0,1),XFun::rand2f(0,1));
+            col = pitch2color( (float)pitch );
+        }
+    }
+    else
+    {
+        counter -= 1;
+        if(counter<=0)
+        {
+            pair<int, int> myNoteOff = noteChanPitch.back();
+            noteChanPitch.pop_back();
+            synth->noteOff( myNoteOff.first, myNoteOff.second );
+        }
+    }
+    col *= powf(1.1,XGfx::delta());
+}
+
+//-----------------------------------------------------------------------------
 // name: render()
 // desc: ...
 //-----------------------------------------------------------------------------
@@ -635,6 +677,40 @@ void SWIRLBirdCube::render()
     glDisable( GL_LIGHTING );
 }
 
+//-----------------------------------------------------------------------------
+// name: render()
+// desc: ...
+//-----------------------------------------------------------------------------
+void SWIRLNoteSphere::render()
+{
+    // enable lighting
+    glEnable( GL_LIGHTING );
+
+    // enable state
+    glEnableClientState( GL_VERTEX_ARRAY );
+    glEnableClientState( GL_NORMAL_ARRAY );
+
+    // set vertex pointer
+    glVertexPointer( 3, GL_FLOAT, 0, g_squareVertices );
+    glNormalPointer( GL_FLOAT, 0, g_squareNormals );
+
+    // push
+    glPushMatrix();
+        // scale
+        glScalef( size.value, size.value, size.value );
+
+        glutSolidSphere( 0.5, 24, 24  );
+
+    // pop
+    glPopMatrix();
+
+    // disable
+    glDisableClientState( GL_VERTEX_ARRAY );
+    glDisableClientState( GL_NORMAL_ARRAY );
+
+    // disable lighting
+    glDisable( GL_LIGHTING );
+}
 
 //-----------------------------------------------------------------------------
 // Name: pitch2color
@@ -642,7 +718,7 @@ void SWIRLBirdCube::render()
 //-----------------------------------------------------------------------------
 Vector3D pitch2color( float pitch ){
     float r, g, b;
-    
+
     int pitchClass = (int)pitch % 12;
 
     r = pitchClass/11.0f;

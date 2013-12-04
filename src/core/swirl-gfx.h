@@ -59,6 +59,10 @@ void turn(float radAmount);
 void turn_left();
 void turn_right();
 
+// Interacting with the environment
+void dropRandCube();
+void dropNoteSphere();
+
 // GL stuff
 void idleFunc();
 void displayFunc();

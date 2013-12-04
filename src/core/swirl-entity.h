@@ -12,6 +12,7 @@
 //#include "y-waveform.h"
 #include "y-fluidsynth.h"
 #include "x-audio.h"
+#include "x-fun.h"
 #include "x-buffer.h"
 //#include "swirl-audio.h"
 #include "Stk.h"
@@ -204,7 +205,7 @@ public:
     SWIRLBirdCube() : size( 1, 1, 1.0f ) {  }
 
 public:
-    virtual void render(); 
+    virtual void render();
     virtual void update( YTimeInterval dt );
 
 public:
@@ -215,6 +216,27 @@ public:
     Vector3D size;
 };
 
+//-----------------------------------------------------------------------------
+// Name: class SWIRLNoteSphere
+// Desc: a sphere that makes a fluidsynth note when avatar is close.
+//-----------------------------------------------------------------------------
+class SWIRLNoteSphere : public SWIRLFluid
+{
+public:
+    SWIRLNoteSphere() : size( 1, 1, 1.0f ) { pitch = XFun::rand2i(48,62); }
+
+public:
+    virtual void render();
+    virtual void update( YTimeInterval dt );
+
+public:
+    // description
+    virtual std::string desc() const;
+    float pitch;
+
+public:
+    Vector3D size;
+};
 
 
 //-----------------------------------------------------------------------------

@@ -677,6 +677,12 @@ void keyboardFunc( unsigned char key, int x, int y )
             glFogf(GL_FOG_DENSITY, Globals::fog_density);
             break;
 
+        case '1':
+            dropRandCube();
+            break;
+        case '2':
+            dropNoteSphere();
+            break;
             //        case 'A':
             //        case 'B':
             //        case 'C':
@@ -789,11 +795,6 @@ void keyboardFunc( unsigned char key, int x, int y )
 //-----------------------------------------------------------------------------
 void mouseFunc( int button, int state, int x, int y )
 {
-    SWIRLBirdCube * nextBirdCube = new SWIRLBirdCube;
-    nextBirdCube->loc = Globals::myAvatar->loc;
-    nextBirdCube->col = Vector3D( XFun::rand2f(0,1), XFun::rand2f(0,1), XFun::rand2f(0,1));
-    Globals::sim->root().addChild( nextBirdCube );
-
 
     // debug TODO remove
     cout << "camera absolute position: " <<
@@ -834,7 +835,6 @@ void mouseFunc( int button, int state, int x, int y )
       endl;
 
 
-    glutPostRedisplay( );
 }
 
 //-----------------------------------------------------------------------------
@@ -992,6 +992,7 @@ void blendPane()
 //-----------------------------------------------------------------------------
 void renderBackground()
 {
+    float backgroundRadius = 200.0;
     // save the current matrix
     glPushMatrix( );
 
@@ -1003,13 +1004,13 @@ void renderBackground()
             ); //ground color
 
         glBegin(GL_TRIANGLE_FAN);//start drawing triangles
-            glVertex3f(-100.0f,-1.0f,-100.0f);
-            glVertex3f( 100.0f,-1.0f,-100.0f);
-            glVertex3f( 100.0f,-1.0f, 100.0f);
+            glVertex3f(-backgroundRadius,-1.0f,-backgroundRadius);
+            glVertex3f( backgroundRadius,-1.0f,-backgroundRadius);
+            glVertex3f( backgroundRadius,-1.0f, backgroundRadius);
             //drawing a new triangle to complete the rectangle
-            glVertex3f( 100.0f,-1.0f, 100.0f);
-            glVertex3f(-100.0f,-1.0f, 100.0f);
-            glVertex3f(-100.0f,-1.0f,-100.0f);
+            glVertex3f( backgroundRadius,-1.0f, backgroundRadius);
+            glVertex3f(-backgroundRadius,-1.0f, backgroundRadius);
+            glVertex3f(-backgroundRadius,-1.0f,-backgroundRadius);
         glEnd();//end drawing of triangles
 
     // restore
@@ -1178,3 +1179,28 @@ void renderBackground()
  *}
  */
 
+//-----------------------------------------------------------------------------
+// Name: dropRandCube
+// Desc: Drops a rand-pitch cube at the user's location
+//-----------------------------------------------------------------------------
+void dropRandCube()
+{
+    SWIRLBirdCube * nextCube = new SWIRLBirdCube;
+    nextCube->loc = Globals::myAvatar->loc;
+    nextCube->col = Vector3D( XFun::rand2f(0,1), XFun::rand2f(0,1), XFun::rand2f(0,1));
+    Globals::sim->root().addChild( nextCube );
+
+    glutPostRedisplay( );
+}
+//-----------------------------------------------------------------------------
+// Name: dropNoteSphere
+// Desc: 
+//-----------------------------------------------------------------------------
+void dropNoteSphere()
+{
+    SWIRLNoteSphere * nextObj = new SWIRLNoteSphere;
+    nextObj->loc = Globals::myAvatar->loc;
+    Globals::sim->root().addChild( nextObj );
+
+    glutPostRedisplay( );
+}
