@@ -84,7 +84,7 @@ bool swirl_gfx_init( int argc, const char ** argv )
 
     // Set the mouse movement function
     // TODO troubleshoot
-    //glutPassiveMotionFunc( mouseMoveFunc );
+    glutPassiveMotionFunc( motion );
 
     // Do our own initialization
     initialize_graphics();
@@ -523,6 +523,36 @@ void mouseMoveFunc( int x, int y )
     // post redisplay
     glutPostRedisplay( );
 
+}
+
+//-----------------------------------------------------------------------------
+// Name: motion( int x, int y )
+// Desc: A mouse movement function adapted slightly from
+//       http://en.wikibooks.org/wiki/OpenGL_Programming/Glescraft_4
+//-----------------------------------------------------------------------------
+void motion(int x, int y) {
+    static bool wrap = false;
+
+    if(!wrap) {
+        int ww = glutGet(GLUT_WINDOW_WIDTH);
+        int wh = glutGet(GLUT_WINDOW_HEIGHT);
+
+        int dx = x - ww / 2;
+        int dy = y - wh / 2;
+
+        // Do something with dx and dy here
+        Globals::myAvatar->turn(dx*0.01);
+        Globals::myAvatar->move(dy*-0.01);
+        glutPostRedisplay( );
+
+        // move mouse pointer back to the center of the window
+        wrap = true;
+        glutWarpPointer(ww / 2, wh / 2);
+    }
+    else
+    {
+        wrap = false;
+    }
 }
 
 //-----------------------------------------------------------------------------
