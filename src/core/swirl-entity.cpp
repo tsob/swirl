@@ -15,6 +15,42 @@
 using namespace std;
 using namespace stk;
 
+
+//-----------------------------------------------------------------------------
+// Name: class: SWIRL* method: desc()
+// Desc: Returns a description (usually type and name) of this object. Useful
+//       for debugging stuff.
+//-----------------------------------------------------------------------------
+std::string SWIRLEntity::desc() const
+{
+    return "SWIRLEntity [unnamed]";
+}
+std::string SWIRLFluid::desc() const
+{
+    return "SWIRLEntity [SWIRLFluid]";
+}
+std::string SWIRLBirdCube::desc() const
+{
+    return "SWIRLEntity [SWIRLBirdCube]";
+}
+std::string SWIRLAvatar::desc() const
+{
+    return "SWIRLEntity [SWIRLAvatar]";
+}
+std::string SWIRLCamera::desc() const
+{
+    return "SWIRLEntity [SWIRLCamera]";
+}
+std::string SWIRLMoon::desc() const
+{
+    return "SWIRLEntity [SWIRLMoon]";
+}
+std::string SWIRLTeapot::desc() const
+{
+    return "SWIRLEntity [SWIRLTeapot]";
+}
+
+
 //-----------------------------------------------------------------------------
 // name: g_squareVertices
 // desc: vertices for a cube
@@ -227,40 +263,11 @@ void SWIRLMoon::render()
     glPopMatrix( );
 }
 
-//-----------------------------------------------------------------------------
-// Name: class: SWIRL* method: desc()
-// Desc: Returns a description (usually type and name) of this object. Useful
-//       for debugging stuff.
-//-----------------------------------------------------------------------------
-std::string SWIRLEntity::desc() const
-{
-    return "SWIRLEntity [unnamed]";
-}
-std::string SWIRLBirdCube::desc() const
-{
-    return "SWIRLEntity [SWIRLBirdCube]";
-}
-std::string SWIRLAvatar::desc() const
-{
-    return "SWIRLEntity [SWIRLAvatar]";
-}
-std::string SWIRLCamera::desc() const
-{
-    return "SWIRLEntity [SWIRLCamera]";
-}
-std::string SWIRLMoon::desc() const
-{
-    return "SWIRLEntity [SWIRLMoon]";
-}
-std::string SWIRLTeapot::desc() const
-{
-    return "SWIRLEntity [SWIRLTeapot]";
-}
 
 
 //-----------------------------------------------------------------------------
-// Name: 
-// Desc: 
+// Name:
+// Desc:
 //-----------------------------------------------------------------------------
 void SWIRLCamera::update( YTimeInterval dt )
 {
@@ -270,7 +277,7 @@ void SWIRLCamera::update( YTimeInterval dt )
     // Vector pointing in the look direction
     Vector3D lookVector = Globals::myAvatar->loc- Globals::myAvatar->refLoc;
     lookVector.normalize();
-    
+
     // rotate relative position for absolute displacement
     float theta = lookVector.angleXZ() + 0.5*SWIRL_PI;
     Vector3D displacementVector = Vector3D(
@@ -284,8 +291,8 @@ void SWIRLCamera::update( YTimeInterval dt )
 }
 
 //-----------------------------------------------------------------------------
-// Name: 
-// Desc: 
+// Name:
+// Desc:
 //-----------------------------------------------------------------------------
 void SWIRLCamera::togglePosition()
 {
@@ -377,11 +384,11 @@ void SWIRLAvatar::render()
 
 //-----------------------------------------------------------------------------
 // Name: class: SWIRLAvatar constructor
-// Desc: 
+// Desc:
 //-----------------------------------------------------------------------------
 SWIRLAvatar::SWIRLAvatar( Vector3D startingLocation )
 {
-    size = Vector3D(1, 1, 1.0f); 
+    size = Vector3D(1, 1, 1.0f);
     loc  = startingLocation;
     refLoc = loc + Vector3D(0.0f, 0.0f, 10.0f);
     col = Globals::ourOrange;
@@ -389,7 +396,7 @@ SWIRLAvatar::SWIRLAvatar( Vector3D startingLocation )
 
 //-----------------------------------------------------------------------------
 // Name: class: SWIRLAvatar method: move( amount )
-// Desc: 
+// Desc:
 //-----------------------------------------------------------------------------
 void SWIRLAvatar::move( float amount )
 {
@@ -406,7 +413,7 @@ void SWIRLAvatar::move( float amount )
 
 //-----------------------------------------------------------------------------
 // Name: class: SWIRLAvatar method: turn( radAmount )
-// Desc: 
+// Desc:
 //-----------------------------------------------------------------------------
 void SWIRLAvatar::turn( float radAmount )
 {
@@ -425,7 +432,7 @@ void SWIRLAvatar::turn( float radAmount )
 
 //-----------------------------------------------------------------------------
 // Name: class: SWIRLAvatar method: strafe( amount )
-// Desc: 
+// Desc:
 //-----------------------------------------------------------------------------
 void SWIRLAvatar::strafe( float amount )
 {
@@ -475,7 +482,7 @@ SWIRLFluid::SWIRLFluid()
 // TODO
 //-----------------------------------------------------------------------------
 // Name: class: SWIRLFluid method: tick()
-// Desc: return a sample of audio from SWIRLBirdy
+// Desc: return a sample of audio from SWIRLFluid
 //-----------------------------------------------------------------------------
 SAMPLE SWIRLFluid::tick( SAMPLE input )
 {
@@ -485,8 +492,8 @@ SAMPLE SWIRLFluid::tick( SAMPLE input )
 }
 
 //-----------------------------------------------------------------------------
-// Name: class: 
-// Desc: 
+// Name: class: SWIRLFluid method: synthesize
+// Desc: fills a stereo buffer with synthesized audio from the fluidsynth obj
 //-----------------------------------------------------------------------------
 void SWIRLFluid::synthesize( SAMPLE * buffer, unsigned int numFrames )
 {

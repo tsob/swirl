@@ -22,47 +22,59 @@ using namespace stk;
 
 //-----------------------------------------------------------------------------
 // Name: class SWIRLEntity
-// Desc: extends YEntity for our stuff
+// Desc: Augments YEntity with audio-related functionality
 //-----------------------------------------------------------------------------
 class SWIRLEntity : public YEntity
 {
 public:
-
-    //! Input one sample to the filter and return one output.
+    // Input one sample to the filter and return one output.
+    // -  Returns nothing for this superclass.
     virtual SAMPLE tick( SAMPLE input ) {};
 
-    // Synthesize a whole buffer
+    // Synthesize a whole buffer.
+    // -  Returns nothing for this superclass.
     virtual void synthesize( SAMPLE * buffer, unsigned int numFrames ) {};
 
-    // Get one sample from every child
+    // Get one frame from every child
     virtual void tickAll( SAMPLE * oneFrame, Vector3D listenerPosition );
 
-    // Synthesize one buffer from every child
-    virtual void synthesizeAll( SAMPLE * buffer,
-                                unsigned int numFrames,
-                                Vector3D listenerPosition
-                              );
+    // Synthesize one buffer from this and every child.
+    virtual void synthesizeAll(
+            SAMPLE * buffer, unsigned int numFrames, Vector3D listenerPosition
+            );
 
+public:
     // description
     virtual std::string desc() const;
 };
 
 //-----------------------------------------------------------------------------
 // Name: class SWIRLCamera
-// Desc: the camera
+// Desc: The camera, meant to be attached to our avatar (i.e. an instance of
+//       SWIRLAvatar).
 //-----------------------------------------------------------------------------
 class SWIRLCamera : public SWIRLEntity
 {
 public:
-    // update
+    // Update
     void update( YTimeInterval dt );
-    // render
+    // Render
     //void render();
 
+public:
+    // Relative position determines the camera's position in relation to the
+    // avatar, e.g. for first vs. third person POV.
     iSlew3D relativePosition;
+
+    // togglePosition() changes between predefined first- and tird-person
+    // relative positions.
     void togglePosition();
+
+public:
+    // Absolute location, needed for calling the actual look() function.
     Vector3D absLoc;
 
+public:
     // description
     virtual std::string desc() const;
 };
@@ -76,26 +88,34 @@ class SWIRLAvatar : public SWIRLEntity
 public:
     SWIRLAvatar( Vector3D startingLocation ); // Constructor
 
+public:
+    // Augment SWIRLEntity with reference location and goals for slewing
     Vector3D goal;
     Vector3D refGoal;
     Vector3D refLoc;
 
+public:
+    // Slewing vectors for movement
     iSlew3D iLoc;
     iSlew3D iRefLoc;
 
-    // update
-    void update( YTimeInterval dt );
-    // render
-    void render();
-
-    // description
-    virtual std::string desc() const;
-
-    // movement methods
+public:
+    // Movement methods
     void move(   float amount );
     void turn(   float degAmount );
     void strafe( float amount );
 
+public:
+    // Update
+    void update( YTimeInterval dt );
+    // Render
+    void render();
+
+public:
+    // description
+    virtual std::string desc() const;
+
+public:
     Vector3D size;
 };
 
@@ -112,6 +132,7 @@ public:
     // render
     void render();
 
+public:
     // description
     virtual std::string desc() const;
 };
@@ -128,26 +149,38 @@ public:
     // render
     void render();
 
+public:
     // description
     virtual std::string desc() const;
 };
 
 //-----------------------------------------------------------------------------
 // Name: class SWIRLFluid
-// Desc:
+// Desc: adds fluidsynth to SWIRLEntity
 //-----------------------------------------------------------------------------
 class SWIRLFluid : public SWIRLEntity
 {
 public:
     SWIRLFluid(); //Constructor
 
+public:
     virtual SAMPLE tick( SAMPLE input );
     virtual void synthesize( SAMPLE * buffer, unsigned int numFrames );
 
-    // fluidsynth
+public:
+    // fluidsynth instance is a member of this class
     GeXFluidSynth * synth;
+
+public:
+    // description
+    virtual std::string desc() const;
 };
 
+// TODO remove?
+//-----------------------------------------------------------------------------
+// Name: class SWIRLCube
+// Desc: a cube SWIRLEntity
+//-----------------------------------------------------------------------------
 class SWIRLCube : public SWIRLEntity
 {
 public:
@@ -162,17 +195,19 @@ public:
 };
 
 //-----------------------------------------------------------------------------
-// Name: class SWIRLFluid
-// Desc:
+// Name: class SWIRLBirdCube
+// Desc: a cube that makes fluidsynth sounds when avatar is close.
 //-----------------------------------------------------------------------------
 class SWIRLBirdCube : public SWIRLFluid
 {
 public:
     SWIRLBirdCube() : size( 1, 1, 1.0f ) {  }
 
+public:
     virtual void render(); 
     virtual void update( YTimeInterval dt );
 
+public:
     // description
     virtual std::string desc() const;
 
