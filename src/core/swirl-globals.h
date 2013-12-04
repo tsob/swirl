@@ -11,6 +11,7 @@
 #define __SWIRL_GLOBALS_H__
 
 #include "swirl-entity.h"
+#include "swirl-networking.h"
 
 // x-api
 #include "x-def.h"
@@ -44,9 +45,7 @@
 
 // forward reference
 class SWIRLSim;
-
-//TODO
-YEntity* getAvatar();
+class SWIRLMessageListener;
 
 //-----------------------------------------------------------------------------
 // Name: class Globals
@@ -55,10 +54,13 @@ YEntity* getAvatar();
 class Globals
 {
 public:
+    
     // Top level root simulation
     static SWIRLSim * sim;
 
-    static int app ;
+    //static int app ;
+    static SWIRLMessageListener * application;
+
 
     // path
     static std::string path;

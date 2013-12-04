@@ -8,6 +8,8 @@
 // Date:   Fall 2013
 //----------------------------------------------------------------------------
 #include "swirl-globals.h"
+#include "swirl-networking.h"
+
 #include "swirl-entity.h"
 #include "y-entity.h"
 
@@ -21,29 +23,7 @@
 #define DEFAULT_VERSION       "0.0.1"
 
 SWIRLSim * Globals::sim     = NULL;
-
-YEntity* avatar = NULL;
-
-YEntity* getAvatar()
-{
-    //TODO
-    if (!avatar)
-    {
-        avatar = new SWIRLTeapot();
-        // create test teapot
-        // set attributes
-        avatar->col = Globals::ourSoftYellow;
-        avatar->loc.x = 0;
-        avatar->loc.y = 0;
-
-        if (Globals::app == 1)
-            avatar->loc.z = -1;
-        else
-            avatar->loc.z = -2;
-    }
-    return avatar;
-}
-
+SWIRLMessageListener* Globals::application = NULL;
 
 GLsizei Globals::windowWidth      = DEFAULT_WINDOW_WIDTH;
 GLsizei Globals::windowHeight     = DEFAULT_WINDOW_HEIGHT;
@@ -92,11 +72,8 @@ iSlew3D  Globals::bgColor( Globals::skyBlue, 10.0 );
 Vector3D Globals::viewRadius( 5, 2, 1 );
 Vector3D Globals::viewEyeY( 2, 0, 1.5f );
 
-int Globals::app = 0;
-
 //TODO
 SWIRLCamera * Globals::camera   =  new SWIRLCamera;
-SWIRLAvatar * Globals::myAvatar =  new SWIRLAvatar( Vector3D(0.0f, 0.0f, 3.0f) );
 
 // Relative camera positions
 Vector3D Globals::firstPerson = Vector3D(0.0f, 0.5f, 2.0f);

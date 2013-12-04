@@ -13,7 +13,7 @@
 #include "swirl-globals.h"
 #include "swirl-sim.h"
 #include "swirl-audio.h"
-#include "swirl-networking.h"
+//#include "swirl-networking.h"
 
 #include "x-def.h"
 #include "x-fun.h"

@@ -137,14 +137,6 @@ void SWIRLTeapot::render()
     glPushMatrix( );
         // enable lighting
         glEnable( GL_LIGHTING );
-        // set color
-
-        //TODO
-        if (Globals::app == 1)
-            glColor4f( col.x, 0, col.z, alpha );
-        else
-            glColor4f( 0, col.y, col.z, alpha );
-
         // render stuff
         glutSolidTeapot( 1.0 );
         // disable lighting
@@ -211,11 +203,13 @@ std::string SWIRLTeapot::desc() const
 //-----------------------------------------------------------------------------
 void SWIRLCamera::update( YTimeInterval dt )
 {
+    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+    
     // interpolate relative camera position
     relativePosition.interp(dt);
 
     // Vector pointing in the look direction
-    Vector3D lookVector = Globals::myAvatar->loc- Globals::myAvatar->refLoc;
+    Vector3D lookVector = myAvatar->loc - myAvatar->refLoc;
     lookVector.normalize();
     
     // rotate relative position for absolute displacement
@@ -226,7 +220,7 @@ void SWIRLCamera::update( YTimeInterval dt )
         relativePosition.actual().x * sin(theta) + relativePosition.actual().z * cos(theta)
         );
 
-    absLoc = Globals::myAvatar->loc + displacementVector;
+    absLoc = myAvatar->loc + displacementVector;
     loc = relativePosition.actual();
 }
 
@@ -324,9 +318,10 @@ void SWIRLAvatar::render()
 // Name: class: SWIRLAvatar constructor
 // Desc: 
 //-----------------------------------------------------------------------------
-SWIRLAvatar::SWIRLAvatar( Vector3D startingLocation )
+SWIRLAvatar::SWIRLAvatar( int anId, Vector3D startingLocation )
 {
-    size = Vector3D(1, 1, 1.0f); 
+    id = anId;
+    size = Vector3D(1, 1, 1.0f);
     loc  = startingLocation;
     refLoc = loc + Vector3D(0.0f, 0.0f, 10.0f);
     col = Globals::ourOrange;
@@ -479,6 +474,8 @@ void SWIRLCube::update( YTimeInterval dt )
 //-----------------------------------------------------------------------------
 void SWIRLBirdCube::update( YTimeInterval dt )
 {
+    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+
     static int counter = 0;
     int timeout = 24;
 
@@ -487,7 +484,7 @@ void SWIRLBirdCube::update( YTimeInterval dt )
 
     if(counter<=0)
     {
-        if( (loc - Globals::myAvatar->loc).magnitude() < size.magnitude() )
+        if( (loc - myAvatar->loc).magnitude() < size.magnitude() )
         {
             synth->noteOn(0, (float)XFun::rand2i(48,62), XFun::rand2i(50,100) );
             counter = timeout;

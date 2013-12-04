@@ -11,7 +11,6 @@
 #include "swirl-gfx.h"
 #include "swirl-networking.h"
 
-
 using namespace std;
 
 //-----------------------------------------------------------------------------
@@ -240,32 +239,23 @@ void initialize_simulation()
     Globals::sim = new SWIRLSim();
 
     // add to simulation
-    Globals::sim->root().addChild( getAvatar() );
+    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+    
+    Globals::sim->root().addChild( myAvatar );
     Globals::sim->root().addChild( new SWIRLMoon  );
 
-    Globals::myAvatar->iLoc = iSlew3D( Globals::myAvatar->loc, 5.0f );
-    Globals::myAvatar->iRefLoc = iSlew3D( Globals::myAvatar->refLoc, 5.0f );
+    myAvatar->iLoc = iSlew3D( myAvatar->loc, 5.0f );
+    myAvatar->iRefLoc = iSlew3D( myAvatar->refLoc, 5.0f );
 
-    if (Globals::app == 1)
-    {
-        Globals::myAvatar->loc.z = -2;
-        Globals::myAvatar->refLoc.z = 9;
-    }
-    else
-    {
-        Globals::myAvatar->loc.z = -1;
-        Globals::myAvatar->refLoc.z = 10;
-    }
-
-    Globals::myAvatar->goal = Globals::myAvatar->loc;
-    Globals::myAvatar->refGoal = Globals::myAvatar->refLoc;
+    myAvatar->goal = myAvatar->loc;
+    myAvatar->refGoal = myAvatar->refLoc;
 
     Globals::camera->relativePosition = iSlew3D( Globals::firstPerson, 5.0f);
 
     //Globals::myAvatar->iRefLoc.setSlew(5);
 
-    Globals::myAvatar->addChild( Globals::camera );
-    Globals::sim->root().addChild( Globals::myAvatar );
+    myAvatar->addChild( Globals::camera );
+    Globals::sim->root().addChild( myAvatar );
 
     Globals::sim->root().addChild( new SWIRLBirdCube() );
 
@@ -448,6 +438,8 @@ void reshapeFunc( int w, int h )
 //-----------------------------------------------------------------------------
 void look( )
 {
+    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+
     // go
     Globals::fov.interp( XGfx::delta() );
     // set the matrix mode to project
@@ -468,9 +460,9 @@ void look( )
         Globals::camera->absLoc.x,
         Globals::camera->absLoc.y,
         Globals::camera->absLoc.z,
-        Globals::myAvatar->refLoc.x,
-        Globals::myAvatar->refLoc.y,
-        Globals::myAvatar->refLoc.z,
+        myAvatar->refLoc.x,
+        myAvatar->refLoc.y,
+        myAvatar->refLoc.z,
         0.0f, 1.0f, 0.0f
         );
 
@@ -486,6 +478,8 @@ void look( )
 //-----------------------------------------------------------------------------
 void mouseMoveFunc( int x, int y )
 {
+    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+
     static float lastx = 0.0;
     static float lasty = 0.0;
 
@@ -500,13 +494,13 @@ void mouseMoveFunc( int x, int y )
     }
 
     if( (float)x > lastx )
-        Globals::myAvatar->turn(lastx*0.01);
+        myAvatar->turn(lastx*0.01);
     else
-        Globals::myAvatar->turn((-lastx)*0.01);
+        myAvatar->turn((-lastx)*0.01);
     if( (float)y > 0 )
-        Globals::myAvatar->move(-lasty*0.01);
+        myAvatar->move(-lasty*0.01);
     else
-        Globals::myAvatar->move(lasty*0.01);
+        myAvatar->move(lasty*0.01);
 
     lastx = (float)x;
     lasty = (float)y;
@@ -524,10 +518,6 @@ void mouseMoveFunc( int x, int y )
 //-----------------------------------------------------------------------------
 void keyboardFunc( unsigned char key, int x, int y )
 {
-
-    //TODO
-    UdpTransmitSocket* transmitSocket = getTransmitSocket();
-
     char buffer[SWIRL_FRAMESIZE];
     osc::OutboundPacketStream oscOuttream( buffer, SWIRL_FRAMESIZE);
 
@@ -684,37 +674,40 @@ void keyboardFunc( unsigned char key, int x, int y )
     // post visualizer handling (if not handled)
     if( !handled )
     {
+        SWIRLServerProxy* serverProxy = ((SWIRLClient*)Globals::application)->serverProxy;
+        SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+
         switch( key )
         {
             case ']':
                 // turn right
-                Globals::myAvatar->turn(0.1f);
-                swirl_send_message( "/turn", 0.1f );
+                myAvatar->turn(0.1f);
+                serverProxy->perform( myAvatar->id, "/turn", 0.1f );
                 break;
             case '[':
                 // turn left
-                Globals::myAvatar->turn(-0.1f);
-                swirl_send_message( "/turn", -0.1f );
+                myAvatar->turn(-0.1f);
+                serverProxy->perform( myAvatar->id, "/turn", -0.1f );
                 break;
             case 'w':
                 // move forward
-                Globals::myAvatar->move(0.2f);
-                swirl_send_message( "/move", 0.2f );
+                myAvatar->move(0.2f);
+                serverProxy->perform( myAvatar->id, "/move", 0.2f );
                 break;
             case 'x':
                 // move back
-                Globals::myAvatar->move(-0.2f);
-                swirl_send_message( "/move", -0.2f );
+                myAvatar->move(-0.2f);
+                serverProxy->perform( myAvatar->id, "/move", -0.2f );
                 break;
             case 'd':
                 //strafe right
-                Globals::myAvatar->strafe(0.1f);
-                swirl_send_message( "/strafe", 0.1f );
+                myAvatar->strafe(0.1f);
+                serverProxy->perform( myAvatar->id, "/strafe", 0.1f );
                 break;
             case 'a':
                 //strafe left
-                Globals::myAvatar->strafe(-0.1f);
-                swirl_send_message( "/strafe", -0.1f );
+                myAvatar->strafe(-0.1f);
+                serverProxy->perform( myAvatar->id, "/strafe", -0.1f );
                 break;
             case 'c':
                 // toggle camera position
@@ -757,8 +750,10 @@ void keyboardFunc( unsigned char key, int x, int y )
 //-----------------------------------------------------------------------------
 void mouseFunc( int button, int state, int x, int y )
 {
+    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+
     SWIRLBirdCube * nextBirdCube = new SWIRLBirdCube;
-    nextBirdCube->loc = Globals::myAvatar->loc;
+    nextBirdCube->loc = myAvatar->loc;
     nextBirdCube->col = Vector3D( XFun::rand2f(0,1), XFun::rand2f(0,1), XFun::rand2f(0,1));
     Globals::sim->root().addChild( nextBirdCube );
 

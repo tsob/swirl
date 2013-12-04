@@ -65,8 +65,10 @@ public:
 class SWIRLAvatar : public SWIRLEntity
 {
 public:
-    SWIRLAvatar( Vector3D startingLocation ); // Constructor
+    SWIRLAvatar( int anId, Vector3D startingLocation ); // Constructor
 
+    int id;
+    
     Vector3D goal;
     Vector3D refGoal;
     Vector3D refLoc;
