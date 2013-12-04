@@ -592,7 +592,7 @@ void SWIRLBirdCube::update( YTimeInterval dt )
             synth->noteOff( myNoteOff.first, myNoteOff.second );
         }
     }
-    col *= 0.99;
+    col *= powf(0.2,XGfx::delta());
 }
 //-----------------------------------------------------------------------------
 // name: render()

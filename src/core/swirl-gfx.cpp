@@ -239,7 +239,6 @@ void initialize_graphics()
 //-----------------------------------------------------------------------------
 void initialize_simulation()
 {
-
     // seed rand
     XFun::srand();
 
@@ -250,8 +249,8 @@ void initialize_simulation()
     Globals::sim->root().addChild( getAvatar() );
     Globals::sim->root().addChild( new SWIRLMoon  );
 
-    Globals::myAvatar->iLoc = iSlew3D( Globals::myAvatar->loc, 5.0f );
-    Globals::myAvatar->iRefLoc = iSlew3D( Globals::myAvatar->refLoc, 9.0f );
+    Globals::myAvatar->iLoc = iSlew3D( Globals::myAvatar->loc, 1.0f );
+    Globals::myAvatar->iRefLoc = iSlew3D( Globals::myAvatar->refLoc, 1.0f );
 
     if (Globals::app == 1)
     {
@@ -267,16 +266,10 @@ void initialize_simulation()
     Globals::myAvatar->goal = Globals::myAvatar->loc;
     Globals::myAvatar->refGoal = Globals::myAvatar->refLoc;
 
-    Globals::camera->relativePosition = iSlew3D( Globals::firstPerson, 9.0f);
-
-    //Globals::myAvatar->iRefLoc.setSlew(5);
+    Globals::camera->relativePosition = iSlew3D( Globals::firstPerson, 0.5f);
 
     Globals::myAvatar->addChild( Globals::camera );
     Globals::sim->root().addChild( Globals::myAvatar );
-
-    // Put a bird on it
-    Globals::sim->root().addChild( new SWIRLBirdCube() );
-
 }
 
 
