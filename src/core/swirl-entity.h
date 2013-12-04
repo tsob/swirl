@@ -89,13 +89,9 @@ class SWIRLAvatar : public SWIRLEntity
 public:
     SWIRLAvatar( int anId, Vector3D startingLocation ); // Constructor
 
-<<<<<<< HEAD
     int id;
-    
-=======
 public:
     // Augment SWIRLEntity with reference location and goals for slewing
->>>>>>> 597465cb69cc9ed9d72943c175d7f4211cd9fe5f
     Vector3D goal;
     Vector3D refGoal;
     Vector3D refLoc;

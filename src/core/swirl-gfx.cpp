@@ -250,31 +250,14 @@ void initialize_simulation()
     Globals::sim->root().addChild( myAvatar );
     Globals::sim->root().addChild( new SWIRLMoon  );
 
-<<<<<<< HEAD
     myAvatar->iLoc = iSlew3D( myAvatar->loc, 5.0f );
     myAvatar->iRefLoc = iSlew3D( myAvatar->refLoc, 5.0f );
-=======
-    Globals::myAvatar->iLoc = iSlew3D( Globals::myAvatar->loc, 1.0f );
-    Globals::myAvatar->iRefLoc = iSlew3D( Globals::myAvatar->refLoc, 1.0f );
-
-    if (Globals::app == 1)
-    {
-        Globals::myAvatar->loc.z = -2;
-        Globals::myAvatar->refLoc.z = 9;
-    }
-    else
-    {
-        Globals::myAvatar->loc.z = -1;
-        Globals::myAvatar->refLoc.z = 10;
-    }
->>>>>>> 597465cb69cc9ed9d72943c175d7f4211cd9fe5f
 
     myAvatar->goal = myAvatar->loc;
     myAvatar->refGoal = myAvatar->refLoc;
 
     Globals::camera->relativePosition = iSlew3D( Globals::firstPerson, 0.5f);
 
-<<<<<<< HEAD
     myAvatar->addChild( Globals::camera );
     Globals::sim->root().addChild( myAvatar );
 
@@ -284,10 +267,6 @@ void initialize_simulation()
     //YCube* cube = new YCube();
     //cube->loc = Vector3D( 1.0f, 1.0f, 1.0f  );
     //Globals::sim->root().addChild( cube );
-=======
-    Globals::myAvatar->addChild( Globals::camera );
-    Globals::sim->root().addChild( Globals::myAvatar );
->>>>>>> 597465cb69cc9ed9d72943c175d7f4211cd9fe5f
 }
 
 
@@ -485,15 +464,9 @@ void look( )
         Globals::camera->absLoc.x,
         Globals::camera->absLoc.y,
         Globals::camera->absLoc.z,
-<<<<<<< HEAD
         myAvatar->refLoc.x,
         myAvatar->refLoc.y,
         myAvatar->refLoc.z,
-=======
-        Globals::myAvatar->iRefLoc.actual().x,
-        Globals::myAvatar->iRefLoc.actual().y,
-        Globals::myAvatar->iRefLoc.actual().z,
->>>>>>> 597465cb69cc9ed9d72943c175d7f4211cd9fe5f
         0.0f, 1.0f, 0.0f
         );
 
@@ -549,6 +522,8 @@ void mouseMoveFunc( int x, int y )
 //       http://en.wikibooks.org/wiki/OpenGL_Programming/Glescraft_4
 //-----------------------------------------------------------------------------
 void motion(int x, int y) {
+    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+
     static bool wrap = false;
 
     if(!wrap) {
@@ -559,8 +534,8 @@ void motion(int x, int y) {
         int dy = y - wh / 2;
 
         // Do something with dx and dy here
-        Globals::myAvatar->move(dy*-0.01);
-        Globals::myAvatar->turn(dx*0.01);
+        myAvatar->move(dy*-0.01);
+        myAvatar->turn(dx*0.01);
         reshapeFunc( Globals::windowWidth, Globals::windowHeight );
         glutPostRedisplay( );
 
@@ -753,7 +728,6 @@ void keyboardFunc( unsigned char key, int x, int y )
         {
             case ']':
                 // turn right
-<<<<<<< HEAD
                 myAvatar->turn(0.1f);
                 serverProxy->perform( myAvatar->id, "/turn", 0.1f );
                 break;
@@ -781,35 +755,6 @@ void keyboardFunc( unsigned char key, int x, int y )
                 //strafe left
                 myAvatar->strafe(-0.1f);
                 serverProxy->perform( myAvatar->id, "/strafe", -0.1f );
-=======
-                Globals::myAvatar->turn(0.4f);
-                swirl_send_message( "/turn", 0.1f );
-                break;
-            case '[':
-                // turn left
-                Globals::myAvatar->turn(-0.4f);
-                swirl_send_message( "/turn", -0.1f );
-                break;
-            case 'w':
-                // move forward
-                Globals::myAvatar->move(0.4f);
-                swirl_send_message( "/move", 0.2f );
-                break;
-            case 'x':
-                // move back
-                Globals::myAvatar->move(-0.4f);
-                swirl_send_message( "/move", -0.2f );
-                break;
-            case 'd':
-                //strafe right
-                Globals::myAvatar->strafe(0.4f);
-                swirl_send_message( "/strafe", 0.1f );
-                break;
-            case 'a':
-                //strafe left
-                Globals::myAvatar->strafe(-0.4f);
-                swirl_send_message( "/strafe", -0.1f );
->>>>>>> 597465cb69cc9ed9d72943c175d7f4211cd9fe5f
                 break;
             case 'c':
                 // toggle camera position
@@ -852,55 +797,12 @@ void keyboardFunc( unsigned char key, int x, int y )
 //-----------------------------------------------------------------------------
 void mouseFunc( int button, int state, int x, int y )
 {
-<<<<<<< HEAD
     SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
 
     SWIRLBirdCube * nextBirdCube = new SWIRLBirdCube;
     nextBirdCube->loc = myAvatar->loc;
     nextBirdCube->col = Vector3D( XFun::rand2f(0,1), XFun::rand2f(0,1), XFun::rand2f(0,1));
     Globals::sim->root().addChild( nextBirdCube );
-=======
->>>>>>> 597465cb69cc9ed9d72943c175d7f4211cd9fe5f
-
-    // debug TODO remove
-    cout << "camera absolute position: " <<
-      Globals::camera->absLoc.x << ", " <<
-      Globals::camera->absLoc.y << ", " <<
-      Globals::camera->absLoc.z << ", " <<
-      endl;
-
-    cout << "camera relative position: " <<
-      Globals::camera->loc.x << ", " <<
-      Globals::camera->loc.y << ", " <<
-      Globals::camera->loc.z << ", " <<
-      endl;
-
-    cout << "My avatar position: " <<
-      Globals::myAvatar->loc.x << ", " <<
-      Globals::myAvatar->loc.y << ", " <<
-      Globals::myAvatar->loc.z << ", " <<
-      endl;
-
-    cout << "My avatar reference position: " <<
-      Globals::myAvatar->refLoc.x << ", " <<
-      Globals::myAvatar->refLoc.y << ", " <<
-      Globals::myAvatar->refLoc.z << ", " <<
-      endl;
-
-    Vector3D lookDirection = Globals::myAvatar->loc - Globals::myAvatar->refLoc;
-    cout << "Look direction from avatar: " <<
-      lookDirection.x << ", " <<
-      lookDirection.y << ", " <<
-      lookDirection.z << ", " <<
-      endl;
-    lookDirection = Globals::camera->absLoc - Globals::myAvatar->refLoc;
-    cout << "Look direction from camera: " <<
-      lookDirection.x << ", " <<
-      lookDirection.y << ", " <<
-      lookDirection.z << ", " <<
-      endl;
-
-
 }
 
 //-----------------------------------------------------------------------------
@@ -1251,8 +1153,10 @@ void renderBackground()
 //-----------------------------------------------------------------------------
 void dropRandCube()
 {
+    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+
     SWIRLBirdCube * nextCube = new SWIRLBirdCube;
-    nextCube->loc = Globals::myAvatar->loc;
+    nextCube->loc = myAvatar->loc;
     nextCube->col = Vector3D( XFun::rand2f(0,1), XFun::rand2f(0,1), XFun::rand2f(0,1));
     Globals::sim->root().addChild( nextCube );
 
@@ -1264,8 +1168,10 @@ void dropRandCube()
 //-----------------------------------------------------------------------------
 void dropNoteSphere()
 {
+    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+
     SWIRLNoteSphere * nextObj = new SWIRLNoteSphere;
-    nextObj->loc = Globals::myAvatar->loc;
+    nextObj->loc = myAvatar->loc;
     Globals::sim->root().addChild( nextObj );
 
     glutPostRedisplay( );

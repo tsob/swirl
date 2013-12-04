@@ -572,7 +572,6 @@ void SWIRLBirdCube::update( YTimeInterval dt )
 {
     SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
     static vector< pair<int,int> > noteChanPitch;
-    static int timeout = 512;
 
     static int counter = 0;
     int timeout = 24;
@@ -611,6 +610,8 @@ void SWIRLBirdCube::update( YTimeInterval dt )
 //-----------------------------------------------------------------------------
 void SWIRLNoteSphere::update( YTimeInterval dt )
 {
+    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+
     static vector< pair<int,int> > noteChanPitch;
     static int timeout = 512;
 
@@ -619,7 +620,7 @@ void SWIRLNoteSphere::update( YTimeInterval dt )
 
     if(counter<=0)
     {
-        if( (loc - Globals::myAvatar->loc).magnitude() < size.magnitude() )
+        if( (loc - myAvatar->loc).magnitude() < size.magnitude() )
         {
             synth->noteOn(channel, (float)pitch, XFun::rand2i(50,100) );
             counter = timeout;
