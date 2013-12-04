@@ -192,15 +192,16 @@ void SWIRLEntity::synthesizeAll( SAMPLE * buffer,
 
         for (int j = 0; j < numFrames; ++j)
         {
-            // perform distance scaling and add to mono buffer
-            buffer[j*SWIRL_NUMCHANNELS] += tmpBuffer[j*SWIRL_NUMCHANNELS]
-                 / max((this->loc-Globals::camera->absLoc).magnitude(), 1.0f);
-
-            // Mono expansion // TODO change
-            for (int i = 1; i < SWIRL_NUMCHANNELS; ++i)
+          for (int i = 0; i < SWIRL_NUMCHANNELS; ++i)
+          {
+            if(i<2)
             {
-                buffer[j*SWIRL_NUMCHANNELS + i] =  buffer[j*SWIRL_NUMCHANNELS];
+              // perform distance scaling and add to mono buffer
+              buffer[j*SWIRL_NUMCHANNELS+i] += tmpBuffer[j*SWIRL_NUMCHANNELS+i]
+                   / max((this->loc-Globals::camera->absLoc).magnitude(), 1.0f);
+              //buffer[j*SWIRL_NUMCHANNELS + i] =  buffer[j*SWIRL_NUMCHANNELS];
             }
+          }
         }
     }
 
