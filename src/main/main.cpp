@@ -20,25 +20,37 @@
 
 using namespace std;
 
+XMutex mutex;
+
 class MyServer : public SWIRLServer
 {
 public:
     MyServer(const char* anAddress, int aPort) : SWIRLServer(anAddress, aPort)
     {
-        
-        
-        addEntity("SWIRLBirdCube", Vector3D(1, 0, 2), Vector3D(0, 0, 0));
+       // addEntity("SWIRLBirdCube", Vector3D(1, 0, 2), Vector3D(0, 0, 0));
         
         //1 5 7 8
-        addEntity( "SWIRLFountain1", Vector3D(0, 0, -4), Vector3D(0, 0, 0) );
-        //addEntity( "SWIRLFountain2", Vector3D(1, 0, 2), Vector3D(0, 0, 0) );
-        //addEntity( "SWIRLFountain3", Vector3D(0, 0, 2), Vector3D(0, 0, 0) );
-        //addEntity( "SWIRLFountain4", Vector3D(0, 0, 0), Vector3D(0, 0, 0) );
-        //addEntity( "SWIRLFountain5", Vector3D(-1, 0, -2), Vector3D(0, 0, 0) );
-        //addEntity( "SWIRLFountain6", Vector3D(-2, 0, -4), Vector3D(0, 0, 0) );
-        //addEntity( "SWIRLFountain7", Vector3D(0, 0, -1), Vector3D(0, 0, 0) );
+        int i;
+        
+        for (i = 0; i < 10; i++)
+        {
+            addEntity( "SWIRLFountain1", Vector3D(i - 5, 0, i - 5), Vector3D(0, 0, 0) );
+           
+        }
+        
+        addEntity( "SWIRLFountain2", Vector3D(1, 0, 2), Vector3D(0, 0, 0) );
+        addEntity( "SWIRLFountain3", Vector3D(2, 0, 2), Vector3D(0, 0, 0) );
+        addEntity( "SWIRLFountain4", Vector3D(3, 0, 0), Vector3D(0, 0, 0) );
+        addEntity( "SWIRLFountain5", Vector3D(2, 0, -2), Vector3D(0, 0, 0) );
+        addEntity( "SWIRLFountain6", Vector3D(1, 0, -4), Vector3D(0, 0, 0) );
+        addEntity( "SWIRLFountain7", Vector3D(0, 0, -1), Vector3D(0, 0, 0) );
         addEntity( "SWIRLFountain8", Vector3D(0, 0, 0), Vector3D(0, 0, 0) );
-        addEntity( "SWIRLFountain1", Vector3D(0, 0, 4), Vector3D(0, 0, 0) );
+        
+        for (i = 0; i < 5; i++)
+        {
+            addEntity( "SWIRLFountain1", Vector3D(i -3, 0, i - 3), Vector3D(0, 0, 0) );
+            
+        }
 
     }
     

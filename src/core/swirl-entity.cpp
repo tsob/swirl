@@ -92,8 +92,15 @@ SWIRLEntity* SWIRLEntityFactory::createEntity(const char* entityClassName, int i
         entity = new SWIRLConeAvatar(); //TODO we can have ori too
     else if (!strcmp(entityClassName, "SWIRLCubeAvatar"))
         entity = new SWIRLCubeAvatar(); //TODO we can have ori too
-    else if (!strcmp(entityClassName, "SWIRLBirdCube"))
+    else if (!strcmp(entityClassName, "SWIRLBirdCube")) {
+        cerr << "creating SWIRLBirdCube" << endl;
+        
         entity = new SWIRLBirdCube(); //TODO we can have ori too
+        
+        cerr << "SWIRLBirdCube created" << endl;
+
+        
+    }
     else if (!strcmp(entityClassName, "SWIRLNoteSphere"))
         entity = new SWIRLNoteSphere(); //TODO we can have ori too
     else if (strstr(entityClassName, "SWIRLFountain"))
@@ -175,6 +182,8 @@ SWIRLEntity* SWIRLEntityFactory::createEntity(const char* entityClassName, int i
 
     entity->goal = entity->loc;
     entity->oriGoal = entity->ori;
+    
+    cerr << "entity created" << endl;
 
     return entity;
 }

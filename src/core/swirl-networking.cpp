@@ -267,13 +267,15 @@ void SWIRLServer::addEntity(const char* entityClassName, int entityId, Vector3D 
 }
 
 int SWIRLServer::addEntity(const char* entityClassName, Vector3D loc, Vector3D ori) {
+    //g_SWIRLNetworkingMutex.acquire();
+    
     std::map<int, SWIRLClientProxy*>::iterator clientProxiesIter;
     
     addEntity(entityClassName, maxEntityId, loc, ori);
     maxEntityId++;
 
     return maxEntityId - 1;
-
+    //g_SWIRLNetworkingMutex.release();
 }
 
 void SWIRLServer::removeEntity(int entityId) {
@@ -296,7 +298,7 @@ void SWIRLServer::removeEntity(int entityId) {
 void SWIRLServer::ProcessMessage( const osc::ReceivedMessage& m,
                                  const IpEndpointName& remoteEndpoint )
 {
-    g_SWIRLNetworkingMutex.acquire();
+    //g_SWIRLNetworkingMutex.acquire();
     
     osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
     char messageName[MAX_MESSAGE_NAME_SIZE];
@@ -378,7 +380,7 @@ void SWIRLServer::ProcessMessage( const osc::ReceivedMessage& m,
             removeEntity(entityId);
         }
         
-        g_SWIRLNetworkingMutex.release();
+        //g_SWIRLNetworkingMutex.release();
 
     }
     catch( osc::Exception& e ){
@@ -545,7 +547,9 @@ void SWIRLClient::removeEntity(int id)
 void SWIRLClient::ProcessMessage( const osc::ReceivedMessage& m,
                                  const IpEndpointName& remoteEndpoint )
 {
-    g_SWIRLNetworkingMutex.acquire();
+    cerr << "-------##### CLIENT RECEIVE MESSAGE" << endl;
+    
+    //g_SWIRLNetworkingMutex.acquire();
     
     osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
     char messageName[MAX_MESSAGE_NAME_SIZE];
@@ -556,6 +560,8 @@ void SWIRLClient::ProcessMessage( const osc::ReceivedMessage& m,
     int i;
     
     strcpy(messageName, m.AddressPattern());
+    
+    cerr << messageName << endl;
     
     try {
         if ( !strcmp( messageName, MOVE ) ||
@@ -583,7 +589,7 @@ void SWIRLClient::ProcessMessage( const osc::ReceivedMessage& m,
             Vector3D loc;
             Vector3D ori;
             
-            cerr << "addEntity received";
+            cerr << "addEntity received" << endl;
             
             args >> entityClassName >> entityId >> loc.x >> loc.y >> loc.z >> ori.x >> ori.y >> ori.z >> osc::EndMessage;
             
@@ -591,7 +597,11 @@ void SWIRLClient::ProcessMessage( const osc::ReceivedMessage& m,
             
             SWIRLEntityFactory factory; //TODO no need to initialize
             SWIRLEntity* entity = (SWIRLEntity*)factory.createEntity(entityClassName, entityId, loc, ori);
+            
+            cerr << "entity " << entityClassName << "created" << endl;
             entities[entityId] = entity;
+            cerr << "entity put inside hashmap" << endl;
+
             
             Globals::sim->root().addChild( entity );
             cerr << "entity added to scene graph " << entityClassName << endl;
@@ -604,6 +614,8 @@ void SWIRLClient::ProcessMessage( const osc::ReceivedMessage& m,
         }
         else if (!strcmp( messageName, RECEIVE_ID)) //TODO can be e method
         {
+            cerr << "receiveId received" << endl;
+            
             args >> entityId >> osc::EndMessage;
             id = entityId;
             cerr << "myAvatar is is now " << entityId << endl;
@@ -619,7 +631,7 @@ void SWIRLClient::ProcessMessage( const osc::ReceivedMessage& m,
             
         }
         
-        g_SWIRLNetworkingMutex.release();
+        //g_SWIRLNetworkingMutex.release();
     }
     catch( osc::Exception& e ){
         // any parsing errors such as unexpected argument types, or
