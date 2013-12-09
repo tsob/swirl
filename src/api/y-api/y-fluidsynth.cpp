@@ -57,7 +57,7 @@ GeXFluidSynth::GeXFluidSynth()
 GeXFluidSynth::~GeXFluidSynth()
 {
     // lock
-    m_mutex.acquire();
+    //m_mutex.acquire();
 
     // clean up
     if( m_synth ) delete_fluid_synth( m_synth );
@@ -66,7 +66,7 @@ GeXFluidSynth::~GeXFluidSynth()
     m_settings = NULL;
 
     // unlock
-    m_mutex.release();
+    //m_mutex.release();
 }
 
 
@@ -85,7 +85,7 @@ bool GeXFluidSynth::init( int srate, int polyphony )
     }
 
     // lock
-    m_mutex.acquire();
+    //m_mutex.acquire();
 
     // log
     //NSLog( @"initializing synth..." );
@@ -106,7 +106,7 @@ bool GeXFluidSynth::init( int srate, int polyphony )
     printf("Fluid synth insantiated.\n");
 
     // unlock
-    m_mutex.release();
+    //m_mutex.release();
 
     return m_synth != NULL;
 }
@@ -123,7 +123,7 @@ bool GeXFluidSynth::load( const char * filename, const char * extension )
     if( m_synth == NULL ) return false;
 
     // lock
-    m_mutex.acquire();
+    //m_mutex.acquire();
 
     // the pathc
     std::string path = filename;
@@ -137,13 +137,13 @@ bool GeXFluidSynth::load( const char * filename, const char * extension )
         // error
         std::cerr << "cannot load font file: " << filename << "." << extension << std::endl;
         // unlock
-        m_mutex.release();
+        //m_mutex.release();
 
         return false;
     }
 
     // unlock
-    m_mutex.release();
+    //m_mutex.release();
 
     return true;
 }
@@ -159,9 +159,9 @@ void GeXFluidSynth::programChange( int channel, int program )
 {
     if( m_synth == NULL ) return;
     if( program < 0 || program > 127 ) return;
-    m_mutex.acquire();
+    //m_mutex.acquire();
     fluid_synth_program_change( m_synth, channel, program );
-    m_mutex.release();
+    //m_mutex.release();
 }
 
 
@@ -175,9 +175,9 @@ void GeXFluidSynth::controlChange( int channel, int data2, int data3 )
 {
     if( m_synth == NULL ) return;
     if( data2 < 0 || data2 > 127 ) return;
-    m_mutex.acquire();
+    //m_mutex.acquire();
     fluid_synth_cc( m_synth, channel, data2, data3 );
-    m_mutex.release();
+    //m_mutex.release();
 }
 
 
@@ -196,7 +196,7 @@ void GeXFluidSynth::noteOn( int channel, float pitch, int velocity )
     // difference
     float diff = pitch - pitch_i;
     // lock
-    m_mutex.acquire();
+    //m_mutex.acquire();
     // if needed
     if( diff != 0 )
     {
@@ -206,7 +206,7 @@ void GeXFluidSynth::noteOn( int channel, float pitch, int velocity )
     // sound note
     fluid_synth_noteon( m_synth, channel, pitch, velocity );
     // unlock
-    m_mutex.release();
+    //m_mutex.release();
 }
 
 
@@ -221,11 +221,11 @@ void GeXFluidSynth::pitchBend( int channel, float pitchDiff )
     // sanity check
     if( m_synth == NULL ) return;
     // lock
-    m_mutex.acquire();
+    //m_mutex.acquire();
     // pitch bend
     fluid_synth_pitch_bend( m_synth, channel, (int)(8192 + pitchDiff * 8191) );
     // unlock
-    m_mutex.release();
+    //m_mutex.release();
 }
 
 
@@ -238,9 +238,9 @@ void GeXFluidSynth::pitchBend( int channel, float pitchDiff )
 void GeXFluidSynth::noteOff( int channel, int pitch )
 {
     if( m_synth == NULL ) return;
-    m_mutex.acquire();
+    //m_mutex.acquire();
     fluid_synth_noteoff( m_synth, channel, pitch );
-    m_mutex.release();
+    //m_mutex.release();
 }
 
 
@@ -266,10 +266,10 @@ void GeXFluidSynth::allNotesOff( int channel )
 bool GeXFluidSynth::synthesize2( float * buffer, unsigned int numFrames )
 {
     if( m_synth == NULL ) return false;
-    m_mutex.acquire();
+    //m_mutex.acquire();
     // get it from fluidsynth
     int retval = fluid_synth_write_float( m_synth, numFrames, buffer, 0, 2, buffer, 1, 2 );
-    m_mutex.release();
+    //m_mutex.release();
 
     // return
     return retval == 0;

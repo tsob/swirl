@@ -6,6 +6,7 @@
 //   date: 2013
 //-----------------------------------------------------------------------------
 #include "swirl-entity.h"
+#include "swirl-sim.h"
 #include "swirl-globals.h"
 #include "swirl-networking.h"
 #include <math.h>
@@ -83,9 +84,9 @@ std::string SWIRLFountain::getClassName() const
 SWIRLEntity* SWIRLEntityFactory::createEntity(const char* entityClassName, int id, Vector3D loc, Vector3D ori)
 {
     SWIRLEntity* entity = NULL;
-    
+
     cerr << "SWIRLEntityFactory::createEntity(" << entityClassName << ")" << endl;
-    
+
     if (!strcmp(entityClassName, "SWIRLSphereAvatar"))
         entity = new SWIRLSphereAvatar(); //TODO we can have ori too
     else if (!strcmp(entityClassName, "SWIRLConeAvatar"))
@@ -94,35 +95,35 @@ SWIRLEntity* SWIRLEntityFactory::createEntity(const char* entityClassName, int i
         entity = new SWIRLCubeAvatar(); //TODO we can have ori too
     else if (!strcmp(entityClassName, "SWIRLBirdCube")) {
         cerr << "creating SWIRLBirdCube" << endl;
-        
+
         entity = new SWIRLBirdCube(); //TODO we can have ori too
-        
+
         cerr << "SWIRLBirdCube created" << endl;
 
-        
+
     }
     else if (!strcmp(entityClassName, "SWIRLNoteSphere"))
         entity = new SWIRLNoteSphere(); //TODO we can have ori too
     else if (strstr(entityClassName, "SWIRLFountain"))
     {
         cerr << "Creating fountain" << endl;
-        
+
         //TODO destruct
         SWIRLPool* pool = new SWIRLPool();
-        
+
         cerr << "-4";
 
         //pool->Initialize(NUM_X_OSCILLATORS,NUM_Z_OSCILLATORS,OSCILLATOR_DISTANCE,OSCILLATOR_WEIGHT, 0.05, 4.0, 4.0);
         //Globals::sim->root().addChild( pool );
         cerr << "-3";
 
-        
+
         //pool->Reset(); //TODO
-        
+
         cerr << "-1";
 
         entity = new SWIRLFountain();
-        
+
         cerr << "0";
 
         if (!strcmp(entityClassName, "SWIRLFountain1")) {
@@ -163,15 +164,15 @@ SWIRLEntity* SWIRLEntityFactory::createEntity(const char* entityClassName, int i
         ((SWIRLFountain*)entity)->Position = F3dVector(NUM_X_OSCILLATORS*OSCILLATOR_DISTANCE/2.0f,
                                           POOL_HEIGHT,
                                           NUM_Z_OSCILLATORS*OSCILLATOR_DISTANCE/2.0f);
-        
-        
+
+
         //place it in the center of the pool:
         ((SWIRLFountain*)entity)->Position = F3dVector(NUM_X_OSCILLATORS*OSCILLATOR_DISTANCE/2.0f,
                                           POOL_HEIGHT,
                                           NUM_Z_OSCILLATORS*OSCILLATOR_DISTANCE/2.0f);
     }
-    
-    
+
+
     entity->id = id;
     entity->loc = loc; //TODO call constructor
     entity->ori = ori;
@@ -182,7 +183,7 @@ SWIRLEntity* SWIRLEntityFactory::createEntity(const char* entityClassName, int i
 
     entity->goal = entity->loc;
     entity->oriGoal = entity->ori;
-    
+
     cerr << "entity created" << endl;
 
     return entity;
@@ -293,7 +294,7 @@ void SWIRLEntity::tickAll( SAMPLE * oneFrame, Vector3D listenerPosition )
           oneFrame[i] = oneFrame[0];
         }
     }
-    
+
     //g_SWiRLEntityMutex.acquire();
     // tick children
     for( vector<YEntity *>::iterator itr = children.begin();
@@ -306,8 +307,8 @@ void SWIRLEntity::tickAll( SAMPLE * oneFrame, Vector3D listenerPosition )
         (*itr)->tickAll(oneFrame, listenerPosition);
     }
     //g_SWiRLEntityMutex.release();
-    
-    
+
+
 }
 
 //-------------------------------------------------------------------------------
@@ -319,7 +320,7 @@ void SWIRLEntity::synthesizeAll( SAMPLE * buffer,
                                  Vector3D listenerPosition
                                )
 {
-    
+
     // Stop if this entity is not active.
     if( !active )
         return;
@@ -352,9 +353,9 @@ void SWIRLEntity::synthesizeAll( SAMPLE * buffer,
           }
         }
     }
-    
+
     //g_SWiRLEntityMutex.acquire();
-    
+
     // synthesize children
     for( vector<YEntity *>::iterator itr = children.begin();
          itr != children.end(); itr++ )
@@ -367,8 +368,8 @@ void SWIRLEntity::synthesizeAll( SAMPLE * buffer,
         (*itr)->synthesizeAll(buffer,numFrames,listenerPosition);
     }
     //g_SWiRLEntityMutex.release();
-    
-    
+
+
 }
 
 //-----------------------------------------------------------------------------
@@ -536,7 +537,10 @@ void SWIRLEntity::strafe( float amount )
 SWIRLFluid::SWIRLFluid()
 {
     printf("About to instantiate SWIRLFluid\n");
-    XFun::srand();
+    //XFun::srand();
+
+    Globals::sim->pause();
+
     // Instantiate fluidsynth
     synth = new GeXFluidSynth();
     // Init fluidsynth
@@ -544,7 +548,11 @@ SWIRLFluid::SWIRLFluid()
     // Load the soundfont
     //synth->load( "data/soundfonts/birds.sf2", "" );
     //synth->load( "data/soundfonts/CasioVL-1.sf2", "" );
+
     synth->load( "data/soundfonts/chorium.sf2", "" );
+
+    Globals::sim->resume();
+
     // Map program changes
     //synth->programChange( 0, XFun::rand2i(1,13)-1 );
 
@@ -647,7 +655,7 @@ void SWIRLBirdCube::update( YTimeInterval dt )
 
     SWIRLClient * client = (SWIRLClient*)Globals::application;
     SWIRLEntity* myAvatar = client->myAvatar;
-    
+
     std::map<int, SWIRLEntity*>::iterator entitiesIter;
     SWIRLEntity* entity;
 
