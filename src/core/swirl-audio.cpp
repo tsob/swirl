@@ -9,6 +9,7 @@
 //----------------------------------------------------------------------------
 
 #include "swirl-audio.h"
+#include "x-thread.h"
 #include <vector>
 
 using namespace std;
@@ -23,7 +24,7 @@ int g_prog = 0;
 // HACK: vector of notes
 vector<SwirlNote> g_notes;
 int g_noteIndex = 0;
-XMutex g_mutex;
+//XMutex g_SWIRLAudioMutex;
 
 //-----------------------------------------------------------------------------
 // Name: class SwirlNote
@@ -82,7 +83,7 @@ void SwirlNoteSequence::update( YTimeInterval dt )
     if( dt > nextTime )
     {
         // lock (to protect vector)
-        m_mutex.acquire();
+        //g_SWIRLAudioMutex.acquire();
         // move down the vector
         if( noteIndex < notes.size() )
         {
@@ -96,7 +97,7 @@ void SwirlNoteSequence::update( YTimeInterval dt )
             noteIndex++;
         }
         // release lock
-        m_mutex.release();
+        //g_SWIRLAudioMutex.release();
     }
     else
     {
@@ -111,7 +112,7 @@ void SwirlNoteSequence::update( YTimeInterval dt )
 void swirl_playNotes( float pitch, float velocity )
 {
     // lock
-    g_mutex.acquire();
+    //g_SWIRLAudioMutex.acquire();
     // clear notes
     g_notes.clear();
 
@@ -121,7 +122,7 @@ void swirl_playNotes( float pitch, float velocity )
         g_notes.push_back( SwirlNote( 0, pitch + i*2, (1 - i/24.0), .05 + .15*(1 - i/24.0) ) );
     }
     // unlock
-    g_mutex.release();
+    //g_SWIRLAudioMutex.release();
 
     // reset the index
     g_noteIndex = 0;
@@ -146,7 +147,7 @@ void swirl_pullNotes()
     if( g_now > g_nextTime )
     {
         // lock (to protect vector)
-        g_mutex.acquire();
+        //g_SWIRLAudioMutex.acquire();
         // move down the vector
         if( g_noteIndex < g_notes.size() )
         {
@@ -162,7 +163,7 @@ void swirl_pullNotes()
             g_noteIndex++;
         }
         // release lock
-        g_mutex.release();
+        //g_SWIRLAudioMutex.release();
     }
 
 }

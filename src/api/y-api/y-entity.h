@@ -38,6 +38,7 @@
 #include <vector>
 #include <string>
 #include "x-gfx.h"
+#include "x-audio.h"
 #include "Stk.h"
 
 // forward references
@@ -80,6 +81,26 @@ public:
     virtual void drawAll();
     // all post-render updates
     virtual void updateAllPostRender( YTimeInterval dt );
+    
+//TODO 
+public:
+    // Input one sample to the filter and return one output.
+    // -  Returns nothing for this superclass.
+    virtual SAMPLE tick( SAMPLE input ) {}
+    
+    // Synthesize a whole buffer.
+    // -  Returns nothing for this superclass.
+    virtual void synthesize( SAMPLE * buffer, unsigned int numFrames ) {}
+    
+    // Get one frame from every child
+    virtual void tickAll( SAMPLE * oneFrame, Vector3D listenerPosition ) {}
+    
+    // Synthesize one buffer from this and every child.
+    virtual void synthesizeAll(
+                               SAMPLE * buffer, unsigned int numFrames, Vector3D listenerPosition
+                               ) {}
+    
+
 
 public:
     // add child

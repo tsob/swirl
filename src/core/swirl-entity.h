@@ -21,6 +21,7 @@
 
 using namespace stk;
 
+
 //-----------------------------------------------------------------------------
 // Name: class SWIRLEntity
 // Desc: Augments YEntity with audio-related functionality
@@ -28,6 +29,12 @@ using namespace stk;
 class SWIRLEntity : public YEntity
 {
 public:
+    SWIRLEntity( int anId = 0, Vector3D startingLocation = Vector3D(0, 0, 0));
+
+public:
+    int id;
+    virtual std::string desc() const { return "SWIRLEntity"; }
+
     // Input one sample to the filter and return one output.
     // -  Returns nothing for this superclass.
     virtual SAMPLE tick( SAMPLE input ) {};
@@ -41,12 +48,68 @@ public:
 
     // Synthesize one buffer from this and every child.
     virtual void synthesizeAll(
-            SAMPLE * buffer, unsigned int numFrames, Vector3D listenerPosition
-            );
+                               SAMPLE * buffer, unsigned int numFrames, Vector3D listenerPosition
+                               );
+
+public:
+    // Augment SWIRLEntity with reference location and goals for slewing
+    Vector3D goal;
+    Vector3D oriGoal;
+
+public:
+    // Slewing vectors for movement
+    iSlew3D iLoc;
+    iSlew3D iOri;
+
+public:
+    // Movement methods
+    void move(   float amount );
+    void turn(   float degAmount );
+    void strafe( float amount );
+
+public:
+    // Update
+    void update( YTimeInterval dt );
+
+public:
+    virtual std::string getClassName() const;
+
+public:
+    Vector3D size;
+};
+
+
+//-----------------------------------------------------------------------------
+// Name: class SWIRLFluid
+// Desc: adds fluidsynth to SWIRLEntity
+//-----------------------------------------------------------------------------
+class SWIRLFluid : public SWIRLEntity //TODO SWIRLAudibleEntity
+{
+public:
+    SWIRLFluid();
+
+public:
+    virtual SAMPLE tick( SAMPLE input );
+    virtual void synthesize( SAMPLE * buffer, unsigned int numFrames );
+
+public:
+    // fluidsynth instance is a member of this class
+    GeXFluidSynth * synth;
 
 public:
     // description
-    virtual std::string desc() const;
+    virtual std::string getClassName() const;
+};
+
+//-----------------------------------------------------------------------------
+// Name:
+// Desc:
+//-----------------------------------------------------------------------------
+
+class SWIRLEntityFactory
+{
+public:
+    static SWIRLEntity* createEntity(const char* entityClassName, int id, Vector3D loc, Vector3D ori);
 };
 
 //-----------------------------------------------------------------------------
@@ -76,49 +139,7 @@ public:
     Vector3D absLoc;
 
 public:
-    // description
-    virtual std::string desc() const;
-};
-
-//-----------------------------------------------------------------------------
-// Name: class SWIRLAvatar
-// Desc: the avatars
-//-----------------------------------------------------------------------------
-class SWIRLAvatar : public SWIRLEntity
-{
-public:
-    SWIRLAvatar( int anId, Vector3D startingLocation ); // Constructor
-
-    int id;
-public:
-    // Augment SWIRLEntity with reference location and goals for slewing
-    Vector3D goal;
-    Vector3D refGoal;
-    Vector3D refLoc;
-
-public:
-    // Slewing vectors for movement
-    iSlew3D iLoc;
-    iSlew3D iRefLoc;
-
-public:
-    // Movement methods
-    void move(   float amount );
-    void turn(   float degAmount );
-    void strafe( float amount );
-
-public:
-    // Update
-    void update( YTimeInterval dt );
-    // Render
-    void render();
-
-public:
-    // description
-    virtual std::string desc() const;
-
-public:
-    Vector3D size;
+    virtual std::string getClassName() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -134,9 +155,7 @@ public:
     // render
     void render();
 
-public:
-    // description
-    virtual std::string desc() const;
+    virtual std::string getClassName() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -151,32 +170,9 @@ public:
     // render
     void render();
 
-public:
-    // description
-    virtual std::string desc() const;
+    virtual std::string getClassName() const;
 };
 
-//-----------------------------------------------------------------------------
-// Name: class SWIRLFluid
-// Desc: adds fluidsynth to SWIRLEntity
-//-----------------------------------------------------------------------------
-class SWIRLFluid : public SWIRLEntity
-{
-public:
-    SWIRLFluid(); //Constructor
-
-public:
-    virtual SAMPLE tick( SAMPLE input );
-    virtual void synthesize( SAMPLE * buffer, unsigned int numFrames );
-
-public:
-    // fluidsynth instance is a member of this class
-    GeXFluidSynth * synth;
-
-public:
-    // description
-    virtual std::string desc() const;
-};
 
 // TODO remove?
 //-----------------------------------------------------------------------------
@@ -194,6 +190,10 @@ public:
 
 public:
     Vector3D size;
+
+public:
+    virtual std::string getClassName() const;
+
 };
 
 //-----------------------------------------------------------------------------
@@ -209,9 +209,7 @@ public:
     virtual void render();
     virtual void update( YTimeInterval dt );
 
-public:
-    // description
-    virtual std::string desc() const;
+    virtual std::string getClassName() const;
 
     int counter;
 
@@ -238,20 +236,69 @@ public:
     virtual void update( YTimeInterval dt );
 
 public:
-    // description
-    virtual std::string desc() const;
     float pitch;
     int counter, channel;
 
 public:
     Vector3D size;
+
+    virtual std::string getClassName() const;
+
 };
 
+//-----------------------------------------------------------------------------
+// Name:
+// Desc:
+//-----------------------------------------------------------------------------
+class SWIRLConeAvatar : public SWIRLEntity
+{
+public:
+    SWIRLConeAvatar();
+
+    virtual void render();
+
+    virtual std::string getClassName() const;
+
+};
+
+//-----------------------------------------------------------------------------
+// Name:
+// Desc:
+//-----------------------------------------------------------------------------
+class SWIRLSphereAvatar : public SWIRLEntity
+{
+public:
+    SWIRLSphereAvatar();
+
+    virtual void render();
+
+    virtual std::string getClassName() const;
+
+};
+
+//-----------------------------------------------------------------------------
+// Name:
+// Desc:
+//-----------------------------------------------------------------------------
+class SWIRLCubeAvatar : public SWIRLEntity
+{
+public:
+    SWIRLCubeAvatar();
+
+    virtual void render();
+
+    virtual std::string getClassName() const;
+
+};
 
 //-----------------------------------------------------------------------------
 // Name: pitch2color
 // Desc: maps pitch to a color
 //-----------------------------------------------------------------------------
 Vector3D pitch2color( float pitch );
+
+float deg2rad( float deg );
+float rad2deg( float rad );
+Vector3D rotateVector( Vector3D vector, Vector3D ori );
 
 #endif

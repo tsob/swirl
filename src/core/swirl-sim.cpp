@@ -76,6 +76,7 @@ void SWIRLSim::systemCascade()
 
     // Set
     m_lastDelta = timeElapsed;
+    
 }
 
 //-------------------------------------------------------------------------------
@@ -84,7 +85,6 @@ void SWIRLSim::systemCascade()
 //-------------------------------------------------------------------------------
 void SWIRLSim::audioCascade(SAMPLE * buffer, unsigned int numFrames)
 {
-
     // Below is to tick all sample by sample...
 /*
  *    SAMPLE oneFrame[SWIRL_NUMCHANNELS];
@@ -108,6 +108,7 @@ void SWIRLSim::audioCascade(SAMPLE * buffer, unsigned int numFrames)
     memset(buffer, 0, sizeof(SAMPLE)*SWIRL_NUMCHANNELS*numFrames);
 
     m_gfxRoot.synthesizeAll( buffer, numFrames, Globals::camera->loc );
+
 }
 
 

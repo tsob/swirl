@@ -34,10 +34,9 @@
 //-----------------------------------------------------------------------------
 #include "y-entity.h"
 #include "x-fun.h"
+#include "x-thread.h"
 #include <iostream>
 using namespace std;
-
-
 
 
 //-----------------------------------------------------------------------------
@@ -58,6 +57,7 @@ void YEntity::updateAll( YTimeInterval dt )
     {
         (*itr)->updateAll( dt );
     }
+    
 }
 
 
@@ -143,6 +143,7 @@ void YEntity::drawAll()
     {
         (*itr)->drawAll();
     }
+
 
     // pop
     popTransforms();

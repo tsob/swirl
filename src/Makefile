@@ -66,7 +66,9 @@ OBJS=RtAudio.o \
 		 $(OSCPACKOSCDIR)OscTypes.o \
 		 swirl-audio.o swirl-entity.o swirl-gfx.o swirl-globals.o swirl-sim.o \
 		 y-waveform.o \
-		 swirl-networking.o main.o
+		 swirl-networking.o main.o \
+		 swirl-vectors.o swirl-pool.o swirl-fountain.o
+
 # Note: leaving out y-score-reader.o
 
 swirl: $(OBJS)
@@ -77,11 +79,11 @@ main.o: $(MAINDIR)main.cpp
 	$(CXX) $(FLAGS) $(INCLUDES) $(MAINDIR)main.cpp
 
 # core
+swirl-entity.o: core/swirl-entity.h core/swirl-entity.cpp Stk.o
+	$(CXX) $(FLAGS) $(INCLUDES) core/swirl-entity.cpp
 swirl-audio.o: y-fluidsynth.o x-audio.o core/swirl-audio.h core/swirl-audio.cpp \
 	RtAudio.o
 	$(CXX) $(FLAGS) $(INCLUDES) core/swirl-audio.cpp
-swirl-entity.o: core/swirl-entity.h core/swirl-entity.cpp Stk.o
-	$(CXX) $(FLAGS) $(INCLUDES) core/swirl-entity.cpp
 swirl-gfx.o: core/swirl-gfx.h core/swirl-gfx.cpp
 	$(CXX) $(FLAGS) $(INCLUDES) core/swirl-gfx.cpp
 swirl-globals.o: core/swirl-globals.h core/swirl-globals.cpp swirl-entity.o
@@ -161,6 +163,15 @@ OscReceivedElements.o:
 	make -C $(OSCPACKDIR)
 OscTypes.o:
 	make -C $(OSCPACKDIR)
+
+swirl-fountain.o: $(COREDIR)swirl-fountain.h $(COREDIR)swirl-fountain.cpp
+	$(CXX) $(FLAGS) $(INCLUDES) $(COREDIR)swirl-fountain.cpp
+
+swirl-vectors.o: $(COREDIR)swirl-vectors.h $(COREDIR)swirl-vectors.cpp
+	$(CXX) $(FLAGS) $(INCLUDES) $(COREDIR)swirl-vectors.cpp
+
+swirl-pool.o: $(COREDIR)swirl-pool.h $(COREDIR)swirl-pool.cpp
+	$(CXX) $(FLAGS) $(INCLUDES) $(COREDIR)swirl-pool.cpp
 
 
 clean:

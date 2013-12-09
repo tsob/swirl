@@ -11,6 +11,7 @@
 #include "swirl-networking.h"
 
 #include "swirl-entity.h"
+#include "x-thread.h"
 #include "y-entity.h"
 
 
@@ -25,11 +26,14 @@
 SWIRLSim * Globals::sim     = NULL;
 SWIRLMessageListener* Globals::application = NULL;
 
+XMutex* Globals::mutex = new XMutex();
+
 GLsizei Globals::windowWidth      = DEFAULT_WINDOW_WIDTH;
 GLsizei Globals::windowHeight     = DEFAULT_WINDOW_HEIGHT;
 GLsizei Globals::lastWindowWidth  = Globals::windowWidth;
 GLsizei Globals::lastWindowHeight = Globals::windowHeight;
 
+bool Globals::useMouse = false;
 
 // AUDIO STUFF ----------------------------------------------------------------
 // fluidsynth

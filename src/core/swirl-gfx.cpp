@@ -77,7 +77,7 @@ bool swirl_gfx_init( int argc, const char ** argv )
     // Set the keyboard function - called on keyboard events
     glutKeyboardFunc( keyboardFunc );
     // Set the mouse function - called on mouse stuff
-    glutMouseFunc( mouseFunc );
+    //TODO glutMouseFunc( mouseFunc );
     // For arrow keys, etc
     glutSpecialFunc (specialFunc );
 
@@ -87,8 +87,10 @@ bool swirl_gfx_init( int argc, const char ** argv )
 
     // Do our own initialization
     initialize_graphics();
+
     // Simulation
     initialize_simulation();
+
     // Do data
     if( !initialize_data() )
     {
@@ -104,8 +106,7 @@ bool swirl_gfx_init( int argc, const char ** argv )
 
     // Debug: print scene graph //TODO remove
     swirl_line();
-    cerr << "Scene graph:" << endl;
-    Globals::sim->root().dumpSceneGraph(1);
+    //TODO Globals::sim->root().dumpSceneGraph(1);
     swirl_line();
 
 
@@ -135,8 +136,8 @@ void swirl_gfx_loop()
 void initialize_graphics()
 {
     // Log
-    cerr << "[swirl]: initializing graphics system..." << endl;
-
+    cerr << "[swirl]:initializing graphics system..." << endl;
+    
     // Reset time
     XGfx::resetCurrentTime();
     // Set simulation speed
@@ -227,6 +228,7 @@ void initialize_graphics()
 
     // clear the color buffer once
     glClear( GL_COLOR_BUFFER_BIT );
+
 }
 
 
@@ -242,26 +244,20 @@ void initialize_simulation()
     XFun::srand();
 
     // instantiate simulation
-    Globals::sim = new SWIRLSim();
+    //TODO moved to main Globals::sim = new SWIRLSim();
 
     // add to simulation
-    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
-    
-    Globals::sim->root().addChild( myAvatar );
-    Globals::sim->root().addChild( new SWIRLMoon  );
+    //SWIRLEntity* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
 
-    myAvatar->iLoc = iSlew3D( myAvatar->loc, 5.0f );
-    myAvatar->iRefLoc = iSlew3D( myAvatar->refLoc, 5.0f );
-
-    myAvatar->goal = myAvatar->loc;
-    myAvatar->refGoal = myAvatar->refLoc;
+    //Globals::sim->root().addChild( myAvatar );
+    //Globals::sim->root().addChild( new SWIRLMoon  );
 
     Globals::camera->relativePosition = iSlew3D( Globals::firstPerson, 0.5f);
 
-    myAvatar->addChild( Globals::camera );
-    Globals::sim->root().addChild( myAvatar );
+    //myAvatar->addChild( Globals::camera );
+    //Globals::sim->root().addChild( myAvatar );
 
-    Globals::sim->root().addChild( new SWIRLBirdCube() );
+    //Globals::sim->root().addChild( new SWIRLBirdCube() );
 
     // Put a cube in the environment
     //YCube* cube = new YCube();
@@ -442,11 +438,12 @@ void reshapeFunc( int w, int h )
 //-----------------------------------------------------------------------------
 void look( )
 {
-    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
-
+    //mutex.acquire();
+    
     // go
     Globals::fov.interp( XGfx::delta() );
     // set the matrix mode to project
+
     glMatrixMode( GL_PROJECTION );
     // load the identity matrix
     glLoadIdentity( );
@@ -459,20 +456,47 @@ void look( )
     glLoadIdentity();
     // position the view point
 
-
-    gluLookAt(
-        Globals::camera->absLoc.x,
-        Globals::camera->absLoc.y,
-        Globals::camera->absLoc.z,
-        myAvatar->refLoc.x,
-        myAvatar->refLoc.y,
-        myAvatar->refLoc.z,
-        0.0f, 1.0f, 0.0f
-        );
-
     // set the position of the lights
     glLightfv( GL_LIGHT0, GL_POSITION, Globals::light0_pos );
     glLightfv( GL_LIGHT1, GL_POSITION, Globals::light1_pos );
+
+    if (!dynamic_cast<SWIRLClient *>(Globals::application)) //if application is not "Client"
+    {
+        //TODO
+        gluLookAt(
+                  0, 1, -10,
+                  0, 0, 0,
+                  //x,y,z,
+                  //refX,refY,refZ,
+                  0.0f, 1.0f, 0.0f
+                  );
+
+        return;
+    }
+    
+    SWIRLEntity* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+
+    float x = 0, y = 0,z = 0;
+    float theta = 0, refX = 0, refY = 0, refZ = 0;
+
+
+    Vector3D ctr, ref;
+    if (myAvatar)
+    {
+        ctr = myAvatar->loc;
+        ref = rotateVector( Vector3D(1.0f, 0.0f, 0.0f), myAvatar->ori);
+        ctr -= ref*3.0;
+        ref *= 15.0;
+        ref += ctr;
+        ctr.y += 2.0f;
+    }
+
+    gluLookAt(
+              ctr.x,ctr.y,ctr.z,
+              ref.x,ref.y,ref.z,
+              0.0f, 1.0f, 0.0f
+              );
+
 }
 
 
@@ -482,7 +506,10 @@ void look( )
 //-----------------------------------------------------------------------------
 void mouseMoveFunc( int x, int y )
 {
-    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+    if (!dynamic_cast<SWIRLClient *>(Globals::application)) //if application is not "Client"
+        return;
+
+    SWIRLEntity* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
 
     static float lastx = 0.0;
     static float lasty = 0.0;
@@ -522,30 +549,35 @@ void mouseMoveFunc( int x, int y )
 //       http://en.wikibooks.org/wiki/OpenGL_Programming/Glescraft_4
 //-----------------------------------------------------------------------------
 void motion(int x, int y) {
-    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
-
-    static bool wrap = false;
-
-    if(!wrap) {
-        int ww = glutGet(GLUT_WINDOW_WIDTH);
-        int wh = glutGet(GLUT_WINDOW_HEIGHT);
-
-        int dx = x - ww / 2;
-        int dy = y - wh / 2;
-
-        // Do something with dx and dy here
-        myAvatar->move(dy*-0.01);
-        myAvatar->turn(dx*0.01);
-        reshapeFunc( Globals::windowWidth, Globals::windowHeight );
-        glutPostRedisplay( );
-
-        // move mouse pointer back to the center of the window
-        wrap = true;
-        glutWarpPointer(ww / 2, wh / 2);
-    }
-    else
+    if(Globals::useMouse==true)
     {
-        wrap = false;
+        SWIRLEntity* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+        if (!dynamic_cast<SWIRLClient *>(Globals::application)) //if application is not "Client"
+            return;
+
+        static bool wrap = false;
+
+        if(!wrap) {
+            int ww = glutGet(GLUT_WINDOW_WIDTH);
+            int wh = glutGet(GLUT_WINDOW_HEIGHT);
+
+            int dx = x - ww / 2;
+            int dy = y - wh / 2;
+
+            // Do something with dx and dy here
+            myAvatar->move(dy*-0.01);
+            myAvatar->turn(dx*0.01);
+            reshapeFunc( Globals::windowWidth, Globals::windowHeight );
+            glutPostRedisplay( );
+
+            // move mouse pointer back to the center of the window
+            wrap = true;
+            glutWarpPointer(ww / 2, wh / 2);
+        }
+        else
+        {
+            wrap = false;
+        }
     }
 }
 
@@ -555,6 +587,9 @@ void motion(int x, int y) {
 //-----------------------------------------------------------------------------
 void keyboardFunc( unsigned char key, int x, int y )
 {
+    if (!dynamic_cast<SWIRLClient *>(Globals::application)) //if application is not "Client"
+        return;
+
     char buffer[SWIRL_FRAMESIZE];
     osc::OutboundPacketStream oscOuttream( buffer, SWIRL_FRAMESIZE);
 
@@ -722,39 +757,46 @@ void keyboardFunc( unsigned char key, int x, int y )
     if( !handled )
     {
         SWIRLServerProxy* serverProxy = ((SWIRLClient*)Globals::application)->serverProxy;
-        SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+        SWIRLEntity* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+
+        const float goalDelta = 1.0;
 
         switch( key )
         {
+            case 'm':
+                if(Globals::useMouse==true)
+                {
+                    Globals::useMouse=false;
+                }
+                else
+                {
+                    Globals::useMouse=true;
+                }
+                break;
             case ']':
                 // turn right
-                myAvatar->turn(0.1f);
-                serverProxy->perform( myAvatar->id, "/turn", 0.1f );
+                //TODO myAvatar->turn(goalDelta);
+                serverProxy->perform( myAvatar->id, "/turn", goalDelta );
                 break;
             case '[':
                 // turn left
-                myAvatar->turn(-0.1f);
-                serverProxy->perform( myAvatar->id, "/turn", -0.1f );
+                serverProxy->perform( myAvatar->id, "/turn", -goalDelta );
                 break;
             case 'w':
                 // move forward
-                myAvatar->move(0.2f);
-                serverProxy->perform( myAvatar->id, "/move", 0.2f );
+                serverProxy->perform( myAvatar->id, "/move", goalDelta );
                 break;
             case 'x':
                 // move back
-                myAvatar->move(-0.2f);
-                serverProxy->perform( myAvatar->id, "/move", -0.2f );
+                serverProxy->perform( myAvatar->id, "/move", -goalDelta );
                 break;
             case 'd':
                 //strafe right
-                myAvatar->strafe(0.1f);
-                serverProxy->perform( myAvatar->id, "/strafe", 0.1f );
+                serverProxy->perform( myAvatar->id, "/strafe", goalDelta );
                 break;
             case 'a':
                 //strafe left
-                myAvatar->strafe(-0.1f);
-                serverProxy->perform( myAvatar->id, "/strafe", -0.1f );
+                serverProxy->perform( myAvatar->id, "/strafe", -goalDelta );
                 break;
             case 'c':
                 // toggle camera position
@@ -786,6 +828,7 @@ void keyboardFunc( unsigned char key, int x, int y )
 
     // post redisplay
     glutPostRedisplay( );
+    
 }
 
 
@@ -797,7 +840,10 @@ void keyboardFunc( unsigned char key, int x, int y )
 //-----------------------------------------------------------------------------
 void mouseFunc( int button, int state, int x, int y )
 {
-    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+    if (!dynamic_cast<SWIRLClient *>(Globals::application)) //if application is not "Client"
+        return;
+
+    SWIRLEntity* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
 
     SWIRLBirdCube * nextBirdCube = new SWIRLBirdCube;
     nextBirdCube->loc = myAvatar->loc;
@@ -853,11 +899,14 @@ void idleFunc( )
 //-----------------------------------------------------------------------------
 void displayFunc( )
 {
+    //Globals::mutex->acquire();
+    
     // update time
     XGfx::getCurrentTime( TRUE );
 
     // update
     Globals::bgColor.interp( XGfx::delta() );
+
     Globals::blendAlpha.interp( XGfx::delta() );
 
     // clear or blend
@@ -875,7 +924,6 @@ void displayFunc( )
         // clear the color and depth buffers
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     }
-
     // enable depth test
     glEnable( GL_DEPTH_TEST );
 
@@ -907,6 +955,9 @@ void displayFunc( )
     glFlush();
     // swap the buffers
     glutSwapBuffers();
+
+    //Globals::mutex->release();
+
 }
 
 
@@ -1153,26 +1204,27 @@ void renderBackground()
 //-----------------------------------------------------------------------------
 void dropRandCube()
 {
-    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+    if (!dynamic_cast<SWIRLClient *>(Globals::application)) //if application is not "Client"
+        return;
 
-    SWIRLBirdCube * nextCube = new SWIRLBirdCube;
-    nextCube->loc = myAvatar->loc;
-    nextCube->col = Vector3D( XFun::rand2f(0,1), XFun::rand2f(0,1), XFun::rand2f(0,1));
-    Globals::sim->root().addChild( nextCube );
-
-    glutPostRedisplay( );
+    SWIRLClient* client= ((SWIRLClient*)Globals::application);
+    SWIRLEntity* myAvatar = client->myAvatar;
+    SWIRLServerProxy* serverProxy = client->serverProxy;
+    
+    serverProxy->addEntity("SWIRLBirdCube", myAvatar->loc, myAvatar->ori);
 }
 //-----------------------------------------------------------------------------
 // Name: dropNoteSphere
-// Desc: 
+// Desc:
 //-----------------------------------------------------------------------------
 void dropNoteSphere()
 {
-    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+    if (!dynamic_cast<SWIRLClient *>(Globals::application)) //if application is not "Client"
+        return;
 
-    SWIRLNoteSphere * nextObj = new SWIRLNoteSphere;
-    nextObj->loc = myAvatar->loc;
-    Globals::sim->root().addChild( nextObj );
-
-    glutPostRedisplay( );
+    SWIRLClient* client= ((SWIRLClient*)Globals::application);
+    SWIRLEntity* myAvatar = client->myAvatar;
+    SWIRLServerProxy* serverProxy = client->serverProxy;
+    
+    serverProxy->addEntity("SWIRLNoteSphere", myAvatar->loc, myAvatar->ori);
 }

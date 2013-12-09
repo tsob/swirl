@@ -27,7 +27,7 @@ class NetworkLocation
 {
 public:
     NetworkLocation(const char* anAddress, int aPort) : port(aPort) { strcpy(address, anAddress); }
-    
+
     char address[MAX_ADDRESS_LENGTH];
     int port;
 };
@@ -37,12 +37,10 @@ class SWIRLEntityProxy
 public:
     SWIRLEntityProxy(const char* anAddress, int aPort);
     virtual ~SWIRLEntityProxy();
-    
+
     int id;
     NetworkLocation networkLocation;
     UdpTransmitSocket* transmitSocket;
-    
-    void startListenerThread();
 };
 
 
@@ -51,25 +49,25 @@ class SWIRLMessageListener : public osc::OscPacketListener
 public:
     SWIRLMessageListener(const char* anAddress, int aPort);
     void startListenerThread();
-    
+
     NetworkLocation networkLocation;
-    
-private:
+
+protected:
     virtual void ProcessMessage( const osc::ReceivedMessage& m,
                                 const IpEndpointName& remoteEndpoint );
 };
-
 void* listen(void * args);
+
 
 class SWIRLClientProxy : public SWIRLEntityProxy
 {
 public:
     SWIRLClientProxy(const char* anAddress, int aPort);
-    
-    void addAvatar( int avatarId, Vector3D loc, Vector3D ori);
-    void removeAvatar(int avatarId);
-    void receiveId(int avatarId);
-    void perform(int avatarId, const char* messageName, float parameter);
+
+    void addEntity( const char* entityClassName, int entityId, Vector3D loc, Vector3D ori);
+    void removeEntity(int entityId);
+    void receiveId(int entityId);
+    void perform(int entityId, const char* messageName, float parameter);
 };
 
 
@@ -77,45 +75,59 @@ class SWIRLServer : public SWIRLMessageListener {
 public:
     SWIRLServer(const char* anAddress, int aPort);
     virtual ~SWIRLServer();
-    
+    int maxEntityId;
+
+    int addEntity(const char* entityClassName, Vector3D loc, Vector3D ori); //also create a new entityId
+    void removeEntity(int entityId);
+
+private:
     int addClientProxy(const char* clientAddress, int clientPort); //TODO id will be se later
     void removeClientProxy(int id);
-    
-private:
+
+    int addClient(const char* avatarClassName, const char* clientAddress, int clientPort, Vector3D loc, Vector3D ori);
+    void removeClent(int entityId);
+
+    void addEntity(const char* entityClassName, int entityId, Vector3D loc, Vector3D ori);
+
     std::map <int, SWIRLClientProxy*> clientProxies;
+    std::map<int, SWIRLEntity*> entities;
     virtual void ProcessMessage( const osc::ReceivedMessage& m,
                                 const IpEndpointName& remoteEndpoint );
-    
+
 };
 
 class SWIRLServerProxy : public SWIRLEntityProxy
 {
 public:
     SWIRLServerProxy(const char* anAddress, int aPort);
-    
+
 public:
-    void addAvatar(const char* clientAddress, int clientPort, Vector3D loc, Vector3D ori);
-    void removeAvatar(int avatarId);
-    void perform(int avatarId, const char* messageName, float parameter);
+    void addClient(const char* entityClassName, const char* clientAddress, int clientPort, Vector3D loc, Vector3D ori);
+    void removeClient(int entityId);
+
+    void addEntity(const char* entityClassName, Vector3D loc, Vector3D ori);
+    void removeEntity(int entityId);
+
+    void perform(int entityId, const char* messageName, float parameter);
 };
 
 class SWIRLClient : public SWIRLMessageListener {
 public:
-    SWIRLClient(const char* anAddress, int aPort, const char* serverAddress, int serverPort,
+    SWIRLClient(const char* entityClassName, const char* anAddress, int aPort, const char* serverAddress, int serverPort,
                 Vector3D avatarLoc, Vector3D avatarOri);
     ~SWIRLClient();
-    
-    SWIRLAvatar* addAvatar(int id, Vector3D loc, Vector3D ori);
-    void removeAvatar(int id);
-    
+
+    void removeEntity(int id);
+
     virtual void ProcessMessage( const osc::ReceivedMessage& m,
                                 const IpEndpointName& remoteEndpoint );
-    
+
+    int id;
     SWIRLServerProxy* serverProxy;
-    
-    std::map<int, SWIRLAvatar*> avatars;
-    SWIRLAvatar* myAvatar;
-    
+
+    std::map<int, SWIRLEntity*> entities;
+    SWIRLEntity* myAvatar;
+
 };
 
 #endif

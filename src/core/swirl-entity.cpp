@@ -11,47 +11,172 @@
 #include <math.h>
 #include <utility>
 #include "x-fun.h"
+#include "x-thread.h"
+#include "swirl-fountain.h"
 
 using namespace std;
 using namespace stk;
 
+//XMutex g_SWiRLEntityMutex;
 
 //-----------------------------------------------------------------------------
 // Name: class: SWIRL* method: desc()
 // Desc: Returns a description (usually type and name) of this object. Useful
 //       for debugging stuff.
 //-----------------------------------------------------------------------------
-std::string SWIRLEntity::desc() const
+
+//TODO replace with typeid
+std::string SWIRLFluid::getClassName() const
 {
-    return "SWIRLEntity [unnamed]";
+    return "SWIRLFluid ";
 }
-std::string SWIRLFluid::desc() const
+std::string SWIRLBirdCube::getClassName() const
 {
-    return "SWIRLEntity [SWIRLFluid]";
+    return "SWIRLBirdCube";
 }
-std::string SWIRLBirdCube::desc() const
+std::string SWIRLNoteSphere::getClassName() const
 {
-    return "SWIRLEntity [SWIRLBirdCube]";
+    return "SWIRLNoteSphere";
 }
-std::string SWIRLNoteSphere::desc() const
+std::string SWIRLEntity::getClassName() const
 {
-    return "SWIRLEntity [SWIRLNoteSphere]";
+    return "SWIRLEntity";
 }
-std::string SWIRLAvatar::desc() const
+std::string SWIRLCamera::getClassName() const
 {
-    return "SWIRLEntity [SWIRLAvatar]";
+    return "SWIRLCamera";
 }
-std::string SWIRLCamera::desc() const
+std::string SWIRLCube::getClassName() const
 {
-    return "SWIRLEntity [SWIRLCamera]";
+    return "SWIRLCube";
 }
-std::string SWIRLMoon::desc() const
+std::string SWIRLMoon::getClassName() const
 {
-    return "SWIRLEntity [SWIRLMoon]";
+    return "SWIRLMoon";
 }
-std::string SWIRLTeapot::desc() const
+std::string SWIRLTeapot::getClassName() const
 {
-    return "SWIRLEntity [SWIRLTeapot]";
+    return "SWIRLTeapot";
+}
+std::string SWIRLConeAvatar::getClassName() const
+{
+    return "SWIRLConeAvatar";
+}
+std::string SWIRLSphereAvatar::getClassName() const
+{
+    return "SWIRLSphereAvatar";
+}
+std::string SWIRLCubeAvatar::getClassName() const
+{
+    return "SWIRLCubeAvatar";
+}
+std::string SWIRLFountain::getClassName() const
+{
+    return className;
+}
+
+//-----------------------------------------------------------------------------
+// name: g_squareVertices
+// desc: vertices for a cube
+//-----------------------------------------------------------------------------
+
+SWIRLEntity* SWIRLEntityFactory::createEntity(const char* entityClassName, int id, Vector3D loc, Vector3D ori)
+{
+    SWIRLEntity* entity = NULL;
+    
+    cerr << "SWIRLEntityFactory::createEntity(" << entityClassName << ")" << endl;
+    
+    if (!strcmp(entityClassName, "SWIRLSphereAvatar"))
+        entity = new SWIRLSphereAvatar(); //TODO we can have ori too
+    else if (!strcmp(entityClassName, "SWIRLConeAvatar"))
+        entity = new SWIRLConeAvatar(); //TODO we can have ori too
+    else if (!strcmp(entityClassName, "SWIRLCubeAvatar"))
+        entity = new SWIRLCubeAvatar(); //TODO we can have ori too
+    else if (!strcmp(entityClassName, "SWIRLBirdCube"))
+        entity = new SWIRLBirdCube(); //TODO we can have ori too
+    else if (!strcmp(entityClassName, "SWIRLNoteSphere"))
+        entity = new SWIRLNoteSphere(); //TODO we can have ori too
+    else if (strstr(entityClassName, "SWIRLFountain"))
+    {
+        cerr << "Creating fountain" << endl;
+        
+        //TODO destruct
+        SWIRLPool* pool = new SWIRLPool();
+        
+        cerr << "-4";
+
+        //pool->Initialize(NUM_X_OSCILLATORS,NUM_Z_OSCILLATORS,OSCILLATOR_DISTANCE,OSCILLATOR_WEIGHT, 0.05, 4.0, 4.0);
+        //Globals::sim->root().addChild( pool );
+        cerr << "-3";
+
+        
+        //pool->Reset(); //TODO
+        
+        cerr << "-1";
+
+        entity = new SWIRLFountain();
+        
+        cerr << "0";
+
+        if (!strcmp(entityClassName, "SWIRLFountain1")) {
+            ((SWIRLFountain*)entity)->Initialize(entityClassName, pool, 3,8,35,76,90,0.5,0.11);
+            cerr << "1";
+
+        } else if (!strcmp(entityClassName, "SWIRLFountain2")) {
+            ((SWIRLFountain*)entity)->Initialize(entityClassName, pool, 3,8,35,76,90,0.5,0.11);
+            cerr << "2";
+
+        } else if (!strcmp(entityClassName, "SWIRLFountain3")) {
+            ((SWIRLFountain*)entity)->Initialize(entityClassName, pool, 1,20,100,70,70,5.0,0.15);
+            cerr << "3";
+
+        } else if (!strcmp(entityClassName, "SWIRLFountain4")) {
+            ((SWIRLFountain*)entity)->Initialize(entityClassName, pool, 1,20,200,85,85,10,0.1);
+            cerr << "4";
+
+        } else if (!strcmp(entityClassName, "SWIRLFountain5")) {
+            ((SWIRLFountain*)entity)->Initialize(entityClassName, pool, 5,20,85,90,90,1.0,0.15);
+            cerr << "5";
+
+        } else if (!strcmp(entityClassName, "SWIRLFountain6")) {
+            ((SWIRLFountain*)entity)->Initialize(entityClassName, pool, 2,20,50,40,70,1.5,0.2);
+            cerr << "6";
+
+        } else if (!strcmp(entityClassName, "SWIRLFountain7")) {
+            ((SWIRLFountain*)entity)->Initialize(entityClassName, pool, 3,50,25,76,90,0.2,0.11);
+            cerr << "7";
+
+        } else if (!strcmp(entityClassName, "SWIRLFountain8")) {
+            ((SWIRLFountain*)entity)->Initialize(entityClassName, pool, 4,100,45,76,90,0.2,0.11);
+            cerr << "8";
+
+        }
+
+
+        ((SWIRLFountain*)entity)->Position = F3dVector(NUM_X_OSCILLATORS*OSCILLATOR_DISTANCE/2.0f,
+                                          POOL_HEIGHT,
+                                          NUM_Z_OSCILLATORS*OSCILLATOR_DISTANCE/2.0f);
+        
+        
+        //place it in the center of the pool:
+        ((SWIRLFountain*)entity)->Position = F3dVector(NUM_X_OSCILLATORS*OSCILLATOR_DISTANCE/2.0f,
+                                          POOL_HEIGHT,
+                                          NUM_Z_OSCILLATORS*OSCILLATOR_DISTANCE/2.0f);
+    }
+    
+    
+    entity->id = id;
+    entity->loc = loc; //TODO call constructor
+    entity->ori = ori;
+
+    // slewing variables for location and orientation`
+    entity->iLoc = iSlew3D( entity->loc, 5.0f );
+    entity->iOri = iSlew3D( entity->ori, 5.0f );
+
+    entity->goal = entity->loc;
+    entity->oriGoal = entity->ori;
+
+    return entity;
 }
 
 
@@ -131,6 +256,9 @@ static const GLfloat g_squareNormals[] =
     0, -1, 0
 };
 
+
+
+
 //-------------------------------------------------------------------------------
 // Name: class: SWIRLEntity method: tickAll()
 // Desc: Get one audio frame from this and every child
@@ -156,17 +284,21 @@ void SWIRLEntity::tickAll( SAMPLE * oneFrame, Vector3D listenerPosition )
           oneFrame[i] = oneFrame[0];
         }
     }
-
+    
+    //g_SWiRLEntityMutex.acquire();
     // tick children
     for( vector<YEntity *>::iterator itr = children.begin();
          itr != children.end(); itr++ )
     {
-        if (dynamic_cast<SWIRLEntity *>(*itr))
-        {
-          ((SWIRLEntity*)*itr)->tickAll(oneFrame, listenerPosition);
-        }
+        //TODO if (dynamic_cast<SWIRLEntity *>(*itr))
+        //{
+        //((SWIRLEntity*)*itr)->tickAll(oneFrame, listenerPosition);
+        //}
+        (*itr)->tickAll(oneFrame, listenerPosition);
     }
-
+    //g_SWiRLEntityMutex.release();
+    
+    
 }
 
 //-------------------------------------------------------------------------------
@@ -178,9 +310,7 @@ void SWIRLEntity::synthesizeAll( SAMPLE * buffer,
                                  Vector3D listenerPosition
                                )
 {
-    //cout << this->desc() << endl;
-    //cout << "starting to synthesize!" << endl;
-
+    
     // Stop if this entity is not active.
     if( !active )
         return;
@@ -188,10 +318,10 @@ void SWIRLEntity::synthesizeAll( SAMPLE * buffer,
     // render self if not hidden
     if( !hidden )
     {
+        SWIRLEntity* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
 
         // For now, just do mono without spatialization
         SAMPLE tmpBuffer[numFrames*2];
-        SAMPLE gainScale = 2.0 / max((this->loc-Globals::camera->absLoc).magnitude(), 1.0f);
         memset(tmpBuffer,0,sizeof(SAMPLE)*numFrames*2);
         this->synthesize( tmpBuffer, numFrames );
 
@@ -202,25 +332,34 @@ void SWIRLEntity::synthesizeAll( SAMPLE * buffer,
             if(i<2)
             {
               // perform distance scaling and add to mono buffer
-              buffer[j*SWIRL_NUMCHANNELS+i] +=
-                tmpBuffer[j*SWIRL_NUMCHANNELS+i] * gainScale;
+              if(myAvatar==NULL)
+                buffer[j*SWIRL_NUMCHANNELS+i] += tmpBuffer[j*SWIRL_NUMCHANNELS+i]
+                   / max((this->loc).magnitude(), 1.0f);
+              else
+                buffer[j*SWIRL_NUMCHANNELS+i] += tmpBuffer[j*SWIRL_NUMCHANNELS+i]
+                   / max((this->loc - myAvatar->loc).magnitude(), 1.0f);
               //buffer[j*SWIRL_NUMCHANNELS + i] =  buffer[j*SWIRL_NUMCHANNELS];
             }
           }
         }
     }
-
+    
+    //g_SWiRLEntityMutex.acquire();
+    
     // synthesize children
     for( vector<YEntity *>::iterator itr = children.begin();
          itr != children.end(); itr++ )
     {
-        if (dynamic_cast<SWIRLEntity *>(*itr))
-        {
-          //cout << "going to child...";
-          ((SWIRLEntity*)*itr)->synthesizeAll(buffer,numFrames,listenerPosition);
-        }
+        //TODO if (dynamic_cast<SWIRLEntity *>(*itr))
+        //{
+        //cerr << "going to child...";
+        //((SWIRLEntity*)*itr)->synthesizeAll(buffer,numFrames,listenerPosition);
+        //}
+        (*itr)->synthesizeAll(buffer,numFrames,listenerPosition);
     }
-
+    //g_SWiRLEntityMutex.release();
+    
+    
 }
 
 //-----------------------------------------------------------------------------
@@ -269,23 +408,18 @@ void SWIRLMoon::render()
 //-----------------------------------------------------------------------------
 void SWIRLCamera::update( YTimeInterval dt )
 {
-    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
-    
+    if (!dynamic_cast<SWIRLClient *>(Globals::application)) //if application is not "Client"
+        return;
+
+    SWIRLEntity* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+
     // interpolate relative camera position
     relativePosition.interp(dt);
     loc = relativePosition.actual();
 
     // Vector pointing in the look direction
-    Vector3D lookVector = myAvatar->loc - myAvatar->refLoc;
-    lookVector.normalize();
-
-    // rotate relative position for absolute displacement
-    float theta = lookVector.angleXZ() - 0.5*SWIRL_PI;
-    Vector3D displacementVector = Vector3D(
-        relativePosition.actual().x * cos(theta) - relativePosition.actual().z * sin(theta),
-        relativePosition.actual().y,
-        relativePosition.actual().x * sin(theta) + relativePosition.actual().z * cos(theta)
-        );
+    Vector3D displacementVector =
+      rotateVector( relativePosition.actual(), ori );
 
     absLoc = myAvatar->loc + displacementVector;
     loc = relativePosition.actual();
@@ -314,158 +448,75 @@ void SWIRLCamera::togglePosition()
 }
 
 //-----------------------------------------------------------------------------
-// Name: class: SWIRLAvatar method: update( YTimeInterval dt )
-// Desc: updates (interpolates) avatar position
+// Name: class: SWIRLEntity method: update( YTimeInterval dt )
+// Desc: updates (interpolates) entity position
 //-----------------------------------------------------------------------------
-void SWIRLAvatar::update( YTimeInterval dt )
+void SWIRLEntity::update( YTimeInterval dt )
 {
     // interp
-    iLoc.interp( dt );
-    iRefLoc.interp( dt );
+    //iLoc.interp( dt );
+    //iOri.interp( dt );
 
     // update goals
     iLoc.update( goal );
-    iRefLoc.update( refGoal );
+    iOri.update( oriGoal );
 
     // interp
     iLoc.interp( dt );
-    iRefLoc.interp( dt );
+    iOri.interp( dt );
 
     // get current positions
-    loc    = iLoc.actual();
-    refLoc = iRefLoc.actual();
-
-    ori.x = 0.0f;
-    ori.y = (-180.0f / 3.1415927) * (refLoc-loc).angleXZ() + 90.0f;
-    ori.z = 0.0f;
-
-    //Globals::waveform->loc = loc + (refLoc-loc)*0.1 + Vector3D(0.0f, 0.6f, 0.0f);
-    //Globals::waveform->ori = ori;
+    loc = iLoc.actual();
+    ori = iOri.actual();
 }
-
 //-----------------------------------------------------------------------------
-// name: render()
-// desc: ...
-//-----------------------------------------------------------------------------
-void SWIRLAvatar::render()
-{
-    // enable lighting
-    glEnable( GL_LIGHTING );
-
-    // enable state
-    glEnableClientState( GL_VERTEX_ARRAY );
-    glEnableClientState( GL_NORMAL_ARRAY );
-
-    // set vertex pointer
-    glVertexPointer( 3, GL_FLOAT, 0, g_squareVertices );
-    glNormalPointer( GL_FLOAT, 0, g_squareNormals );
-
-    // push
-    glPushMatrix();
-        // scale
-        glScalef( size.value, size.value, size.value );
-
-        // draw it
-        //glDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
-        //glDrawArrays( GL_TRIANGLE_STRIP, 4, 4 );
-        //glDrawArrays( GL_TRIANGLE_STRIP, 8, 4 );
-        //glDrawArrays( GL_TRIANGLE_STRIP, 12, 4 );
-        //glDrawArrays( GL_TRIANGLE_STRIP, 16, 4 );
-        //glDrawArrays( GL_TRIANGLE_STRIP, 20, 4 );
-        glTranslatef( 0.0f, -1.5f, 0.0f);
-        glRotatef( -90.0f, 1.0f, 0.0f, 0.0f);
-        glutSolidCone( 1.0f, 3.0f, 24, 24 );
-
-    // pop
-    glPopMatrix();
-
-    // disable
-    glDisableClientState( GL_VERTEX_ARRAY );
-    glDisableClientState( GL_NORMAL_ARRAY );
-
-    // disable lighting
-    glDisable( GL_LIGHTING );
-}
-
-//-----------------------------------------------------------------------------
-// Name: class: SWIRLAvatar constructor
+// Name:
 // Desc:
 //-----------------------------------------------------------------------------
-SWIRLAvatar::SWIRLAvatar( int anId, Vector3D startingLocation )
+
+SWIRLEntity::SWIRLEntity( int anId, Vector3D startingLocation) : id(anId)
 {
-    id = anId;
-    size = Vector3D(1, 1, 1.0f);
     loc  = startingLocation;
-    refLoc = loc + Vector3D(0.0f, 0.0f, 10.0f);
-    col    = Globals::ourOrange;
+    size = Vector3D(1, 1, 1.0f);
+    ori  = Vector3D(0.0f, 0.0f, 0.0f);
+    col  = Globals::ourOrange;
+}
+//-----------------------------------------------------------------------------
+// Name: class: SWIRLEntity method: move( amount )
+// Desc:
+//-----------------------------------------------------------------------------
+void SWIRLEntity::move( float amount )
+{
+   Vector3D movementVector = rotateVector( Vector3D(1.0f, 0.0f, 0.0f), ori);
+   //movementVector.normalize(); //not needed
+   movementVector *= amount;
+
+    cerr << "MOV VEC " << movementVector.x << " " << movementVector.y << " " << movementVector.z << endl;
+
+   goal    += movementVector;
 }
 
 //-----------------------------------------------------------------------------
-// Name: class: SWIRLAvatar method: move( amnunt )
+// Name: class: SWIRLEntity method: turn( radAmount )
 // Desc:
 //-----------------------------------------------------------------------------
-void SWIRLAvatar::move( float amount )
+void SWIRLEntity::turn( float radAmount )
 {
-   //Vector3D movementVector = iRefLoc.actual() - iLoc.actual();
-   Vector3D movementVector = refGoal - goal;
-   //movementVector.y = 0.0f;
-   movementVector.normalize();
+   oriGoal.y -= rad2deg(radAmount);
+}
+
+//-----------------------------------------------------------------------------
+// Name: class: SWIRLEntity method: strafe( amount )
+// Desc:
+//-----------------------------------------------------------------------------
+void SWIRLEntity::strafe( float amount )
+{
+   Vector3D movementVector = rotateVector( Vector3D(0.0f, 0.0f, -1.0f), ori);
+
+   movementVector.normalize(); // maybe not necessary
    movementVector *= amount;
 
    goal    += movementVector;
-   refGoal += movementVector;
-
-
-   //Vector3D direction = goal-refGoal;
-   //refGoal = goal + direction*10.0;
-
-   // TODO
-   //swirl_send_message( "/move", amount );
-}
-
-//-----------------------------------------------------------------------------
-// Name: class: SWIRLAvatar method: turn( radAmount )
-// Desc:
-//-----------------------------------------------------------------------------
-void SWIRLAvatar::turn( float radAmount )
-{
-   Vector3D lookVector = iRefLoc.actual() - iLoc.actual();
-   float tmpRefX = lookVector.x;
-   float tmpRefZ = lookVector.z;
-
-   lookVector.x = tmpRefX * cos(radAmount)
-                  - tmpRefZ * sin(radAmount);
-
-   lookVector.z = tmpRefX * sin(radAmount)
-                  + tmpRefZ * cos(radAmount);
-
-   refGoal = loc + lookVector;
-}
-
-//-----------------------------------------------------------------------------
-// Name: class: SWIRLAvatar method: strafe( amount )
-// Desc:
-//-----------------------------------------------------------------------------
-void SWIRLAvatar::strafe( float amount )
-{
-   Vector3D movementVector = refLoc - loc;
-   // Rotate movementVector by 90 degrees
-   float tmpX = movementVector.x;
-   float tmpZ = movementVector.z;
-
-   movementVector.x = - tmpZ;
-   movementVector.z = tmpX;
-
-   movementVector.normalize();
-   movementVector *= amount;
-
-   refGoal += movementVector;
-   goal    += movementVector;
-
-   // TODO
-   //swirl_send_message( "/strafe", -0.1f );
-   //swirl_send_message( "/strafe", amount );
-
 }
 
 // TODO
@@ -581,7 +632,11 @@ void SWIRLCube::update( YTimeInterval dt )
 //-----------------------------------------------------------------------------
 void SWIRLBirdCube::update( YTimeInterval dt )
 {
-    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+    //TODO check everywhere
+    if (!dynamic_cast<SWIRLClient *>(Globals::application)) //if application is not "Client"
+        return;
+
+    SWIRLEntity* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
     static vector< pair<int,int> > noteChanPitch;
 
     //static int counter = 0;
@@ -621,7 +676,10 @@ void SWIRLBirdCube::update( YTimeInterval dt )
 //-----------------------------------------------------------------------------
 void SWIRLNoteSphere::update( YTimeInterval dt )
 {
-    SWIRLAvatar* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+    if (!dynamic_cast<SWIRLClient *>(Globals::application)) //if application is not "Client"
+        return;
+
+    SWIRLEntity* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
 
     static vector< pair<int,int> > noteChanPitch;
     static int timeout = 512;
@@ -650,7 +708,7 @@ void SWIRLNoteSphere::update( YTimeInterval dt )
             synth->noteOff( myNoteOff.first, myNoteOff.second );
         }
     }
-    col *= powf(1.2,XGfx::delta());
+    col *= powf(1.1,XGfx::delta());
 }
 
 //-----------------------------------------------------------------------------
@@ -730,6 +788,192 @@ void SWIRLNoteSphere::render()
 }
 
 //-----------------------------------------------------------------------------
+// name:
+// desc:
+//-----------------------------------------------------------------------------
+
+
+SWIRLConeAvatar::SWIRLConeAvatar()
+{
+    col = Globals::ourRed;
+}
+
+//-----------------------------------------------------------------------------
+// name: render()
+// desc: ...
+//-----------------------------------------------------------------------------
+void SWIRLConeAvatar::render()
+{
+    // enable lighting
+    glEnable( GL_LIGHTING );
+
+    // enable state
+    glEnableClientState( GL_VERTEX_ARRAY );
+    glEnableClientState( GL_NORMAL_ARRAY );
+
+    // set vertex pointer
+    glVertexPointer( 3, GL_FLOAT, 0, g_squareVertices );
+    glNormalPointer( GL_FLOAT, 0, g_squareNormals );
+
+    // push
+    glPushMatrix();
+
+    //glColor3b(0, 0, 1);
+    // scale
+        glScalef( size.value, size.value, size.value );
+       // glRotatef( -90.0f, 1.0f, 0.0f, 0.0f);
+    /*
+        glColor3f(100, 100, 255);
+
+
+        glTranslatef( -0.2f, -0.2f, 0.4f);
+        glutSolidSphere( 0.2, 24, 24  );
+
+        glTranslatef( 0.4f, 0.0f, 0.0f);
+        glutSolidSphere( 0.2, 24, 24  );
+
+        glTranslatef( 0.0f, 0.2f, -0.4f);
+
+        glColor3f(col.x, col.y, col.z);
+   */
+        glutSolidCone( 1.0f, 2.0f, 24, 24 );
+
+        // pop
+    glPopMatrix();
+
+    // disable
+    glDisableClientState( GL_VERTEX_ARRAY );
+    glDisableClientState( GL_NORMAL_ARRAY );
+
+    // disable lighting
+    glDisable( GL_LIGHTING );
+}
+
+//-----------------------------------------------------------------------------
+// name:
+// desc:
+//-----------------------------------------------------------------------------
+
+
+SWIRLSphereAvatar::SWIRLSphereAvatar()
+{
+    col = Globals::ourOrange;
+}
+
+//-----------------------------------------------------------------------------
+// name: render()
+// desc: ...
+//-----------------------------------------------------------------------------
+void SWIRLSphereAvatar::render()
+{
+    // enable lighting
+    glEnable( GL_LIGHTING );
+
+    // enable state
+    glEnableClientState( GL_VERTEX_ARRAY );
+    glEnableClientState( GL_NORMAL_ARRAY );
+
+    // set vertex pointer
+    glVertexPointer( 3, GL_FLOAT, 0, g_squareVertices );
+    glNormalPointer( GL_FLOAT, 0, g_squareNormals );
+
+    // push
+    glPushMatrix();
+
+    //glColor3b(0, 0, 1);
+    // scale
+    glScalef( size.value, size.value, size.value );
+
+    glPushMatrix();
+    // scale
+        glScalef( size.value, size.value, size.value );
+
+        glutSolidSphere( 0.6, 24, 24  );
+
+        glColor3f(100, 100, 255);
+
+        glTranslatef( -0.2f, 0.3f, 0.4f);
+        glutSolidSphere( 0.2, 24, 24  );
+
+        glTranslatef( 0.4f, 0.0f, 0.0f);
+        glutSolidSphere( 0.2, 24, 24  );
+    glPopMatrix();
+
+    // pop
+    glPopMatrix();
+
+    // disable
+    glDisableClientState( GL_VERTEX_ARRAY );
+    glDisableClientState( GL_NORMAL_ARRAY );
+
+    // disable lighting
+    glDisable( GL_LIGHTING );
+}
+
+
+//-----------------------------------------------------------------------------
+// name:
+// desc:
+//-----------------------------------------------------------------------------
+
+
+SWIRLCubeAvatar::SWIRLCubeAvatar()
+{
+    col = Globals::ourBlue;
+}
+
+//-----------------------------------------------------------------------------
+// name: render()
+// desc: ...
+//-----------------------------------------------------------------------------
+void SWIRLCubeAvatar::render()
+{
+    // enable lighting
+    glEnable( GL_LIGHTING );
+
+    // enable state
+    glEnableClientState( GL_VERTEX_ARRAY );
+    glEnableClientState( GL_NORMAL_ARRAY );
+
+    // set vertex pointer
+    glVertexPointer( 3, GL_FLOAT, 0, g_squareVertices );
+    glNormalPointer( GL_FLOAT, 0, g_squareNormals );
+
+    // push
+    glPushMatrix();
+
+    //glColor3b(0, 0, 1);
+    // scale
+    glScalef( size.value, size.value, size.value );
+
+    glPushMatrix();
+    // scale
+    glScalef( size.value, size.value, size.value );
+
+    glutSolidCube( 0.6);
+
+    glColor3f(100, 100, 255);
+
+    glTranslatef( -0.2f, 0.2f, 0.4f);
+    glutSolidCube( 0.2);
+
+    glTranslatef( 0.4f, 0.0f, 0.0f);
+    glutSolidCube( 0.2 );
+    glPopMatrix();
+
+    // pop
+    glPopMatrix();
+
+    // disable
+    glDisableClientState( GL_VERTEX_ARRAY );
+    glDisableClientState( GL_NORMAL_ARRAY );
+
+    // disable lighting
+    glDisable( GL_LIGHTING );
+}
+
+
+//-----------------------------------------------------------------------------
 // Name: pitch2color
 // Desc: maps pitch to a color
 //-----------------------------------------------------------------------------
@@ -743,4 +987,57 @@ Vector3D pitch2color( float pitch ){
     b = 1.0f - pitchClass/11.0f;
 
     return Vector3D(r, g, b);
+}
+
+
+//-----------------------------------------------------------------------------
+// Name: deg2rad
+// Desc: gets radians from degrees
+//-----------------------------------------------------------------------------
+float deg2rad( float deg )
+{
+    return deg*SWIRL_PI/180.0;
+}
+
+//-----------------------------------------------------------------------------
+// Name: rad2deg
+// Desc: gets degrees from radians
+//-----------------------------------------------------------------------------
+float rad2deg( float rad )
+{
+    return rad*180.0/SWIRL_PI;
+}
+
+
+//-----------------------------------------------------------------------------
+// Name: rotateVector
+// Desc: rotate a vector with a given orientation in degrees
+//-----------------------------------------------------------------------------
+Vector3D rotateVector( Vector3D vector, Vector3D ori )
+{
+    Vector3D outputVector = vector;
+    float theta, tmpX, tmpY, tmpZ;
+
+    // Rotate about x
+    theta = deg2rad(ori.x);
+    tmpY = outputVector.y;
+    tmpZ = outputVector.z;
+    outputVector.y = tmpY * cos(theta) - tmpZ * sin(theta);
+    outputVector.z = tmpY * sin(theta) + tmpZ * cos(theta);
+
+    // Rotate about y
+    theta = deg2rad(ori.y);
+    tmpX = outputVector.x;
+    tmpZ = outputVector.z;
+    outputVector.z = tmpX * cos(theta) - tmpZ * sin(theta);
+    outputVector.x = tmpX * sin(theta) + tmpZ * cos(theta);
+
+    // Rotate about z
+    theta = deg2rad(ori.z);
+    tmpX = outputVector.x;
+    tmpY = outputVector.y;
+    outputVector.x = tmpX * cos(theta) - tmpY * sin(theta);
+    outputVector.y = tmpX * sin(theta) + tmpY * cos(theta);
+
+    return outputVector;
 }

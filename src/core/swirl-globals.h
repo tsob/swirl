@@ -61,6 +61,7 @@ public:
     //static int app ;
     static SWIRLMessageListener * application;
 
+    static XMutex* mutex;
 
     // path
     static std::string path;
@@ -108,9 +109,11 @@ public:
     static Vector3D viewRadius;
     static Vector3D viewEyeY;
 
+    static bool useMouse;
+
     //TODO
     static SWIRLCamera* camera;
-    static SWIRLAvatar* myAvatar;
+    static SWIRLEntity* myAvatar;
 
     // Relative camera positions
     static Vector3D firstPerson;
