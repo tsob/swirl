@@ -41,5 +41,4 @@ public:
 					GLfloat AccFactor);
 	void Delete();
     virtual std::string getClassName() const;
-
 };

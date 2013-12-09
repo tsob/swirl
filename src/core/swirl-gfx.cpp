@@ -552,6 +552,7 @@ void motion(int x, int y) {
     if(Globals::useMouse==true)
     {
         SWIRLEntity* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
+        SWIRLServerProxy* serverProxy = ((SWIRLClient*)Globals::application)->serverProxy;
         if (!dynamic_cast<SWIRLClient *>(Globals::application)) //if application is not "Client"
             return;
 
@@ -565,8 +566,10 @@ void motion(int x, int y) {
             int dy = y - wh / 2;
 
             // Do something with dx and dy here
-            myAvatar->move(dy*-0.01);
-            myAvatar->turn(dx*0.01);
+            //myAvatar->move(dy*-0.01);
+            serverProxy->perform( myAvatar->id, "/move", dy*-0.01 );
+            //myAvatar->turn(dx*0.01);
+            serverProxy->perform( myAvatar->id, "/turn", dx*0.01 );
             reshapeFunc( Globals::windowWidth, Globals::windowHeight );
             glutPostRedisplay( );
 

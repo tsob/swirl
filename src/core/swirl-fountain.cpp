@@ -2,6 +2,7 @@
 #include <math.h>
 #include "swirl-fountain.h"
 #include "swirl-globals.h"
+#include "x-vector3d.h"
 
 #define RandomFactor 2.0
 
@@ -79,6 +80,7 @@ SWIRLFountain::SWIRLFountain()
 {
     col = Globals::ourWhite;
     pool = NULL;
+    size = Vector3D(0.8f, 0.8f, 0.8f);
 }
 
 void SWIRLFountain::Initialize(std::string className, SWIRLPool* aPool, GLint Steps, GLint RaysPerStep, GLint DropsPerRay,

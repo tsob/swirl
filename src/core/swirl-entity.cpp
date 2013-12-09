@@ -645,36 +645,50 @@ void SWIRLBirdCube::update( YTimeInterval dt )
     if (!dynamic_cast<SWIRLClient *>(Globals::application)) //if application is not "Client"
         return;
 
-    SWIRLEntity* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
-    static vector< pair<int,int> > noteChanPitch;
+    SWIRLClient * client = (SWIRLClient*)Globals::application;
+    SWIRLEntity* myAvatar = client->myAvatar;
+    
+    std::map<int, SWIRLEntity*>::iterator entitiesIter;
+    SWIRLEntity* entity;
 
-    //static int counter = 0;
-    int timeout = 24;
+    //first add all the entities we have so far to the client
+    for (entitiesIter = client->entities.begin(); entitiesIter != client->entities.end(); entitiesIter++) {
+        entity = entitiesIter->second;
 
-    // interp
-    size.interp( dt );
+        if(entity->id == id) break;
+        cerr << "Entity ID: " << entity->id << endl;
+        cerr << "Class name: " << entity->getClassName() << endl;
 
-    if(counter<=0)
-    {
-        if( (loc - myAvatar->loc).magnitude() < size.magnitude() )
-        {
-            int pitch = XFun::rand2i(48,62);
-            int channel = rand() % 9;
-            synth->noteOn(channel, (float)pitch, (rand() % 40) + 80 );
-            counter = timeout;
-            noteChanPitch.push_back( make_pair(channel, (int)pitch) );
-            //col = Vector3D(XFun::rand2f(0,1),XFun::rand2f(0,1),XFun::rand2f(0,1));
-            col = pitch2color( (float)pitch );
-        }
-    }
-    else
-    {
-        counter -= 1;
+        static vector< pair<int,int> > noteChanPitch;
+
+        //static int counter = 0;
+        int timeout = 24;
+
+        // interp
+        size.interp( dt );
+
         if(counter<=0)
         {
-            pair<int, int> myNoteOff = noteChanPitch.back();
-            noteChanPitch.pop_back();
-            synth->noteOff( myNoteOff.first, myNoteOff.second );
+            if( (loc - entity->loc).magnitude() < size.magnitude() )
+            {
+                int pitch = XFun::rand2i(48,62);
+                int channel = rand() % 9;
+                synth->noteOn(channel, (float)pitch, (rand() % 40) + 80 );
+                counter = timeout;
+                noteChanPitch.push_back( make_pair(channel, (int)pitch) );
+                //col = Vector3D(XFun::rand2f(0,1),XFun::rand2f(0,1),XFun::rand2f(0,1));
+                col = pitch2color( (float)pitch );
+            }
+        }
+        else
+        {
+            counter -= 1;
+            if(counter<=0)
+            {
+                pair<int, int> myNoteOff = noteChanPitch.back();
+                noteChanPitch.pop_back();
+                synth->noteOff( myNoteOff.first, myNoteOff.second );
+            }
         }
     }
     col *= powf(0.2,XGfx::delta());
