@@ -85,7 +85,7 @@ SWIRLEntity* SWIRLEntityFactory::createEntity(const char* entityClassName, int i
 {
     SWIRLEntity* entity = NULL;
 
-    cerr << "SWIRLEntityFactory::createEntity(" << entityClassName << ")" << endl;
+    //cerr << "SWIRLEntityFactory::createEntity(" << entityClassName << ")" << endl;
 
     if (!strcmp(entityClassName, "SWIRLSphereAvatar"))
         entity = new SWIRLSphereAvatar(); //TODO we can have ori too
@@ -94,11 +94,11 @@ SWIRLEntity* SWIRLEntityFactory::createEntity(const char* entityClassName, int i
     else if (!strcmp(entityClassName, "SWIRLCubeAvatar"))
         entity = new SWIRLCubeAvatar(); //TODO we can have ori too
     else if (!strcmp(entityClassName, "SWIRLBirdCube")) {
-        cerr << "creating SWIRLBirdCube" << endl;
+        //cerr << "creating SWIRLBirdCube" << endl;
 
         entity = new SWIRLBirdCube(); //TODO we can have ori too
 
-        cerr << "SWIRLBirdCube created" << endl;
+        //cerr << "SWIRLBirdCube created" << endl;
 
 
     }
@@ -501,7 +501,7 @@ void SWIRLEntity::move( float amount )
    //movementVector.normalize(); //not needed
    movementVector *= amount;
 
-    cerr << "MOV VEC " << movementVector.x << " " << movementVector.y << " " << movementVector.z << endl;
+    //cerr << "MOV VEC " << movementVector.x << " " << movementVector.y << " " << movementVector.z << endl;
 
    goal    += movementVector;
 }
@@ -664,8 +664,8 @@ void SWIRLBirdCube::update( YTimeInterval dt )
         entity = entitiesIter->second;
 
         if(entity->id == id) break;
-        cerr << "Entity ID: " << entity->id << endl;
-        cerr << "Class name: " << entity->getClassName() << endl;
+        //cerr << "Entity ID: " << entity->id << endl;
+        //cerr << "Class name: " << entity->getClassName() << endl;
 
         static vector< pair<int,int> > noteChanPitch;
 

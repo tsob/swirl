@@ -570,8 +570,8 @@ void motion(int x, int y) {
             serverProxy->perform( myAvatar->id, "/move", dy*-0.01 );
             //myAvatar->turn(dx*0.01);
             serverProxy->perform( myAvatar->id, "/turn", dx*0.01 );
-            reshapeFunc( Globals::windowWidth, Globals::windowHeight );
-            glutPostRedisplay( );
+            //reshapeFunc( Globals::windowWidth, Globals::windowHeight );
+            //glutPostRedisplay( );
 
             // move mouse pointer back to the center of the window
             wrap = true;
