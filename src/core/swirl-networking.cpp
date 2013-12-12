@@ -643,8 +643,8 @@ void SWIRLClient::ProcessMessage( const osc::ReceivedMessage& m,
             //cerr << "accxyz received " << x << " " << y << " " << z << endl;
 
             if (myAvatar) {
-                serverProxy->perform( myAvatar->id, "/turn", x );
-                serverProxy->perform( myAvatar->id, "/move", -y );
+                serverProxy->perform( myAvatar->id, "/turn", x / 4 );
+                serverProxy->perform( myAvatar->id, "/move", -y / 4);
             }
         }
 
