@@ -105,7 +105,6 @@ public:
 // Name:
 // Desc:
 //-----------------------------------------------------------------------------
-
 class SWIRLEntityFactory
 {
 public:
@@ -226,8 +225,8 @@ class SWIRLNoteSphere : public SWIRLFluid
 public:
     SWIRLNoteSphere() : size( 1, 1, 1.0f ){
         srand(time(NULL));
-        pitch   = (rand() % 60) + 22;
         channel = rand() % 9;
+        pitch   = (rand() % 40) + 48;
         counter = 0;
     }
 

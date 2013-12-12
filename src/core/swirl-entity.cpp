@@ -718,7 +718,7 @@ void SWIRLNoteSphere::update( YTimeInterval dt )
     SWIRLEntity* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
 
     static vector< pair<int,int> > noteChanPitch;
-    static int timeout = 512;
+    static int timeout = 24;
 
     // interp
     size.interp( dt );
@@ -726,9 +726,9 @@ void SWIRLNoteSphere::update( YTimeInterval dt )
     if(counter<=0)
     {
         if( (loc - myAvatar->loc).magnitude() < size.magnitude() )
-        {
-            synth->noteOn(channel, (float)pitch,  (rand() % 40) + 60 );
-            counter = timeout;
+        {   pitch = XFun::rand2i(35,62);
+            synth->noteOn(channel, (float)pitch,  (rand() % 60) + 30 );
+            counter = timeout + (rand() % 20) - 10;;
             noteChanPitch.push_back( make_pair(channel, (int)pitch) );
             //col = Vector3D(XFun::rand2f(0,1),XFun::rand2f(0,1),XFun::rand2f(0,1));
             col = pitch2color( (float)pitch );
