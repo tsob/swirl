@@ -98,7 +98,14 @@ public:
 
 public:
     // description
+<<<<<<< HEAD
     virtual std::string getClassName() const;
+=======
+    virtual std::string desc() const;
+    
+    Vector3D eye;
+    Vector3D reference;
+>>>>>>> origin/reza
 };
 
 //-----------------------------------------------------------------------------

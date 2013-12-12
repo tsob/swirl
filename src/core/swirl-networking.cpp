@@ -161,6 +161,7 @@ void SWIRLClientProxy::receiveId(int entityId)
 }
 
 
+<<<<<<< HEAD
 void SWIRLClientProxy::perform(int entityId, const char* messageName, float parameter)
 {
     //char* buffer = new char[MAX_PACKET_SIZE];
@@ -267,6 +268,24 @@ void SWIRLServer::addEntity(const char* entityClassName, int entityId, Vector3D 
         clientProxy->addEntity(entityClassName, entityId, loc, ori);
     }
 }
+=======
+                std::cout << f << std::endl;
+                
+                //TODO  Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
+                Vector3D lookVector = Globals::swirlCamera.reference - Globals::swirlCamera.eye;
+                
+                 Vector3D movementVector = lookVector;
+                 movementVector.normalize();
+                 movementVector *= -0.1;
+
+                 //TODO Globals::cameraReference += movementVector;
+                Globals::swirlCamera.reference += movementVector;
+                
+                //TODO Globals::cameraEye += movementVector;
+                Globals::swirlCamera.eye += movementVector;
+   
+                 getAvatar()->ori.y += (180 / (3.14f) * f);
+>>>>>>> origin/reza
 
 int SWIRLServer::addEntity(const char* entityClassName, Vector3D loc, Vector3D ori) {
     //g_SWIRLNetworkingMutex.acquire();
