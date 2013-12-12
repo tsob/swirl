@@ -776,6 +776,16 @@ void keyboardFunc( unsigned char key, int x, int y )
                     Globals::useMouse=true;
                 }
                 break;
+            case 'i':
+                if(Globals::useAccelerometer==true)
+                {
+                    Globals::useAccelerometer=false;
+                }
+                else
+                {
+                    Globals::useAccelerometer=true;
+                }
+                break;
             case ']':
                 // turn right
                 //TODO myAvatar->turn(goalDelta);

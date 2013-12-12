@@ -32,21 +32,43 @@ public:
         //1 5 7 8
         int i;
         
-        for (i = 0; i < 10; i++)
+        for (i = 0; i < 3; i++)
         {
             addEntity( "SWIRLFountain1", Vector3D(i - 5, 0, i - 5), Vector3D(0, 0, 0) );
            
         }
         
-        addEntity( "SWIRLFountain2", Vector3D(1, 0, 2), Vector3D(0, 0, 0) );
-        addEntity( "SWIRLFountain3", Vector3D(2, 0, 2), Vector3D(0, 0, 0) );
-        addEntity( "SWIRLFountain4", Vector3D(3, 0, 0), Vector3D(0, 0, 0) );
-        addEntity( "SWIRLFountain5", Vector3D(2, 0, -2), Vector3D(0, 0, 0) );
-        addEntity( "SWIRLFountain6", Vector3D(1, 0, -4), Vector3D(0, 0, 0) );
-        addEntity( "SWIRLFountain7", Vector3D(0, 0, -1), Vector3D(0, 0, 0) );
-        addEntity( "SWIRLFountain8", Vector3D(0, 0, 0), Vector3D(0, 0, 0) );
+        for (i = 0; i < 2; i++)
+        {
+            addEntity( "SWIRLFountain2", Vector3D(1 - i, 0, 2), Vector3D(0, 0, 0) );
+        }
         
-        for (i = 0; i < 5; i++)
+        for (i = 0; i < 2; i++)
+        {
+            addEntity( "SWIRLFountain3", Vector3D(2 - i * 3, 0, 2), Vector3D(0, 0, 0) );
+        }
+        
+        addEntity( "SWIRLFountain4", Vector3D(0, 0, 100), Vector3D(0, 0, 0) );
+        
+        for (i = 0; i < 3; i++)
+        {
+
+            addEntity( "SWIRLFountain5", Vector3D(i - 3, 0, -2), Vector3D(0, 0, 0) );
+        }
+
+        for (i = 0; i < 3; i++)
+        {
+            addEntity( "SWIRLFountain6", Vector3D(2 * i - 5, 0, 4), Vector3D(0, 0, 0) );
+            
+        }
+        
+        for (i = 0; i < 2; i++) {
+            addEntity( "SWIRLFountain7", Vector3D(2 - i * 3, 0, -1), Vector3D(0, 0, 0) );
+        }
+        
+        addEntity( "SWIRLFountain8", Vector3D(- 5, 0, 0), Vector3D(0, 0, 0) );
+        
+        for (i = 0; i < 2; i++)
         {
             addEntity( "SWIRLFountain1", Vector3D(i -3, 0, i - 3), Vector3D(0, 0, 0) );
             

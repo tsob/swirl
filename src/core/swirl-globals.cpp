@@ -34,6 +34,8 @@ GLsizei Globals::lastWindowWidth  = Globals::windowWidth;
 GLsizei Globals::lastWindowHeight = Globals::windowHeight;
 
 bool Globals::useMouse = false;
+bool Globals::useAccelerometer = false;
+
 
 // AUDIO STUFF ----------------------------------------------------------------
 // fluidsynth

@@ -110,6 +110,8 @@ public:
     static Vector3D viewEyeY;
 
     static bool useMouse;
+    static bool useAccelerometer;
+
 
     //TODO
     static SWIRLCamera* camera;

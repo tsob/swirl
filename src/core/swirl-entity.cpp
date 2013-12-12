@@ -138,11 +138,16 @@ SWIRLEntity* SWIRLEntityFactory::createEntity(const char* entityClassName, int i
             ((SWIRLFountain*)entity)->Initialize(entityClassName, pool, 1,20,100,70,70,5.0,0.15);
             cerr << "3";
 
-        } else if (!strcmp(entityClassName, "SWIRLFountain4")) {
-            ((SWIRLFountain*)entity)->Initialize(entityClassName, pool, 1,20,200,85,85,10,0.1);
+        }
+        
+        else if (!strcmp(entityClassName, "SWIRLFountain4")) {
+            ((SWIRLFountain*)entity)->Initialize(entityClassName, pool, 1,200,200,85,85,10,0.001);
             cerr << "4";
 
-        } else if (!strcmp(entityClassName, "SWIRLFountain5")) {
+        }
+        
+        
+        else if (!strcmp(entityClassName, "SWIRLFountain5")) {
             ((SWIRLFountain*)entity)->Initialize(entityClassName, pool, 5,20,85,90,90,1.0,0.15);
             cerr << "5";
 
@@ -664,8 +669,8 @@ void SWIRLBirdCube::update( YTimeInterval dt )
         entity = entitiesIter->second;
 
         if(entity->id == id) break;
-        cerr << "Entity ID: " << entity->id << endl;
-        cerr << "Class name: " << entity->getClassName() << endl;
+        //cerr << "Entity ID: " << entity->id << endl;
+        //cerr << "Class name: " << entity->getClassName() << endl;
 
         static vector< pair<int,int> > noteChanPitch;
 
