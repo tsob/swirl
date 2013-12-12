@@ -250,7 +250,6 @@ void initialize_simulation()
     // add to simulation
     //SWIRLEntity* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
 
-<<<<<<< HEAD
     //Globals::sim->root().addChild( myAvatar );
     //Globals::sim->root().addChild( new SWIRLMoon  );
 
@@ -258,26 +257,6 @@ void initialize_simulation()
 
     //myAvatar->addChild( Globals::camera );
     //Globals::sim->root().addChild( myAvatar );
-=======
-    //TODO Globals::cameraEye.x = 0;
-    //TODO Globals::cameraEye.y = 0;
-    Globals::Globals::swirlCamera.eye.x = Globals::swirlCamera.eye.y = 0;
-
-    if (Globals::app == 1)
-    {
-        //TODO Globals::cameraEye.z = -2;
-        //TODO Globals::cameraReference.z = 9;
-        Globals::swirlCamera.eye.z = -2;
-        Globals::swirlCamera.reference.z = 9;
-
-
-    }
-    else
-    {
-        Globals::swirlCamera.eye.z = -1;
-        Globals::swirlCamera.reference.z = 10;
-    }
->>>>>>> origin/reza
 
     //Globals::sim->root().addChild( new SWIRLBirdCube() );
 
@@ -498,32 +477,8 @@ void look( )
     
     SWIRLEntity* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
 
-<<<<<<< HEAD
     float x = 0, y = 0,z = 0;
     float theta = 0, refX = 0, refY = 0, refZ = 0;
-=======
-    // TODO change to camera YEntity
-    gluLookAt(
-        
-        /*
-        Globals::cameraEye.x,
-        Globals::cameraEye.y,
-        Globals::cameraEye.z,
-        Globals::cameraReference.x,
-        Globals::cameraReference.y,
-        Globals::cameraReference.z,
-         */
-              
-        Globals::swirlCamera.eye.x,
-              Globals::swirlCamera.eye.y,
-              Globals::swirlCamera.eye.z,
-              Globals::swirlCamera.reference.x,
-              Globals::swirlCamera.reference.y,
-              Globals::swirlCamera.reference.z,
-
-        0.0f, 1.0f, 0.0f
-        );
->>>>>>> origin/reza
 
 
     Vector3D ctr, ref;
@@ -1257,51 +1212,12 @@ void renderBackground()
  *}
  */
 
-<<<<<<< HEAD
-=======
-
-
-// TODO CHANGE TO MEMBER FUNCTIONS OF YENTITIES
-
-//-----------------------------------------------------------------------------
-// Name: strafe_left( )
-// Desc: move me left
-//-----------------------------------------------------------------------------
-void strafe_left()
-{
-   //TODO Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
-    Vector3D lookVector = Globals::swirlCamera.reference - Globals::swirlCamera.eye;
-    
-   Vector3D movementVector = lookVector;
-   // Rotate movementVector by 90 degrees
-   float tmpX = movementVector.x;
-   float tmpZ = movementVector.z;
-
-   movementVector.x = - tmpZ;
-   movementVector.z = tmpX;
-
-   movementVector.normalize();
-   movementVector *= -0.1;
-
-   //TODO Globals::cameraReference += movementVector;
-    Globals::swirlCamera.reference += movementVector;
-   //TODO Globals::cameraEye += movementVector;
-    Globals::swirlCamera.eye += movementVector;
-
-   // TODO
-   //swirl_send_message( "/strafe", -0.1f );
-   swirl_send_message( "/strafe", -0.1f );
-}
-
-
->>>>>>> origin/reza
 //-----------------------------------------------------------------------------
 // Name: dropRandCube
 // Desc: Drops a rand-pitch cube at the user's location
 //-----------------------------------------------------------------------------
 void dropRandCube()
 {
-<<<<<<< HEAD
     if (!dynamic_cast<SWIRLClient *>(Globals::application)) //if application is not "Client"
         return;
 
@@ -1310,103 +1226,6 @@ void dropRandCube()
     SWIRLServerProxy* serverProxy = client->serverProxy;
     
     serverProxy->addEntity("SWIRLBirdCube", myAvatar->loc, myAvatar->ori);
-=======
-   //TODO Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
-    Vector3D lookVector = Globals::swirlCamera.reference - Globals::swirlCamera.eye;
-   Vector3D movementVector = lookVector;
-   // Rotate movementVector by 90 degrees
-   float tmpX = movementVector.x;
-   float tmpZ = movementVector.z;
-
-   movementVector.x = - tmpZ;
-   movementVector.z = tmpX;
-
-   movementVector.normalize();
-   movementVector *= 0.1;
-
-   //Globals::cameraReference += movementVector;
-    Globals::swirlCamera.reference += movementVector;
-   
-    
-    //TODO Globals::cameraEye += movementVector;
-    Globals::swirlCamera.eye += movementVector;
-
-
-   // TODO
-   swirl_send_message( "/strafe", 0.1f );
-}
-
-//-----------------------------------------------------------------------------
-// Name: move_forward( )
-// Desc: move me forward
-//-----------------------------------------------------------------------------
-void move_forward()
-{
-   //TODO Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
-    Vector3D lookVector = Globals::swirlCamera.reference - Globals::swirlCamera.eye;
-
-   Vector3D movementVector = lookVector;
-   movementVector.normalize();
-   movementVector *= 0.1;
-
-    //Globals::cameraReference += movementVector;
-    Globals::swirlCamera.reference += movementVector;
-    
-    
-    //TODO Globals::cameraEye += movementVector;
-    Globals::swirlCamera.eye += movementVector;
-   // TODO
-   swirl_send_message( "/moveForward", 0.1f );
-}
-
-//-----------------------------------------------------------------------------
-// Name: move_back( )
-// Desc: move me backward
-//-----------------------------------------------------------------------------
-void move_back()
-{
-    //TODO Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
-    Vector3D lookVector = Globals::swirlCamera.reference - Globals::swirlCamera.eye;
-    
-   Vector3D movementVector = lookVector;
-   movementVector.normalize();
-   movementVector *= -0.1;
-
-    //Globals::cameraReference += movementVector;
-    Globals::swirlCamera.reference += movementVector;
-    
-    
-    //TODO Globals::cameraEye += movementVector;
-    Globals::swirlCamera.eye += movementVector;
-
-   // TODO
-   swirl_send_message( "/moveForward", -0.1f );
-}
-
-//-----------------------------------------------------------------------------
-// Name: turn_left( )
-// Desc: turn me left
-//-----------------------------------------------------------------------------
-void turn_left()
-{
-    //TODO Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
-    Vector3D lookVector = Globals::swirlCamera.reference - Globals::swirlCamera.eye;
-
-    
-    float tmpRefX = lookVector.x;
-   float tmpRefZ = lookVector.z;
-
-   lookVector.x = tmpRefX * cos(-0.1)
-                  - tmpRefZ * sin(-0.1);
-
-   lookVector.z = tmpRefX * sin(-0.1)
-                  + tmpRefZ * cos(-0.1);
-
-   //TODO Globals::cameraReference = Globals::cameraEye + lookVector;
-    Globals::swirlCamera.reference = Globals::swirlCamera.eye + lookVector;
-
-   swirl_send_message( "/rotated", 0.1f );
->>>>>>> origin/reza
 }
 //-----------------------------------------------------------------------------
 // Name: dropNoteSphere
@@ -1414,7 +1233,6 @@ void turn_left()
 //-----------------------------------------------------------------------------
 void dropNoteSphere()
 {
-<<<<<<< HEAD
     if (!dynamic_cast<SWIRLClient *>(Globals::application)) //if application is not "Client"
         return;
 
@@ -1423,22 +1241,4 @@ void dropNoteSphere()
     SWIRLServerProxy* serverProxy = client->serverProxy;
     
     serverProxy->addEntity("SWIRLNoteSphere", myAvatar->loc, myAvatar->ori);
-=======
-    //TODO Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
-    Vector3D lookVector = Globals::swirlCamera.reference - Globals::swirlCamera.eye;
-
-    float tmpRefX = lookVector.x;
-   float tmpRefZ = lookVector.z;
-
-   lookVector.x = tmpRefX * cos(0.1)
-                  - tmpRefZ * sin(0.1);
-
-   lookVector.z = tmpRefX * sin(0.1)
-                  + tmpRefZ * cos(0.1);
-
-    //TODO Globals::cameraReference = Globals::cameraEye + lookVector;
-    Globals::swirlCamera.reference = Globals::swirlCamera.eye + lookVector;
-    
-   swirl_send_message( "/rotated", -0.1f );
->>>>>>> origin/reza
 }

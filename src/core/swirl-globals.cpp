@@ -78,25 +78,8 @@ iSlew3D  Globals::bgColor( Globals::skyBlue, 10.0 );
 Vector3D Globals::viewRadius( 5, 2, 1 );
 Vector3D Globals::viewEyeY( 2, 0, 1.5f );
 
-<<<<<<< HEAD
 //TODO
 SWIRLCamera * Globals::camera   =  new SWIRLCamera;
-=======
-int Globals::app = 0;
-
-
-SWIRLCamera Globals::swirlCamera;
-
-//TODO
-//SWIRLCamera * Globals::swirlCamera =  new SWIRLCamera;
-//Vector3D Globals::cameraEye( 0, 0, -1 );
-//Vector3D Globals::cameraReference( 0, 0, 0 );
-
-//TODO
-//SWIRLCamera Globals::swirlCamera.eye(0, 0, -1);
-//SWIRLCamera Globals::swirlCamera.reference(0, 0, 0);
-
->>>>>>> origin/reza
 
 // Relative camera positions
 Vector3D Globals::firstPerson = Vector3D(0.0f, 1.5f, 0.0f);

@@ -114,18 +114,12 @@ public:
 
 
     //TODO
-<<<<<<< HEAD
     static SWIRLCamera* camera;
     static SWIRLEntity* myAvatar;
 
     // Relative camera positions
     static Vector3D firstPerson;
     static Vector3D thirdPerson;
-=======
-    static SWIRLCamera swirlCamera;
-    static Vector3D cameraEye;
-    static Vector3D cameraReference;
->>>>>>> origin/reza
 
     static Vector3D fov;
 

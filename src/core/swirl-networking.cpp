@@ -58,7 +58,7 @@ SWIRLMessageListener::SWIRLMessageListener(const char* anAddress, int aPort) : n
 void SWIRLMessageListener::startListenerThread()
 {
     cerr << "Starting listening thread!" << endl;
-    
+
     pthread_t listenerThread;
     pthread_create(&listenerThread, NULL, &(listen), this);
 }
@@ -71,9 +71,9 @@ void SWIRLMessageListener::ProcessMessage( const osc::ReceivedMessage& m,
 void* listen(void * args)
 {
     SWIRLMessageListener* listener = (SWIRLMessageListener*)args;
-    
+
     cerr << "Listening to " << listener->networkLocation.address << " " << listener->networkLocation.port << "..." << endl;
-    
+
     UdpListeningReceiveSocket s(
                                 IpEndpointName(
                                                //IpEndpointName::ANY_ADDRESS,
@@ -82,10 +82,10 @@ void* listen(void * args)
                                                ),
                                 listener
                                 );
-    
+
     //s.RunUntilSigInt();
     s.Run();
-    
+
     pthread_exit(NULL);
     cerr << "Exiting thread!" << endl;
 }
@@ -94,17 +94,17 @@ void* listen(void * args)
 
 SWIRLClientProxy::SWIRLClientProxy(const char* anAddress, int aPort) : SWIRLEntityProxy(anAddress, aPort)
 {
-    
+
 }
 
 void SWIRLClientProxy::addEntity(const char* entityClassName, int entityId, Vector3D loc, Vector3D ori)
 {
     //cerr << "SWIRLClientProxy::addEntity " << entityId << endl;
-    
+
     char buffer[MAX_PACKET_SIZE];
     //char* buffer = new char[MAX_PACKET_SIZE];
     osc::OutboundPacketStream oscOutstream( buffer, MAX_PACKET_SIZE);
-    
+
     oscOutstream
     << osc::BeginBundleImmediate
     << osc::BeginMessage( ADD_ENTITY )
@@ -114,9 +114,9 @@ void SWIRLClientProxy::addEntity(const char* entityClassName, int entityId, Vect
     << ori.x << ori.y << ori.z
     << osc::EndMessage
     << osc::EndBundle;
-    
+
     transmitSocket->Send( oscOutstream.Data(), oscOutstream.Size() );
-    
+
     //cerr << "addEntity sent" << endl;
 }
 
@@ -125,50 +125,49 @@ void SWIRLClientProxy::removeEntity(int entityId)
     //char* buffer = new char[MAX_PACKET_SIZE];
     char buffer[MAX_PACKET_SIZE];
     osc::OutboundPacketStream oscOutstream( buffer, MAX_PACKET_SIZE);
-    
+
     oscOutstream
     << osc::BeginBundleImmediate
     << osc::BeginMessage( REMOVE_ENTITY )
     << entityId
     << osc::EndMessage
     << osc::EndBundle;
-    
+
     transmitSocket->Send( oscOutstream.Data(), oscOutstream.Size() );
     //delete[] buffer;
-    
+
 }
 
 void SWIRLClientProxy::receiveId(int entityId)
 {
-    
+
     //cerr << endl << "SWIRLClientProxy::receiveId port=" << networkLocation.port << " " << "entityId = " << entityId << endl;;
-    
+
     //char* buffer = new char[MAX_PACKET_SIZE];
     char buffer[MAX_PACKET_SIZE];
     osc::OutboundPacketStream oscOutstream( buffer, MAX_PACKET_SIZE);
-    
+
     oscOutstream
     << osc::BeginBundleImmediate
     << osc::BeginMessage( RECEIVE_ID )
     << entityId
     << osc::EndMessage
     << osc::EndBundle;
-    
+
     transmitSocket->Send( oscOutstream.Data(), oscOutstream.Size() );
-    
+
     cout << "receiveId sent" << endl;
-    
+
 }
 
 
-<<<<<<< HEAD
 void SWIRLClientProxy::perform(int entityId, const char* messageName, float parameter)
 {
     //char* buffer = new char[MAX_PACKET_SIZE];
     char buffer[MAX_PACKET_SIZE];
 
     osc::OutboundPacketStream oscOutstream( buffer, MAX_PACKET_SIZE);
-    
+
     oscOutstream
     << osc::BeginBundleImmediate
     << osc::BeginMessage( messageName )
@@ -176,7 +175,7 @@ void SWIRLClientProxy::perform(int entityId, const char* messageName, float para
     << parameter
     << osc::EndMessage
     << osc::EndBundle;
-    
+
     transmitSocket->Send( oscOutstream.Data(), oscOutstream.Size() );
     //delete[] buffer;
 }
@@ -191,7 +190,7 @@ SWIRLServer::SWIRLServer(const char* anAddress, int aPort) : SWIRLMessageListene
 SWIRLServer::~SWIRLServer()
 {
     std::map<int, SWIRLClientProxy*>::iterator iter;
-    
+
     for (iter = clientProxies.begin(); iter != clientProxies.end(); iter++) {
         if (iter->second)
             delete iter->second;
@@ -201,13 +200,13 @@ SWIRLServer::~SWIRLServer()
 int SWIRLServer::addClientProxy(const char* clientAddress, int clientPort)
 {
     //cerr << "SWIRLServer::addClientProxy " << clientAddress << " " << clientPort << endl;
-    
+
     SWIRLClientProxy* clientProxy = new SWIRLClientProxy(clientAddress, clientPort);
-    
+
     clientProxy->id = maxEntityId;
 
     clientProxies[clientProxy->id] = clientProxy;
-    
+
     return maxEntityId;
 }
 
@@ -230,15 +229,15 @@ int SWIRLServer::addClient(const char* avatarClassName, const char* clientAddres
     //first add all the entities we have so far to the client
     for (entitiesIter = entities.begin(); entitiesIter != entities.end(); entitiesIter++) {
         entity = entitiesIter->second;
-        
+
         clientProxies[clientId]->addEntity(entity->getClassName().c_str(), entity->id, entity->loc, entity->ori);
     }
-    
+
     //add avatar to all the clients (including the sender). clientId is passed as the avatar entityId
     addEntity(avatarClassName, loc, ori);
-    
+
     return clientId;
-    
+
 }
 
 void SWIRLServer::removeClent(int clientId)
@@ -251,47 +250,29 @@ void SWIRLServer::removeClent(int clientId)
 void SWIRLServer::addEntity(const char* entityClassName, int entityId, Vector3D loc, Vector3D ori) {
     std::map<int, SWIRLClientProxy*>::iterator clientProxiesIter;
     SWIRLClientProxy* clientProxy;
-    
+
     //add the new avatar to the server map
     SWIRLEntityFactory factory; //TODO no need to initialize
     //TODO wrong cast, revview class hierarchy
-    
+
     SWIRLEntity* entity = (SWIRLEntity*)factory.createEntity(entityClassName, entityId, loc, ori);
-    
+
     Globals::sim->root().addChild( entity ); //TODO
 
-    
+
     entities[entityId] = entity;
-    
+
     for (clientProxiesIter = clientProxies.begin(); clientProxiesIter != clientProxies.end(); clientProxiesIter++) {
         clientProxy = clientProxiesIter->second;
         clientProxy->addEntity(entityClassName, entityId, loc, ori);
     }
 }
-=======
-                std::cout << f << std::endl;
-                
-                //TODO  Vector3D lookVector = Globals::cameraReference - Globals::cameraEye;
-                Vector3D lookVector = Globals::swirlCamera.reference - Globals::swirlCamera.eye;
-                
-                 Vector3D movementVector = lookVector;
-                 movementVector.normalize();
-                 movementVector *= -0.1;
-
-                 //TODO Globals::cameraReference += movementVector;
-                Globals::swirlCamera.reference += movementVector;
-                
-                //TODO Globals::cameraEye += movementVector;
-                Globals::swirlCamera.eye += movementVector;
-   
-                 getAvatar()->ori.y += (180 / (3.14f) * f);
->>>>>>> origin/reza
 
 int SWIRLServer::addEntity(const char* entityClassName, Vector3D loc, Vector3D ori) {
     //g_SWIRLNetworkingMutex.acquire();
-    
+
     std::map<int, SWIRLClientProxy*>::iterator clientProxiesIter;
-    
+
     addEntity(entityClassName, maxEntityId, loc, ori);
     maxEntityId++;
 
@@ -300,19 +281,19 @@ int SWIRLServer::addEntity(const char* entityClassName, Vector3D loc, Vector3D o
 }
 
 void SWIRLServer::removeEntity(int entityId) {
-    
+
     std::map<int, SWIRLClientProxy*>::iterator clientProxiesIter;
     SWIRLClientProxy* clientProxy;
-    
+
     std::map<int, SWIRLEntity*>::iterator entitiesIter;
     entitiesIter = entities.find(entityId);
     entities.erase(entitiesIter);
-    
+
     for (clientProxiesIter = clientProxies.begin(); clientProxiesIter != clientProxies.end(); clientProxiesIter++) {
         clientProxy = clientProxiesIter->second;
         clientProxy->removeEntity(entityId);
     }
-    
+
 }
 
 
@@ -320,27 +301,27 @@ void SWIRLServer::ProcessMessage( const osc::ReceivedMessage& m,
                                  const IpEndpointName& remoteEndpoint )
 {
     //g_SWIRLNetworkingMutex.acquire();
-    
+
     osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
     char messageName[MAX_MESSAGE_NAME_SIZE];
-    
+
     //TODO remove
     int entityId;
     std::map<int, SWIRLClientProxy*>::iterator iter;
     SWIRLClientProxy* clientProxy;
-    
+
     strcpy(messageName, m.AddressPattern());
-    
+
     try {
         if ( !strcmp( messageName, MOVE ) ||
             !strcmp( messageName, TURN ) ||
             !strcmp( messageName, STRAFE ) ) {
-            
+
             float f;
             args >> entityId >> f >> osc::EndMessage;
 
             SWIRLEntity* entity = entities[entityId];
-            
+
             //TODO if (entity != myAvatar) //TODO needed?
             if (!strcmp( messageName, MOVE ))
                 entity->move(f);
@@ -348,10 +329,10 @@ void SWIRLServer::ProcessMessage( const osc::ReceivedMessage& m,
                 entity->turn(f);
             else if (!strcmp( messageName, STRAFE ))
                 entity->strafe(f);
-            
+
             for (iter = clientProxies.begin(); iter != clientProxies.end(); iter++) {
                 clientProxy = iter->second;
-                
+
                 //TODO if (clientProxy->id != entityId) // dont send again to the 'sender' client
                 {
                     clientProxy->perform(entityId, messageName, f);
@@ -361,32 +342,32 @@ void SWIRLServer::ProcessMessage( const osc::ReceivedMessage& m,
         else if (!strcmp( messageName, ADD_ENTITY ))
         {
             //cerr << "receiving " << ADD_ENTITY << endl;
-            
+
             const char* entityClassName;
             const char* clientAddress;
             int clientPort;
             Vector3D loc;
             Vector3D ori;
-            
+
             args >> entityClassName >> loc.x >> loc.y >> loc.z >> ori.x >> ori.y >> ori.z >> osc::EndMessage;
-            
+
             int entityId = addEntity(entityClassName, loc, ori);
         }
-        
+
         else if (!strcmp( messageName, ADD_CLIENT ))
         {
             //cerr << "receving " << ADD_CLIENT << endl;
-            
+
             const char* entityClassName;
             const char* clientAddress;
             int clientPort;
             Vector3D loc;
             Vector3D ori;
-            
+
             args >> entityClassName >> clientAddress >> clientPort >> loc.x >> loc.y >> loc.z >> ori.x >> ori.y >> ori.z >> osc::EndMessage;
 
             int clientId = addClient(entityClassName, clientAddress, clientPort, loc, ori);
-            
+
             clientProxies[clientId]->receiveId(clientId); //it is important to call receiveId after addEntity for avatar
 
         }
@@ -400,7 +381,7 @@ void SWIRLServer::ProcessMessage( const osc::ReceivedMessage& m,
             args >> entityId >> osc::EndMessage;
             removeEntity(entityId);
         }
-        
+
         //g_SWIRLNetworkingMutex.release();
 
     }
@@ -430,11 +411,11 @@ void removeEntity(int entityId);
 void SWIRLServerProxy::addClient(const char* entityClassName, const char* clientAddress, int clientPort, Vector3D loc, Vector3D ori)
 {
     //cerr << "sending " << ADD_CLIENT << endl;
-    
+
     //char* buffer = new char[MAX_PACKET_SIZE];
     char buffer[MAX_PACKET_SIZE];
     osc::OutboundPacketStream oscOutstream( buffer, MAX_PACKET_SIZE);
-    
+
     oscOutstream
     << osc::BeginBundleImmediate
     << osc::BeginMessage( ADD_CLIENT )
@@ -443,10 +424,10 @@ void SWIRLServerProxy::addClient(const char* entityClassName, const char* client
     << ori.x << ori.y << ori.z
     << osc::EndMessage
     << osc::EndBundle;
-    
+
     transmitSocket->Send( oscOutstream.Data(), oscOutstream.Size() );
     //delete[] buffer;
-    
+
     //TODO receive back clientId
 }
 
@@ -455,14 +436,14 @@ void SWIRLServerProxy::removeClient(int clientId)
     char buffer[MAX_PACKET_SIZE];
     //char* buffer = new char[MAX_PACKET_SIZE];
     osc::OutboundPacketStream oscOutstream( buffer, MAX_PACKET_SIZE);
-    
+
     oscOutstream
     << osc::BeginBundleImmediate
     << osc::BeginMessage( REMOVE_CLIENT )
     << clientId
     << osc::EndMessage
     << osc::EndBundle;
-    
+
     transmitSocket->Send( oscOutstream.Data(), oscOutstream.Size() );
     //delete[] buffer;
 }
@@ -470,12 +451,12 @@ void SWIRLServerProxy::removeClient(int clientId)
 void SWIRLServerProxy::addEntity(const char* entityClassName, Vector3D loc, Vector3D ori)
 {
     //cerr << "sending " << ADD_ENTITY << endl;
-    
+
     //char* buffer = new char[MAX_PACKET_SIZE];
     char buffer[MAX_PACKET_SIZE];
 
     osc::OutboundPacketStream oscOutstream( buffer, MAX_PACKET_SIZE);
-    
+
     oscOutstream
     << osc::BeginBundleImmediate
     << osc::BeginMessage( ADD_ENTITY )
@@ -484,10 +465,10 @@ void SWIRLServerProxy::addEntity(const char* entityClassName, Vector3D loc, Vect
     << ori.x << ori.y << ori.z
     << osc::EndMessage
     << osc::EndBundle;
-    
+
     transmitSocket->Send( oscOutstream.Data(), oscOutstream.Size() );
     //delete[] buffer;
-    
+
     //TODO receive back clientId
 }
 
@@ -496,14 +477,14 @@ void SWIRLServerProxy::removeEntity(int entityId)
     //char* buffer = new char[MAX_PACKET_SIZE];
     char buffer[MAX_PACKET_SIZE];
     osc::OutboundPacketStream oscOutstream( buffer, MAX_PACKET_SIZE);
-    
+
     oscOutstream
     << osc::BeginBundleImmediate
     << osc::BeginMessage( REMOVE_ENTITY )
     << entityId
     << osc::EndMessage
     << osc::EndBundle;
-    
+
     transmitSocket->Send( oscOutstream.Data(), oscOutstream.Size() );
     //delete[] buffer;
 }
@@ -511,14 +492,14 @@ void SWIRLServerProxy::removeEntity(int entityId)
 void SWIRLServerProxy::perform(int eneityId, const char* messageName, float parameter)
 {
     //cerr << "sending perform" << endl;
-    
+
     //char* buffer = new char[MAX_PACKET_SIZE];
     char buffer[MAX_PACKET_SIZE];
 
     //cerr << "after new buffer" << endl;
-    
+
     osc::OutboundPacketStream oscOutstream( buffer, MAX_PACKET_SIZE);
-    
+
     oscOutstream
     << osc::BeginBundleImmediate
     << osc::BeginMessage( messageName )
@@ -526,7 +507,7 @@ void SWIRLServerProxy::perform(int eneityId, const char* messageName, float para
     << parameter
     << osc::EndMessage
     << osc::EndBundle;
-    
+
     transmitSocket->Send( oscOutstream.Data(), oscOutstream.Size() );
 }
 
@@ -537,18 +518,18 @@ SWIRLClient::SWIRLClient(const char* entityClassName, const char* anAddress, int
                          Vector3D avatarLoc, Vector3D avatarOri) : SWIRLMessageListener(anAddress, aPort)
 {
     serverProxy = new SWIRLServerProxy(serverAddress, serverPort);
-    
+
     serverProxy->addClient(entityClassName, anAddress, aPort, avatarLoc, avatarOri);
-    
+
 }
 
 SWIRLClient::~SWIRLClient()
 {
-    
+
     serverProxy->removeClient(id);
 
     std::map<int, SWIRLEntity*>::iterator iter;
-    
+
     for (iter = entities.begin(); iter != entities.end(); iter++) {
         if (iter->second)
             delete iter->second;
@@ -560,7 +541,7 @@ SWIRLClient::~SWIRLClient()
 void SWIRLClient::removeEntity(int id)
 {
     std::map<int, SWIRLEntity*>::iterator iter;
-    
+
     iter = entities.find(id);
     entities.erase(iter);
 }
@@ -569,31 +550,31 @@ void SWIRLClient::ProcessMessage( const osc::ReceivedMessage& m,
                                  const IpEndpointName& remoteEndpoint )
 {
     //cerr << "-------##### CLIENT RECEIVE MESSAGE" << endl;
-    
+
     //g_SWIRLNetworkingMutex.acquire();
-    
+
     osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
     char messageName[MAX_MESSAGE_NAME_SIZE];
     SWIRLEntity* entity;
     std::map<int, SWIRLEntity*>::iterator iter;
-    
+
     int entityId;
     int i;
-    
+
     strcpy(messageName, m.AddressPattern());
-    
+
     //cerr << messageName << endl;
-    
+
     try {
         if ( !strcmp( messageName, MOVE ) ||
             !strcmp( messageName, TURN ) ||
             !strcmp( messageName, STRAFE ) ) {
-            
+
             float f;
             args >> entityId >> f >> osc::EndMessage;;
-            
+
             entity = entities[entityId];
-            
+
             //TODO if (entity != myAvatar) //TODO needed?
             {
                 if (!strcmp( messageName, MOVE ))
@@ -609,24 +590,24 @@ void SWIRLClient::ProcessMessage( const osc::ReceivedMessage& m,
             const char* entityClassName;
             Vector3D loc;
             Vector3D ori;
-            
+
             //cerr << "addEntity received" << endl;
-            
+
             args >> entityClassName >> entityId >> loc.x >> loc.y >> loc.z >> ori.x >> ori.y >> ori.z >> osc::EndMessage;
-            
+
             //cerr << entityClassName << endl;
-            
+
             SWIRLEntityFactory factory; //TODO no need to initialize
             SWIRLEntity* entity = (SWIRLEntity*)factory.createEntity(entityClassName, entityId, loc, ori);
-            
+
             //cerr << "entity " << entityClassName << "created" << endl;
             entities[entityId] = entity;
             //cerr << "entity put inside hashmap" << endl;
 
-            
+
             Globals::sim->root().addChild( entity );
             //cerr << "entity added to scene graph " << entityClassName << endl;
-            
+
         }
         else if (!strcmp( messageName, REMOVE_ENTITY))
         {
@@ -636,20 +617,20 @@ void SWIRLClient::ProcessMessage( const osc::ReceivedMessage& m,
         else if (!strcmp( messageName, RECEIVE_ID)) //TODO can be a method
         {
             //cerr << "receiveId received" << endl;
-            
+
             args >> entityId >> osc::EndMessage;
             id = entityId;
             //cerr << "myAvatar is is now " << entityId << endl;
-            
+
             myAvatar = entities[entityId];
             //TODO myAvatar->addChild(Globals::camera);
-            
+
             //Globals::camera->loc    = Globals::firstPerson;
             //Globals::camera->absLoc = myAvatar->loc - Globals::firstPerson;
-            
+
             myAvatar->id = entityId;
             //cerr << "put avatar " << myAvatar->id << "into map" << endl;
-            
+
         }
         else if (!strcmp( messageName, ACC_XYZ) && Globals::useAccelerometer)
         {
@@ -657,7 +638,7 @@ void SWIRLClient::ProcessMessage( const osc::ReceivedMessage& m,
 
             SWIRLServerProxy* serverProxy = ((SWIRLClient*)Globals::application)->serverProxy;
             SWIRLEntity* myAvatar = ((SWIRLClient*)Globals::application)->myAvatar;
-            
+
             args >> x >> y >> z >> osc::EndMessage;
             //cerr << "accxyz received " << x << " " << y << " " << z << endl;
 
@@ -666,7 +647,7 @@ void SWIRLClient::ProcessMessage( const osc::ReceivedMessage& m,
                 serverProxy->perform( myAvatar->id, "/move", -y );
             }
         }
-        
+
         //g_SWIRLNetworkingMutex.release();
     }
     catch( osc::Exception& e ){
